@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import time
 import pandas as pd
+import io
+from urllib import parse
+from urllib import robotparser
 
 class Crawler:
 
@@ -63,7 +66,43 @@ class Crawler:
         #     for url, num in self.page_map.items():
         #         write.writerow([url, num])
 
+    # read the robots.txt file
+    def scan_robots_txt(page_url):
+        if page_url.endswith('/'):
+            path = page_url
+        else: 
+            path = page_url + '/'
+        req = urlopen(path + 'robots.txt', data = None)
+        data = io.TextIOWrapper(req, encoding='utf-8')
+        return data.read()
+
+    def parse_robots_txt(page_url):
+        AGENT_NAME = '*'
+        URL_BASE = page_url
+        parser = robotparser.RobotFileParser()
+        parser.set_url(parse.urljoin(URL_BASE, 'robots.txt'))
+        parser.read()
+
+        PATHS = [
+            '/',
+            '/search/',
+            '/wp-admin/admin-ajax.php',
+            '/wp-admin/',
+        ]
+
+        for path in PATHS:
+            print('{!r:>6} : {}'.format(
+                parser.can_fetch(AGENT_NAME, path), path))
+            url = parse.urljoin(URL_BASE, path)
+            print('{!r:>6} : {}'.format(
+                parser.can_fetch(AGENT_NAME, url), url))
+            print()
+    
+
 seed = 'https://techcrunch.com/'
-seed = 'https://www.yahoo.com/'
+# seed = 'https://www.yahoo.com/'
 crawler = Crawler(seed, 'English')
-crawler.parse_pages()
+# crawler.parse_pages()
+
+print(Crawler.scan_robots_txt(seed))
+Crawler.parse_robots_txt(seed)
