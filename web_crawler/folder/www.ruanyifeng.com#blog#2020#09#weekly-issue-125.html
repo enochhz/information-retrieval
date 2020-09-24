@@ -1,0 +1,2658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="Movable Type  5.2.2" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--link rel="stylesheet" href="http://www.ruanyifeng.com/blog/styles.css" type="text/css" /-->
+<link rel="start" href="http://www.ruanyifeng.com/blog/" title="Home" />
+<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="http://feeds.feedburner.com/ruanyifeng" />
+<script type="text/javascript" src="http://www.ruanyifeng.com/blog/mt.js"></script>
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">
+<dc:title>RESTful API è®¾è®¡æå</dc:title>
+<dc:description>ç½ç»åºç¨ç¨åºï¼åä¸ºåç«¯ååç«¯ä¸¤ä¸ªé¨åãå½åçåå±è¶å¿ï¼å°±æ¯åç«¯è®¾å¤å±åºä¸ç©·ï¼ææºãå¹³æ¿ãæ¡é¢çµèãå¶ä»ä¸ç¨è®¾å¤......ï¼ã...</dc:description>
+<dc:creator>é®ä¸å³°</dc:creator>
+<dc:date>2014-05-22T20:54:31+08:00</dc:date>
+<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/3.0/" />
+</Work>
+<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+</License>
+</rdf:RDF>
+-->
+
+<style>
+body {
+  background-color: #f5f5d5;
+}
+
+#container::before {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+  text-align: center;
+  content: "æ¬ç«æ¾ç¤ºä¸æ­£å¸¸ï¼å¯è½å ä¸ºæ¨ä½¿ç¨äºå¹¿åæ¦æªå¨ã";
+}
+
+</style>
+<script>
+function loadjscssfile(filename, filetype){
+    if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+//loadjscssfile("http://www.ruanyifeng.com/blog/styles.css", "css");
+loadjscssfile('/static/themes/theme_scrapbook/theme_scrapbook.min.css', "css");
+
+
+function checker() {
+// var img = document.querySelector('img[src^="http://www.ruanyifeng.com/blog/images"]');
+var img = document.querySelector('a > img[src*="wangbase.com/blogimg/asset/"]');
+  if (img && window.getComputedStyle(img).display === 'none'){
+    var sponsor = document.querySelector('.entry-sponsor');
+    var prompt = document.createElement('div');
+    prompt.style = 'border: 1px solid #c6c6c6;border-radius: 4px;background-color: #f5f2f0;padding: 15px; font-size: 14px;';
+  prompt.innerHTML = '<p>æ¨ä½¿ç¨äºå¹¿åæ¦æªå¨ï¼å¯¼è´æ¬ç«åå®¹æ æ³æ¾ç¤ºã</p><p>è¯·å° www.ruanyifeng.com å å¥ç½ååï¼è§£é¤å¹¿åå±è½åï¼å·æ°é¡µé¢ãè°¢è°¢ã</p>';
+    sponsor.parentNode.replaceChild(prompt, sponsor);
+    document.querySelector('#main-content').innerHTML = '';
+  }
+}
+
+setTimeout(checker, 1000);
+</script>
+
+    
+    <link rel="prev" href="http://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html" title="è½»æ¾å­¦ä¼ React é©å­ï¼ä»¥  useEffect() ä¸ºä¾" />
+    
+    
+    <title>ç§æç±å¥½èå¨åï¼ç¬¬ 125 æï¼ï¼æ°å­äººæ°å¸è¦åä»£è° - é®ä¸å³°çç½ç»æ¥å¿</title>
+</head>
+<body id="scrapbook" class="mt-entry-archive one-column">
+<script>
+if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) document.body.classList.add('mobile');
+
+/*
+window.addEventListener('load', function(event) {
+  setTimeout(function () {
+    hab('#sup-post-2');
+    hab('#cre-inner');
+  }, 1000);
+});
+*/
+</script>
+    <div id="container">
+        <div id="container-inner">
+
+            <div id="header">
+    <div id="header-inner">
+        <div id="header-content">
+
+
+            <div id="header-name">é®ä¸å³°çç½ç»æ¥å¿ <span id="site_location"> Â» <a href="http://www.ruanyifeng.com/blog/" accesskey="1">é¦é¡µ</a></span><span id="site_archive"> Â» <a href="http://www.ruanyifeng.com/blog/archives.html">æ¡£æ¡</a></span>
+</div>
+
+<div id="google_search">
+<!-- SiteSearch Google -->
+<form action="https://www.baidu.com/s" target="_blank" method="get" id="cse-search-box">
+  <div>
+  <input type="text" size="20" name="origin" class="searchbox" id="sbi" value="" />
+  <input type="hidden" name="wd" value="" />
+  <!--input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="æç´¢" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' inurl:www.ruanyifeng.com/blog'" /-->
+  <input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="æç´¢" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' é®ä¸å³°'" />
+</div>
+</form>
+
+<!-- SiteSearch Google -->
+</div>
+<div id="feed_icon">
+<a href="/feed.html" title="è®¢éFeed">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAUzSURBVHjavFdbbFRVFF3nPjoz7dTWTittaW0jUDRAUqaNojyqREnEQKgfUj9MqqAmhqRt/OCD4CuY+Kckoh+aiGKC+gMJbdHoRysJ8dkhhmJLNdDKtJU+6GMK87j3Hs85d2Z6HzNtMYWb3Dn3NWftvfba+5xNYDl+e6Fkj6yqb/oDRbWq14vlPBLRKCITkxf0ROLt+hNjp1PPSRK4kA3vF1dXNRcWlyA2OQU9eos9opAkAiKxD+XkKO6t15aRWO7J/MgmAZU8MEgexgZHMX518Dh72sYMmVKShnxWuWHdHtxKIDIYTgMuDzgfmSOIQkYMpdUF8OY92Hytt4/jvkg47czzU16iQovM3QFwmNck+Yyduu7D6NA0Z6JR4THntFs9V4tWQg6Ui3s6MwKDncsFTnXKLJhDSeUK3AgPtyhccDzmVs999buRt/1Vm4i0od+hX7+MRG87jPGB/w1u8FPj9xEw7McVrnYuOCvtpjTth3J/nTg99c8LRhKhr6D3dTB5R24bXFwbMXBsyZzeoXaycEpJ95TB09AGX/NpqLVNtw8urnVzLvHjFNxiFqRy2OOHuqUVnue+ACkoWzo4O6lGzTmuHq6nPvY2m9rVqjrIK2rMEKxqyG5NPAKt+wjo0LklgfNxJkZMA3KJvqRUk3z5UFY3QH14P0h+WUY79HPvgv7VuSg4ZRGY1YgZgqXmORccF17sy2ehnf9AeO085K2HQFbtXBScj0LcpgF2cN+WV+DZ/LJQu6gD4R7oV7pBJwbSgtMvfiPoVp56DySwxm7EtkMs1WdAB7qzggsDJKQYsHucSkOudrkiCPWR/fA2nYCn8SNIK4NptSMyAu3sAdDRkIsJdfth0LzSrODUoPNZ4KI9SxJI5UHk7D4GdQfz2us31c7CoHMjRkKuDPHseCMrONVhNcDJwMJpKFVvg9L4OaTiNWm1x789KCqkrXhVBiEz0WYCT2nAzQAD1/vaETv1GrRfP4Vx5cfMNcDPwvP0h0DhanPym7OIf/+O67vcJ1/PCJ4KgdzaUP6Wz+dU+5yIL6fV+PsHGAOdwlPpvvUOyeeAVGyCdqkDNB6DPjsBSrnndfOGevOh3RhGItxvA+fX1CtbGFhgYUFkFMZPR6F1HnClHq8HyubWtJexX06CRmdt33hrd7nA7SFY4qoGpnYuOKcRykPPgDCBcsHx9Iv+fNL2PueBehCWUfYQIIMGLOCcOmXDXsh1+yCt35tUPfvzGFuSvzvoinXOxqa02qOhM6733nVP2MAdaej2XN11DPKjLZCD+yBvahGCo7JfTKAN9UD7s8Oe9zUNIhz8fWI8DG2k38WCFdxugANcXrvTVd1IEbuv3Jour7Hzn7jLMBNfKs7R3i67gRVrbeCOEDhinmWhAatsqdquM2XzHZINhK2cqTjHr/XZdVJUbgN3MWAVXKbSyg9jesRW2xP9di+lwrL5ojM3m2H/kG9hwcIA37c71W6wJdW2J2S5nrjYbq/t1AHAhJsKQeyfPvf6IMJgghPJhFZ4x0KlfLFvt22du45Au/A1SOlGc0P672XXwhLtOcM0kTTEMMd0qkVmMNXxMd/tsedUjInr4SQDgOfeXMSiN0FCL5WHah4L1qqYXPJOJlttd+a5M+YpcG5poLYKQ5f+6JJ4r8bbJYP47hq4r7QAs9PjYNhHJd4o8l5taiwuOpa7AS4XKqI/5NjJbTnaWK92nLdLuhQAJayRNMiygXPBeQN+Qbvu0zDc3y+aUzhbkGR73sI7ljvUnndx2q3t+X8CDAD66FtrIL864AAAAABJRU5ErkJggg==" alt="" style="border: 0pt none;" />
+</a></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+            <div id="content">
+                <div id="content-inner">
+
+
+                    <div id="alpha">
+                        <div id="alpha-inner">
+
+
+                            <div id="entry-2207" class="entry-asset asset hentry">
+                                <div class="asset-header">
+<div class="asset-nav entry-nav">
+
+<div class="entry-location">
+<ul>
+<li>ä¸ä¸ç¯ï¼<a href="http://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html" title="è½»æ¾å­¦ä¼ React é©å­ï¼ä»¥  useEffect() ä¸ºä¾">è½»æ¾å­¦ä¼&nbsp;React&nbsp;</a></li>
+
+</ul>
+</div>
+
+
+    
+                                    <div class="entry-categories">
+                                        <p>åç±»<span class="delimiter">ï¼</span></p>
+                                        <ul>
+                                            <li><a href="http://www.ruanyifeng.com/blog/weekly/" rel="tag">å¨å</a></li>
+                                        </ul>
+                                    </div>
+    
+
+
+                                            
+<div class="entry-location-mobile" style="float: right;">
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html" title="è½»æ¾å­¦ä¼ React é©å­ï¼ä»¥  useEffect() ä¸ºä¾">â&nbsp;</a></li>
+
+</ul>
+</div>
+
+</div>
+</div>
+
+                          
+<article class="hentry">
+                                    <h1 id="page-title" class="asset-name entry-title">ç§æç±å¥½èå¨åï¼ç¬¬ 125 æï¼ï¼æ°å­äººæ°å¸è¦åä»£è°</h1>
+                                            <div id="share_button" class="social-share" style="float:right;padding-right:2em;padding-top:1em;"></div>
+
+<div class="asset-meta">
+                                        
+
+                                            <p class="vcard author">ä½èï¼ <a class="fn url" href="http://www.ruanyifeng.com">é®ä¸å³°</a></p>
+                                    <p>æ¥æï¼ <a href="http://www.ruanyifeng.com/blog/2020/09/"><abbr class="published" title="2020-09-18T08:40:00+08:00">2020å¹´9æ18æ¥</abbr></a></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+                                
+                                <div class="asset-content entry-content" id="main-content">
+
+                                    <!-- div class="asset-body" -->
+                                        <p>è¿éè®°å½æ¯å¨å¼å¾åäº«çç§æåå®¹ï¼å¨äºåå¸ã</p>
+
+                                    <!-- /div -->
+
+
+                                    <!-- div id="more" class="asset-more" -->
+                                        <p>æ¬æå¿å¼æºï¼GitHub: <a href="https://github.com/ruanyf/weekly">ruanyf/weekly</a>ï¼ï¼æ¬¢è¿æäº¤ issueï¼æç¨¿ææ¨èç§æåå®¹ã</p>
+
+<p>å¨åè®¨è®ºåºçå¸å­<a href="https://github.com/ruanyf/weekly/issues/1392">ãè°å¨æäººï¼ã</a>ï¼æä¾å¤§éå°±ä¸ä¿¡æ¯ï¼æ¬¢è¿è®¿é®æåå¸å·¥ä½/å®ä¹ å²ä½ã</p>
+
+<h2>å°é¢å¾</h2>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091705.jpg" alt="" title="" /></p>
+
+<p>è¥¿ç­çå çº³å©å²çäººä»¬ï¼å¨ç«å±±ç°ä¸æåç§è¡èãç«å±±ç°ææ°´å¿«ï¼ç§åºæ¥çè¡èæ´éåé¿éãï¼<a href="https://www.instagram.com/p/CFMtHr3jOtR/">via</a>ï¼</p>
+
+<h2>æ¬å¨è¯é¢ï¼æ°å­äººæ°å¸è¦åä»£è°</h2>
+
+<p>æ°å­äººæ°å¸ï¼å·²ç»ä¼ äºå¾ä¹äºï¼ä½å®å°åºæ¯ä»ä¹ä¸è¥¿ï¼åªä½å´ä¸æã</p>
+
+<p>æ¬å¨ï¼äººæ°é¶è¡çå¯è¡é¿åäº<a href="https://www.financialnews.com.cn/ll/gdsj/202009/t20200914_200849.html">ä¸ç¯æç« </a>ï¼ç¬¬ä¸æ®µå°±åç­äºè¿ä¸ªé®é¢ã</p>
+
+<blockquote>
+  <p>"æ°å­äººæ°å¸ä¸»è¦å®ä½äºæµéä¸­ç°éã......å½å®¶æå¿è¦å©ç¨æ°ææ¯å¯¹ç°éè¿è¡æ°å­åï¼ä¸ºæ°å­ç»æµåå±æä¾éç¨æ§çåºç¡è´§å¸ã"</p>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091414.jpg" alt="" title="" /></p>
+
+<p>ç°å¨æ¸æ¥äºï¼æ°å­äººæ°å¸æ ¹æ¬ä¸æ¯å å¯è´§å¸ï¼èæ¯äººæ°å¸ç°éçæ°å­å½¢å¼ï¼ä¸»è¦ç¨äºç½ä¸æ¯ä»ã</p>
+
+<p>ä½æ¯ï¼ç½ä¸æ¯ä»æ©ä¸æ¯é®é¢äºï¼æ¯ä»å®åå¾®ä¿¡æ¯ä»ç¨å¾å¥½å¥½çï¼ä¸ºä»ä¹å¤®è¡è¿è¦æ¨è¡æ°å­äººæ°å¸å¢ï¼ä¸é¢é£ç¯æç« ï¼åæ ·è§£éäºæ°å­äººæ°å¸çè¿ä½æ¨¡å¼ã</p>
+
+<blockquote>
+  <p><strong>"ä¸­å¤®é¶è¡å¨æ°å­äººæ°å¸ä½ç³»ä¸­å±äºä¸­å¿å°ä½ï¼è´è´£åæå®åä¸é¶è¡æ¹åæ°å­äººæ°å¸å¹¶è¿è¡å¨çå½å¨æç®¡çï¼åä¸é¶è¡ç­æºæè´è´£é¢åç¤¾ä¼å¬ä¼æä¾æ°å­äººæ°å¸åæ¢æµéæå¡ã"</strong></p>
+</blockquote>
+
+<p>çå°äºåï¼ä¸­å¤®é¶è¡ä¸»ç®¡æ°å­äººæ°å¸ï¼åªææå®çåä¸é¶è¡æè½å¯¹å¬ä¼æä¾æå¡ãä¹å°±æ¯è¯´ï¼ä»¥åç½ä¸æ¯ä»çæ¶åï¼ä½ ä¸ä¼åªç¨å¾®ä¿¡æ¯ä»åæ¯ä»å®ï¼è¿å¯ä»¥ç¨åä¸é¶è¡çå®¢æ·ç«¯ãè¿å°±æ¯è¯´ï¼ <strong>æ°å­äººæ°å¸å°±æ¯åä¸é¶è¡çç½ä¸æ¯ä»æå¡ã</strong></p>
+
+<p>åä¸æ®µæ¶é´ï¼å»ºè¡çæ°å­äººæ°å¸å®¢æ·ç«¯æ³æ¼ãé¡¶é¨çåä¸ªä¸»è¦åè½æé®æ¯ä»æ¬¾ãæ¶æ¬¾ãæ«ä¸æ«åè½¬æ¬¾ï¼æ­£å¥½éªè¯äºå¤®è¡çè¯´æ³ã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091413.jpg" alt="" title="" /></p>
+
+<p>ææ³ï¼è¿å°±æ¯ä¸­å¤®é¶è¡æ³è¦æ¨å¹¿æ°å­äººæ°å¸çä¸»è¦åå ãç°å¨çå±é¢æ¯ï¼ä¸¤å®¶äºèç½å·¨å¤´ï¼ææ¡äºå¨å½çæ°å­æ¯ä»ï¼å®ä»¬è¿é½æ¯ç§äººå¬å¸ãå½æåä¸é¶è¡åé¶èçäºéªä»ï¼æ ¹æ¬æ¿ä¸å°å¸åºä»½é¢ãä¸­å¤®é¶è¡åºè¯¥æ¯æ¯è¾æå¿è¿ä¸ªï¼ä¸æ¿æ°å­æ¯ä»è¢«è¾è®¯åé¿éåæ­ï¼å¸æåä¸é¶è¡è½æ¤è¿å»ã</p>
+
+<p>è¿å¯¹æ¶è´¹èæ¯æå©çãä¸¤å¤§å·¨å¤´ç°å¨åå å±±å¤´ï¼é¿éç³»ä¸æ¯æå¾®ä¿¡æ¯ä»ï¼è¾è®¯ç³»ä¸æ¯ææ¯ä»å®ãæ°å­äººæ°å¸åºæ¥ä»¥åï¼ææå¹³å°é½å¿é¡»æ¯æï¼å®æ¯æ³å®è´§å¸ï¼ãæçæ³ï¼å°æ¥åºè¯¥åªæä¸ä¸ªç»ä¸çäºç»´ç ï¼ä¸ç®¡æ¯ç¨å¾®ä¿¡ãæ¯ä»å®è¿æ¯åä¸é¶è¡ç App æ«æï¼é½è½æ¯ä»ãä¸åç°å¨ï¼åå®¶é½è¦è´´ä¸¤ä¸ªäºç»´ç ï¼èçä¸ä¸ªãç»¿çä¸ä¸ªã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091703.jpg" alt="" title="" /></p>
+
+<p>ä½æ¯ï¼æ°å­æ¯ä»ä¸å¡å¶å®æ¯æ å©å¯å¾çãå®ä¸åä¿¡ç¨å¡æ¯ä»ï¼æä¾æ¹ä¸ä»èµä¸å°æç»­è´¹ï¼è¿è¦å¾éé¢è´´é±ãç»´æ¤ç¡¬ä»¶åå¼åè½¯ä»¶é½éè¦å·¨å¤§çæå¥ï¼èä¸å¯¹å¯é æ§çè¦æ±ç¹å«é«ï¼æå¡ä¸è½ä¸­æ­ï¼æ´ä¸è½åºéãå¾®ä¿¡åæ¯ä»å®å¶å®é½ææ«ç æ¯ä»å½ä½æµéå¥å£ï¼èä¸æ¯å©æ¶¦æ¥æºã</p>
+
+<p>æå¾å¥½å¥ï¼æ°å­äººæ°å¸çæå¡å¨ï¼å°æ¥ç±è°ç»´æ¤ï¼æ¯ä¸æ¯ä¸­å¤®é¶è¡ä»¥åä¹ä¼æä¸ä¸ªä¸é¨ç DevOps é¨é¨ï¼ä½æ¯ï¼è¿ç§èµä¸å°é±ãææ¯é¾åº¦å¤§ãå·¥ç¨å¸èªæ°´åæé«çä¸å¡ï¼å½æåä½è½æå¥½åï¼</p>
+
+<h2>å¤§æ°æ®åæå®æè¯¾</h2>
+
+<p>å¦ä»ï¼å¨çæ©å·²æ­¥å¥æ°æ®æ¶ä»£ï¼æ°æ®è¡ä¸é«éåå±ï¼ç¸å³å²ä½ç¼ºå£å·²è¶150ä¸ï¼èªèµè¶è¿ä¼ ç»å²ä½ãæ®ä¼°è®¡ï¼æªæ¥åå¹´ï¼æ°æ®ç¸å³å²ä½å°æ©å¼ 5åï¼äººæç¼ºå£ææ¾ã</p>
+
+<p>å¾å¤äººå¸æè¿å¥æ°æ®åæè¡ä¸ï¼å´ç»å¸¸éå°ä»¥ä¸é®é¢ï¼</p>
+
+<ul>
+<li>ExcelãSQLãPython......ä¸å¤§å æ°æ®åæå·¥å·ï¼ä¸ç¥éè¯¥å­¦åªä¸ªã</li>
+<li>åªå­¦äºçè®ºå´æ²¡æå®æç»éªï¼å¾ä¸å°ä¼ä¸çéçã</li>
+<li>ä¸æ³å°é¢è¯å°±ç´§å¼ ï¼åºèæ¶ä¸ç¥éæä¹åºå¯¹æé®ã</li>
+</ul>
+
+<p>æ¬å¨çè¯¾ç¨èµææ¯å¼è¯¾å§æä¾ç <strong>ãå¤§æ°æ®åæå®æè¯¾ã</strong> ï¼4å¤§å®æé¡¹ç®ï¼å¸¦ä½ å®éæä½çå®ä¸å¡åºæ¯ä¸çæ°æ®åæï¼ä»¥æ¡ä¾ä¸ºå¯¼åï¼å¿«éç§¯ç´¯æ°æ®åæçå®æç»éªã</p>
+
+<ul>
+<li>é¡¹ç®ä¸ï¼å©ç¨ Python å®ç°åå¬èªå¨åã</li>
+<li>é¡¹ç®äºï¼æµ·éæ°æ®å¾å½¢å¯è§åã</li>
+<li>é¡¹ç®ä¸ï¼çµåæ°æ®åæåå¯è§åå±ç¤ºã</li>
+<li>é¡¹ç®åï¼ç©è½¬é«ç²¾ææ¬åæã</li>
+</ul>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020081102.jpg" alt="" title="" /></p>
+
+<p>æ¬è¯¾ç¨ç±èµæ·±å¤§æ°æ®ä¸å®¶æ½æµ·è¶èå¸äº²æï¼è®©ä½ å¨ç­æ¶é´å Get æ°æ®åæå®ææè½ï¼è¿éææ¡ BATãTMB ç­äºèç½å¤§åä¸»æµå·¥å·ï¼å¿«éç§¯ç´¯æ°æ®åæçå®æç»éªã</p>
+
+<p>ãå¤§æ°æ®åæå®æè¯¾ãç°å¨éæ¶ä¼æ ï¼åä»·599åï¼ <strong>ç°ä»é  0 åã</strong> åé¢æéï¼åå°åå¾ï¼å¾®ä¿¡æ«æä¸é¢äºç»´ç ç«å³æ¥åã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091604.jpg" alt="" title="" /></p>
+
+<h2>èµè®¯</h2>
+
+<p>1ã<a href="https://buzzorange.com/techorange/2018/11/23/plane-with-no-moving-parts/">çµå­é£é£æº</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090408.jpg" alt="" title="" /></p>
+
+<p>é£æºä¸è¬ä½¿ç¨èºææ¡¨ææ¶¡è½®ä½ä¸ºå¨åï¼æè¿éº»ççå·¥å­¦é¢ç ååºå©ç¨çµæäº§çç¦»å­é£ä½ä¸ºå¨åçé£æºãæ©å¨ä¸ä¸ªä¸çºª60å¹´ä»£ï¼äººä»¬å°±å·²ç»åç°çµæµä¼å¨èçµæååçµæä¹é´äº§çç¦»å­é£ï¼ä¸å¾ï¼ãè¿æ¯é¦æ¬¡å°è¿ç§ç°è±¡ç¨äºé£æºï¼è®©ç¦»å­é£æä¸ºæ¨å¨é£æºçæ°æµã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090409.jpg" alt="" title="" /></p>
+
+<p>å®çå¥½å¤æ¯ï¼ç±äºå¨åæ¥èªçµæµï¼ä¸éè¦æºæ¢°å¨åï¼æä»¥æ´ä¸ªé£æºå¯ä»¥æ²¡æä¼å¨çé¨ä»¶ï¼ä»èéä½åªé³ï¼é£æºåå¨æºçåªé³éå¸¸å¤§ï¼ï¼ç¼©åä¿å»ææ¬ï¼ä»¥ååå°æ±¡æãç¼ºç¹æ¯å¨åæéï¼ç®ååªè½è®©ä¸å° 10 å¬æ¤çå°é£æºèµ·é£ï¼è¿æ æ³è½½äººã</p>
+
+<p>2ã<a href="https://threadreaderapp.com/thread/1301708467925741568.html">åè£è¯çº¸ççµå­å¦å¨ æµè¯ç¬</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090503.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090504.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090505.jpg" alt="" title="" /></p>
+
+<p>ä¸ä½æ¨ç¹ç¨æ·æè¿è´­ä¹°äºçµå­å¦å¨ æµè¯ç¬ï¼çå£«ç²¾å¯è¯æ­æéå¬å¸çäº§åãä»å°çµå­ç¬æå¼ä»¥åï¼éæå°åç°ï¼éé¢å±ç¶è£äºè¯çº¸ãçæ­£èµ·æµè¯ä½ç¨çæ¯è¿å¼ è¯çº¸ï¼èä¸æ¯çµå­è®¾å¤ã</p>
+
+<p>çµè·¯çæ ¸å¿æ¯å ä¸ªåä¼ æå¨ï¼ç¨æ¥è¯å«è¯çº¸æ¾ç¤ºçæ¡çº¹ï¼è½¬æçµä¿¡å·ï¼å°æµè¯ç»ææ¾ç¤ºå¨æ¶²æ¶å±å¹ä¸ãè¿æ ·åè½ç¶ä½¿å¾æµè¯ç»ææ´å®¹æè§£è¯»ï¼ä½æ¯å¤ææ§å¢å äºå¥½å¤åï¼ä»·æ ¼æ´æ´è´µäº25åã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090506.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090507.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090508.jpg" alt="" title="" /></p>
+
+<p>3ã<a href="https://www.smithsonianmag.com/smart-news/your-next-digital-tablet-could-be-made-paper-180975727/">çº¸å¼ é®ç</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090603.jpg" alt="" title="" /></p>
+
+<p>æ®æ¸¡å¤§å­¦çå·¥ç¨å¸åæäºä¸ç§æ°ææ¯ï¼å¯ä»¥å°ä»»ä½çº¸å¼ ï¼æ§æ¥çº¸ææå°çº¸ï¼åæè®¡ç®æºé®çãå·ä½åæ³æ¯ï¼åå¨çº¸å¼ ä¸æ¶ä¸å±ç¹æ®æ²¹å¢¨ï¼ç¶åå¨æ²¹å¢¨ä¸è®¾ç½®çµè·¯ãçµè·¯ä¹é´éè¿æ©æ¦ä¼äº§ççµï¼èæ¯æ¬¡æé®é½ä¼é ææ©æ¦ï¼å æ­¤å°±ä¸º"é®ç"æä¾äºçµã</p>
+
+<p>æä»¥ï¼çº¸è´¨é®çä¸éè¦çµæºï¼å®å¨æ¯èªä¾çµï¼åéè¿èçè¿æ¥å°è®¡ç®æºæææºï¼ä»èåæè¾å¥è®¾å¤ãæ ¹æ®åæå¢éçè®¾æ³ï¼è¿ç§ææ¯å¯ä»¥ç¨å¨åååè£ä¸ï¼ç¨æ¥æ£éªæ¯å¦çåï¼æèæ¥çé£åä¿è´¨æã</p>
+
+<p>4ã<a href="https://sichuan.scol.com.cn/cddt/202007/57855226.html">åå¸æ£®æè±å­</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091706.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091707.jpg" alt="" title="" /></p>
+
+<p>æé½æä¸ä¸ª8æ æ¥¼å±æ°å°åºï¼æ¯æ æ¥¼30å±ï¼æ¯ä¸å®¶ä½æ·é½æ40å¹³ç±³ï½100å¹³ç±³å®¤å¤åº­é¢ï¼å¯ä»¥ç§è±ç§èï¼çä¸å»ååå¸æ£®æä¸æ ·ã</p>
+
+<p>åº­é¢çå¡«åå±æ60åç±³åï¼å¨é å¢çå°æ¹è¿å¯ä»¥åä¸ä¸ªåä¸50åç±³çæ æ± ï¼è¿æ ·å¨é å¢çå°æ¹ä¾¿æ1ç±³å¤æ·±çè¦åï¼å¯ä»¥æ ½ç§4å°5ç±³é«çæ ï¼å¹¶å°æ å¹²åºå®å¨å¢ä¸ï¼ä»¥é²å¤§é£å°æ å®åæä½¿å¶ææï¼å¨å¶å®ä¸é å¢çå°æ¹ææ ½ç§1~2ç±³çä½ç®æ¤ç©ãææ æçæ¨ãç©ä¸è¿ä¸ºæ¯å®¶å®è£äºèªå¨å·ç³ç³»ç»ã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091708.jpg" alt="" title="" /></p>
+
+<p>5ã<a href="https://www.bbc.com/news/science-environment-54066586">ä¸çæå¤§æ°ç ç¸æº</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091103.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091105.jpg" alt="" title="" /></p>
+
+<p>æºå©ç»´æé²å®¾å¤©æå°å®è£äºä¸å°ä¸çæå¤§çæ°ç ç¸æºï¼é«è¾¾32äº¿åç´ ï¼ç¨æ¥æææ´ä¸ªå¤©ç©ºçæ°åäº¿é¢ææåæç³»çä½ç½®ï¼èä¸è¿ä¼ææä»»ä½ç§»å¨æéªççä¸è¥¿ã</p>
+
+<p>è¿å°ç¸æºçåä¼ æå¨ç±189ä¸ªåç¬ç CCD ç»æï¼æ­£å¨å å©ç¦å°¼äºçå®éªå®¤è¿è¡æµè¯ï¼å·²ç»ç»æå®æã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091104.jpg" alt="" title="" /></p>
+
+<p>ä¸ºäºæµè¯å®çæ§è½ï¼å·¥ç¨å¸ä»¬ç¨å®ææè¥¿å°è±ãå¦æä¸åé¡ºå©ï¼å®å°å¨2022å¹´ä¸åå¹´æå¥å·¥ä½ã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091102.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091106.jpg" alt="" title="" /></p>
+
+<p>6ã<strong>ä¸å¥è¯æ¶æ¯</strong></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://twitter.com/vidister/status/1304542559210024962">ç½å</a>å°ç½çº¿çä¸æ ¹éç»çº¿åªæ­ï¼ä¸¤ç«¯æå¥è¹æãä¿¡å·ç§æ ·ä¼ è¾ï¼ç½ééå¸¸å¥½ã</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091201.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://www.cnn.com/2020/09/09/us/robot-dogs-us-air-force-test-intl-hnk-scli-scn/index.html">ç¾å½ç©ºå</a>å¼å§è¯éªï¼æºå¨çä¸å£«åµä¸èµ·å·¡é»ãæºå¨ççæ­£å¼äº§ååå«å"èªå¨æ äººå°é¢è½¦è¾"ã</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091403.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091404.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://edition.cnn.com/style/article/diamond-auction-hong-kong/index.html">é¦æ¸¯</a>ä¸æå°æåä¸é¢102.39åæçé»ç³ï¼è¿æ¯æå²ä»¥æ¥ç¬¬å«é¢è¢«æåçè¶è¿100åæçé»ç³ã</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091306.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="http://world.people.com.cn/n1/2020/0907/c1002-31852279.html">ååæ¿åº</a>9æ6æ¥å®£å¸ï¼åºåäº13å·2500å¹´åçæ¨æ£ºï¼èªä»ä¸è¬åå°±æ²¡ææå¼è¿ã</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091307.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://www.theguardian.com/business/2020/sep/14/global-oil-demand-may-have-passed-peak-says-bp-energy-report">è±å½ç³æ²¹å¬å¸</a>åè¡¨ç ç©¶æ¥åï¼è®¤ä¸ºä¸çç³æ²¹æ¶è´¹éç«æåå·²ç»å°è¾¾é¡¶å³°ï¼æ­¤åå¯è½ä¼ä¸æ­ä¸éã</li>
+</ul>
+</blockquote>
+
+<h2>æç« </h2>
+
+<p>1ã<a href="https://www.generationatomic.org/skim/the-nuclear-heartbeat-of-space-exploration">æ ¸çµæ± å¯ä»¥ç¨äºå¤ªç©ºæè¡</a>ï¼è±æï¼</p>
+
+<p>æ¬æä»ç»äºæ ¸çµæ± çåçï¼å©ç¨æ¾å°æ§åç´ è¡°åäº§ççè½éï¼ï¼ä»¥åç¨äºå¤ªç©ºæè¡çå¯è½æ§ã</p>
+
+<p>2ã<a href="https://xtrp.io/blog/2020/09/12/using-the-monte-carlo-tree-search-algorithm-in-an-ai-to-beat-2048-and-other-games/">ä½¿ç¨èç¹å¡æ´ç®æ³ç©2048</a>ï¼è±æï¼</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091303.jpg" alt="" title="" /></p>
+
+<p>2048 æ¯ä¸ä¸ª4x4çæ¹åæ¸¸æï¼åªè¦ä¸¤ä¸ªç¸åæ°å­ç¸é»ï¼å°±å¯ä»¥åå¹¶ä¸ºä¸ä¸ªæ°å­ãæ¬æè®²è§£äºå¦ä½ç¨èç¹å¡æ´ç®æ³è¿è¡ç®åæ¨¡æï¼è®©è®¡ç®æºèªå·±è§£å³2048æ¸¸æã</p>
+
+<p>3ã<a href="https://juejin.im/post/6864381092061773831">å¾®åç«¯"å®¹å¨"---- microcosmos å®ç°</a>ï¼ä¸­æï¼</p>
+
+<p>æ¬æè®¨è®ºäºå¾®åç«¯çæ¦å¿µåå®ç°ï¼å¯ä»¥ç¨æ¥äºè§£"å¾®åç«¯"è¿ç§æ°çåæ³ãï¼<a href="https://github.com/ruanyf/weekly/issues/1407">@chuifengji</a> æç¨¿ï¼</p>
+
+<p>4ã<a href="https://blog.8bitbuddhism.com/2019/12/01/how-to-use-your-android-tablet-as-second-monitor/">å¦ä½å° Android å¹³æ¿çµèç¨ä½ç¬¬äºå°æ¾ç¤ºå¨</a>ï¼è±æï¼</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091601.jpg" alt="" title="" /></p>
+
+<p>ä½èä»ç»å¦ä½å°ä¸åæ§çå®åå¹³æ¿ï¼å½ä½çµèçå¯å±ï¼ä½¿ç¨ VNC åè®®æ¾ç¤ºè¿ç¨æ¡é¢ã</p>
+
+<p>5ã<a href="https://www.mikealche.com/software-development/a-simple-explanation-of-the-for-await-of-statement-in-node-js">for await ... of è¯­å¥è§£é</a>ï¼è±æï¼</p>
+
+<p>ES6 å¼å¥äº for await ... of æ°è¯­æ³ï¼ç¨æ¥éåå¼æ­¥è¿­ä»£å¨ï¼å¾å¤äººè¿ä¸çæãæ¬ææ¯å¯¹å®çç®åè§£éã</p>
+
+<p>6ã<a href="https://blog.bitsrc.io/6-reasons-to-use-react-hooks-instead-of-classes-7e3ee745fe04">ä½¿ç¨ React é©å­èä¸æ¯ç±»ç6ä¸ªçç±</a>ï¼è±æï¼</p>
+
+<p>æ¬ææ»ç» React é©å­æ¯ç±»æ´æä¼å¿ç6ä¸ªæ¹é¢ï¼æ¯å¦ä¸åæ this é®é¢ï¼ä¹ä¸ç¨åç»å®æ¹æ³äºã</p>
+
+<p>7ã<a href="https://jakearchibald.com/2020/avif-has-landed/">AVIF æ ¼å¼åæ¢</a>ï¼è±æï¼</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091711.jpg" alt="" title="" /></p>
+
+<p>AVIF æ¯ä¸ç§å¼æºå¾çæ ¼å¼ï¼æºèª AV1 è§é¢æ ¼å¼ãåä¸ªå¹³å°åºæ¬ä¸é½ä¼æ¯æï¼è¿ç¯æç« å¯¹æ¯äºå®ä¸ JPEG å WebP æ ¼å¼ï¼ç»æå¾ä¸éã</p>
+
+<p>8ã<a href="https://philna.sh/blog/2020/08/06/how-to-stream-file-downloads-in-Node-js-with-got/">Node.js å¦ä½ä¸è½½æµä¼ è¾æä»¶</a>ï¼è±æï¼</p>
+
+<p>æ¬æä»ç»å¦ä½ä½¿ç¨ Got è¿ä¸ªåºï¼ä»¥æµä¼ è¾çå½¢å¼ï¼streamï¼ä¸è½½æä»¶ã</p>
+
+<p>9ã<a href="https://simonwillison.net/2020/May/21/dogsheep-photos/">ä» Apple Photos æ¾åºï¼æºå¨è®¤å®çï¼æç¾ç§ç</a>ï¼è±æï¼</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202005/bg2020052402.jpg" alt="" title="" /></p>
+
+<p>è¹æç Apple Photos ä¼å¯¹ç¨æ·ææçæ¯ä¸å¼ ç§çï¼è¿è¡æºå¨å­¦ä¹ æ¨¡åæ¥è¯å«ç§ççåå®¹ï¼ç¶åå¾åºä¸ä¸ªå«å"ZBEHAVIORALSCORE"ç"æ»ä½ç¾å­¦è¯å"ï¼ä¿å­å¨æ¬å°ç SQLite æ°æ®åºéé¢ã</p>
+
+<p>ä½èå¯¹è¿ä¸ªæ°æ®åºä½¿ç¨ SQL æ¥è¯¢ï¼æ¾åºè®¡ç®æºè®¤ä¸ºçæä¸ªä¸»é¢ï¼æ¯å¦"é¸ç±»"ï¼çæä½³ç§çã</p>
+
+<h2>å·¥å·</h2>
+
+<p>1ã<a href="https://www.diffchecker.com/">Diffchecker</a></p>
+
+<p>ä¸ä¸ªå¨çº¿å·¥å·ï¼å¯ä»¥æ£æ¥ææ¬ãå¾çãPDF ä¹é´çå·®å¼ã</p>
+
+<p>2ã<a href="https://github.com/blackjack4494/youtube-dlc">youtube-dlc</a></p>
+
+<p>ä¸ä¸ªå½ä»¤è¡å·¥å·ï¼youtube-dl çååï¼ç¨æ¥ä¸è½½ Youtube åå¶ä»è§é¢ç½ç«çè§é¢ãååçä¸»è¦åå æ¯ï¼youtube-dl ç®åæç¹é·å¥åæ»ï¼å¾å¤ issue æ²¡æååºï¼å æ­¤æäººå°±å¦èµ·çç¶ï¼è¿ä¸ªçæ¬çå¼åç°å¨éå¸¸æ´»è·ã</p>
+
+<p>3ã<a href="https://github.com/fastai/fastmac/">fastmac</a></p>
+
+<p>ææ¶åï¼ä½ éè¦ Mac çµèçç¯å¢ï¼ä½æ¯æè¾¹åæ²¡æ mac çµèãè¿ä¸ªå·¥å·å©ç¨ GitHub Actions æä¾çèµæºï¼è®©ä½ å¯ä»¥åè´¹ä½¿ç¨ Mac çå½ä»¤è¡ç¯å¢ï¼ä¸è¿åªè½ä½¿ç¨ä¸å°ä¼ã</p>
+
+<p>4ã<a href="https://www.screely.com/">Screely</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091323.jpg" alt="" title="" /></p>
+
+<p>ä¸ä¸ªå¨çº¿å·¥å·ï¼å¯ä»¥çæç½é¡µå±ç¤ºææçç¤ºæå¾ã</p>
+
+<p>5ã<a href="https://poolside.fm/">Poolside FM</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091503.jpg" alt="" title="" /></p>
+
+<p>ä¸ä¸ªå¨çº¿çå¤å¤é£æ ¼é³ä¹çµå°ãï¼<a href="https://github.com/ruanyf/weekly/issues/1406">@freezsun</a> æç¨¿ï¼</p>
+
+<p>6ã<a href="https://mimestream.com/">Mimestream</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091504.jpg" alt="" title="" /></p>
+
+<p>åè¹æé®ä»¶å®¢æ·ç«¯å·¥ç¨å¸ Neil Jhaveri æ¨åºç Gmail macOS åçå®¢æ·ç«¯ï¼å¤è§ç®æ´å¤§æ¹ï¼ååå¥ååçé£æ ¼ï¼åè<a href="https://www.cnbeta.com/articles/tech/1027397.htm">ä»ç»æç« </a>ãï¼<a href="https://github.com/ruanyf/weekly/issues/1408">@dushi792</a> æç¨¿ï¼</p>
+
+<p>7ã<a href="https://github.com/parzulpan/real-live">real-live</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091505.jpg" alt="" title="" /></p>
+
+<p>ä¸ä¸ªå¼æºçç´æ­èåæ¶çå¹³å°ãéç¨ Qt ä½ä¸ºåç«¯æ¡æ¶ï¼åç«¯ç¨å° RequestsãMySQLãRedisææ¯ç­ï¼ç®åæ¯æå¨è¯¥å¹³å°æ¶ç 36 ä¸ªè§é¢ç´æ­ã59 ä¸ªé«æ¸çµè§é¢éå 74 ä¸ªå¹¿æ­çµå°ãï¼<a href="https://github.com/ruanyf/weekly/issues/1409">@parzulpan</a> æç¨¿ï¼</p>
+
+<p>8ã<a href="https://github.com/CasterWx/kibana-eye">kibana-eye</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091507.jpg" alt="" title="" /></p>
+
+<p>ELK å¹³å°ï¼Elasticsearchï¼Logstashï¼Kibanaï¼çå®æ¶ä»»å¡ç®¡çå·¥å·ï¼å¯ä»¥èåå¤çæ¥å¿ï¼çææ¥è¡¨ä¿¡æ¯ï¼éè¿é®ä»¶/ééç­æ¹å¼åééç¥ãï¼<a href="https://github.com/ruanyf/weekly/issues/1413">@CasterWx</a> æç¨¿ï¼</p>
+
+<p>9ã<a href="https://lofimusic.app">LofiMusic</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091509.jpg" alt="" title="" /></p>
+
+<p>ä¸ä¸ªå¼æºçèæ¯é³ä¹æ­æ¾ç½ç«ã</p>
+
+<p>10ã<a href="https://beeware.org/">BeeWare</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091701.jpg" alt="" title="" /></p>
+
+<p>ä¸ä¸ª Python å·¥å·ï¼è®©ä½ ç Python ä»£ç å¯ä»¥æåæè·¨å¹³å°å¾å½¢çé¢åºç¨ï¼å°¤å¶æ¯å¯ä»¥æåæææº Appï¼æ¯æ iOSãAndroidãWindowsãMacOSãLinuxãWeb ç­å¹³å°ã</p>
+
+<h2>èµæº</h2>
+
+<p>1ã<a href="https://aggregatedawesome.com/">Aggregated Awesome</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091702.jpg" alt="" title="" /></p>
+
+<p>GitHub ä¸é¢æå¾å¤ awesome çä»åºï¼æ¶éæä¸ªä¸»é¢çæææç¨çåå®¹ãè¿ä¸ªç½é¡µæ´çäºä¸ä¸ª awesome ä»åºçæ¸åã</p>
+
+<p>2ã<a href="https://app.ignitionrobotics.org/GoogleResearch/fuel/collections/Google%20Scanned%20Objects">Fuel Collection</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091101.jpg" alt="" title="" /></p>
+
+<p>è°·æ­å¯¹å¤§éæ¥å¸¸ç©åè¿è¡äº 3D æ«æï¼å°æ°æ®æ¾å¨ç½ä¸ï¼æä¾å¬å¼ä¸è½½ã</p>
+
+<p>3ã<a href="https://primes.utm.edu/curios/">Prime Curios!</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091301.jpg" alt="" title="" /></p>
+
+<p>è¿ä¸ªç½ç«æ¶éåç§ä¸è´¨æ°ç¸å³çæ°å­ï¼æ¯å¦ 561 çå¹³æ¹å 2åå2ä¼å¾å°ä¸¤ä¸ªè¿ç»­çè´¨æ°ã</p>
+
+<p>4ã<a href="http://data.iana.org/TLD/tlds-alpha-by-domain.txt">é¡¶çº§åååè¡¨</a></p>
+
+<p>äºèç½å·ç åéå±ï¼IANAï¼å®æ¹çç®åææé¡¶çº§ååï¼TLDï¼çåè¡¨ï¼å±æ1508ä¸ªãå¦ææé¤å½å®¶åå°åºç TLDï¼åä¸º1260ä¸ªã</p>
+
+<p>5ã<a href="https://github.com/lotabout/write-a-C-interpreter/tree/master/tutorial/en">å¦ä½åä¸ä¸ªç®åç C è¯­è¨è§£éå¨</a></p>
+
+<p>ä¸ä¸ªè±è¯­æç¨ï¼éè¿åä¸ä¸ªç®åç C è¯­è¨è§£éå¨ï¼çè§£ç¼è¯åçã</p>
+
+<p>6ã<a href="https://webrtc.github.io/samples/">WebRTC ç¤ºä¾ä»åº</a></p>
+
+<p>WebRTC æ¯æµè§å¨ç¹å¯¹ç¹éä¿¡ç APIï¼è¿ä¸ªä»åºç»åºäºåç§ä½¿ç¨ç¤ºä¾ï¼è¦çäºä¸»è¦çä½¿ç¨åºæ¯ã</p>
+
+<h2>å¾ç</h2>
+
+<p>1ã<a href="https://zh.wikipedia.org/wiki/%E9%BB%91%E6%B2%B3-%E8%85%BE%E5%86%B2%E7%BA%BF">é»æ²³-è¾å²çº¿</a></p>
+
+<p>ä¸­å½å°å¾ä¸ï¼ä»é»æ²³å°è¾å²ç»ä¸æ¡çº¿ï¼è¿æ¡çº¿ä»¥ä¸ä½çå¨å½94%çäººå£ãè¿æ¯1935å¹´ç±å°çå­¦å®¶è¡çåº¸é¦æ¬¡æåºã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090907.jpg" alt="" title="" /></p>
+
+<p>2ã<a href="https://designyoutrust.com/2020/09/olympus-mons-the-largest-volcano-in-the-solar-system/">å¤ªé³ç³»æé«çç«å±±</a></p>
+
+<p>ç«æä¸é¢çå¥¥æå¹æ¯å±±ï¼Olympus Monsï¼é«è¾¾21å¬éï¼æ¯ç ç©æçå³°çä¸¤ååãå®æ¯ç®åå·²ç¥å¤ªé³ç³»æå¤§çç«å±±ï¼ä¹æ¯æé«çå±±å³°ä¹ä¸ã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091001.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091002.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091003.jpg" alt="" title="" /></p>
+
+<h2>ææ</h2>
+
+<p>1ã<a href="https://www.nationalgeographic.com/news/2017/07/plastic-produced-recycling-waste-ocean-trash-debris-environment/">å¡æåå¾æç</a></p>
+
+<p>éçç³åå·¥ä¸çåå±ï¼å¡æå¤§è§æ¨¡è¿å¥äººç±»çæ´»ï¼è¿ä»ä¸è¿åªæ60å¹´çåå²ãä½æ¯ï¼60å¹´æ¥ï¼äººç±»å·²ç»åé äº83äº¿å¨çå¡æï¼å¶ä¸­å¤§é¨åæ¯ä¸æ¬¡æ§äº§åï¼æç»é½åæäºåå¾ã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091606.jpg" alt="" title="" /></p>
+
+<p>83äº¿å¨å¡æä¹ä¸­ï¼9%è¢«åæ¶ï¼12%è¢«çåï¼å©ä¸ç79%å°±é½æäºå¡æåå¾ãè¿äºåå¾æäºå ç§¯å¨åå¾å¡«ååºä¸­ï¼è¿æä¸äºå°±æ£è½å¤§èªç¶ä¸­ï¼å¶ä¸­ç¸å½ä¸é¨åè¿å¥äºæµ·æ´ã</p>
+
+<p>æ´å¯æçæ¯ï¼å¡æçå¢é¿éåº¦å¤§çº¦æ¯æ¯15å¹´ç¿»ä¸çªï¼è¶è¿äºå¶ä»ææäººé ææãèä¸ï¼å¡æçä½¿ç¨å¨æç¹å«ç­ãé¢ææä¸åç¨äºå»ºç­ä¸ï¼ä½¿ç¨å¯¿å½é¿è¾¾æ°åå¹´ï¼èå¡æçäº§åºæ¥ï¼ä¸å°ä¸å¹´å°±æä¸ååæäºåå¾ï¼å¶ä¸­å¾å¤§é¨ååªç¨äºåè£ã</p>
+
+<p>å¡æéè¦400å¤å¹´çæ¶é´æè½éè§£ãæ®ä¼°è®¡ï¼æ¯å¹´æ800ä¸å¨å¡ææµå¥æµ·æ´ãå°2050å¹´ï¼æµ·æ´ä¸­çå¡æåºç©æ»ééï¼å°å¤äºé±¼ç±»çééãä¸æ­¤åæ¶ï¼éå°ä¸çåå¾å¡«ååºé£æ¶å¿é¡»å¡«å120äº¿å¨å¡æãäººç±»å°çæ´»å¨ä¸ä¸ªéå¸å¡æåå¾çæçï¼å¶å®ç°å¨å·²ç»æ¯è¿æ ·äºã</p>
+
+<p>2ã<a href="https://www.smithsonianmag.com/science-nature/corn-future-hundreds-years-old-and-makes-its-own-mucus-180969972/">åºæ°®çç±³</a></p>
+
+<p>ç©ºæ°çæå¤§æåï¼78%ï¼æ¯æ°®æ°ï¼ä½æ¯å¾å¥æªï¼æ¤ç©å´æ®éç¼ºå°æ°®åç´ ãåä½ç©å¿é¡»æ½å æ°®è¥ï¼æè½æé«äº§éãæ¹ååè´¨ãå ä¸ºå¤§å¤æ°æ¤ç©æ æ³ç´æ¥éè¿æ°®æ°å¸æ¶æ°®åç´ ã</p>
+
+<p>åªæå°æ°æ¤ç©ä¸éè¦æ°®è¥ï¼ä¸»è¦æ¯è±ç§ç±»æ¤ç©ï¼èªèº«å°±å·æå°ç©ºæ°ä¸­çæ°®æ°åææ°®è¥çè½åãæ¤ç©å­¦å®¶ä¸ç´æ¢¦æ³å°è¿ç§"åºæ°®è½å"ç§»æ¤å°å¶ä»æ¤ç©ãå¨çç§æ¤é¢ç§¯æå¤§çåä½ç©æ¯çç±³ï¼å®å°±æä¸ºç§»æ¤"åºæ°®è½å"çé¦éç®æ ã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091107.jpg" alt="" title="" /></p>
+
+<p>1980å¹´ä»£ï¼ä¸ä¸ªç¾å½åä¸ç§å­¦å®¶å¨å¢¨è¥¿å¥åé¨ï¼åç°äºä¸äºå¥æªççç±³ãè¿ç§çç±³é«è¾¾5ã6ç±³ï¼æ¯æ®éçç±³é«å¾å¤ï¼ä½æ¯éè¦6ï½8ä¸ªæææçï¼æ¯æ®éçç±³ç3ä¸ªæé¿å¾å¤ãææäººçæ¯ï¼å®ä¸éè¦æ½å æ°®è¥ï¼å°±å¯ä»¥å¨è´«ç åå°ä¸é¿å¾å¾å¥½ãä¹å°±æ¯è¯´ï¼è¿æ¯å¨ä¸çç¬ä¸æ äºçå·æ"åºæ°®è½å"ççç±³ï¼</p>
+
+<p>è¿ä¸æ­¥ç ç©¶ï¼ç§å­¦å®¶åç°è¿ç§çç±³ææ°æ ¹ï¼ä¸é¨åæ ¹ç³»æ´é²å¨ç©ºæ°ä¸­ï¼è¿ä¹æ¯å¨ä¸çå¯ä¸ææ°æ ¹ççç±³ãè¿äºç»¿è²åç«ç°è²çæ°æ ¹ï¼ä¸é¢æéæçç³æµç¶ç²æ¶²ãç§å­¦å®¶æçï¼è¿å°±æ¯å®ä»¬æ¯éæ½è¥çç§å¯----è¿äºç²æ¶²è½åºæ°®ãæ¢è¨ä¹ï¼çç±³æ°æ ¹ä¸­æåºæ°®èï¼çç±³å©ç¨åºæ°®èä¸ºèªå·±æ½è¥ã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091108.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091109.jpg" alt="" title="" /></p>
+
+<p>å½å¹´æ²¡æ DNA å·¥å·æ¥ç ç©¶çç±³å¦ä½åºæ°®çç»èï¼è¿ä¸åç°è¢«æç½®äº20å¹´ãç´å°2005å¹´ï¼æç¨å°ç«¯ææ¯ï¼ç¡®è®¤ç²æ¶²ä¸­çç»èæ­£å¨ä»ç©ºæ°ä¸­å¸æ¶æ°®ï¼å°å¶è½¬åä¸ºçç±³å¯ä»¥å¸æ¶çå½¢å¼ã</p>
+
+<p>å¦ä»ï¼ç»è¿åå¤å¹´çåºå åæï¼ç§å­¦å®¶åè¡¨äºææ°çç ç©¶ææï¼è¿ç§åºæ°®ç¹æ§å¯ä»¥ç§»æ¤å°å¸¸è§çç±³ä¸­ï¼è¿å¾å¯è½ä¼å¯¼è´åä¸é©å½ï¼åä»£ä¸é¨åæ°®è¥ã</p>
+
+<p>æ°®æ°åæä¸ºæ°®è¥ï¼å¯è½æ¯20ä¸çºªçæå¤§æå°±ä¹ä¸ãåææ°®ææ¯ä¸å±è·å¾è¿ä¸ä¸ªè¯ºè´å°å¥ãè¿æ¯å½ä¹æ æ§çï¼æ®ä¼°è®¡ï¼ä»1908å¹´è³2008å¹´é´ï¼åä½ç©çåäº§å¢å äºä¸åä»¥ä¸ï¼å¶ä¸­çä¸å¤§åå å°±æ¯äººç±»ä¼å¶é æ°®è¥äºãæ²¡ææ°®è¥ï¼ä¸ºäºçäº§åæ ·æ°éçç²®é£ï¼æä»¬éè¦çèå°æ°éä¼æ¯ç°å¨å¤ååï¼ä¸çäººå£ä¹å°±ä¸å¯è½å¨20ä¸çºªå¤§å¹å¢é¿ã</p>
+
+<p>ä½æ¯ï¼æ°®è¥çäº§éè¦æ¶èä¸ç1ï¼è³2ï¼çè½æºï¼å¹¶ææ¾å¤§éæ¸©å®¤æ°ä½ãåææ°®éå¸¸ä¼ä»ç°éå²å¥æ°´éï¼å¯¼è´å¤§éè»ç±»å¤§éç¹æ®ï¼ä»èå¸æ¶æææ°§æ°ï¼ææ­»é±¼ç±»åå¶ä»çç©ãå¦æ­¤å¤çæ°®è¿å¥æ²³æµåæºªæµï¼ä»¥è³äºä¸çæ²³æµçæ²³å£å½¢æäºå¤§é¢ç§¯çæ­»åºã</p>
+
+<h2>è¨è®º</h2>
+
+<p>1ã</p>
+
+<p>2002å¹´ï¼æå¨ä¸­å³æä¸é´ä¸ç®è±ªåçéåºéä¸è®¿ NVIDIA CEO é»ä»åçæ¶åï¼ä»å°å£°å¯¹æè¯´ï¼è±ç¹å°æ CPUï¼æä»¬æ GPUã</p>
+
+<p>ä»è¯´å¾é£ä¹ä¸èªä¿¡ãæä¹åªæ¯å¾®ç¬çå®¹å¿ä»å° NVIDIA å Intel ç¸æå¹¶è®ºã18å¹´è¿å»ï¼NVIDIA å¸å¼è¶è¿ Intelã</p>
+
+<p>-- åé§</p>
+
+<p>2ã</p>
+
+<p>2005å¹´ï¼æçæ¯ä¸è®ºæçãåèä¹¦ç®ãé¨ååå«äº152ä¸ª URLãä¸ºäºçºªå¿µæ¯ä¸åäºå¨å¹´ï¼æéæ°æ£æ¥äºè¿äº URLï¼å¶ä¸­82ä¸ªä¸åèµ·ä½ç¨ãæå æ­¤åå®ï¼äºèç½é¾æ¥çèççæ¯57%ã</p>
+
+<p>--<a href="https://www.lightbluetouchpaper.org/2020/09/03/a-measurement-of-link-rot-57/">ãæµéé¾æ¥èççã</a></p>
+
+<p>3ã</p>
+
+<p>æåèå¨æ°å å¡çæåï¼ä¸ä»æ¯å ä¸ºä»çä¸å¶ä¸»ä¹ï¼èä¸è¿å ä¸ºæ°å å¡å³ç­ç²¾è±é¶å±ççº¯ç²¹å®ç¨ä¸»ä¹ãä»ä»¬æ²¡æåºå®ä¸åçæè¯å½¢æï¼èæ¯éæ©åéçæè¯å½¢æã</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=24382427">Hacker News è¯»è</a></p>
+
+<p>4ã</p>
+
+<p>äºèç½è½¯ä»¶è¡ä¸çå¼åæ¨¡å¼ï¼å·²ç»ä»æ¼«é¿çå¼åå¨æåä¸é¨çè´¨éä¿è¯ï¼QAï¼é¶æ®µï¼è½¬ç§»å°äºå¿«èå¥çè¿ç»­éæ/è¿ç»­äº¤ä»ï¼CI / CDï¼ç®¡éï¼è¿æ ·åæå¤§å°æé«äºè¿­ä»£éåº¦ã</p>
+
+<p>-- <a href="https://engineering.linkedin.com/blog/2020/production-testing-with-dark-canaries">ãé»æéä¸éæ¨¡å¼ççäº§æ¨¡å¼ã</a></p>
+
+<p>5ã</p>
+
+<p>ä½ è½å¨ä¸é¢çä¸å¯æåçä¸­ï¼å¿«éæ¾å°ä¸ä¸ªæ¹åçé£å¼ çåï¼è¿å°±æ¯ç¨æ·é¢å¯¹å¤§åèåè¿è¡å¯¼èªæ¶çæåã</p>
+
+<p>-- <a href="https://uxmovement.com/navigation/solving-the-megaton-problem-with-mega-menus/">ãå¤§èåå¯¼èªçè§£å³æ¹æ¡ã</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091401.jpg" alt="" title="" /></p>
+
+<p>6ã</p>
+
+<p>ä¸å¹´åï¼æä»¬æ¬å°ä¼¦æ¦æä¹¦ï¼ä¸ç´ç§æ¿ä½ï¼ç°å¨å¯ä»¥ä¹°æ¿äºã</p>
+
+<p>-- <a href="https://www.imperial.ac.uk/news/203853/imperial-mathematician-scoops-3m-breakthrough-prize/">è±å½é©¬ä¸Â·æµ·å°ææ</a>ï¼Martin Hairerï¼çè·å¥æè¨ãä»è·å¾äºä»å¹´çæ°å­¦çªç ´å¥ï¼å¥éä¸º300ä¸ç¾åï¼è¿æ¯ç®åå¥éæé«çç§å­¦å¥é¡¹ã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091308.jpg" alt="" title="" /></p>
+
+<p>7ã</p>
+
+<p>å®è¿æ²¡ææ­»ï¼ä½ç¡®å®å·²ç»åå®äºã</p>
+
+<p>-- <a href="https://momentjs.com/docs/#/-project-status/">Moment.js</a> å®£å¸åæ­¢å¼åï¼è¿å¥ç»´æ¤ç¶æã</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091508.jpg" alt="" title="" /></p>
+
+<h2>åé¡¾</h2>
+
+<p>2019å¹´çæ¬å¨ï¼ç¬¬ 74 æï¼ï¼<a href="http://www.ruanyifeng.com/blog/2019/09/weekly-issue-74.html">ä¿¡æ¯çåä¸æ¨¡å¼ä¸ºä»ä¹ä¸æ¯æ¶è´¹</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/201909/bg2019091910.jpg" alt="" title="" /></p>
+
+<p>2018å¹´çæ¬å¨ï¼ç¬¬ 22 æï¼ï¼<a href="http://www.ruanyifeng.com/blog/2018/09/weekly-issue-22.html">ç´å­èªæï¼çæå½è°</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/201809/bg2018091401.jpg" alt="" title="" /></p>
+
+<h2>è®¢é</h2>
+
+<p>è¿ä¸ªå¨åæ¯å¨äºåå¸ï¼åæ­¥æ´æ°å¨<a href="http://www.ruanyifeng.com/blog">é®ä¸å³°çç½ç»æ¥å¿</a>å<a href="http://weixin.sogou.com/weixin?query=%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97">å¾®ä¿¡å¬ä¼å·</a>ã</p>
+
+<p>å¾®ä¿¡æç´¢"é®ä¸å³°çç½ç»æ¥å¿"æèæ«æäºç»´ç ï¼å³å¯è®¢éã</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2018/bg2018042311.jpg" alt="" title="" /></p>
+
+<p>ï¼å®ï¼</p>
+
+                                    <!-- /div -->
+
+                                </div>
+    <script type="text/javascript" src="/newwindow.js"></script>
+                                <div class="asset-footer">
+
+<h3>ææ¡£ä¿¡æ¯</h3>
+<ul>
+<li>çæå£°æï¼èªç±è½¬è½½-éåç¨-éè¡ç-ä¿æç½²åï¼<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">åæå±äº«3.0è®¸å¯è¯</a>ï¼</li>
+<li>åè¡¨æ¥æï¼ <abbr class="published" title="2020-09-18T08:40:00+08:00">2020å¹´9æ18æ¥</abbr></li>
+
+</ul>
+                                </div>
+</article>
+                            </div>
+
+
+
+
+<div id="related_entries">
+<h2>ç¸å³æç« </h2>
+<ul>
+
+<li><strong>2020.09.11: <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-124.html">ç§æç±å¥½èå¨åï¼ç¬¬ 124 æï¼ï¼åä¸ºå¦ä½èæ ¸åå·¥</a></strong>
+
+                           <div class="entry-body">
+                              è¿éè®°å½æ¯å¨å¼å¾åäº«çç§æåå®¹ï¼å¨äºåå¸ã
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.09.04: <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html">ç§æç±å¥½èå¨åï¼ç¬¬ 123 æï¼ï¼äºèç½å¬å¸ä¸æ¹åçåå¶</a></strong>
+
+                           <div class="entry-body">
+                              è¿éè®°å½æ¯å¨å¼å¾åäº«çç§æåå®¹ï¼å¨äºåå¸ã
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.08.28: <a href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-122.html">ç§æç±å¥½èå¨åï¼ç¬¬ 122 æï¼ï¼è°è°äºèç½å¬å¸çé«ä¼°å¼</a></strong>
+
+                           <div class="entry-body">
+                              è¿éè®°å½æ¯å¨å¼å¾åäº«çç§æåå®¹ï¼å¨äºåå¸ã
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.08.21: <a href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-121.html">ç§æç±å¥½èå¨åï¼ç¬¬ 121 æï¼ï¼ä¸ºä»ä¹äººç±»æ²¡æè¶æ¥è¶é²ï¼</a></strong>
+
+                           <div class="entry-body">
+                              è¿éè®°å½æ¯å¨å¼å¾åäº«çç§æåå®¹ï¼å¨äºåå¸ã
+
+                           </div>
+
+</li>
+
+ 
+</ul>
+</div>
+
+
+
+                    
+
+                    <div id="comments" class="comments">
+
+
+    
+    
+        
+    <h2 class="comments-header">çè¨ï¼48æ¡ï¼</h2>
+
+    <div id="comments-content" class="comments-content" style="clear: left;">
+        
+        <div id="comment-422498" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.chengxiangqian.com/" href="http://www.chengxiangqian.com/" target="_blank" rel="nofollow">æ±æ¹äººç§°ååå</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422498">
+            <p>âäºèç½é¾æ¥çèççæ¯57%ãâç¡®å®ï¼å¾å¤æ¶èçé¾æ¥è¿ä¸æ®µå°±404äº</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:07 AM">2020å¹´9æ18æ¥ 09:07</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422498">#</a>
+ | <a href="#comment-text" title="å¼ç¨æ±æ¹äººç§°åååçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422498','æ±æ¹äººç§°ååå');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422501" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">åçæé¢</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422501">
+            <p>è¿ç§èµä¸å°é±ãææ¯é¾åº¦å¤§ãå·¥ç¨å¸èªæ°´åæé«çä¸å¡ï¼å½æåä½è½æå¥½åï¼<br />
+èµä¸å°é±åï¼</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:30 AM">2020å¹´9æ18æ¥ 09:30</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422501">#</a>
+ | <a href="#comment-text" title="å¼ç¨åçæé¢çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422501','åçæé¢');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422502" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://zhengyaing.com" href="http://zhengyaing.com" target="_blank" rel="nofollow">Zhengyaing</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422502">
+            <p>ç½çº¿æ­äºå æ ¹ä¾ç¶å¯ç¨çãããã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:31 AM">2020å¹´9æ18æ¥ 09:31</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422502">#</a>
+ | <a href="#comment-text" title="å¼ç¨Zhengyaingçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422502','Zhengyaing');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422504" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">å¢¨è²æ¯æåå­¦</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422504">
+            <p>æè¿ä¹å¨å³æ³¨æ°å­äººæ°å¸ï¼DECPï¼<br />
+ææççè§£ï¼DECPä¸æ¯åä»£å¾®ä¿¡ãæ¯ä»å®ãé¶èäºéªä»è¿ç±»ééçï¼èæ¯ä¸çº¸å¸ãå¤®è¡äººæ°å¸å¨å¤åç­å°ä½çæ³å®è´§å¸ï¼å®æ¯ç±»ä¼¼äºTCP/IPçåºå±ï¼èä¸æ¯httpsè¿æ ·çåºç¨å±é¢ã<br />
+æ¢ç¶æ¯åä»£çº¸å¸ä¸é¶è¡å¨å¤ï¼é£ä¹å®çç¹ç¹å°±æ¯ï¼<br />
+1.åºåé¾çå¯æº¯æºï¼è½ææè·è¸ªè´§å¸æµåï¼åæ´é±ãå¼å¸¸å¤æ±æµå¨ãè¯éªé½æ¯éç¹åºç¨åºå<br />
+2.æ°å­è´§å¸æ¬èº«çå®å¨æ§ãåæ³æ§ï¼è½ææé²æ­¢åå¸åèåæ¯ä»ï¼ç°å¨çµå­æ¯ä»å¶å®å·²ç»è§£å³äºåå¸é®é¢ï¼ï¼ç°å¨ä¸»è¦è§£å³èåæ¯ä»ï¼èåäºç»´ç ãååä»äººç¹å¾çæ¶æ¬¾ï¼<br />
+3.ä»¥åå¾®ä¿¡ãæ¯ä»å®åæ ·å¿é¡»ä½¿ç¨DECPäº¤æï¼åå°å¤®è¡ç»ä¸çç®¡ï¼ç¨æ·å¨å¾®ä¿¡æ¯ä»å®è´¦æ·éä½é¢ä¸èªå·±çDECPè´¦æ·å¯ä¸å¯¹åºï¼èä¸æ¯ç°å¨çèµéæ± æ¨¡å¼ã<br />
+4.å®éæ°ç¨åºæ¯ä¸­ï¼æ¯ææéçæ ç½ç»äº¤æï¼å¨éªè¯ç¯èåæä¿¡é¢åº¦ä¸åæç« ï¼</p>
+
+<p>ææ¯ä¸æè®¤ä¸ºé®é¢ä¸å¤§ï¼12306ãå¤®è¡ç¬¬äºä»£ç½ç»æ¯ä»ç³»ç»è¿ç±»è¶å¤§è§æ¨¡é«å¹¶åç³»ç»å·²ç»æçï¼å ä¸è¾è®¯é¿éåä¸æ åå¶å®å¿ç¶è¦å¥ä¼æä¾æ¯æã</p>
+
+<p>æ°å­äººæ°å¸æ å©å¯å¾åï¼å¦æäºè§£å¤æ±ååæ´é±å¨å½å®¶éèæç¥ä¸­çéè¦å°ä½å°±ä¼åç°ï¼DECPå°±æ¯ä¸è½é²æ°´è¶ï¼å µä½æææ¼ç¹ææ¯å®çä½ç¨</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:39 AM">2020å¹´9æ18æ¥ 09:39</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422504">#</a>
+ | <a href="#comment-text" title="å¼ç¨å¢¨è²æ¯æåå­¦çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422504','å¢¨è²æ¯æåå­¦');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422505" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">å è²ç«</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422505">
+            <p>âç½åå°ç½çº¿çä¸æ ¹éç»çº¿åªæ­ï¼ä¸¤ç«¯æå¥è¹æãä¿¡å·ç§æ ·ä¼ è¾ï¼ç½ééå¸¸å¥½ãâè¿åæ°é»çå¾çæé®é¢ãç½çº¿ä¼ è¾æ°æ®åªä½¿ç¨8è¯ä¸­ç4æ ¹è¯ï¼èè²çº¿æ¯ä¸ä½¿ç¨çï¼å³ä½¿åªæ­èè²çº¿ï¼å¯¹ç½ç»ä¹æ²¡æå½±åã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:43 AM">2020å¹´9æ18æ¥ 09:43</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422505">#</a>
+ | <a href="#comment-text" title="å¼ç¨å è²ç«çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422505','å è²ç«');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422506" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ruiiiii</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422506">
+            <p>16æ¥çç­æä¹ä¸å°±æ¯âç´å­å·äºææºèªæå¹¶å½äºä¸æ®µåæ­ï¼âå2018å¹´çæ¬å¨åå®¢é¥ç¸å¼åºï¼<br />
+å¦å¤ï¼å¥½å¥æé½çâåç´æ£®æâçæ¿ä»·æ¯å¤å°å¢ï¼</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:45 AM">2020å¹´9æ18æ¥ 09:45</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422506">#</a>
+ | <a href="#comment-text" title="å¼ç¨ruiiiiiçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422506','ruiiiii');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422508" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">andy</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422508">
+            <blockquote>
+<pre>å¼ç¨æ±æ¹äººç§°åååçåè¨ï¼</pre>
+
+<p>âäºèç½é¾æ¥çèççæ¯57%ãâç¡®å®ï¼å¾å¤æ¶èçé¾æ¥è¿ä¸æ®µå°±404äº</p>
+
+</blockquote>
+
+<p>ä¹å¯è½æ¯æ¾ä¸å°IPå°å</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:48 AM">2020å¹´9æ18æ¥ 09:48</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422508">#</a>
+ | <a href="#comment-text" title="å¼ç¨andyçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422508','andy');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422509" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://www.xttblog.com" href="https://www.xttblog.com" target="_blank" rel="nofollow">ä¸ä½è</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422509">
+            <p>@å¢¨è²æ¯æåå­¦ï¼</p>
+
+<p>å¾èµåï¼å¾çå¥½æ°å­äººæ°å¸ï¼</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:04 AM">2020å¹´9æ18æ¥ 10:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422509">#</a>
+ | <a href="#comment-text" title="å¼ç¨ä¸ä½èçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422509','ä¸ä½è');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422510" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422510">
+            <blockquote>
+<pre>å¼ç¨åçæé¢çåè¨ï¼</pre>
+
+<p>è¿ç§èµä¸å°é±ãææ¯é¾åº¦å¤§ãå·¥ç¨å¸èªæ°´åæé«çä¸å¡ï¼å½æåä½è½æå¥½åï¼<br />
+èµä¸å°é±åï¼</p>
+
+</blockquote>
+
+<p>å±å®èµä¸å°é±ï¼ä½æ¯å½å®¶åºç¡è®¾æ½ä¸å¤ªèèçå©<br />
+åè¡çº¸å¸èèè¿èµé±çé®é¢ä¹ï¼</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:09 AM">2020å¹´9æ18æ¥ 10:09</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422510">#</a>
+ | <a href="#comment-text" title="å¼ç¨threezhiwangçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422510','threezhiwang');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422511" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://zhaokaifeng.com/?p=2446" href="https://zhaokaifeng.com/?p=2446" target="_blank" rel="nofollow">èåä¹æ¢¦</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422511">
+            <p>ææ¾åºäºé²ä¼ªçç®çè®¾æ³è¿ä¸ç§âåæ°å­åâçäººæ°å¸ï¼åºäºè®¤è¯ä¸­å¿çæ°åçº¸è´¨è´§å¸é²ä¼ªæ¹æ¡ãä½å¨è¿ç¯æç« ååºæ¥æ²¡å¤ä¹å°±çå°äºå¤®è¡å¼åæ°å­è´§å¸çæ°é»ã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:10 AM">2020å¹´9æ18æ¥ 10:10</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422511">#</a>
+ | <a href="#comment-text" title="å¼ç¨èåä¹æ¢¦çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422511','èåä¹æ¢¦');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422512" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422512">
+            <p>çè§£çå¾å°ä½<br />
+ä½æè§å¾åºè¯¥ç¨ä¸å°åºåé¾çææ³<br />
+åºåé¾çæ ¸å¿æ¯å»ä¸­å¿å<br />
+èå¤®è¡å°±æ¯ä¸­å¿å<br />
+å¶å®å°±æ¯ç»æ¯å¼ å¸è®¾è®¡ä¸ä¸ªå¯ä¸æ è¯<br />
+ç¶åå¤®è¡è®°å½æ è¯çæ¥æè<br />
+è´§å¸æ°å¼åå¯æº¯æºä¹å<br />
+ä¼å¸¦æ¥æµ·éçè´¢æ¿æ¶å¥<br />
+åºç¡è®¾æ½èªç¶ä¸èèçå©<br />
+æ²¡åæ¯åè¡çº¸å¸çææ¬æ´ä½å¢<br />
+çº¸å¸ä¸é£ä¹å¤é«ç§æè¿æäººå·¥ææ¬ä¿å¯ææ¬ï¼è¿æææ§<br />
+è³äºwepay/alipayæ ¹æ¬å°±ä¸æ¯æ°å­è´§å¸<br />
+èæ¯è´§å¸æ°å­å<br />
+è´§å¸æ°å­åå¾æ©å°±æäº<br />
+é¶è¡è½¬è´¦<br />
+ä¸è¿æ²¡æå½æ°çº§åºç¨ç½¢äº<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:15 AM">2020å¹´9æ18æ¥ 10:15</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422512">#</a>
+ | <a href="#comment-text" title="å¼ç¨threezhiwangçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422512','threezhiwang');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422513" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">å¢¨è²æ¯æåå­¦</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422513">
+            <p>å½éè´§å¸åºéç»ç»ç»è®¡,å¨çæ¯å¹´éæ³æ´é±çæ°é¢çº¦å ä¸çåå½GDPæ»åç2%å°5%,å¤§çº¦å¨1.5ä¸äº¿è³3ä¸äº¿ç¾åä¹é´,ä¸ä»¥æ¯å¹´1000äº¿ç¾åéå¢ã<br />
+2015å¹´ï¼ä¸­å½æ¯å¹´çæ´é±è§æ¨¡ä¸å°äº2000äº¿åäººæ°å¸ï¼å¤§ä½ç¸å½äºä¸­å½ç»æµæ»éç2%ã</p>
+
+<p>å°±è¿ä¸é¡¹å°±è¶³å¤åæ¬äºå§</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:19 AM">2020å¹´9æ18æ¥ 10:19</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422513">#</a>
+ | <a href="#comment-text" title="å¼ç¨å¢¨è²æ¯æåå­¦çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422513','å¢¨è²æ¯æåå­¦');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422514" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">å¢¨è²æ¯æåå­¦</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422514">
+            <p>ç®åçæ¥ï¼åºåé¾çä¸­å¿ææ³å»ä¸­å¿åæ¯åºç¨çï¼ä¸è¿åºäºå½å®¶æç¥å®å¨çè¦æ±ï¼ä½¿ç¨çæ¯æéå»ä¸­å¿åï¼å³åªææææå¡å¨æè½éªè¯äº¤æçä¼ªï¼ã<br />
+å ä¸ºçè®ºä¸ï¼å¨å®å¨å»ä¸­å¿åç½ç»ä¸­ï¼æå½åªéè¦é¨ç½²51%çèç¹å³å¯ç¯¡æ¹æ´ä¸ªç½ç»çæ°æ®ï¼è¿å¨å½å®¶æç¥ä¸­æ¯ä¸åè®¸çã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:24 AM">2020å¹´9æ18æ¥ 10:24</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422514">#</a>
+ | <a href="#comment-text" title="å¼ç¨å¢¨è²æ¯æåå­¦çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422514','å¢¨è²æ¯æåå­¦');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422515" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422515">
+            <p>é£ä¸å«èµé±<br />
+é£å«è´¢æ¿æ¶å¥<br />
+åºç¡è®¾æ½çæå¥ä¸èèåæ¬<br />
+åè´¹æ¯åºèèåæ¬ä¹<br />
+å¨æ´é«çç»´åº¦è¡¡é<br />
+æçè§£ä½ æ³è¡¨è¾¾ç<br />
+ææ³è¯´çæ¯å½å®¶è¡ä¸ºä¸èèçå©<br />
+èæ¯èèå½å®¶å©ç<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:25 AM">2020å¹´9æ18æ¥ 10:25</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422515">#</a>
+ | <a href="#comment-text" title="å¼ç¨threezhiwangçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422515','threezhiwang');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422516" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422516">
+            <p>é£ä¸å«æéå»ä¸­å¿å<br />
+é£å«åå¸å¼<br />
+æ¯ç¹å¸ç51%è¡¡éæ¯åºäºæ¯ç¹å¸è®¾è®¡çæ°å­¦é¾é¢<br />
+å¦æéå­è®¡ç®æºè½å°æèæ°å­¦çè®ºçªé£çè¿<br />
+51%æ¯å®ä¸ä½<br />
+æä»¥ä¸­å¤®æ¿åºæçä¸å®æ¯ä¸­å¿åç<br />
+åªæå¨å¹³è¡ä¸»æé´ææå¯è½å»ä¸­å¿å<br />
+æ¯å¦ç°å¨ç¾å¸æ¯ä¸­å¿åç<br />
+æä»¥æä»¬è¦æå½éè´§å¸å»ä¸­å¿å<br />
+ä¸è¦å¤§å®¶é½è¢«ç¾å¸æ¶é¸å¸ç¨<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:29 AM">2020å¹´9æ18æ¥ 10:29</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422516">#</a>
+ | <a href="#comment-text" title="å¼ç¨threezhiwangçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422516','threezhiwang');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422517" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">åå</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422517">
+            <blockquote>
+<pre>å¼ç¨åçæé¢çåè¨ï¼</pre>
+
+<p>è¿ç§èµä¸å°é±ãææ¯é¾åº¦å¤§ãå·¥ç¨å¸èªæ°´åæé«çä¸å¡ï¼å½æåä½è½æå¥½åï¼<br />
+èµä¸å°é±åï¼</p>
+
+</blockquote>
+
+<p>è¿ç§èµä¸å°é±ãææ¯é¾åº¦å¤§ãå·¥ç¨å¸èªæ°´åæé«çä¸å¡ï¼ç§äººä¼ä¸è½æå¥½åï¼</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:33 AM">2020å¹´9æ18æ¥ 10:33</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422517">#</a>
+ | <a href="#comment-text" title="å¼ç¨ååçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422517','åå');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422518" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://readhop.com" href="https://readhop.com" target="_blank" rel="nofollow">Long</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422518">
+            <p>åè¡çº¸å¸å½ç¶æ¯èµé±çï¼é¸å¸ç¨ï¼èä¸æ¿åºçä¸»è¦æ¶å¥æ¹å¼ä¹ä¸ è³äºæ°å­è´§å¸åä¸æ¯ä¸ºäºèµé± ä¸æ¹é¢å½ç¶æ¯ä¸æ³è®©æ°ä¼éè¿çµå­é±åæ§å¶è¿ä¹å¤§ç¬é± å¦ä¸æ¹é¢å°±åæ¥¼ä¸æè¯´ ä¸­å¿åçæ°å­è´§å¸å¯ä»¥å®ç°å¨æ¹é¢çæº¯æºåæ§å¶ å¯ä»¥è¿½è¸ªæ¹é¢æ¯ä»ä¹å¤©ç½æçæ´é«</p>
+
+<p>æåçµå­æ¯ä»å¦æ¯ä»å®æ¯éå¸¸èµé±ç å¤§å®¶çé±æ¾æ¯ä»å® é¿éå¯ä»¥æ¿å»ä»»ææèµåè´· è·é¶è¡çæ¦å¿µå¾å ä½ä¸åé¶çä¼çç®¡</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:34 AM">2020å¹´9æ18æ¥ 10:34</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422518">#</a>
+ | <a href="#comment-text" title="å¼ç¨Longçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422518','Long');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422519" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ç½å</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422519">
+            <p>æé½çâåç´æ£®æâãææå¿æ¿å±ä¼ä¸ä¼å ä¸ºæ¤ç©ççé¿ååå£¤è¢«ååãå®å¡</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:53 AM">2020å¹´9æ18æ¥ 10:53</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422519">#</a>
+ | <a href="#comment-text" title="å¼ç¨ç½åçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422519','ç½å');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422520" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.junziboxue.com" href="http://www.junziboxue.com" target="_blank" rel="nofollow">megaTrends</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422520">
+            <p>æ£ºæ¨é£ä¸ªï¼æè§æ¯ä¸å¨åç</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:57 AM">2020å¹´9æ18æ¥ 10:57</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422520">#</a>
+ | <a href="#comment-text" title="å¼ç¨megaTrendsçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422520','megaTrends');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422522" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">å¤§åäººå£«</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422522">
+            <blockquote>
+<pre>å¼ç¨åçæé¢çåè¨ï¼</pre>
+
+<p>è¿ç§èµä¸å°é±ãææ¯é¾åº¦å¤§ãå·¥ç¨å¸èªæ°´åæé«çä¸å¡ï¼å½æåä½è½æå¥½åï¼<br />
+èµä¸å°é±åï¼</p>
+
+</blockquote>
+
+<p>å½å®¶å¯ä»¥ç¨çææ®µççæ¯å¤ªå¤äºï¼å¬å¡åå·¥èµä¹ä¸é«ï¼ä¸ºä»ä¹å¤§å®¶è¶ä¹è¥é¹ï¼ç»ä¸ªåäº¬ä¸æµ·æ·å£ï¼åå¥æ¿ä¹ç±»çå¯¹æ¿åºæ¥è¯´è¿ä¸æ¯so easy</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 11:00 AM">2020å¹´9æ18æ¥ 11:00</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422522">#</a>
+ | <a href="#comment-text" title="å¼ç¨å¤§åäººå£«çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422522','å¤§åäººå£«');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422523" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">magicV</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422523">
+            <p>ååï¼çäº12306çè¿æ­¥ï¼æç¸ä¿¡å½æä¼ä¸ä¸æ ·å¯ä»¥æå¥½è¿äºäºã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 11:44 AM">2020å¹´9æ18æ¥ 11:44</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422523">#</a>
+ | <a href="#comment-text" title="å¼ç¨magicVçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422523','magicV');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422524" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">å¢¨è²æ¯æåå­¦</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422524">
+            <p>æçè§£çä¸­å¿åæ¯ç¸å¯¹çï¼å¦æåªæå¤®è¡ä½ä¸ºå¯ä¸èç¹ï¼é£DECPå½ç¶æ¯ç»å¯¹ä¸­å¿åçï¼ææäº¤æå´ç»å¤®è¡ã<br />
+ä½æ¯ç®åçæ¥ï¼åºåé¾å¨DECPææ¯ä¸çåºç¨ï¼ä»ç¶æ¯ä»¥ï¼æéï¼å»ä¸­å¿åä¸ºåæçï¼å³åªæææçæºææè½åä¸é´æã<br />
+å®éåºç¨ä¸­ï¼å¤®è¡å¹¶ä¸æ¯å¯ä¸èç¹ï¼ææåä¸é¶è¡ãä¿é©ãè¯å¸ç±»éèå¬å¸å¨é¨åä¸ä½ä¸ºèç¹ï¼æè½ä»æ´ä¸ªéèè¡ä¸å®ç°äº¤æé´æçå¨è¦çåç¸äºå°è¯ãå¦åDECPä¸è¿æ¯å¤®è¡çç§è´¦å¯ä»¥ä»»äººææ®ï¼å¯¹äºå½å®¶éèæç¥æ¯æææ¾å¼±ç¹çï¼å³æ»å»å¤®è¡å³å¯æ§æ¯å½å®¶éèä½ç³»ï¼ã<br />
+ä»è¿ä¸ªè§åº¦æ¥çï¼DECPä»ç¶æ¯å·æå»ä¸­å¿åç¹ç¹çï¼å°½ç®¡å®æ¯æéçå»ä¸­å¿åï¼èä¸æ¯æ¯ç¹å¸è¿ç±»æ°é´ç»ç»çå®å¨å»ä¸­å¿å</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 11:55 AM">2020å¹´9æ18æ¥ 11:55</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422524">#</a>
+ | <a href="#comment-text" title="å¼ç¨å¢¨è²æ¯æåå­¦çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422524','å¢¨è²æ¯æåå­¦');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422526" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">irvingtest</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422526">
+            <p>é®èå¸åä¸åè§ä¸è¡åãæ°å­è´§å¸åä¸åç°éå¾å¤ªå¤äº<br />
+ä½ è¦æ¶è´¹æ°å­è´§å¸ï¼å°±è¦å¾è´¦æ·éå­é±ãé£ä¹é®é¢æ¥äºï¼å¹¿å¤§ç¨æ·é½è¢«å¸å¼å¾ä½ è´¦æ·éå­é±å¨èäºï¼è¿å­æ¬¾è½å¹²ä»ä¹ï¼è¿å°±æ¯æå¤§ççå©æºä¼å<br />
+åæ¯å¦ï¼æ°ä»¥äº¿è®¡çç¨æ·æ¯å¤©æ¶è´¹è®°å½ï¼è¿æ°æ®ä¸å¼é±åï¼æ¯å¹´åºä¸ªæ¯ä¸ªç»åè¡ä¸çæ¶è´¹åææ¥åï¼å¤å°è¡ä¸èæ¿æ¢çè¦ï¼</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  2:01 PM">2020å¹´9æ18æ¥ 14:01</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422526">#</a>
+ | <a href="#comment-text" title="å¼ç¨irvingtestçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422526','irvingtest');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422527" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">lk</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422527">
+            <p>å¼ºè¿«ççæ¬è´¨æ¯ä¸ªäººçæç»´æ¨¡å¼ä»¥åå¿çä¹ æ§ï¼æä»¥è¦æ¹åçæ¯è¿ä¸ª</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  2:04 PM">2020å¹´9æ18æ¥ 14:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422527">#</a>
+ | <a href="#comment-text" title="å¼ç¨lkçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422527','lk');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422529" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">wadang</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422529">
+            <p>âä½æ¯ï¼è¿ç§èµä¸å°é±ãææ¯é¾åº¦å¤§ãå·¥ç¨å¸èªæ°´åæé«çä¸å¡ï¼å½æåä½è½æå¥½åï¼â</p>
+
+<p>æ¯èµ·åå°ççº¸å¸å·¥åï¼è®¾å¤ï¼æ²¹å¢¨ãç¹ç§çº¸å¼ ï¼å­å¨ï¼è¿è¾çè´¹ç¨ï¼æ°å­è´§å¸åºè¯¥æææ¬ä¼å¿å§ã</p>
+
+<p>ææ¯é¾åº¦å¤§ï¼å·¥ç¨å¸èªæ°´é«çä¸å¤§çµä¿¡è¿è¥åä¸æ²¡é£ä¹å·®å§ï¼5Gå»ºè®¾æ¹é¢ä¹æ¯ä¸çç¬¬ä¸æ¢¯éå§ã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  2:17 PM">2020å¹´9æ18æ¥ 14:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422529">#</a>
+ | <a href="#comment-text" title="å¼ç¨wadangçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422529','wadang');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422530" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">yizhognchuanqi</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422530">
+            <p>ä¸­å¤®é¶è¡çå¹³åèªé&ç¦å©æ°´å¹³åºè¯¥æ¯ä¸è¬å¬å¸çdevopsé¨é¨çå·¥ç¨å¸å¹³åæ°´å¹³é«å¤äºå§</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  2:59 PM">2020å¹´9æ18æ¥ 14:59</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422530">#</a>
+ | <a href="#comment-text" title="å¼ç¨yizhognchuanqiçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422530','yizhognchuanqi');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422531" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ååµå²å</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422531">
+            <p>æ²¡æä»ä¹æ¯å¤åè§£å³ä¸äºç</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  5:15 PM">2020å¹´9æ18æ¥ 17:15</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422531">#</a>
+ | <a href="#comment-text" title="å¼ç¨ååµå²åçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422531','ååµå²å');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422542" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">arno</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422542">
+            <p>èªç¶åæ­ææ¶å°½ï¼æ³å®åæ­æ ç©·å®ã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  8:06 PM">2020å¹´9æ18æ¥ 20:06</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422542">#</a>
+ | <a href="#comment-text" title="å¼ç¨arnoçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422542','arno');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422544" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">æ¹æ¥</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422544">
+            <p>ååç½çº¿éè¦8æ ¹é½éæè¡ãç¾åç½çº¿åªè¦ 1236è¿4æ ¹éäºå°±è¡ãçå¾çæ¯èè²æ­äºã<br />
+æ©ç½ï¼æ©ï¼ç»¿ç½ï¼èï¼èç½ï¼ç»¿ï¼æ£ç½ï¼æ£<br />
+1     2   3     4    5    6    7    8<br />
+ææèè²æ­äºï¼æ­£å¸¸éä¿¡æ²¡é®é¢ã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 19, 2020 11:19 AM">2020å¹´9æ19æ¥ 11:19</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422544">#</a>
+ | <a href="#comment-text" title="å¼ç¨æ¹æ¥çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422544','æ¹æ¥');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422548" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://www.ivu4e.com" href="https://www.ivu4e.com" target="_blank" rel="nofollow">å¾®wxç¬</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422548">
+            <blockquote>
+<pre>å¼ç¨å¢¨è²æ¯æåå­¦çåè¨ï¼</pre>
+
+<p>ç®åçæ¥ï¼åºåé¾çä¸­å¿ææ³å»ä¸­å¿åæ¯åºç¨çï¼ä¸è¿åºäºå½å®¶æç¥å®å¨çè¦æ±ï¼ä½¿ç¨çæ¯æéå»ä¸­å¿åï¼å³åªææææå¡å¨æè½éªè¯äº¤æçä¼ªï¼ã<br />
+å ä¸ºçè®ºä¸ï¼å¨å®å¨å»ä¸­å¿åç½ç»ä¸­ï¼æå½åªéè¦é¨ç½²51%çèç¹å³å¯ç¯¡æ¹æ´ä¸ªç½ç»çæ°æ®ï¼è¿å¨å½å®¶æç¥ä¸­æ¯ä¸åè®¸çã</p>
+
+</blockquote>
+
+<p>æéå»ä¸­å¿åå°±æ¯èçé¾çåºç¨å§</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 19, 2020  4:05 PM">2020å¹´9æ19æ¥ 16:05</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422548">#</a>
+ | <a href="#comment-text" title="å¼ç¨å¾®wxç¬çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422548','å¾®wxç¬');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422549" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://www.ivu4e.com" href="https://www.ivu4e.com" target="_blank" rel="nofollow">å¾®wxç¬</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422549">
+            <p>æ°å­äººæ°å¸æ¯ä¸æ¯å¯ä»¥è®©è¿éè½¦æ¶å¤±äºï¼</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 19, 2020  4:17 PM">2020å¹´9æ19æ¥ 16:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422549">#</a>
+ | <a href="#comment-text" title="å¼ç¨å¾®wxç¬çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422549','å¾®wxç¬');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422552" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">çµè§ç«</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422552">
+            <p>å¤§åä¸æ åä¸»æ¯ç»æµå­¦åå£« ä¸ä¼ä¸ç¥é æ°å­äººæ°å¸æ¯ç¨æ¥å²é­è åå¤å³é¨æè®¡åç»æµçèå¥ å´å¤§å èµèµ å¯è§ç»ææ å¤ä¸å¨</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 20, 2020  7:38 AM">2020å¹´9æ20æ¥ 07:38</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422552">#</a>
+ | <a href="#comment-text" title="å¼ç¨çµè§ç«çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422552','çµè§ç«');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422554" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">openadmin</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422554">
+            <p><a href="https://reposhub.com" rel="nofollow">https://reposhub.com</a> ä¹æ¯ä¸ä¸ªæ¶éæ´ç github awesome ä»åºåå®¹çç½ç«ã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 20, 2020 10:17 AM">2020å¹´9æ20æ¥ 10:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422554">#</a>
+ | <a href="#comment-text" title="å¼ç¨openadminçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422554','openadmin');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422569" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">encro</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422569">
+            <p>è¿å¯¹æ¶è´¹èæ¯æå©çã</p>
+
+<p>çå°è¿å¥å°±æ³âæªå¿å§âï¼</p>
+
+<p>ä¸ºäºç»ä¸çç®¡ï¼ç¶åæé«æ°è¥é¨æ§ï¼éä½ä½éªçäºæåºè¯¥ä¹åå¾ä¸å°å§ã</p>
+
+<p>åªæ¯å¦å¤ä¸¤å®¶å·²ç»åå¾å¤å¤§äºï¼ç®åå·²ç»ä¸å¥½çç®¡äºï¼æå¼èµ·æ°æ¤ç½¢äºï¼æä»¥ç®åææ®µæ¯æ¸©æ°´èè¤èï¼</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 20, 2020  4:30 PM">2020å¹´9æ20æ¥ 16:30</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422569">#</a>
+ | <a href="#comment-text" title="å¼ç¨encroçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422569','encro');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422604" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ä½åæ°</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422604">
+            <blockquote>
+<pre>å¼ç¨å è²ç«çåè¨ï¼</pre>
+
+<p>âç½åå°ç½çº¿çä¸æ ¹éç»çº¿åªæ­ï¼ä¸¤ç«¯æå¥è¹æãä¿¡å·ç§æ ·ä¼ è¾ï¼ç½ééå¸¸å¥½ãâè¿åæ°é»çå¾çæé®é¢ãç½çº¿ä¼ è¾æ°æ®åªä½¿ç¨8è¯ä¸­ç4æ ¹è¯ï¼èè²çº¿æ¯ä¸ä½¿ç¨çï¼å³ä½¿åªæ­èè²çº¿ï¼å¯¹ç½ç»ä¹æ²¡æå½±åã</p>
+
+</blockquote>
+
+<p>ç¾åæåªç¨åæ ¹ï¼ååè¦å«æ ¹é½å¨ï¼ä¸è¿æç« æ²¡æè¯´æ¸æ¥è¿äºã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 21, 2020  5:08 PM">2020å¹´9æ21æ¥ 17:08</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422604">#</a>
+ | <a href="#comment-text" title="å¼ç¨ä½åæ°çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422604','ä½åæ°');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422605" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ç»ä¸æçº¿æ çº¿ä¸å¨</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422605">
+            <blockquote>
+<pre>å¼ç¨çµè§ç«çåè¨ï¼</pre>
+
+<p>å¤§åä¸æ åä¸»æ¯ç»æµå­¦åå£« ä¸ä¼ä¸ç¥é æ°å­äººæ°å¸æ¯ç¨æ¥å²é­è åå¤å³é¨æè®¡åç»æµçèå¥ å´å¤§å èµèµ å¯è§ç»ææ å¤ä¸å¨</p>
+
+</blockquote>
+
+<p>åä¸»å¤©å¤©èµç¾åä¸ºï¼ä½ è¿ä¸ç¥éåï¼åä¸»æ¿æ²»è§æéå¸¸é«çã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 21, 2020  5:32 PM">2020å¹´9æ21æ¥ 17:32</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422605">#</a>
+ | <a href="#comment-text" title="å¼ç¨ç»ä¸æçº¿æ çº¿ä¸å¨çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422605','ç»ä¸æçº¿æ çº¿ä¸å¨');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422608" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://eureka.name" href="https://eureka.name" target="_blank" rel="nofollow">Eureka</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422608">
+            <blockquote>
+<pre>å¼ç¨æ±æ¹äººç§°åååçåè¨ï¼</pre>
+
+<p>âäºèç½é¾æ¥çèççæ¯57%ãâç¡®å®ï¼å¾å¤æ¶èçé¾æ¥è¿ä¸æ®µå°±404äº</p>
+
+</blockquote>
+
+<p>æä»¥è±¡IPFSè¿æ ·çåºç¡å­å¨åºç¨åºè¯¥å¼å§åæ¥ä½ç¨äºã<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 21, 2020  9:30 PM">2020å¹´9æ21æ¥ 21:30</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422608">#</a>
+ | <a href="#comment-text" title="å¼ç¨Eurekaçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422608','Eureka');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422633" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://woodloch.blog" href="https://woodloch.blog" target="_blank" rel="nofollow">æ¨æ¾¤</a></span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422633">
+            <p>æ²æ³å°éæééº¼å¤æ¨ä¹ä¼å¯ä»¥åºå~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 22, 2020  4:58 PM">2020å¹´9æ22æ¥ 16:58</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422633">#</a>
+ | <a href="#comment-text" title="å¼ç¨æ¨æ¾¤çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422633','æ¨æ¾¤');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422658" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">FantasyGao</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422658">
+            <p>ä¸å¼ çº¸å¸å¨äº¤ææµéä¸­ï¼æµéææ¬å®éæ¯å é¢é¢ä¸é¨åçï¼æ¯å¦å°éææ¬ãå®å¨è¿è¾ææ¬ï¼è¿æä¸äºéå¸¦çå¦å°éæºçäº§ãç»´æ¤ãéªéæºç­ãå¦ææ²¡æè¿äºæµç¨ï¼é£æ°å­äººæ°å¸ä¼æ¯åé¢é¢çº¸å¸çæ´å·ä»·å¼ï¼è¿äºæº¢åºçä»·å¼ç¨æ¥ç»´æ¤æå¡å¨ãææ¯äººåæ¯ç»°ç»°æä½çã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020 10:37 AM">2020å¹´9æ23æ¥ 10:37</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422658">#</a>
+ | <a href="#comment-text" title="å¼ç¨FantasyGaoçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422658','FantasyGao');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422662" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">flight.cai</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422662">
+            <p>å¯¹æèè¨ï¼æ°å­è´§å¸å°±åæ¯ä»¥åå­¦æ ¡éæçå­¦è´¹ï¼æ¯å¼ æ¯ç·ç·ä¸é½å¾çä¸ªç­¾å~~ä¸ºé¿åé­å°æ±¡æäººæ°å¸çææ§ï¼ä»¥åé½æ¯ç¨çéç¬ï¼å¯éæ¶æ¦å»ãèç¨äºæ°å­ææ¯ï¼ä¸ä»æç­¾åãæ¶é´æ³ï¼è¿æåç§å¯è¿½æº¯ä¿¡æ¯ï¼å¹¶ä¸è¿äºæ°æ®å¯ä»¥æ°¸å­ãããå¯¹äºè¿ä¹å®ç¾çjiankongææ¯ï¼ä½ ç¥éï¼æå½ä¸å®æ¯è½åå¥½ç~~è¿ç¹æ¯åº¸ç½®ç~~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020  3:21 PM">2020å¹´9æ23æ¥ 15:21</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422662">#</a>
+ | <a href="#comment-text" title="å¼ç¨flight.caiçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422662','flight.cai');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422701" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422701">
+            <blockquote>
+<pre>å¼ç¨encroçåè¨ï¼</pre>
+
+<p>è¿å¯¹æ¶è´¹èæ¯æå©çã</p>
+
+<p>çå°è¿å¥å°±æ³âæªå¿å§âï¼</p>
+
+<p>ä¸ºäºç»ä¸çç®¡ï¼ç¶åæé«æ°è¥é¨æ§ï¼éä½ä½éªçäºæåºè¯¥ä¹åå¾ä¸å°å§ã</p>
+
+<p>åªæ¯å¦å¤ä¸¤å®¶å·²ç»åå¾å¤å¤§äºï¼ç®åå·²ç»ä¸å¥½çç®¡äºï¼æå¼èµ·æ°æ¤ç½¢äºï¼æä»¥ç®åææ®µæ¯æ¸©æ°´èè¤èï¼</p>
+
+</blockquote>
+
+<p>ä¸¤å®¶åªæ¯è´§å¸æ°å­åï¼ä¸æ¯ä¸¥æ ¼æä¹çæ°å­è´§å¸ã<br />
+å¯è½ä»ä½éªä¸æ¥è®²æ¯ä¸æ ·çã<br />
+ä½æ¯ä»ä¸¥æ ¼æä¹ä¸è®²ï¼å·®è·å¾å¤§ã<br />
+æ¯å¦è´§å¸æ°å­åï¼wepayæ æ³ä»æ³çä¸è¿è¡å¢åè´§å¸ã<br />
+èæ°å­è´§å¸å°±å¯ä»¥ã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020  5:07 PM">2020å¹´9æ23æ¥ 17:07</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422701">#</a>
+ | <a href="#comment-text" title="å¼ç¨threezhiwangçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422701','threezhiwang');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422702" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422702">
+            <blockquote>
+<pre>å¼ç¨flight.caiçåè¨ï¼</pre>
+
+<p>å¯¹æèè¨ï¼æ°å­è´§å¸å°±åæ¯ä»¥åå­¦æ ¡éæçå­¦è´¹ï¼æ¯å¼ æ¯ç·ç·ä¸é½å¾çä¸ªç­¾å~~ä¸ºé¿åé­å°æ±¡æäººæ°å¸çææ§ï¼ä»¥åé½æ¯ç¨çéç¬ï¼å¯éæ¶æ¦å»ãèç¨äºæ°å­ææ¯ï¼ä¸ä»æç­¾åãæ¶é´æ³ï¼è¿æåç§å¯è¿½æº¯ä¿¡æ¯ï¼å¹¶ä¸è¿äºæ°æ®å¯ä»¥æ°¸å­ãããå¯¹äºè¿ä¹å®ç¾çjiankongææ¯ï¼ä½ ç¥éï¼æå½ä¸å®æ¯è½åå¥½ç~~è¿ç¹æ¯åº¸ç½®ç~~</p>
+
+</blockquote>
+
+<p>å¥½è§åº¦ï¼å¥½æè·¯</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020  5:08 PM">2020å¹´9æ23æ¥ 17:08</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422702">#</a>
+ | <a href="#comment-text" title="å¼ç¨threezhiwangçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422702','threezhiwang');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422703" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422703">
+            <blockquote>
+<pre>å¼ç¨å¢¨è²æ¯æåå­¦çåè¨ï¼</pre>
+
+<p>æçè§£çä¸­å¿åæ¯ç¸å¯¹çï¼å¦æåªæå¤®è¡ä½ä¸ºå¯ä¸èç¹ï¼é£DECPå½ç¶æ¯ç»å¯¹ä¸­å¿åçï¼ææäº¤æå´ç»å¤®è¡ã<br />
+ä½æ¯ç®åçæ¥ï¼åºåé¾å¨DECPææ¯ä¸çåºç¨ï¼ä»ç¶æ¯ä»¥ï¼æéï¼å»ä¸­å¿åä¸ºåæçï¼å³åªæææçæºææè½åä¸é´æã<br />
+å®éåºç¨ä¸­ï¼å¤®è¡å¹¶ä¸æ¯å¯ä¸èç¹ï¼ææåä¸é¶è¡ãä¿é©ãè¯å¸ç±»éèå¬å¸å¨é¨åä¸ä½ä¸ºèç¹ï¼æè½ä»æ´ä¸ªéèè¡ä¸å®ç°äº¤æé´æçå¨è¦çåç¸äºå°è¯ãå¦åDECPä¸è¿æ¯å¤®è¡çç§è´¦å¯ä»¥ä»»äººææ®ï¼å¯¹äºå½å®¶éèæç¥æ¯æææ¾å¼±ç¹çï¼å³æ»å»å¤®è¡å³å¯æ§æ¯å½å®¶éèä½ç³»ï¼ã<br />
+ä»è¿ä¸ªè§åº¦æ¥çï¼DECPä»ç¶æ¯å·æå»ä¸­å¿åç¹ç¹çï¼å°½ç®¡å®æ¯æéçå»ä¸­å¿åï¼èä¸æ¯æ¯ç¹å¸è¿ç±»æ°é´ç»ç»çå®å¨å»ä¸­å¿å</p>
+
+</blockquote>
+
+<p>ä¸­æ¬èªçå»ä¸­å¿åçæè·¯æ¯éè¿è§£æ°å­¦é¾é¢å»éªè¯ç®å<br />
+éè¿ç®åæ¯è¾å»æè¡¡ä¸­å¿<br />
+å¨ä¸­å¤®æ¿åºä¸çå¶ä»åå­èç¹<br />
+æ²¡æå¿è¦å»æµªè´¹ç®åå»è¯æä¸­å¿<br />
+åå¥½åæ­¥å³å¯<br />
+ç±»ä¼¼äºPKIçé»è¾<br />
+ææ ¹çCAä¸å®æ¯ç©çèä¹¦ç<br />
+ç¬¬ä¸æ¬¡è®¤è¯ä¸å®æ¯çº¿ä¸é¢å¯¹é¢çã<br />
+çæ­£çå»ä¸­å¿åçå®è·µæ¹åå¨å½éè´§å¸ä¸­ã<br />
+DECPå°åºåäººæ°å¸å½éåæ¯ä¸ä¸ªæ¦å¿µè¿æ¯ä¸¤ä¸ªæ¦å¿µæ¯å®ä¹çé®é¢ã<br />
+ä½ä»ææ¯ææ®µæ¥è®²ã<br />
+äººæ°å¸å½éåè¦è§£å³çé®é¢æ¯é¸å¸ç¨å½å®¶è´§å¸è¶åé®é¢ã<br />
+äººæ°å¸æ°å­åè¦è§£å³çé®é¢æ¯å½å®¶å¯¹ç»æµé¢åççç®¡é®é¢ã<br />
+ä¸ªäººæè§ã</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020  5:16 PM">2020å¹´9æ23æ¥ 17:16</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422703">#</a>
+ | <a href="#comment-text" title="å¼ç¨threezhiwangçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422703','threezhiwang');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422708" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ç¤é±¼</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422708">
+            <blockquote>
+<pre>å¼ç¨çµè§ç«çåè¨ï¼</pre>
+
+<p>å¤§åä¸æ åä¸»æ¯ç»æµå­¦åå£« ä¸ä¼ä¸ç¥é æ°å­äººæ°å¸æ¯ç¨æ¥å²é­è åå¤å³é¨æè®¡åç»æµçèå¥ å´å¤§å èµèµ å¯è§ç»ææ å¤ä¸å¨</p>
+
+</blockquote>
+
+<p>"å½éæ¸ç®é¶è¡ï¼Bank for International Settlementsï¼2019å¹´çä¸é¡¹è°æ¥æ¾ç¤ºï¼å¨ç66å®¶å¤®è¡ä¸­ï¼è¶è¿80%çå¤®è¡åä¸äºä¸»ææ°å­è´§å¸é¡¹ç®ã"<br />
+å¤§å®¶é½è¦æè´§å¸ç»æµå?è¯·é®ä½ å¯¹ç»æµå­¦æä½é«è§?</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020  2:04 AM">2020å¹´9æ24æ¥ 02:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422708">#</a>
+ | <a href="#comment-text" title="å¼ç¨ç¤é±¼çè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422708','ç¤é±¼');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422712" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">flight.cai</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422712">
+            <p>@threezhiwangï¼</p>
+
+<p>äººæ°å¸å½éåé¦åè¦è§£å³çé®é¢é¾éä¸æ¯èªç±åæ¢ï¼<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020 11:38 AM">2020å¹´9æ24æ¥ 11:38</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422712">#</a>
+ | <a href="#comment-text" title="å¼ç¨flight.caiçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422712','flight.cai');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422713" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">flight.cai</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422713">
+            <p>æé½çåç´æ£®æå¥½å å¹´å ç±³å°ä¸åä¼é£ä¼å¿å°±æï¼èä¸æ¯æé½è®¾è®¡å¾å¥½çï¼å±æ¬¡æå¼º ç»¿æ¤é¢è²ä¸°å¯~~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020 11:44 AM">2020å¹´9æ24æ¥ 11:44</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422713">#</a>
+ | <a href="#comment-text" title="å¼ç¨flight.caiçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422713','flight.cai');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422720" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Cosplay.Cook</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422720">
+            <blockquote>
+<pre>å¼ç¨ruiiiiiçåè¨ï¼</pre>
+
+<p>16æ¥çç­æä¹ä¸å°±æ¯âç´å­å·äºææºèªæå¹¶å½äºä¸æ®µåæ­ï¼âå2018å¹´çæ¬å¨åå®¢é¥ç¸å¼åºï¼<br />
+å¦å¤ï¼å¥½å¥æé½çâåç´æ£®æâçæ¿ä»·æ¯å¤å°å¢ï¼</p>
+
+</blockquote>
+
+<p>3ä¸å¤</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020  2:10 PM">2020å¹´9æ24æ¥ 14:10</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422720">#</a>
+ | <a href="#comment-text" title="å¼ç¨Cosplay.Cookçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422720','Cosplay.Cook');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422721" class="comment">
+    <div id="comment-last" class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Cosplay.Cook</span>
+
+ è¯´ï¼
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422721">
+            <blockquote>
+<pre>å¼ç¨magicVçåè¨ï¼</pre>
+
+<p>ååï¼çäº12306çè¿æ­¥ï¼æç¸ä¿¡å½æä¼ä¸ä¸æ ·å¯ä»¥æå¥½è¿äºäºã</p>
+
+</blockquote>
+
+<p>å¯¹ä¸èµ·ï¼12306æ¯é¿éå¸®åç<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020  2:19 PM">2020å¹´9æ24æ¥ 14:19</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422721">#</a>
+ | <a href="#comment-text" title="å¼ç¨Cosplay.Cookçè¿æ¡çè¨" onclick="return CommentQuote('comment-quote-422721','Cosplay.Cook');">å¼ç¨</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    </div>
+        
+    
+
+
+    
+    
+    <div class="comments-open" id="comments-open">
+        <h2 class="comments-open-header">æè¦åè¡¨çæ³</h2>
+        <div class="comments-open-content">
+
+        
+            <div id="comment-greeting"></div>
+
+            <form method="post" action="http://www.ruanyifeng.com/cgi-bin/mtos/mt-comments.cgi" name="comments_form" id="comments-form" onsubmit="return pleaseWait();">
+                <input type="hidden" name="static" value="1" />
+                <input type="hidden" name="entry_id" value="2207" />
+                <input type="hidden" name="__lang" value="en" />
+                <input type="hidden" name="parent_id" value="" id="comment-parent-id" />
+                <input type="hidden" name="armor" value="1" />
+                <input type="hidden" name="preview" value="" />
+                <input type="hidden" name="sid" value="" />
+                <div id="comments-open-data">
+            <div id="comments-open-text">
+                    <p><label for="comment-text">æ¨ççè¨
+                    ï¼HTMLæ ç­¾é¨åå¯ç¨ï¼</label></p>
+                    <p><textarea id="comment-text" name="text" rows="10" cols="50"></textarea></p>
+                </div>
+                    <div id="comment-form-name">
+                        <p><label for="comment-author">æ¨çå¤§åï¼</label></p>
+                        <p><input id="comment-author" name="author" size="30" value="" />  <span class="hint"> &laquo;-å¿å¡«</span></p>
+                    </div>
+                    <div id="comment-form-email">
+                        <p><label for="comment-email">çµå­é®ä»¶ï¼</label></p>
+                        <p><input id="comment-email" name="email" size="30" value="" />  <span class="hint"> &laquo;-å¿å¡«ï¼ä¸å¬å¼</span></p>
+                    </div>
+                    <div id="comment-form-url">
+                        <p><label for="comment-url">ä¸ªäººç½åï¼</label></p>
+                        <p><input id="comment-url" name="url" size="30" value="" />  <span class="hint"> &laquo;-æä¿¡ä»»ä½ ï¼ä¸ä¼å¡«åå¹¿åé¾æ¥</span></p>
+                    </div>
+                    <div id="comment-form-remember-me">
+                        <p>
+                        <label for="comment-bake-cookie">è®°ä½ä¸ªäººä¿¡æ¯ï¼</label><input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="!this.checked?forgetMe(document.comments_form):rememberMe(document.comments_form)" value="1" accesskey="r" /></p>
+                    </div>
+                </div>
+                    <div id="comment-form-reply" style="display:none">
+                    <input type="checkbox" id="comment-reply" name="comment_reply" value="" onclick="mtSetCommentParentID()" />
+                    <label for="comment-reply" id="comment-reply-label"></label>
+                </div>
+                <div id="comments-open-captcha"></div>
+                <div id="comments-open-footer">
+<div id="wait" style="display:none;">
+<p><strong>æ­£å¨åè¡¨æ¨çè¯è®ºï¼è¯·ç¨å</strong></p>
+<p>
+<input type="text" name="percent" size="3" style="font-family:Arial; color:black;text-align:center; border-width:medium; border-style:none;">           
+<input type="text" name="chart" size="46" style="font-family:Arial;font-weight:bolder; color:black; padding:0px; border-style:none;">
+</p>
+</div>
+
+                    <p><input type="submit" accesskey="s" name="post" id="comment-submit" value="åè¡¨" />  <span class="hint"> &laquo;- ç¹å»æé®</span></p>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <script type="text/javascript" src="http://www.ruanyifeng.com/blog/js/prism.js"></script>
+        <script type="text/javascript" src="/blog/checker.js"></script> 
+            <div id="footer">
+<div id="footer-inner">
+  <div id="footer-content">
+
+      
+<!--
+      <section> 
+     </section>
+  <p><a title="Instagram" target="_blank" href="http://instagram.com/ruanyf">Instagram</a></p>
+       <p><a title="è®¢é" href="https://app.feedblitz.com/f/f.fbz?Sub=348868" target="_blank">é®ä»¶è®¢é</a></p>
+  
+       <h2>Feed</h2>
+       <p><a title="FeedBurner" href="http://feeds.feedburner.com/ruanyifeng" target="_blank">FeedBurner</a></p>
+       <p><a title="atom.xml" href="http://www.ruanyifeng.com/blog/atom.xml" target="_blank">atom.xml</a></p>
+     
+      <p>æ¯ä»å®ï¼<a title="æ¯ä»å®" href="alipays://platformapi/startapp?appId=20000067&url=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog" target="_blank">yifeng.ruan@gmail.com</a></p>
+-->
+
+     <section>
+<!--
+       <h2>æææ¹å¼</h2>
+       <p><a title="è®¸å¯è¯" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">èªç±è½¬è½½-éåç¨-éè¡ç-ä¿æç½²å</a></p>
+       <h2>å¾®ä¿¡å¬å·</h2>
+       <h2>ç¤¾äº¤å¸å·</h2>
+       <h2>èç³»æ¹å¼</h2>
+     -->
+       <p><img src="https://www.wangbase.com/blogimg/asset/202001/bg2020013101.jpg" alt="å¾®ä¿¡æ«æ"></p>
+       <p>
+         <a title="å¾®å" href="http://weibo.com/ruanyf" target="_blank">Weibo</a> | 
+         <a title="Twitter" target="_blank" href="https://twitter.com/ruanyf">Twitter</a> |
+         <a title="GitHub" target="_blank" href="https://github.com/ruanyf">GitHub</a>
+       </p>
+     
+     <p>Email: <a title="çµå­é®ä»¶" href="mailto:yifeng.ruan@gmail.com" target="_blank">yifeng.ruan@gmail.com</a></p>
+     </section>
+  
+  
+
+
+  </div>
+</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46829782-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript" src="/blog/stats.js"></script>
+<script>
+var supportImg = document.querySelector('#support-img');
+
+if (supportImg && _hmt) {
+  _hmt.push(['_trackEvent', 'banner', 'load']);
+  supportImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'banner', 'click']);
+  }, false);
+}
+
+var homepageImg = document.querySelector('#homepage_sponsor');
+if (homepageImg && _hmt) {
+  _hmt.push(['_trackEvent', 'homepage-banner', 'load']);
+  homepageImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'homepage-banner', 'click']);
+  }, false);
+}
+</script>
+
+
+<div id="share_button_proto" style="display:none;">
+<a class="bshareDiv" href="http://www.bshare.cn/share">åäº«æé®</a>
+
+
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=15e016b4-0028-44f1-a40d-a3c9d9c13c28&style=10&bgcolor=#fff&bp=weixin,qqim,qzone,qqmb,sinaminiblog,fanfou,xueqiu,douban,facebook,twitter,gplus,instapaper&ssc=false"></script>
+<script type="text/javascript" charset="utf-8">
+bShare.addEntry({
+    title: document.getElementById("page-title").innerHTML,
+url:window.location.href
+});
+</script>
+</div>
+
+<script>
+document.getElementById("share_button").innerHTML=document.getElementById("share_button_proto").innerHTML;
+</script>
+
+
+
+
+
+        </div>
+    </div>
+</body>
+</html>
