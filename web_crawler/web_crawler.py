@@ -9,6 +9,7 @@ import pandas as pd
 import collections
 import requests
 from helper import detect_language
+# from robots_deteor import robot_detector
 
 class Crawler:
 
@@ -84,14 +85,11 @@ class Crawler:
         if page_url.endswith('.html'): # Parse html file (e.g., https://www.test.com/main.html)
             print('html: ' + page_url)
             html = requests.get(page_url).content.decode('utf-8') 
-            if not self.valid_language(host_name, html): return False
-            self.store_html_content(page_url, html)
-            self.count_links(page_url, html)
         else: # Parse regular URL (e.g., https://www.techcruntch.com)
             html = urlopen(page_url).read().decode('utf-8')
-            if not self.valid_language(host_name, html): return False
-            self.store_html_content(page_url, html)
-            self.count_links(page_url, html)
+        if not self.valid_language(host_name, html): return False
+        self.store_html_content(page_url, html)
+        self.count_out_links(page_url, html)
         return True
     
     def valid_language(self, host_name: str, html_content: str) -> bool: 
@@ -110,7 +108,7 @@ class Crawler:
         text_file.write(html)
         text_file.close()
 
-    def count_links(self, page_url: str, html: str):
+    def count_out_links(self, page_url: str, html: str):
         # soup = BeautifulSoup(html, features='lxml')
         soup = BeautifulSoup(html, features='html.parser')
         all_a_tags = soup.find_all('a')
@@ -139,9 +137,9 @@ english_seed_url = 'https://www.yahoo.com/'
 english_seed_url = 'https://techcrunch.com/'
 Crawler(english_seed_url, 'en').parse_pages()
 
-chinese_seed_url = 'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html'
-Crawler(chinese_seed_url, 'zh-cn').parse_pages()
+# chinese_seed_url = 'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html'
+# Crawler(chinese_seed_url, 'zh-cn').parse_pages()
 
-spanish_seed_url = 'https://espndeportes.espn.com/'
-# spanish_seed_url = 'https://www.milanuncios.com/'
-Crawler(spanish_seed_url, 'es').parse_pages()
+# spanish_seed_url = 'https://espndeportes.espn.com/'
+# # spanish_seed_url = 'https://www.milanuncios.com/'
+# Crawler(spanish_seed_url, 'es').parse_pages()

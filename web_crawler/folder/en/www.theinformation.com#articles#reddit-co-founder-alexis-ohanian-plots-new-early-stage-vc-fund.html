@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"cf65152c96","applicationID":"54981851","transactionName":"dlZfQEJYXVtURR8EE0FQUlhVRB5EWVhH","queueTime":4,"applicationTime":169,"agent":""}</script>
+<script>(window.NREUM||(NREUM={})).loader_config={licenseKey:"cf65152c96",applicationID:"54981851"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(c(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(5),c=e(6),f=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(e,n){s[n]=i(p+n,!0,"api")}),s.addPageAction=i(p+"addPageAction",!0),s.setCurrentRouteName=i(p+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(l+"tracer",[u.now(),e,t],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?d("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&d("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&d("lcp",[t[t.length-1]])}function o(e){e.getEntries().forEach(function(e){e.hadRecentInput||d("cls",[e])})}function a(e){if(e instanceof m&&!g){var n=Math.round(e.timeStamp),t={type:e.type};n<=p.now()?t.fid=p.now()-n:n>p.offset&&n<=Date.now()?(n-=p.offset,t.fid=p.now()-n):n=p.now(),g=!0,d("timing",["fi",n,t])}}function c(e){d("pageHide",[p.now(),e])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var f,u,s,d=e("handle"),p=e("loader"),l=e(4),m=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){f=new PerformanceObserver(r);try{f.observe({entryTypes:["paint"]})}catch(v){}u=new PerformanceObserver(i);try{u.observe({entryTypes:["largest-contentful-paint"]})}catch(v){}s=new PerformanceObserver(o);try{s.observe({type:"layout-shift",buffered:!0})}catch(v){}}if("addEventListener"in document){var g=!1,y=["click","keydown","mousedown","pointerdown","touchstart"];y.forEach(function(e){document.addEventListener(e,a,!1)})}l(c)}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e){function n(){e(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,n,!1)}n.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],5:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],6:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],7:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?f(e,c,o):o()}function t(t,r,i,o){if(!p.aborted||o){e&&e(t,r,i);for(var a=n(i),c=v(t),f=c.length,u=0;u<f;u++)c[u].apply(a,r);var d=s[w[t]];return d&&d.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return d[e]=d[e]||i(t)}function y(e,n){u(e,function(e,t){n=n||"feature",w[t]=n,n in s||(s[n]=[])})}var h={},w={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:y,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(p.aborted=!0,s=p.backlog={})}var c="nr@context",f=e("gos"),u=e(5),s={},d={},p=n.exports=i();p.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(w,function(n,t){e[n]||(e[n]=t)});var t=a();f("mark",["onload",t+E.offset],null,"api"),f("timing",["load",t]);var r=l.createElement("script");r.src="https://"+e.agent,n.parentNode.insertBefore(r,n)}}function i(){"complete"===l.readyState&&o()}function o(){f("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(c=Math.max((new Date).getTime(),c))-E.offset}var c=(new Date).getTime(),f=e("handle"),u=e(5),s=e("ee"),d=e(3),p=window,l=p.document,m="addEventListener",v="attachEvent",g=p.XMLHttpRequest,y=g&&g.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:g,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var h=""+location,w={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1177.min.js"},b=g&&y&&y[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:c,now:a,origin:h,features:{},xhrWrappable:b,userAgent:d};e(1),e(2),l[m]?(l[m]("DOMContentLoaded",o,!1),p[m]("load",r,!1)):(l[v]("onreadystatechange",i),p[v]("onload",r)),f("mark",["firstbyte",c],null,"api");var x=0,O=e(7)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(6),a="nr@original",c=Object.prototype.hasOwnProperty,f=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,c,f;try{a=this,r=o(arguments),c="function"==typeof t?t(r,a):t||{}}catch(u){p([u,"",[r,a,i],c])}s(n+"start",[r,a,i],c);try{return f=e.apply(a,r)}catch(d){throw s(n+"err",[r,a,d],c),d}finally{s(n+"end",[r,a,f],c)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,d(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,c,f,u="-"===i.charAt(0);for(f=0;f<n.length;f++)c=n[f],a=e[c],r(a)||(e[c]=t(a,u?c+i:i,o,c))}function s(t,r,i){if(!f||n){var o=f;f=!0;try{e.emit(t,r,i,n)}catch(a){p([a,t,r,i])}f=o}}function d(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){p([r])}for(var i in e)c.call(e,i)&&(n[i]=e[i]);return n}function p(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script>
+  <link rel="manifest" href="/manifest.json">
+
+  <title>Reddit Co-Founder Alexis Ohanian Plots New Early-Stage VC Fund — The Information</title>
+<meta name="description" content="Reddit co-founder Alexis Ohanian has begun meeting with investors to raise money for a new venture firm following his departure from Initialized Capital, the early-stage investing fund he co-founded, according to two people familiar with the matter.Ohanian in June said he was leaving ..." />
+<meta property="og:title" content="Reddit Co-Founder Alexis Ohanian Plots New Early-Stage VC Fund" />
+<meta property="og:description" content="Reddit co-founder Alexis Ohanian has begun meeting with investors to raise money for a new venture firm following his departure from Initialized Capital, the early-stage investing fund he co-founded, according to two people familiar with the matter.Ohanian in June said he was leaving ..." />
+<meta property="og:site_name" content="The Information" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.theinformation.com/articles/reddit-co-founder-alexis-ohanian-plots-new-early-stage-vc-fund" />
+<meta property="og:image" content="https://dmxvlyap9srmn.cloudfront.net/production/articles/4761/small_50b75adc-5db6-4cc5-bd85-65c5663d4c07.jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@theinformation" />
+<meta name="twitter:title" content="Reddit Co-Founder Alexis Ohanian Plots New Early-Stage VC Fund" />
+<meta name="twitter:description" content="Reddit co-founder Alexis Ohanian has begun meeting with investors to raise money for a new venture firm following his departure from Initialized Capital, the early-stage investing fund he co-founded, according to two people familiar with the matter.Ohanian in June said he was leaving ..." />
+<meta name="twitter:creator" content="@kateclarktweets " />
+<link rel="canonical" href="https://www.theinformation.com/articles/reddit-co-founder-alexis-ohanian-plots-new-early-stage-vc-fund" />
+
+<base href="https://www.theinformation.com/articles/reddit-co-founder-alexis-ohanian-plots-new-early-stage-vc-fund">
+<meta property="fb:pages" content="322278407910875">
+<meta name="google-site-verification" content="SGIw8baIav9ybDaHULYSgwX5auDJt_mBZcqngEeAKEc" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,  maximum-scale=1">
+<meta name="google-site-verification" content="BIC9E8nyS0dX-5ONYFXynL1HmoUbLrVA0S08sA3LVaw" />
+<meta name="google-signin-client_id" content="572469268518-tndg5b1551jrfj27qru2sua71doum5k5.apps.googleusercontent.com">
+<meta name="apple-itunes-app" content="app-id=1485459932">
+
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="xZlNJrE46YMGpkY6r/jj+/KuyUHRC9LyVYBFr8B0ZcZzRFnH6GAYviO5BbIKzpH0dF5wusnRebPkyyt3yTa4/A==" />
+<link rel="alternate" type="application/atom+xml" title="The Information" href="/feed" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_prod%2Fapple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_prod%2Ffavicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_prod%2Ffavicon-16x16.png">
+<link rel="manifest" href="/assets/favicon_prod%2Fmanifest.json">
+<link rel="mask-icon" href="/assets/favicon_prod%2Fsafari-pinned-tab.svg" color="#ef4136">
+<link rel="shortcut icon" href="/assets/favicon_prod%2Ffavicon.ico">
+<meta name="msapplication-config" content="/assets/favicon_prod%2Fbrowserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+  let currentUser = {
+    type: 'logged-out'
+  };
+
+</script>
+
+  <script type="text/javascript">
+  // Setting up a simple namespace for our functions.
+  let currentPage = {};
+    currentPage.articleId = 4761;
+    currentPage.paywalled = true
+    if (currentPage.paywalled) {
+        currentPage.paywallType = 'locked'
+    }
+</script>
+
+
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',"GTM-MXFP3X");</script>
+
+
+  
+
+
+
+  
+  <script type="text/javascript">
+  // Setting up a simple namespace for our functions.
+  var ti = {};
+
+  var config = {
+    // Config for showing console.log status messages for functions in console.
+    // Turn on by setting to true
+    // usage: log('your status message')
+    logging: false,
+    modalDelay: 10000
+  }
+</script>
+
+  
+  
+
+  
+    
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"NewsArticle","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.theinformation.com/articles/reddit-co-founder-alexis-ohanian-plots-new-early-stage-vc-fund"},"headline":"Reddit Co-Founder Alexis Ohanian Plots New Early-Stage VC Fund","image":"https://dmxvlyap9srmn.cloudfront.net/production/articles/4761/50b75adc-5db6-4cc5-bd85-65c5663d4c07.jpeg","datePublished":"2020-08-13T14:02:34Z","dateModified":"2020-09-10T00:34:28Z","author":[{"@type":"Person","name":"Kate Clark"}],"publisher":{"name":"The Information","@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.theinformation.com/images/logo-i2.png"}},"isAccessibleForFree":"False"}
+  </script>
+
+  <script src="/assets/application-1cdfa8b81ce7a6bdb61487fa106b7cb1b1474bf08ac29b8fe38933de8c4dd013.js"></script>
+  <script type="text/javascript" async src="//platform.twitter.com/widgets.js" async defer></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-lite.js"
+    charset="utf-8"></script>
+  <script src="https://cdn.optimizely.com/js/7254060343.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=loadGoogleAuth" async defer></script>
+ <script src="//cdn.jsdelivr.net/npm/bluebird@3.5.5/js/browser/bluebird.min.js" async defer onload="Promise.config({cancellation: true});"></script>
+  <script type="text/javascript">
+    var googAnalyticsID;
+  </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46194836-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
+  <script type="text/javascript">
+    window.HELP_IMPROVE_VIDEOJS = false;
+  </script>
+  <script src="//vjs.zencdn.net/6.2.5/video.js" async defer></script>
+
+    <script type="text/javascript">
+      $(function() {
+        initializeEmbeddedVideos();
+      })
+    </script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script type="text/javascript">
+      const
+        stripe = Stripe('pk_live_Wlp0zqDCzQrHDR5rCbmHeDkw'),
+        stripeConfig = {
+          fonts: [
+            {
+              family: 'MetaWeb-Normal',
+              src: 'url(https://www.theinformation.com/styles/fonts/MetaWeb-Normal.ttf)'
+            }
+          ]
+        },
+        mockStripe = false,
+        mockApplePayOption = false,
+        mockGooglePayOption = false,
+        elements = stripe.elements(stripeConfig);
+    </script>
+
+    <script>
+    $(function() {
+      if ((typeof hj) === 'function') {
+        hj('trigger', 'article_view_logged_out');
+        hj('trigger', 'article-view');
+      }
+    })
+  </script>
+
+    <link rel="stylesheet" media="all" href="/assets/application-7578c705a8a4dd7300438846b9a2d35421c7db1d47b05c0849eebba4f2b6f19a.css" />
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-lite.css"
+    rel="stylesheet"
+    type="text/css">
+
+  
+
+  <script src="/packs/js/application-aa74b4bd6ee86f0f1a22.js"></script>
+
+</head>
+
+<body class="namespaced-ti desktop the_information">
+
+  
+    <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXFP3X"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <div id="ti-wrapper">
+    
+
+    <header class="locked">
+  <a href="/">
+    <div class="logo" alt="The Information"></div>
+</a>  <div class="links-container">
+      <a class="sign-in" href="/sessions/new">Sign In</a>
+  </div>
+</header>
+
+    
+
+    <div id="ti-content">
+      <section class="pageContent">
+        
+
+
+        <div class="container flash-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="flash"></div>
+    </div>
+  </div>
+</div>
+
+
+        
+
+
+
+
+<article class="immersive" id="4761">
+  <div id="top-spacer"></div>
+  <div id="feature-image-container">
+    <img id="feature-image" src="https://dmxvlyap9srmn.cloudfront.net/production/articles/4761/large_50b75adc-5db6-4cc5-bd85-65c5663d4c07.jpeg" alt="Alexis Ohanian, co-founder of Reddit and Initialized Capital, in August 2019. Photo: AP" title="Alexis Ohanian, co-founder of Reddit and Initialized Capital, in August 2019. Photo: AP"></img>
+  </div>
+
+  <div id="article-container" class="container">
+    <div class="row">
+      <div class="col-xs-12 highlight-and-topics">
+          <div class="highlight">Exclusive</div>
+          <div class="topics">
+              <span class="topic">Venture Capital</span>
+              <span class="topic">Startups</span>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 title-and-dek">
+        <h1>Reddit Co-Founder Alexis Ohanian Plots New Early-Stage VC Fund</h1>
+      </div>
+    </div>
+
+    <div class="row" id="pre-article">
+      <div class="col-xs-12" id="byline-and-published-time">
+        By <div class="author-meta inline-block"><a class="quiet-link author-link track-click" data-type="link" data-name="Contributor profile" data-location="byline" data-identifier="Kate Clark" href="/reporters/kate-clark">Kate Clark</a><div class="author-contact-card-container hidden-xs hidden-sm"><ul class="author-contact-card"><li><em><a class="track-click" data-type="link" data-name="Reporter contact: email" data-location="byline dropdown" data-identifier="Kate Clark" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;%6b%61%74%65@%74%68%65%69%6e%66%6f%72%6d%61%74%69%6f%6e.%63%6f%6d">kate@theinformation.c&#173;om</a></em></li><li><a class="track-click" data-type="link" data-name="Reporter contact: profile" data-location="byline dropdown" data-identifier="Kate Clark" href="/reporters/kate-clark">Profile and archive <span style='font-family: helvetica, arial, sans-serif;'>&rarr;</span></a></li><li><a target="_blank" rel="noreferrer" class="track-click" data-type="link" data-name="Reporter contact: twitter" data-location="byline dropdown" data-identifier="Kate Clark" href="https://twitter.com/kateclarktweets ">Follow Kate on <span class='is-brand twitter'>Twitter</span></a></li></ul></div></div>
+        &nbsp;|&nbsp;
+        Aug. 13, 2020  7:02 AM PDT
+      </div>
+
+        <div class="col-xs-12 picture-credit">
+          Photo: Alexis Ohanian, co-founder of Reddit and Initialized Capital, in August 2019. Photo: AP
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 divider"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 article-content">
+        <div class="has-fadeout down-up dark-bg">
+          <p class="first">Reddit co-founder Alexis Ohanian has begun meeting with investors to raise money for a new venture firm following his departure from Initialized Capital, the early-stage investing fund he co-founded, according to two people familiar with the matter. </p><p>Ohanian in June said he was leaving Initialized, which backed high-valued startups such as Instacart, Coinbase and Opendoor in their early years. He now plans to raise more than $100 million for the fund, which will focus on pre-seed and seed investments, one person said. The new effort stands to capitalize on his brand and connections to attract startup founders, who are increasingly seeking out well-known individual investors rather than established firms. </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div class="read-this-article-banner-container" id="read-this-article-banner-container-hero">
+  
+<div class="p0 read-this-article-immersive banner" id="read-this-article">
+  <div class="container">
+    <h1 class="type test-headline serif">
+      Join now to read the full story
+    </h1>
+    <div class="action-container">
+        <div class="lead-form-capture">
+          <div class="get-started-form-group">
+  <div class="get-started-action-group">
+    <input type="text" class="get-started-input" placeholder="Enter your email...">
+    <span>
+      <a type="button" class="get-started-button" data-submit-uri="/users" data-redirect-uri="/subscribe/one">
+        Get Started
+      </a>
+    </span>
+  </div>
+  <div class="get-started-error"></div>
+</div>
+
+        </div>
+        <div class="google-divider"></div>
+        <div
+  class="g-signin2"
+  data-onsuccess= "createLeadWithGoogle"
+  data-theme="dark"
+  data-height="48"
+  data-width="250"
+  data-longtitle="true"
+  data-verification-uri="/create_lead_with_google"
+    data-returning-uri ="/subscribe/one"
+>
+</div>
+
+        <div class="get-started-error"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div id="locked-homepage" class="locked immersive-value-props">
+  <section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 copy-container">
+        <div class="copy">
+          <div class="header">
+            Get access to exclusive coverage
+          </div>
+          <div class="subheader">
+            Read deeply reported stories from the largest newsroom in tech.
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 insert-container">
+          <div class="insert">
+            <div class="ti-section-header">
+              <div class="title">
+                Latest Articles
+              </div>
+              <div class="line">&nbsp;</div>
+            </div>
+            <div class="highlight-and-topics">
+                <span class="highlight">
+                  The Takeaway
+                </span>
+                <span class="topics">
+                    <span class="topic">
+                      Media/Telecom
+                    </span>
+                </span>
+            </div>
+            <div class="title-and-image-container">
+              <div class="col-md-6 col-xs-12">
+                <div class="insert-content-title">
+                  What I Hope Substack Changes About Journalism
+                </div>
+                <div class="insert-content-authors-line">
+                  By Jessica E. Lessin &middot Sept. 26, 2020  7:46 AM PDT
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <img src="https://dmxvlyap9srmn.cloudfront.net/production/articles/4878/small_a08be6aa-1b24-49d2-bee7-ab65ebd62ab3.png">
+              </div>
+            </div>
+            <div class="excerpt">
+              <p>This week there was a lot of buzz around journalists ditching their newsroom jobs to publish their own newsletters. The trend was chronicled in a <a href="https://www.nytimes.com/2020/09/23/business/media/substack-newsletters-journalists.html"><u>New York Times piece</u></a>, pegged to the news that The Verge&rsquo;s Casey Newton was breaking out on his own.&nbsp;</p> <p>I had to laugh when Ben Thompson, the creator of the subscription Stratechery newsletter, tweeted: &ldquo;The NYT trend piece on ...</p>
+            </div>
+          </div>
+      </div>
+    </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 insert-container">
+          <div class="insert">
+            <div class="ti-section-header">
+              <div class="title">
+                Latest Briefs
+              </div>
+              <div class="line">&nbsp;</div>
+            </div>
+              <div class="insert-brief">
+                <div class="insert-content-title">
+                  Startup CEO That Violated Airbnb Rules Steps Down After Investigation 
+                </div>
+                <div class="insert-content-authors-line">
+                  By Cory Weinberg &middot Sept. 25, 2020
+                </div>
+              </div>
+              <div class="insert-brief">
+                <div class="insert-content-title">
+                  Podcasting Company Wondery Explores Sale
+                </div>
+                <div class="insert-content-authors-line">
+                  By Jessica Toonkel &middot Sept. 25, 2020
+                </div>
+              </div>
+              <div class="insert-brief">
+                <div class="insert-content-title">
+                  Court Sets TikTok Hearing for Sunday Morning
+                </div>
+                <div class="insert-content-authors-line">
+                  By Alex Heath and Laura Mandaro &middot Sept. 25, 2020
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 copy-container">
+        <div class="copy">
+          <div class="header">
+            Stay in the know
+          </div>
+          <div class="subheader">
+            Receive a summary of the day's top tech news—distilled into one email.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="white-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 copy-container">
+        <div class="copy">
+          <div class="header">
+            Access on the go
+          </div>
+          <div class="subheader">
+            View stories on our mobile app and tune into our weekly podcast.
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 insert-container" id="app-screenshot-container">
+        <img class="screenshot" src="/images/locked-homepage-app-insert.png">
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 insert-container">
+        <img class="screenshot" src="/images/locked-homepage-video-insert.png">
+      </div>
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 copy-container">
+        <div class="copy">
+          <div class="header">
+            Join live video Q&A&rsquo;s
+          </div>
+          <div class="subheader">
+            Deep-dive into topics like startups and autonomous vehicles with our top reporters and other executives.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 copy-container">
+        <div class="copy">
+          <div class="header">
+            Enjoy a clutter-free experience
+          </div>
+          <div class="subheader">
+            Read without any banner ads.
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 insert-container">
+        <img class="screenshot" src="/images/locked-homepage-article-insert.png">
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+      <div id="popular-stories-section-title">
+        Recent Popular Stories
+      </div>
+        <div class="row popular-story">
+          <div class="col-sm-4 col-xs-12 popular-story-image">
+            <a href="/articles/tech-execs-are-obsessing-over-note-taking-apps-we-tested-them-out">
+              <img src="https://dmxvlyap9srmn.cloudfront.net/production/articles/4864/normal_16d5580d-15b8-4e66-8aa9-1b32993c88f1.jpg">
+</a>          </div>
+          <div class="col-sm-8 col-xs-12 popular-story-content">
+            <div class="highlight-and-topics">
+                <span class="topics">
+                    <span class="topic">
+                      Startups
+                    </span>
+                    <span class="topic">
+                      Microsoft
+                    </span>
+                </span>
+            </div>
+            <a href="/articles/tech-execs-are-obsessing-over-note-taking-apps-we-tested-them-out">
+              <div class="popular-story-title">
+                Tech Execs Are Obsessing Over Note-Taking Apps. We Tested Them Out
+              </div>
+</a>            <div class="popular-story-author">
+              By The Information Staff
+            </div>
+            <div class="popular-story-excerpt">
+              <a href="/articles/tech-execs-are-obsessing-over-note-taking-apps-we-tested-them-out">
+                 Investors are newly enamored of note-taking apps, financing startups like Notion Labs, Coda and Roam Research at high valuations.
+</a>            </div>
+          </div>
+        </div>
+        <div class="row popular-story">
+          <div class="col-sm-4 col-xs-12 popular-story-image">
+            <a href="/articles/bourkoff-is-star-media-dealmaker-but-can-he-make-shift-to-tech">
+              <img src="https://dmxvlyap9srmn.cloudfront.net/production/articles/4867/normal_dd42ae24-7382-4ca9-9e08-b0d374d1adb3.jpg">
+</a>          </div>
+          <div class="col-sm-8 col-xs-12 popular-story-content">
+            <div class="highlight-and-topics">
+                <span class="highlight">
+                  Profile
+                </span>
+                <span class="topics">
+                    <span class="topic">
+                      Media/Telecom
+                    </span>
+                    <span class="topic">
+                      Markets
+                    </span>
+                </span>
+            </div>
+            <a href="/articles/bourkoff-is-star-media-dealmaker-but-can-he-make-shift-to-tech">
+              <div class="popular-story-title">
+                Bourkoff Is Star Media Dealmaker, but Can He Make Shift to Tech?
+              </div>
+</a>            <div class="popular-story-author">
+              By Jessica Toonkel
+            </div>
+            <div class="popular-story-excerpt">
+              <a href="/articles/bourkoff-is-star-media-dealmaker-but-can-he-make-shift-to-tech">
+                 Aryeh Bourkoff hates wasting time. Rather than checking his overcoat when he goes out to lunch during New York&rsquo;s frigid winters, the investment banker sometimes asks his assistant to walk with him to the restaurant so she can take his coat with her back to the office.
+</a>            </div>
+          </div>
+        </div>
+        <div class="row popular-story">
+          <div class="col-sm-4 col-xs-12 popular-story-image">
+            <a href="/articles/viacomcbs-probed-sexual-misconduct-allegation-against-ceo-bob-bakish">
+              <img src="https://dmxvlyap9srmn.cloudfront.net/production/articles/4873/normal_324ab887-5ec7-4af2-9dfe-44bb3cd06fe5.png">
+</a>          </div>
+          <div class="col-sm-8 col-xs-12 popular-story-content">
+            <div class="highlight-and-topics">
+                <span class="highlight">
+                  Exclusive
+                </span>
+                <span class="topics">
+                    <span class="topic">
+                      Entertainment
+                    </span>
+                </span>
+            </div>
+            <a href="/articles/viacomcbs-probed-sexual-misconduct-allegation-against-ceo-bob-bakish">
+              <div class="popular-story-title">
+                ViacomCBS Probed Sexual Misconduct Allegation Against CEO Bob Bakish
+              </div>
+</a>            <div class="popular-story-author">
+              By Jessica Toonkel
+            </div>
+            <div class="popular-story-excerpt">
+              <a href="/articles/viacomcbs-probed-sexual-misconduct-allegation-against-ceo-bob-bakish">
+                 ViacomCBS has been investigating an allegation of sexual misconduct by its CEO, Bob Bakish, according to several people familiar with the situation.
+</a>            </div>
+          </div>
+        </div>
+        <div class="row popular-story">
+          <div class="col-sm-4 col-xs-12 popular-story-image">
+            <a href="/articles/microsofts-changes-to-business-software-terms-could-lift-its-cloud-service-and-hurt-aws-google">
+              <img src="https://dmxvlyap9srmn.cloudfront.net/production/articles/4875/normal_a01030c3-f76b-43b3-8abd-a8b8c1c39fdd.jpg">
+</a>          </div>
+          <div class="col-sm-8 col-xs-12 popular-story-content">
+            <div class="highlight-and-topics">
+                <span class="highlight">
+                  Exclusive
+                </span>
+                <span class="topics">
+                    <span class="topic">
+                      Enterprise
+                    </span>
+                    <span class="topic">
+                      Cloud
+                    </span>
+                </span>
+            </div>
+            <a href="/articles/microsofts-changes-to-business-software-terms-could-lift-its-cloud-service-and-hurt-aws-google">
+              <div class="popular-story-title">
+                Microsoft’s Changes to Business Software Terms Could Lift Its Cloud Service and Hurt AWS, Google   
+              </div>
+</a>            <div class="popular-story-author">
+              By Kevin McLaughlin and Amir Efrati
+            </div>
+            <div class="popular-story-excerpt">
+              <a href="/articles/microsofts-changes-to-business-software-terms-could-lift-its-cloud-service-and-hurt-aws-google">
+                 A change Microsoft made late last year to the terms of service for Microsoft 365, its cloud-based software that includes Word, PowerPoint and Outlook, could drive some companies that use Amazon Web Services and Google Cloud to Microsoft&rsquo;s Azure cloud service, analysts said.
+</a>            </div>
+          </div>
+        </div>
+        <div class="row popular-story">
+          <div class="col-sm-4 col-xs-12 popular-story-image">
+            <a href="/articles/tiktok-valued-at-around-60-billion-as-deal-structure-emerges">
+              <img src="https://dmxvlyap9srmn.cloudfront.net/production/articles/4861/normal_89ccd271-07e5-4037-b268-7d000d0e094b.jpeg">
+</a>          </div>
+          <div class="col-sm-8 col-xs-12 popular-story-content">
+            <div class="highlight-and-topics">
+                <span class="topics">
+                    <span class="topic">
+                      Venture Capital
+                    </span>
+                    <span class="topic">
+                      Asia
+                    </span>
+                </span>
+            </div>
+            <a href="/articles/tiktok-valued-at-around-60-billion-as-deal-structure-emerges">
+              <div class="popular-story-title">
+                TikTok Valued at Around $60 Billion, As Deal Structure Emerges
+              </div>
+</a>            <div class="popular-story-author">
+              By Kate Clark, Kevin McLaughlin and Jessica E. Lessin
+            </div>
+            <div class="popular-story-excerpt">
+              <a href="/articles/tiktok-valued-at-around-60-billion-as-deal-structure-emerges">
+                 Walmart and Oracle are valuing the soon-to-be formed TikTok Global at between $50 billion and $60 billion, according to two people familiar with the deal, as key aspects of one of the most convoluted global tech deals in history take shape.
+</a>            </div>
+          </div>
+        </div>
+        <div class="row popular-story">
+          <div class="col-sm-4 col-xs-12 popular-story-image">
+            <a href="/articles/politics-create-high-wire-act-for-tech-ceos">
+              <img src="https://dmxvlyap9srmn.cloudfront.net/production/articles/4862/normal_b5a5b15a-7304-45d6-b739-98a48559b627.jpg">
+</a>          </div>
+          <div class="col-sm-8 col-xs-12 popular-story-content">
+            <div class="highlight-and-topics">
+                <span class="topics">
+                    <span class="topic">
+                      Venture Capital
+                    </span>
+                    <span class="topic">
+                      Startups
+                    </span>
+                </span>
+            </div>
+            <a href="/articles/politics-create-high-wire-act-for-tech-ceos">
+              <div class="popular-story-title">
+                Politics Create High-Wire Act for Tech CEOs
+              </div>
+</a>            <div class="popular-story-author">
+              By Zoë Bernard
+            </div>
+            <div class="popular-story-excerpt">
+              <a href="/articles/politics-create-high-wire-act-for-tech-ceos">
+                 In June, after protests against the police killing of George Floyd swept the country, Glenn Kelman, CEO of online real estate brokerage Redfin, wrote an email to his customers in which he  committed  to doing more to help Black customers find homes in neighborhoods they&rsquo;ve traditionally been shut out of.
+</a>            </div>
+          </div>
+        </div>
+  </div>
+</section>
+
+</div>
+
+
+
+        
+      </section>
+
+      
+    </div>
+
+      <footer class="locked" id="locked-footer">
+    <div class="container">
+      <div class="row">
+        <div id="locked-footer-nav" class="col-xs-12">
+          <a class="locked-footer-nav-link" href="/org-charts">Org Charts</a>
+          <a class="locked-footer-nav-link" href="/about">About</a>
+          <a class="locked-footer-nav-link" href="/video">Video</a>
+          <a class="locked-footer-nav-link" href="/contributors">Community</a>
+          <a class="locked-footer-nav-link" href="/events">Events</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" id="locked-footer-get-started">
+            <div class="get-started-form-group">
+              <input type="text" class="get-started-input" placeholder="Enter your email...">
+              <span>
+                <a type="button" class="get-started-button" data-submit-uri="/users" data-redirect-uri="/subscribe/one">Get Started</a>
+              </span>
+              <div class="get-started-error"></div>
+            </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" id="locked-footer-hr">
+          <hr>
+        </div>
+      </div> 
+      <div class="footer-links-container">
+  <div class="footer-container-inner">
+    <div>
+      <span>© 2013-2020 The Information. All Rights Reserved.</span>
+    </div>
+    <div>
+      <a href="/terms">Terms</a> &middot 
+      <a href="/privacy">Privacy</a> &middot 
+      <a href="/payment-policy">Payment Policy</a> &middot 
+      <a href="https://theinformation.zendesk.com/hc/">Help &amp; Support</a> &middot 
+      <a href="/feed">RSS Feed</a> &middot 
+      <a href="/tips">Tips</a> &middot
+      <a href="/about#jobs">Careers</a>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </footer>
+
+  </div>
+
+  <section class="overlay not-visible initial-not-visible" id="menu-overlay">
+  <div class="overlay-inner">
+    <i class="fa fa-times" aria-hidden="true"></i>
+    <div class="overlay-content">
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/about">About Us</a>
+        </li>
+        <li>
+          <a href="/contributors">Community</a>
+        </li>
+        <li>
+          <a href="/events">Events</a>
+        </li>
+        <li>
+          <a href="/video">Video</a>
+        </li>
+        <li>
+          <a href="/briefings">Briefings</a>
+        </li>
+        <li>
+          <a href="https://theinformation.typeform.com/to/gcz0yw">Corporate Sales</a>
+        </li>
+      </ul>
+      <ul>
+        <p class="header upcoming-ipos-toggle">
+          Upcoming Ipos <span class="toggle-indicator">(+)</span>
+        </p>
+        <div class="upcoming-ipos-expansion" data-visible="false">
+            <li>
+              <a class="upcoming-ipo-name track-click" data-type="link" data-name="Upcoming-IPO-Link" data-location="mobile-upcoming-ipos-list" data-identifier="airbnb-upcoming-ipo" href="/companies/airbnb">Airbnb</a>
+            </li>
+            <li>
+              <a class="upcoming-ipo-name track-click" data-type="link" data-name="Upcoming-IPO-Link" data-location="mobile-upcoming-ipos-list" data-identifier="ant-group-upcoming-ipo" href="/companies/ant-group">Ant Group</a>
+            </li>
+            <li>
+              <a class="upcoming-ipo-name track-click" data-type="link" data-name="Upcoming-IPO-Link" data-location="mobile-upcoming-ipos-list" data-identifier="asana-upcoming-ipo" href="/companies/asana">Asana</a>
+            </li>
+            <li>
+              <a class="upcoming-ipo-name track-click" data-type="link" data-name="Upcoming-IPO-Link" data-location="mobile-upcoming-ipos-list" data-identifier="doordash-upcoming-ipo" href="/companies/doordash">DoorDash</a>
+            </li>
+            <li>
+              <a class="upcoming-ipo-name track-click" data-type="link" data-name="Upcoming-IPO-Link" data-location="mobile-upcoming-ipos-list" data-identifier="palantir-upcoming-ipo" href="/companies/palantir">Palantir</a>
+            </li>
+        </div>
+      </ul>
+      <ul>
+        <p class="header org-chart-toggle">
+          Org charts <span class="toggle-indicator">(+)</span>
+        </p>
+        <div class="org-charts-expansion" data-visible="false">
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="airbnb-org-chart" href="/org-charts/airbnb">Airbnb</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="amazon-org-chart" href="/org-charts/amazon">Amazon</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="aws-org-chart" href="/org-charts/aws">Amazon Web Services</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="apple-org-chart" href="/org-charts/apple">Apple</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="aptiv-org-chart" href="/org-charts/aptiv">Aptiv</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="bytedance-org-chart" href="/org-charts/bytedance">ByteDance</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="coinbase-org-chart" href="/org-charts/coinbase">Coinbase</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="cruise-org-chart" href="/org-charts/cruise">Cruise</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="didi-chuxing-org-chart" href="/org-charts/didi-chuxing">Didi Chuxing</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="disney-org-chart" href="/org-charts/disney">Disney Streaming</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="endeavor-org-chart" href="/org-charts/endeavor">Endeavor</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="facebook-org-chart" href="/org-charts/facebook">Facebook</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="google-org-chart" href="/org-charts/google">Google</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="lyft-org-chart" href="/org-charts/lyft">Lyft</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="microsoft-org-chart" href="/org-charts/microsoft">Microsoft</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="netflix-org-chart" href="/org-charts/netflix">Netflix</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="quibi-org-chart" href="/org-charts/quibi">Quibi</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="snap-org-chart" href="/org-charts/snap">Snap</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="spotify-org-chart" href="/org-charts/spotify">Spotify</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="tencent-org-chart" href="/org-charts/tencent">Tencent</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="tesla-org-chart" href="/org-charts/tesla">Tesla</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="twitter-org-chart" href="/org-charts/twitter">Twitter</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="uber-org-chart" href="/org-charts/uber">Uber</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="viacomcbs-org-chart" href="/org-charts/viacomcbs">ViacomCBS</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="walmart-org-chart" href="/org-charts/walmart">Walmart</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="warnermedia-org-chart" href="/org-charts/warnermedia">WarnerMedia </a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="waymo-org-chart" href="/org-charts/waymo">Waymo</a>
+            </li>
+            <li>
+              <a class="org-chart-name track-click" data-type="link" data-name="Project-Link" data-location="mobile-projects-list" data-identifier="wework-org-chart" href="/org-charts/wework">WeWork</a>
+            </li>
+        </div>
+      </ul>
+      <ul>
+        <p class="header project-toggle">
+          Projects <span class="toggle-indicator">(+)</span>
+        </p>
+        <div class="projects-expansion" data-visible="false">
+          <li>
+            <a
+              class="track-click"
+              data-type="link"
+              data-name="Project-Link"
+              data-location="mobile-projects-list"
+              data-identifier="vc-diversity-index"
+              href="/vc-diversity-index"
+            >
+              VC Diversity Index
+            </a>
+          </li>
+          <li>
+            <a
+              class="track-click"
+              data-type="link"
+              data-name="Project-Link"
+              data-location="mobile-projects-list"
+              data-identifier="tech-events"
+              href="/tech-events"
+            >
+              Most Valuable Tech Events
+            </a>
+          </li>
+          <li>
+            <a
+              class="track-click"
+              data-type="link"
+              data-name="Project-Link"
+              data-location="mobile-projects-list"
+              data-identifier="pressed-documentary"
+              href="/pressed"
+            >
+              Pressed Documentary
+            </a>
+          </li>
+          <li>
+            <a
+              class="track-click"
+              data-type="link"
+              data-name="Course-Link"
+              data-location="mobile-projects-list"
+              data-identifier="how-to-run-a-startup-course"
+              href="/courses/how-to-run-a-startup"
+            >
+              How to Run a Startup
+            </a>
+          </li>
+        </div>
+      </ul>
+      <ul>
+        <li>
+          <a href="/search">Search</a>
+        </li>
+          <li>
+            <a class="track-click" data-name="LOHP - Subscribe" data-location="mobile-menu" data-type="link" href="/subscribe/one">Subscribe</a>
+          </li>
+          <li>
+            <a href="/sessions/new">Log In</a>
+          </li>
+        <li>
+          <a href="https://theinformation.zendesk.com/hc/">Help &amp; Support</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+  <script>
+  $(function() {
+    // Start!
+    engine();
+  })
+</script>
+
+  <!-- Ahoy -->
+<script>
+  $(function() {
+    ahoy.start();
+    ahoy.trackAll();
+  })
+</script>
+<script type="text/javascript">
+  (function( $ ) {
+
+    // Track for internal analytics
+    $(document).on("click", ".track-click", function(e){
+      var $this = $(this),
+          eventName = 'Clicked ' + $this.data("name"),
+          currentPage = window.location.pathname,
+          properties = {};
+
+      //
+      // Assign ALL the data
+      properties.can_read_content = false;
+      properties.page = currentPage;
+      properties.type = $this.data("type");
+      properties.location = $this.data("location");
+      properties.awareness_bar_text = $this.data("awareness-bar-text");
+
+      if ($this.data("identifier")) {
+        properties.identifier = $this.data("identifier");
+      }
+
+
+      // Record the event
+      ahoy.start();
+      ahoy.track(eventName, properties);
+    });
+
+  }( jQuery ));
+</script>
+
+<script type="text/javascript">
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+    const
+      trackingPrefsCookie = Cookies.get('tracking-preferences'),
+      destinations = trackingPrefsCookie ? JSON.parse(decodeURI(trackingPrefsCookie)).destinations : {All: true};
+    analytics.load(
+      "pBBV1c1b6TE22XZ2gQCmMx3vihrGNdPC", {
+        integrations: destinations
+      }
+    );
+    analytics.page();
+  }}();
+</script>
+
+
+  <div class="hidden">
+  
+<div
+  data-id="what-is-the-info-module"
+  class="contributor-signup m0">
+  <h1 class="contributor-title">
+    What Is The Information?
+  </h1>
+  <ul class="text-left m0 p0 mb2 serif list-style-none">
+      <li>
+        <h4 class="m0 font-blue">
+          In-depth Journalism
+        </h4>
+        <p class="type font-8 mb2">
+          Receive out our latest exclusives, breaking news, interactive graphics and more in your inbox every morning.
+        </p>
+      </li>
+      <li>
+        <h4 class="m0 font-blue">
+          Daily Briefing
+        </h4>
+        <p class="type font-8 mb2">
+          Every weeknight, we&#39;ll send you our views on the day&#39;s top tech news.
+        </p>
+      </li>
+      <li>
+        <h4 class="m0 font-blue">
+          Conference Calls
+        </h4>
+        <p class="type font-8 mb2">
+          Each month, our reporters discuss trending tech topics in depth exclusively with our subscribers.
+        </p>
+      </li>
+      <li>
+        <h4 class="m0 font-blue">
+          Exclusive Events
+        </h4>
+        <p class="type font-8 mb2">
+          Unlike other news organizations, our events are available to subscribers at no extra cost. 
+        </p>
+      </li>
+  </ul>
+
+  <a
+    target="_blank"
+    rel="noopener"
+    href="/subscribe/one"
+    class="track-click"
+    data-type="button"
+    data-name="subscribe"
+    data-location="'what is the information' banner">
+    <button class="button">
+      Subscribe now
+    </button>
+  </a>
+</div>
+
+</div>
+
+    <script type='text/javascript'>
+  $(document).ready( function() {
+    ahoy.start();
+    var trackingObj = {
+      title: "Reddit Co-Founder Alexis Ohanian Plots New Early-Stage VC Fund",
+      author: "Kate Clark",
+      article_id: 4761,
+      slug: "reddit-co-founder-alexis-ohanian-plots-new-early-stage-vc-fund",
+      shared: false,
+      unlocked: false, // TODO Not accurate for locked/unlocked article pages
+      logged_out: true,
+      type: "show"
+    }
+
+    ahoy.track('Article view', trackingObj);
+  });
+</script>
+
+  <script type='text/javascript'>
+  const
+    device = "desktop",
+    articleTitle = "Reddit Co-Founder Alexis Ohanian Plots New Early-Stage VC Fund",
+    articleUrl = "reddit-co-founder-alexis-ohanian-plots-new-early-stage-vc-fund",
+    subStatus = null;
+
+  ready(() => {
+    analytics.track('Article viewed', {
+      article_id: 4761,
+      article_title: articleTitle,
+      url: articleUrl,
+      subscription_status: subStatus,
+      logged_in: false,
+      topic_ids: [3, 9],
+      device: device,
+    });
+  });
+</script>
+
+
+      <script type="text/javascript">
+
+      googAnalyticsID = 'UA-46194836-1';
+
+      var googTrackingData = {
+        dimension7: false,
+        dimension6: 0
+      };
+
+    </script>
+
+</body>
+</html>

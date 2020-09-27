@@ -12,8 +12,8 @@ language_tracker_pattern = {lan: 0 for lan in languages}
 
 def detect_language(html_content: str):
     language_tracker = language_tracker_pattern.copy()
-    soup = BeautifulSoup(html_content, features = 'lxml')
-    texts = set(soup.findAll(text = True))
+    soup = BeautifulSoup(html_content, features = 'lxml') 
+    texts = set(soup.findAll(text = True)) # Only extract text
     for text in texts:
         try: language_tracker[detect(text)] += 1
         except Exception as e: pass

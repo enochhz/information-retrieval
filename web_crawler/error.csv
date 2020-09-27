@@ -1,3 +1,5 @@
 ,root_url,error_info
-0,https://jakearchibald.com/2020/avif-has-landed/,HTTP Error 403: Forbidden
-1,https://blog.bitsrc.io/6-reasons-to-use-react-hooks-instead-of-classes-7e3ee745fe04,HTTP Error 403: Forbidden
+0,techcrunch.com,unknown url type: 'techcrunch.com'
+1,https://crunchbase.com/organization/reddit,HTTP Error 403: Forbidden
+2,http://www.linkedin.com/in/sarahintampa,HTTP Error 999: Request denied
+3,https://www.crunchbase.com/person/sarah-perez,HTTP Error 403: Forbidden
