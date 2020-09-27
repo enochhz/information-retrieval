@@ -1,108 +1,83 @@
 import csv
-import re
 from bs4 import BeautifulSoup
-# from selenium import webdriver
+# for selennium import webdriver
 from urllib.request import urlopen
 import time
-import pandas as pd
-import io
+
+import unittest
+from test import support
+
 from urllib import parse
 from urllib import robotparser
 
 class Crawler:
-
-    page_limit = 10
-    html_folder = 'folder' 
+    page_limit = 100
     page_map = {}
     page_stack = []
-
-    def __init__(self, seed_url, language: str):
-        self.page_stack.append(seed_url)
-        self.lang  = language
-
-    def parse_pages(self):
-        while len(self.page_stack) > 0:
-            if (len(self.page_map.keys()) > self.page_limit): break 
-            try:
-                page_url = self.page_stack.pop()
-                # check language (page_url): 80% 
-                # checkRobots(page_url)
-                # duplicates(page_url)
-                print(page_url)
-                html = urlopen(page_url).read().decode('utf-8')
-                self.store_html(page_url, html)
-                self.count_links(page_url, html)
-            except Exception as e:
-                print(str(e))
-        self.write_to_csv('./info.csv')
+    disallow_stack = []
+    allow_stack = []
+    disallow_stack = []
     
-    def store_html(self, page_url: str, html: str):
-        path_name = page_url.split('https://')[1]
-        path_name = path_name.replace('/', '#')
-        print(path_name)
-        file_name = f'{self.html_folder}/{path_name}.html'
-        text_file = open(file_name, 'w')
-        text_file.write(html)
-        text_file.close()
-
-    def count_links(self, page_url: str, html: str):
-        soup = BeautifulSoup(html, features='lxml')
-        all_href = soup.find_all('a')
-        all_href = [l['href'] for l in all_href]
-        self.page_map[page_url] = len(all_href)
-        for link in all_href:
-            self.page_stack.append(link)
-
-    def write_to_csv(self, file_name: str):
-        new_dict = {
-            'root_url': [k for k in self.page_map.keys()], 
-            'num_of_out_links': [v for v in self.page_map.values()]
-        }
-        pandas_df = pd.DataFrame.from_dict(new_dict)
-        pandas_df.to_csv(file_name)
-        # with open(file_name, 'w', newline='') as file:
-        #     write = csv.writer(file)
-        #     write.writerow(['root_url', 'num_of_out_links'])
-        #     for url, num in self.page_map.items():
-        #         write.writerow([url, num])
-
-    # read the robots.txt file
-    def scan_robots_txt(page_url):
+    def __init__(self, seed_url, language:str):
+        self.page_stack.append(seed_url)
+        self.lang = language
+        
+    def parse_pages(self):
+        while len(self.page_stack) > 0: 
+            if (len(self.page_map.keys()) > self.page_limit): return
+            
+            page_url = self.page_stack.pop() #DFS
+            
+            print(page_url)
+            
+            html = urlopen(page_url).read().decode('utf-8')
+            soup = BeautifulSoup(html, features='lxml')
+            all_href = soup.find_all("a")
+            all_href = [l['href'] for l in all_href]
+            self.page_map[page_url] = len(all_href)
+            # do we need to check if the page is exist
+#             print(self.page_map)
+            for link in all_href:
+                self.page_stack.append(link)
+    
+    # checkRobots(page_url) 
+    def check_robots_url(self, page_url, check_url) -> bool:
+        agent_name = '*'
         if page_url.endswith('/'):
-            path = page_url
+            url_base = page_url
         else: 
-            path = page_url + '/'
-        req = urlopen(path + 'robots.txt', data = None)
-        data = io.TextIOWrapper(req, encoding='utf-8')
-        return data.read()
-
-    def parse_robots_txt(page_url):
-        AGENT_NAME = '*'
-        URL_BASE = page_url
+            url_base = page_url + '/'
+            
         parser = robotparser.RobotFileParser()
-        parser.set_url(parse.urljoin(URL_BASE, 'robots.txt'))
+        parser.set_url(parse.urljoin(url_base, 'robots.txt'))
         parser.read()
 
-        PATHS = [
-            '/',
-            '/search/',
-            '/wp-admin/admin-ajax.php',
-            '/wp-admin/',
-        ]
+        if parser.can_fetch(agent_name, check_url):
+            self.allow_stack.append(check_url)
+            return True
+        else:
+            self.disallow_stack.append(check_url)
+            return False
 
-        for path in PATHS:
-            print('{!r:>6} : {}'.format(
-                parser.can_fetch(AGENT_NAME, path), path))
-            url = parse.urljoin(URL_BASE, path)
-            print('{!r:>6} : {}'.format(
-                parser.can_fetch(AGENT_NAME, url), url))
-            print()
-    
 
-seed = 'https://techcrunch.com/'
-# seed = 'https://www.yahoo.com/'
-crawler = Crawler(seed, 'English')
-# crawler.parse_pages()
+# seed = 'https://techcrunch.com/'
+# seed = 'https://www.google.com/'
+# seed = 'https://news.yahoo.com/'
+seed = 'https://yahoo.com/'
+# seed = 'https://www.doughellmann.com/blog/'
+crawler = Crawler(seed, '')
 
-print(Crawler.scan_robots_txt(seed))
-Crawler.parse_robots_txt(seed)
+yahoo_PATHS = [
+    '/',
+    '/p/',
+    '/blank.html',
+    '/myjs',
+    '/bin/',
+    '/gma/sitemaps/gma-sitemap_articles_US_en-US.xml'     
+]
+
+for path in yahoo_PATHS:
+    crawler.check_robots_url(seed, path)
+
+print("allow: ", crawler.allow_stack)
+print("disallow: ", crawler.disallow_stack)
