@@ -1,5 +1,2 @@
 ,root_url,error_info
-0,techcrunch.com,unknown url type: 'techcrunch.com'
-1,https://crunchbase.com/organization/reddit,HTTP Error 403: Forbidden
-2,http://www.linkedin.com/in/sarahintampa,HTTP Error 999: Request denied
-3,https://www.crunchbase.com/person/sarah-perez,HTTP Error 403: Forbidden
+0,https://crunchbase.com/person/reilly-brennan,HTTP Error 403: Forbidden

@@ -13,7 +13,6 @@ from helper import detect_language
 
 class Crawler:
 
-    page_limit = 10
     html_content_folder = 'folder' 
     page_map = {}
     error_map = {}
@@ -21,14 +20,16 @@ class Crawler:
     recent_visited_hosts = collections.deque([], maxlen = 10)
     visited_hosts = set()
     skip = 0
+    page_limit = 5
     banned_hosts = [] # To keep track of websites in different language
 
-    def __init__(self, seed_url, language: str):
+    def __init__(self, seed_url, language: str, page_limit: int):
         self.to_be_visited_queue = [seed_url]
         self.page_map, self.error_map = {}, {}
         self.banned_hosts = []
         self.visited_hosts = set()
         self.lang  = language
+        self.page_limit = page_limit
         self.make_directories()
     
     def make_directories(self) -> None: 
@@ -52,8 +53,8 @@ class Crawler:
                 if not self.parse_and_store_page(host_name, page_url): continue
             except Exception as e: 
                 self.error_map[page_url] = str(e)
-        self.write_outlinks_analysis_csv('./info.csv')
-        self.write_error_csv('./error.csv')
+        self.write_to_csv(self.page_map, 'root_url', 'num_of_out_links', './info.csv') # Write outlinks analysis csv
+        self.write_to_csv(self.error_map, 'root_url', 'error_info', './error.csv') # Write error csv
 
     def extract_host_name(self, page_url: str) -> str:
         url_pattern = '(?:http.*://)?(?P<host>[^:/ ]+).?(?P<port>[0-9]*).*'
@@ -118,28 +119,26 @@ class Crawler:
         for link in all_href:
             if link.startswith('/'): link = page_url + link # Append the link to current URL if it is a relative path
             self.to_be_visited_queue.append(link)
-
-    def write_outlinks_analysis_csv(self, file_name: str) -> None:
-        new_dict = {
-            'root_url': [k for k in self.page_map.keys()], 
-            'num_of_out_links': [v for v in self.page_map.values()]
-        }
-        pd.DataFrame.from_dict(new_dict).to_csv(file_name)
     
-    def write_error_csv(self, file_name: str) -> None:
+    def write_to_csv(self, dictionary: dict, col1_name: str, col2_name: str, file_name: str) -> None:
         new_dict = {
-            'root_url': [k for k in self.error_map.keys()],
-            'error_info': [error_info for error_info in self.error_map.values()]
+            col1_name: [k for k in dictionary.keys()], 
+            col2_name: [v for v in dictionary.values()]
         }
-        pd.DataFrame.from_dict(new_dict).to_csv(file_name)
+        new_df = pd.DataFrame.from_dict(new_dict)
+        if os.path.exists(file_name):
+            exist_df = pd.read_csv(file_name, index_col=0)
+            exist_df.append(new_df).reset_index(drop=True).to_csv(file_name)
+        else:
+            new_df.reset_index(drop=True).to_csv(file_name)
 
 english_seed_url = 'https://www.yahoo.com/'
 english_seed_url = 'https://techcrunch.com/'
-Crawler(english_seed_url, 'en').parse_pages()
+Crawler(english_seed_url, 'en', 5).parse_pages()
 
 # chinese_seed_url = 'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html'
-# Crawler(chinese_seed_url, 'zh-cn').parse_pages()
+# Crawler(chinese_seed_url, 'zh-cn', 5).parse_pages()
 
 # spanish_seed_url = 'https://espndeportes.espn.com/'
 # # spanish_seed_url = 'https://www.milanuncios.com/'
-# Crawler(spanish_seed_url, 'es').parse_pages()
+# Crawler(spanish_seed_url, 'es', 5).parse_pages()
