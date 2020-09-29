@@ -1,2 +1,65 @@
 ,root_url,error_info
-0,https://crunchbase.com/person/reilly-brennan,HTTP Error 403: Forbidden
+0,mailto:yifeng.ruan@gmail.com,<urlopen error unknown url type: mailto>
+1,http://world.people.com.cn/n1/2020/0907/c1002-31852279.html,'utf-8' codec can't decode byte 0xb0 in position 341: invalid start byte
+2,https://momentjs.com/docs/#/-project-status/,HTTP Error 403: Forbidden
+3,http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html,'set' object is not subscriptable
+4,http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html,'set' object is not subscriptable
+5,http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh,HTTP Error 403: Forbidden
+6,https://blog.bitsrc.io/6-reasons-to-use-react-hooks-instead-of-classes-7e3ee745fe04,HTTP Error 403: Forbidden
+7,https://philna.sh/blog/2020/08/06/how-to-stream-file-downloads-in-Node-js-with-got/,HTTP Error 403: Forbidden
+8,http://world.people.com.cn/n1/2020/0907/c1002-31852279.html,'utf-8' codec can't decode byte 0xb0 in position 341: invalid start byte
+9,#comment-text,unknown url type: '#comment-text'
+10,https://primes.utm.edu/curios/,<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1076)>
+11,http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html,name 'language_tracker_pattern' is not defined
+12,https://primes.utm.edu/curios/,<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1076)>
+13,https://buzzorange.com/techorange/2018/11/23/plane-with-no-moving-parts/,HTTP Error 403: Forbidden
+14,http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh,HTTP Error 403: Forbidden
+15,https://jakearchibald.com/2020/avif-has-landed/,HTTP Error 403: Forbidden
+16,https://primes.utm.edu/curios/,<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1076)>
+17,mailto:yifeng.ruan@gmail.com,<urlopen error unknown url type: mailto>
+18,https://momentjs.com/docs/#/-project-status/,HTTP Error 403: Forbidden
+19,http://world.people.com.cn/n1/2020/0907/c1002-31852279.html,'utf-8' codec can't decode byte 0xb0 in position 341: invalid start byte
+20,http://weibo.com/ruanyf,'utf-8' codec can't decode byte 0xca in position 339: invalid continuation byte
+21,https://reposhub.com,HTTP Error 403: Forbidden
+22,mailto:yifeng.ruan@gmail.com,<urlopen error unknown url type: mailto>
+23,https://primes.utm.edu/curios/,<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1076)>
+24,mailto:yifeng.ruan@gmail.com,<urlopen error unknown url type: mailto>
+25,https://uxmovement.com/navigation/solving-the-megaton-problem-with-mega-menus/,HTTP Error 503: Service Unavailable
+26,https://buzzorange.com/techorange/2018/11/23/plane-with-no-moving-parts/,HTTP Error 403: Forbidden
+27,https://primes.utm.edu/curios/,<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1076)>
+28,techcrunch.com,unknown url type: 'techcrunch.com'
+29,https://github.com/CasterWx/kibana-eye,HTTP Error 404: Not Found
+30,#comment-text,unknown url type: '#comment-text'
+31,http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh,HTTP Error 403: Forbidden
+32,http://weibo.com/ruanyf,'utf-8' codec can't decode byte 0xca in position 339: invalid continuation byte
+33,https://philna.sh/blog/2020/08/06/how-to-stream-file-downloads-in-Node-js-with-got/,HTTP Error 403: Forbidden
+34,#core-navigation,unknown url type: '#core-navigation'
+35,#jump-linkhttps://www.youtube.com/watch?v=CX5AgQ5QDYk,unknown url type: '#jump-linkhttps://www.youtube.com/watch?v=CX5AgQ5QDYk'
+36,#orb-banner,unknown url type: '#orb-banner'
+37,whatsapp://send?text=BBC%20News%20Mundo%20%7C%20Armenia%20y%20Azerbaiy%C3%A1n%20%E2%80%9Cal%20borde%20de%20la%20guerra%E2%80%9D%3A%20por%20qu%C3%A9%20recrudeci%C3%B3%20el%20conflicto%20en%20torno%20a%20Nagorno%20Karabaj%20%28y%20qu%C3%A9%20papel%20juegan%20Rusia%20y%20Turqu%C3%ADa%29%20-%20https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690%3Focid%3Dwsmundo.chat-apps.in-app-msg.whatsapp.trial.link1_.auin,<urlopen error unknown url type: whatsapp>
+38,fb-messenger://share?app_id=58567469885&redirect_uri=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690&link=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690%3FCMP%3Dshare_btn_me,<urlopen error unknown url type: fb-messenger>
+39,https://www.bbc.com/mundo/noticias-internacional-54320690/mundo/topics/a30418d5-3efe-415d-b2d2-1480eaf2eb4a,HTTP Error 404: Not Found
+40,#share-tools,unknown url type: '#share-tools'
+41,#orb-footer,unknown url type: '#orb-footer'
+42,#,unknown url type: ''
+43,http://meneame.net/submit.php?url=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690&title=BBCMundo.com%20-%20Armenia%20y%20Azerbaiy%C3%A1n%20%E2%80%9Cal%20borde%20de%20la%20guerra%E2%80%9D%3A%20por%20qu%C3%A9%20recrudeci%C3%B3%20el%20conflicto%20en%20torno%20a%20Nagorno%20Karabaj%20%28y%20qu%C3%A9%20papel%20juegan%20Rusia%20y%20Turqu%C3%ADa%29,[Errno 63] File name too long: 'folder/es/meneame.net#submit.php?url=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690&title=BBCMundo.com%20-%20Armenia%20y%20Azerbaiy%C3%A1n%20%E2%80%9Cal%20borde%20de%20la%20guerra%E2%80%9D%3A%20por%20qu%C3%A9%20recrudeci%C3%B3%20el%20conflicto%20en%20torno%20a%20Nagorno%20Karabaj%20%28y%20qu%C3%A9%20papel%20juegan%20Rusia%20y%20Turqu%C3%ADa%29.html'
+44,#page,unknown url type: '#page'
+45,mailto:?subject=Shared%20from%20BBC%20Mundo&body=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690,<urlopen error unknown url type: mailto>
+46,www.bbc.com,unknown url type: 'www.bbc.com'
+47,#jump-linkhttps,unknown url type: '#jump-linkhttps'
+48,techcrunch.com,unknown url type: 'techcrunch.com'
+49,#comment-text,unknown url type: '#comment-text'
+50,https://www.bbc.co.uk/bbcnewsletter,'utf-8' codec can't decode byte 0x8b in position 1: invalid start byte
+51,#orb-footer,unknown url type: '#orb-footer'
+52,mailto:?subject=Shared%20from%20BBC%20Mundo&body=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690,<urlopen error unknown url type: mailto>
+53,fb-messenger://share?app_id=58567469885&redirect_uri=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690&link=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690%3FCMP%3Dshare_btn_me,<urlopen error unknown url type: fb-messenger>
+54,#,unknown url type: ''
+55,http://meneame.net/submit.php?url=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690&title=BBCMundo.com%20-%20Armenia%20y%20Azerbaiy%C3%A1n%20%E2%80%9Cal%20borde%20de%20la%20guerra%E2%80%9D%3A%20por%20qu%C3%A9%20recrudeci%C3%B3%20el%20conflicto%20en%20torno%20a%20Nagorno%20Karabaj%20%28y%20qu%C3%A9%20papel%20juegan%20Rusia%20y%20Turqu%C3%ADa%29,[Errno 63] File name too long: 'folder/es/meneame.net#submit.php?url=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690&title=BBCMundo.com%20-%20Armenia%20y%20Azerbaiy%C3%A1n%20%E2%80%9Cal%20borde%20de%20la%20guerra%E2%80%9D%3A%20por%20qu%C3%A9%20recrudeci%C3%B3%20el%20conflicto%20en%20torno%20a%20Nagorno%20Karabaj%20%28y%20qu%C3%A9%20papel%20juegan%20Rusia%20y%20Turqu%C3%ADa%29.html'
+56,whatsapp://send?text=BBC%20News%20Mundo%20%7C%20Armenia%20y%20Azerbaiy%C3%A1n%20%E2%80%9Cal%20borde%20de%20la%20guerra%E2%80%9D%3A%20por%20qu%C3%A9%20recrudeci%C3%B3%20el%20conflicto%20en%20torno%20a%20Nagorno%20Karabaj%20%28y%20qu%C3%A9%20papel%20juegan%20Rusia%20y%20Turqu%C3%ADa%29%20-%20https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-internacional-54320690%3Focid%3Dwsmundo.chat-apps.in-app-msg.whatsapp.trial.link1_.auin,<urlopen error unknown url type: whatsapp>
+57,#page,unknown url type: '#page'
+58,#jump-linkhttps://www.youtube.com/watch?v=5JIm2fDK1es,unknown url type: '#jump-linkhttps://www.youtube.com/watch?v=5JIm2fDK1es'
+59,#orb-banner,unknown url type: '#orb-banner'
+60,#share-tools,unknown url type: '#share-tools'
+61,#core-navigation,unknown url type: '#core-navigation'
+62,#jump-linkhttps,unknown url type: '#jump-linkhttps'
+63,techcrunch.com,unknown url type: 'techcrunch.com'
