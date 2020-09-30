@@ -1,2 +1,4 @@
 ,root_url,error_info
-0,techcrunch.com,unknown url type: 'techcrunch.com'
+0,http://world.people.com.cn/n1/2020/0907/c1002-31852279.html,"<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'world.people.com.cn'. (_ssl.c:1076)>"
+1,http://www.chengxiangqian.com/,<urlopen error [Errno 61] Connection refused>
+2,https://primes.utm.edu/curios/,<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1076)>

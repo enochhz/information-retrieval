@@ -58,10 +58,8 @@ class Crawler:
                     continue
                 print(page_url)
                 if self.check_robots(host_name, page_url) :
-                    # print('------ crawl allowed: ----- ', page_url)
                     pass
                 else:
-                    # print('XXXXXX crawl disallowed: XXXXX ', page_url)
                     continue
 
                 if not self.parse_and_store_page(host_name, page_url):
@@ -160,56 +158,62 @@ class Crawler:
         else: 
             url_base = 'https://'+page_url + '/'
         parser = robotparser.RobotFileParser()
-        parser.set_url(parse.urljoin(url_base, 'robots.txt'))
-        parser.read()
-        if parser.can_fetch(agent_name, check_url):
-            self.allow_page.add(check_url)
-            print('true: ', check_url)
-            return True
-        else:
-            self.disallow_page.add(check_url)
-            print('false: ', check_url)
-            return False
+        try:
+            parser.set_url(parse.urljoin(url_base, 'robots.txt'))
+            parser.read()
+            if parser.can_fetch(agent_name, check_url):
+                self.allow_page.add(check_url)
+                print('true: ', check_url)
+                return True
+            else:
+                self.disallow_page.add(check_url)
+                print('false: ', check_url)
+                return False
+        except Exception as e: 
+            self.error_map[check_url] = str(e)
 
     def from_sitemap(self, seed_url):
         tree = sitemap_tree_for_homepage(seed_url)
-        # print(tree)
-        # all_pages() returns an Iterator
+
         for page in tree.all_pages():
-            # print(page.url)
-            # print(page)
             self.pages_from_sitemap.append(page.url);
+            if len(self.pages_from_sitemap) == self.page_limit:
+                break;
+        for page_url in self.pages_from_sitemap:
+            host_name = self.extract_host_name(page_url)
+            if not self.parse_and_store_page(host_name, page_url):
+                continue
+        print("page_map size: ", len(self.page_map))
+        if len(self.page_map) < self.page_limit:
+            self.parse_pages()
+        self.write_outlinks_analysis_csv('./info.csv')
+        self.write_error_csv('./error.csv')
+
 
 
 # english_seed_url = 'https://www.yahoo.com/'
 english_seed_url = 'https://techcrunch.com/'
 # crawler_en = Crawler(english_seed_url, 'en');
-# crawler.parse_pages()
+# crawler_en.parse_pages()
 
-# chinese_seed_url = 'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html'
+chinese_seed_url = 'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html'
 # chinese_seed_url = 'https://baike.baidu.com/item/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/217599?fr=aladdin'
 # chinese_seed_url = 'https://www.zhihu.com/'
-chinese_seed_url = 'https://www.yundianseo.com/'
+# chinese_seed_url = 'https://www.yundianseo.com/'
 # Crawler(chinese_seed_url, 'zh-cn').parse_pages()
 
 spanish_seed_url = 'https://espndeportes.espn.com/'
 # # # spanish_seed_url = 'https://www.milanuncios.com/'
 # Crawler(spanish_seed_url, 'es').parse_pages()
 
-# print('allowed: ', crawler.allow_page)
-# print('disallowed: ', crawler.disallow_page)
-
 crawler_en = Crawler(english_seed_url, 'en');
 crawler_en.from_sitemap(english_seed_url)
-# print(crawler.pages_from_sitemap)
 
 crawler_es = Crawler(spanish_seed_url, 'es');
 crawler_es.from_sitemap(spanish_seed_url)
-# print(crawler.pages_from_sitemap)
 
-crawler_zh_cn = Crawler(chinese_seed_url, 'zh_cn');
+crawler_zh_cn = Crawler(chinese_seed_url, 'zh-cn');
 crawler_zh_cn.from_sitemap(chinese_seed_url)
-# print(crawler.pages_from_sitemap)
 
 print('en sitemaps: ', len(crawler_en.pages_from_sitemap))
 print('es sitemaps: ', len(crawler_es.pages_from_sitemap))

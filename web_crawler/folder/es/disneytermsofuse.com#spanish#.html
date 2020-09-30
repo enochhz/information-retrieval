@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie ie6 lte9 lte8 lte7" lang="en-US"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie ie7 lte9 lte8 lte7" lang="en-US"> <![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 lte9 lte8" lang="en-US"> <![endif]-->
+<!--[if IE 9]>
+<html class="ie ie9 lte9" lang="en-US"> <![endif]-->
+<!--[if gt IE 9]>
+<html> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en-US"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8" /><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"129fe16bc0",applicationID:"215508892"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(c(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(5),c=e(6),f=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(e,n){s[n]=i(p+n,!0,"api")}),s.addPageAction=i(p+"addPageAction",!0),s.setCurrentRouteName=i(p+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(l+"tracer",[u.now(),e,t],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?d("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&d("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&d("lcp",[t[t.length-1]])}function o(e){e.getEntries().forEach(function(e){e.hadRecentInput||d("cls",[e])})}function a(e){if(e instanceof m&&!g){var n=Math.round(e.timeStamp),t={type:e.type};n<=p.now()?t.fid=p.now()-n:n>p.offset&&n<=Date.now()?(n-=p.offset,t.fid=p.now()-n):n=p.now(),g=!0,d("timing",["fi",n,t])}}function c(e){d("pageHide",[p.now(),e])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var f,u,s,d=e("handle"),p=e("loader"),l=e(4),m=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){f=new PerformanceObserver(r);try{f.observe({entryTypes:["paint"]})}catch(v){}u=new PerformanceObserver(i);try{u.observe({entryTypes:["largest-contentful-paint"]})}catch(v){}s=new PerformanceObserver(o);try{s.observe({type:"layout-shift",buffered:!0})}catch(v){}}if("addEventListener"in document){var g=!1,y=["click","keydown","mousedown","pointerdown","touchstart"];y.forEach(function(e){document.addEventListener(e,a,!1)})}l(c)}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e){function n(){e(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,n,!1)}n.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],5:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],6:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],7:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?f(e,c,o):o()}function t(t,r,i,o){if(!p.aborted||o){e&&e(t,r,i);for(var a=n(i),c=v(t),f=c.length,u=0;u<f;u++)c[u].apply(a,r);var d=s[w[t]];return d&&d.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return d[e]=d[e]||i(t)}function y(e,n){u(e,function(e,t){n=n||"feature",w[t]=n,n in s||(s[n]=[])})}var h={},w={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:y,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(p.aborted=!0,s=p.backlog={})}var c="nr@context",f=e("gos"),u=e(5),s={},d={},p=n.exports=i();p.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(w,function(n,t){e[n]||(e[n]=t)});var t=a();f("mark",["onload",t+E.offset],null,"api"),f("timing",["load",t]);var r=l.createElement("script");r.src="https://"+e.agent,n.parentNode.insertBefore(r,n)}}function i(){"complete"===l.readyState&&o()}function o(){f("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(c=Math.max((new Date).getTime(),c))-E.offset}var c=(new Date).getTime(),f=e("handle"),u=e(5),s=e("ee"),d=e(3),p=window,l=p.document,m="addEventListener",v="attachEvent",g=p.XMLHttpRequest,y=g&&g.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:g,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var h=""+location,w={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1177.min.js"},b=g&&y&&y[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:c,now:a,origin:h,features:{},xhrWrappable:b,userAgent:d};e(1),e(2),l[m]?(l[m]("DOMContentLoaded",o,!1),p[m]("load",r,!1)):(l[v]("onreadystatechange",i),p[v]("onload",r)),f("mark",["firstbyte",c],null,"api");var x=0,O=e(7)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(6),a="nr@original",c=Object.prototype.hasOwnProperty,f=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,c,f;try{a=this,r=o(arguments),c="function"==typeof t?t(r,a):t||{}}catch(u){p([u,"",[r,a,i],c])}s(n+"start",[r,a,i],c);try{return f=e.apply(a,r)}catch(d){throw s(n+"err",[r,a,d],c),d}finally{s(n+"end",[r,a,f],c)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,d(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,c,f,u="-"===i.charAt(0);for(f=0;f<n.length;f++)c=n[f],a=e[c],r(a)||(e[c]=t(a,u?c+i:i,o,c))}function s(t,r,i){if(!f||n){var o=f;f=!0;try{e.emit(t,r,i,n)}catch(a){p([a,t,r,i])}f=o}}function d(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){p([r])}for(var i in e)c.call(e,i)&&(n[i]=e[i]);return n}function p(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script>
+	<title>Spanish / Español – Disney Terms of Use</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="pingback" href="https://disneytermsofuse.com/wp/xmlrpc.php" />
+			<link rel="stylesheet" href="https://disneytermsofuse.com/app/themes/elegance/shortcodes.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="https://disneytermsofuse.com/app/themes/elegance/style.css" type="text/css" media="screen" />
+					<link rel="stylesheet" href="https://disneytermsofuse.com/app/themes/elegance/styles/red.css" type="text/css" media="screen" />
+
+		<!--[if IE 6]>
+		<link rel="stylesheet" type="text/css" href="https://disneytermsofuse.com/app/themes/elegance/styles/_ie/ie6.css"> <![endif]-->
+		<!--[if IE 7]>
+		<link rel="stylesheet" type="text/css" href="https://disneytermsofuse.com/app/themes/elegance/styles/_ie/ie7.css"> <![endif]-->
+		<!--[if IE 8]>
+		<link rel="stylesheet" type="text/css" href="https://disneytermsofuse.com/app/themes/elegance/styles/_ie/ie8.css"> <![endif]-->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="https://disneytermsofuse.com/app/themes/elegance/lib/scripts/respond.min.js"></script> <![endif]-->
+				<link rel="shortcut icon" href="/app/uploads/2013/05/disney-favicon.jpg" />
+							<style type="text/css">
+				#gde_footerContainer #gde_footerContents {width:100%;}
+#fancy_search {display:none;} #breadcrumbs, #breadcrumbs a, .jqueryslidemenu a, a { color: #444444; } 
+.jqueryslidemenu a, #intro .intro_title, #intro .teaser, #slider_module + #intro h3, h1, h2, h3, h4, #sidebar .widgettitle, .about_author_title, .share_this_title, .additional_posts_title, .commentlist_title, #reply-title, #comments-title, .blog_tabs, #outro, #outro a, .toggle a, .toggle_accordion a, #content .teaser { font-family:"Lucida Sans Unicode","Lucida Grande","Droid Sans",sans-serif;}
+body { color: #363636; }
+div.dtss-dma-dol-shared-footer {
+   background-color:#660000;
+    background-attachment: scroll;
+    background-image: url("/wp-content/themes/elegance/images/sub_footer.png");
+    background-position: center top;
+    background-repeat: repeat-x;}
+
+div#gde_comScoreLogo, div#gde_comScoreLogo img { display:none; }
+
+.link { color:#770000;  text-decoration:underline;}
+
+
+/* makes links in content areas use alternate color based on color changes to Privacy Center by BU */
+
+.entry a, .entry a:link, .entry a:visited, .entry a:hover, .entry a:active { color:#a90909; }
+
+a.button_link, a.button_link span  {color:#ffffff;}
+
+#sub_footer {
+    background-color: #a90909;
+}
+.is_home h6 a:link { text-decoration:underline }
+			</style>
+						
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var imageResize = "",
+				resizeDisabled = "",
+				assetsUri = "https://disneytermsofuse.com/app/themes/elegance/images/assets",
+				imageNonce = "156171800d",
+				disableSlidemenu = "false",
+				prettyphotoTheme = "pp_default",
+				imagePadding = "0",
+				responsiveSite = "true";
+			document.write('<style type="text/css">.noscript{visibility: hidden;}.ie .noscript{visibility: collapse;}.noscript_dn{display: none;}</style>');
+			/* ]]> */
+		</script>
+			<link rel='dns-prefetch' href='//s.w.org' />
+<link rel='dns-prefetch' href='//ddm-termsofuse-prod.s3.amazonaws.com' />
+<link rel="alternate" type="application/rss+xml" title="Disney Terms Of Use &raquo; Feed" href="https://disneytermsofuse.com/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/disneytermsofuse.com\/wp\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.13"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='mysite_prettyphoto-css'  href='https://disneytermsofuse.com/app/themes/elegance/lib/scripts/prettyphoto/css/prettyPhoto.css?ver=dtss.4' type='text/css' media='screen' />
+<link rel='stylesheet' id='mysite_flexslider-css'  href='https://disneytermsofuse.com/app/themes/elegance/lib/scripts/flexslider/flexslider.css?ver=dtss.4' type='text/css' media='screen' />
+<link rel='stylesheet' id='wpdreams-asl-basic-css'  href='https://disneytermsofuse.com/app/plugins/ajax-search-lite/css/style.basic.css?ver=4.7.26' type='text/css' media='all' />
+<link rel='stylesheet' id='wpdreams-ajaxsearchlite-css'  href='https://disneytermsofuse.com/app/plugins/ajax-search-lite/css/style-simple-red.css?ver=4.7.26' type='text/css' media='all' />
+<script type='text/javascript' src='https://disneytermsofuse.com/wp/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://disneytermsofuse.com/wp/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://disneytermsofuse.com/app/themes/elegance/lib/scripts/custom.js?ver=dtss.4'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://disneytermsofuse.com/wp/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://disneytermsofuse.com/wp/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://disneytermsofuse.com/?p=814' />
+<meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://disneytermsofuse.com/spanish/" /><script type="text/javascript">/* <![CDATA[ */jQuery(document).ready(function() {var search = jQuery('#fancy_search'),searchField = search.find('input.text');var hoverConfigSearch = {interval:100,timeout:2000,over:function(){jQuery(searchField).css('display', 'block');searchField.animate({width:160}, 400, 'easeInOutQuad').focus();},out:function(){searchField.animate({width:0}, 400, 'easeInOutQuad', function(){ jQuery(searchField).css('display', 'none') } ).blur();}};search.hoverIntent(hoverConfigSearch);});/* ]]> */</script><script type="text/javascript">
+	/* <![CDATA[ */
+	jQuery(document).ready(function() {
+		jQuery('#body_inner').fitVids();
+	});
+	/* ]]> */
+	</script>                <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+                                <style type="text/css">
+                    <!--
+                    
+            @font-face {
+                font-family: 'aslsicons2';
+                src: url('https://disneytermsofuse.com/app/plugins/ajax-search-lite/css/fonts/icons2.eot');
+                src: url('https://disneytermsofuse.com/app/plugins/ajax-search-lite/css/fonts/icons2.eot?#iefix') format('embedded-opentype'),
+                     url('https://disneytermsofuse.com/app/plugins/ajax-search-lite/css/fonts/icons2.woff2') format('woff2'),
+                     url('https://disneytermsofuse.com/app/plugins/ajax-search-lite/css/fonts/icons2.woff') format('woff'),
+                     url('https://disneytermsofuse.com/app/plugins/ajax-search-lite/css/fonts/icons2.ttf') format('truetype'),
+                     url('https://disneytermsofuse.com/app/plugins/ajax-search-lite/css/fonts/icons2.svg#icons') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+            div[id*='ajaxsearchlitesettings'].searchsettings .asl_option_inner label {
+                font-size: 0px !important;
+                color: rgba(0, 0, 0, 0);
+            }
+            div[id*='ajaxsearchlitesettings'].searchsettings .asl_option_inner label:after {
+                font-size: 11px !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+            }
+            div[id*='ajaxsearchlite'].wpdreams_asl_container {
+                width: 100%;
+                margin: 0px 0px 0px 0px;
+            }
+            div[id*='ajaxsearchliteres'].wpdreams_asl_results div.resdrg span.highlighted {
+                font-weight: bold;
+                color: #d9312b;
+                background-color: #eee;
+            }
+            div[id*='ajaxsearchliteres'].wpdreams_asl_results .results div.asl_image {
+                width: 70px;
+                height: 70px;
+            }
+            div.asl_r .results {
+                max-height: none;
+            }
+                                -->
+                </style>
+                            <script type="text/javascript">
+                if ( typeof _ASL !== "undefined" && _ASL !== null && typeof _ASL.initialize !== "undefined" )
+                    _ASL.initialize();
+            </script>
+            <meta name="google-site-verification" content="DfkZojUW-c-IWaeGPaBz7q6EXwp0KHgB7l_IADhgXOA" />
+<meta name="msvalidate.01" content="1172945D51F80608C9726582F3DDA44D" />
+<meta name="viewport" content="width=device-width, initial-scale=1"></head>
+
+<body class="mysite_responsive has_breadcrumbs full_width has_intro no_footer">
+<div class="multibg">
+	<div class="multibg"></div>
+</div>
+<div id="body_inner">
+
+		<div id="header">
+		<div id="header_inner">
+			<div class="logo"><a rel="home" href="https://disneytermsofuse.com/" class="site_logo"><img src="/app/uploads/2013/10/twdc_header_77h.png" alt="The Walt Disney Company"  /></a></div><!-- .logo -->		</div><!-- #header_inner -->
+	</div><!-- #header -->
+
+	<div id="primary_menu"><div class="jqueryslidemenu"><ul id="menu-main-menu" class=""><li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/"><span>Terms of Use</span></a></li>
+</ul></div><div class="clearboth"></div><div id="fancy_search" class="search_hidden"><form id = "searchform" method="get" action="https://disneytermsofuse.com/"><input class="text" name="s" id="s" style="width:0px;margin:0;display:none;" /><input type="submit" value="submit" class="submit" /></form></div></div><!-- #primary_menu --><div id="responsive_menu" class="responsive_menu_container"><select class="styled"><option value="/" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12">Terms of Use</option></select></div><script type="text/javascript">
+		/* <![CDATA[ */
+		jQuery(function($) {
+			$("#responsive_menu select").change(function() {
+				window.location = $("#responsive_menu select option:selected").val();
+			})
+		});
+		/* ]]> */
+		</script><div id="intro"><div id="intro_inner"><h1 class="intro_title"><span>Spanish / Español – Disney Terms of Use</span></h1><p class="teaser"><span></span></p><div class="clearboth"></div></div><!-- #intro_inner --></div><!-- #intro --><div id="breadcrumbs"><div id="breadcrumbs_inner"><a href="https://disneytermsofuse.com/" rel="home" class="home_breadcrumb">Home</a> <span class="delimiter">/</span> <span class="current_breadcrumb">Spanish / Español – Disney Terms of Use</span></div><!-- #breadcrumbs_inner --></div><!-- #breadcrumbs -->
+	<div id="content">
+		<div id="content_inner">
+
+			
+			<div id="main">
+				<div id="main_inner">
+
+
+
+	
+			<div id="post-814" class="post-814 page type-page status-publish hentry">
+
+				
+				<div class="entry">
+					<p><a href="https://disneytermsofuse.com/spanish-spain/">Si se encuentra en España y accede a productos o servicios de Disney, centrados en España, consulte las Condiciones de uso para España.</a></p>
+<p><a class="button_link hover_fade small_button alignright" href="javascript:window.print();"><span>Print</span><br />
+</a><a href="https://disneytermsofuse.com/app/uploads/2020/09/disney_gtou_20160331v2_Spanish-TOU.pdf" class="button_link hover_fade small_button alignright"><span>Download PDF</span></a></p>
+<p>&nbsp;</p>
+<p><b><span style="text-decoration: underline;">Condiciones de Uso</span></b></p>
+<p>Fecha de la última actualización: 10 de julio de 2014</p>
+<p>Disney Interactive tiene el placer de ofrecerle sus sitios, software, aplicaciones, contenidos, productos y servicios (los “Servicios Disney”), que podrán incorporar las marcas Disney, ABC, ESPN, Marvel, Lucasfilm, Club Penguin, Playdom u otras marcas de las que The Walt Disney Company es titular o licenciataria. Estas condiciones rigen su uso y nuestra prestación de los Servicios Disney en los que se publican estas condiciones, así como los Servicios Disney que ofrecemos en sitios y plataformas de terceros si estas condiciones le son comunicadas en relación con su uso de los Servicios Disney. LEA ATENTAMENTE ESTAS CONDICIONES ANTES DE UTILIZAR LOS SERVICIOS DISNEY.</p>
+<p>&nbsp;</p>
+<p>LOS CONFLICTOS ENTRE UD. Y NOSOTROS DEBERÁN RESOLVERSE MEDIANTE ARBITRAJE INDIVIDUAL VINCULANTE. LEA LA CLÁUSULA DE ARBITRAJE INCLUIDA EN ESTAS CONDICIONES DADO QUE ELLO AFECTA A SUS DERECHOS CONFORME A ESTE CONTRATO.</p>
+<p>&nbsp;</p>
+<p>NADA DE LO ESTIPULADO EN ESTAS CONDICIONES TIENE POR OBJETO AFECTAR A SUS DERECHOS CONFORME A LA LEGISLACIÓN DE SU LUGAR HABITUAL DE RESIDENCIA. EN CASO DE CONFLICTO ENTRE DICHOS DERECHOS Y ESTAS CONDICIONES, PREVALECERÁN LOS DERECHOS RECONOCIDOS EN LA LEGISLACIÓN LOCAL APLICABLE.</p>
+<p>&nbsp;</p>
+<p><b>1.      Contrato entre Ud. y Nosotros</b></p>
+<p>Este documento constituye un contrato entre Ud. y Disney Interactive, una sociedad de California con domicilio en 500 South Buena Vista Street, Burbank, California 91521, USA, o entre Ud. y el proveedor de servicios identificado con respecto a un Servicio Disney concreto, en caso de ser distinto. Ud. deberá leer y aceptar estas condiciones antes de utilizar los Servicios Disney. Si no está conforme, no podrá utilizar los Servicios Disney. Estas condiciones describen la base limitada sobre la que se ofrecen los Servicios Disney y sustituyen a todos los anteriores pactos o acuerdos.</p>
+<p>Podrán existir determinados términos y condiciones adicionales de aplicación a algunos Servicios Disney tales como las normas de un concurso, servicio u otra actividad en concreto, o condiciones que podrán acompañar a determinados contenidos o software a los que podrá accederse a través de los Servicios Disney. Los términos y condiciones adicionales le serán comunicados en relación con el concurso, servicio o actividad en cuestión. Todos los términos y condiciones adicionales tendrán carácter complementario a estas condiciones y, en caso de conflicto, prevalecerán sobre estas condiciones.</p>
+<p>Podremos modificar estas condiciones. Las modificaciones entrarán en vigor en un plazo de treinta (30) días a partir del momento en el que le enviemos una notificación al respecto o publiquemos la correspondiente modificación en los Servicios Disney. Si no está conforme con algún cambio de estas condiciones, deberá dejar de utilizar los Servicios Disney. Nuestros representantes de atención al cliente no están autorizados para modificar ninguna disposición de estas condiciones, ya sea verbalmente o por escrito.</p>
+<p>Podremos resolver este contrato inmediatamente con respecto a Ud. (incluyendo la cancelación de su acceso a los Servicios Disney) si incumple cualquier disposición de estas condiciones.</p>
+<p><b>2.      Los Servicios Disney</b></p>
+<p>Los Servicios Disney son para uso personal y no comercial, están destinados para fines informativos y de ocio exclusivamente, y no constituyen ningún tipo de asesoramiento o análisis legal, financiero, profesional, médico o sanitario, por lo que no podrán utilizarse para dichos fines. Para contribuir al buen funcionamiento de los Servicios Disney en áreas geográficas de gran extensión, determinados aspectos de algunas actividades, tales como los juegos, podrán ser simulados al objeto de evitar retrasos.</p>
+<p>Los Servicios Disney están protegidos por derechos de autor propiedad de nuestra compañía o de nuestros licenciantes o licenciatarios, y todas las marcas, marcas de servicio, nombres comerciales, imágenes de marca (<i>trade dress</i>) y todos los demás derechos de propiedad intelectual sobre los Servicios Disney pertenecen a nuestra compañía o a nuestros licenciantes o licenciatarios. Salvo en la medida de lo específicamente acordado por escrito, ningún elemento de los Servicios Disney podrá ser utilizado o explotado en modo alguno distinto de como parte de los Servicios Disney que se le ofrecen. Ud. podrá ser el propietario del soporte físico en el que se le entreguen los elementos de los Servicios Disney, pero nosotros conservaremos la plena y titularidad de dichos Servicios Disney. No transmitimos la titularidad de ninguna parte de los Servicios Disney a su favor.</p>
+<p><span style="text-decoration: underline;">Licencia de Software y Contenidos</span></p>
+<p>Cuando un Servicio Disney esté configurado para permitir el uso de software, contenidos, elementos virtuales u otros materiales pertenecientes a nuestra compañía u obtenidos bajo licencia por nosotros, le otorgamos una licencia limitada, no exclusiva, no sublicenciable e intransferible de acceso y uso con respecto a dicho software, contenidos, elementos virtuales o materiales para su uso personal y no comercial exclusivamente.</p>
+<p>Ud. no podrá eludir o desactivar los sistemas de protección de contenidos o la tecnología de gestión de derechos digitales que se utilice con los Servicios Disney. Asimismo, no podrá realizar actividades de descompilación, ingeniería inversa o desensamblaje de los Servicios Disney o reducirlos a formato legible por las personas; eliminar advertencias de identificación, derechos de autor u otras advertencias de propiedad; o acceder a los Servicios Disney o utilizarlos de ninguna forma ilegal o no autorizada o de modo que se sugiera algún tipo de asociación con nuestros productos, servicios o marcas. No podrá acceder a los Servicios Disney ni utilizarlos en contravención de las <a href="https://www.bis.doc.gov/index.php/exporter-portal"><span style="text-decoration: underline;">normas</span></a> de control a la exportación y sanciones económicas de Estados Unidos. Al adquirir servicios, contenidos o software a través de los Servicios Disney, Ud. manifiesta y garantiza que sus actividades de acceso y uso de los servicios, contenidos o software cumplirán con lo dispuesto en dichas normas.</p>
+<p><span style="text-decoration: underline;">Exclusión y Limitación de Responsabilidad</span></p>
+<p>LOS SERVICIOS DISNEY SE OFRECEN “TAL CUAL” Y “EN FUNCIÓN DE SU DISPONIBILIDAD.” EXCLUIMOS TODAS LAS CONDICIONES, MANIFESTACIONES Y GARANTÍAS QUE NO SE ENCUENTREN EXPRESAMENTE RECOGIDAS EN ESTAS CONDICIONES.</p>
+<p>NO SEREMOS RESPONSABLES FRENTE A UD. POR CUALESQUIERA DAÑOS INDIRECTOS, DERIVADOS, EMERGENTES O ESPECIALES, INCLUYENDO LUCRO CESANTE Y DAÑOS MATERIALES, INCLUSO EN EL CASO DE HABER SIDO ADVERTIDOS DE LA POSIBILIDAD DE TALES DAÑOS, NI SEREMOS IGUALMENTE RESPONSABLES POR CUALESQUIERA RETRASOS O FALTAS DE CUMPLIMIENTO QUE SE DERIVEN DE CAUSAS AJENAS A NUESTRO CONTROL RAZONABLE. NUESTRA RESPONSABILIDAD TOTAL FRENTE A UD. POR CUALESQUIERA DAÑOS, PÉRDIDAS Y PROCEDIMIENTOS JUDICIALES NO EXCEDERÁ EN NINGÚN CASO LA CIFRA DE MIL DÓLARES ESTADOUNIDENSES (US $1.000).</p>
+<p>ESTAS EXCLUSIONES Y LIMITACIONES DE RESPONSABILIDAD NO AFECTAN A SUS DERECHOS COMO CONSUMIDOR NI PRETENDEN LIMITAR LA RESPONSABILIDAD QUE NO PUEDA SER EXCLUIDA CON ARREGLO A LA LEGISLACIÓN DE SU LUGAR HABITUAL DE RESIDENCIA.</p>
+<p><span style="text-decoration: underline;">Cambios en los Servicios Disney</span></p>
+<p>Los Servicios Disney están en constante evolución y podrán cambiar a lo largo del tiempo. Cuando introduzcamos algún cambio sustancial en los Servicios Disney, se lo notificaremos con una antelación razonable y Ud. tendrá derecho a resolver este contrato.</p>
+<p><span style="text-decoration: underline;">Restricciones Adicionales al Uso de los Servicios Disney</span></p>
+<p>No está permitido ningún uso de los Servicios Disney para fines comerciales o profesionales, o que tenga por objeto publicitar u ofrecer en venta productos o servicios (ya sea con fines lucrativos o no), o solicitar otros elementos (incluyendo la solicitud de aportaciones o donaciones). Ud. se compromete a no introducir, de forma consciente o imprudente, ningún virus u otros componentes dañinos, y a no alterar, corromper o dañar cualquier Servicio Disney o red conectada, y a no interferir con el uso y disfrute de los Servicios Disney por parte de otras personas o entidades. No podrá utilizar ningún software o dispositivo que permita el juego automatizado o acelerado, ni podrá manipular los juegos o clientes de juegos, y se obliga asimismo a no falsificar o modificar ningún Servicio Disney o experiencia de juego para crear una ventaja de un usuario sobre otro. Adicionalmente, Ud. se obliga a no acceder a los elementos de los Servicios Disney y a no vigilarlos o copiarlos, ni permitir que otra persona o entidad acceda, vigile o copie los mismos, utilizando robots, arañas, <i>scrapers</i> u otros medios automatizados o procesos manuales sin nuestro consentimiento expreso y por escrito.</p>
+<p><span style="text-decoration: underline;">Servicios y Contenidos de Terceros</span></p>
+<p>Los Servicios Disney podrán integrar (o estar integrados en) servicios y contenidos de terceros, o ser facilitados en relación con estos. Nosotros no controlamos los servicios y contenidos de terceros. Ud. deberá leer los documentos de condiciones de uso y políticas de privacidad de aplicación a dichos servicios y contenidos de terceros.</p>
+<p>Si Ud. accede a un Servicio Disney utilizando un dispositivo con tecnología Apple iOS, Android o Microsoft Windows, o Microsoft Xbox One, Apple Inc., Google, Inc. o Microsoft Corporation, respectivamente, serán terceros beneficiarios de este contrato. No obstante, estos terceros beneficiarios no son parte de este contrato y no son responsables de la prestación o del soporte de los Servicios Disney. Ud. acepta que su acceso a los Servicios Disney utilizando estos dispositivos también estará sujeto a los términos y condiciones de uso estipulados en las condiciones de servicio del tercer beneficiario en cuestión.</p>
+<p><span style="text-decoration: underline;">Redes Móviles </span></p>
+<p>Cuando acceda a los Servicios Disney a través de una red móvil, se aplicarán las tarifas de mensajería, datos y demás tarifas de su proveedor de red o servicio <i>roaming</i>. Las actividades de descarga, instalación o uso de determinados Servicios Disney podrán estar prohibidas o restringidas por su proveedor de red y no todos los Servicios Disney podrán funcionar con su dispositivo o proveedor de red.</p>
+<p><b>3.      Sus Contenidos y Su Cuenta</b></p>
+<p><span style="text-decoration: underline;">Contenidos Generados por el Usuario</span></p>
+<p>Los Servicios Disney podrán permitirle comunicar, enviar, cargar u ofrecer textos, imágenes, archivos de audio, video, entradas a concursos u otros contenidos (los “Contenidos Generados por el Usuario”), que podrán ser accesibles y ser visualizados por el público en general. El acceso a estas prestaciones podrá estar sujeto a restricciones de edad. No podrán enviarse o cargarse Contenidos Generados por el Usuario que sean difamatorios, de acoso, amenazantes, que inciten al fanatismo, al odio o a la violencia, vulgares, obscenos, pornográficos u ofensivos, o que dañen o puedan dañar, razonablemente, a cualquier persona o entidad, con independencia de que dicho material esté protegido por ley.</p>
+<p>No reclamaremos la titularidad sobre los Contenidos Generados por el Usuario; no obstante, Ud. nos otorga una licencia no exclusiva, sublicenciable, irrevocable, mundial y exenta del pago de royalties sobre todos los derechos de autor, marcas, patentes, secretos comerciales, privacidad y publicidad, así como cualesquiera otros derechos de propiedad intelectual, para poder utilizar, reproducir, transmitir, imprimir, publicar, mostrar públicamente, exhibir, distribuir, redistribuir, copiar, indexar, comentar, modificar, adaptar, traducir, crear trabajos derivados, representar en público, ofrecer y explotar los Contenidos Generados por el Usuario, total o parcialmente, en todos los formatos, soportes y canales actualmente conocidos o que se inventen en el futuro (incluyendo en relación con los Servicios Disney y en sitios y plataformas de terceros tales como Facebook, YouTube y Twitter), en cualquier número de copias, sin limitaciones de tiempo, manera y frecuencia de uso, sin necesidad de preaviso, con o sin especificación de autoría, y sin ningún requisito de obtención de su permiso o de efectuar pago alguno a favor de Ud. o de cualquier otra persona o entidad.</p>
+<p>Ud. manifiesta y garantiza que sus Contenidos Generados por el Usuario se adecuan a estas condiciones y que cuenta con todos los derechos y permisos necesarios, sin que exista ninguna obligación de pago a cualquier otra persona o entidad, en relación al uso y la explotación de los mencionados Contenidos Generados por el Usuario, y nos autoriza a utilizarlos y explotarlos en todas las formas contempladas en estas condiciones. Ud. se obliga a excluir de toda responsabilidad tanto a nuestra compañía como a nuestras entidades asociadas y filiales (y a todos sus respectivos empleados y directivos) frente a cualesquiera demandas, pérdidas, obligaciones, reclamaciones o gastos (incluyendo honorarios de abogados), presentados contra nosotros por cualquier tercero en relación con nuestra utilización y explotación de los Contenidos Generados por el Usuario. Asimismo, Ud. se compromete a no reivindicar ningún tipo de derechos morales, accesorios u otros derechos similares sobre los Contenidos Generados por el Usuario frente a nosotros o nuestros licenciatarios, distribuidores, agentes, representantes u otros usuarios autorizados, así como a procurar el mismo compromiso de renuncia de otros terceros que puedan tener los mencionados derechos.</p>
+<p>En la medida en que le autoricemos a crear, publicar, cargar, distribuir, exhibir o representar públicamente Contenidos Generados por el Usuario que exijan el uso de nuestras obras protegidas por derechos de autor, le otorgamos una licencia no exclusiva para crear trabajos derivados utilizando nuestras obras protegidas por derechos de autor conforme se precise al objeto de crear los materiales, en el entendimiento, no obstante, de que dicha licencia estará condicionada a que nos ceda todos los derechos sobre las obras que cree. Si dichos derechos no nos son cedidos, su licencia para crear trabajos derivados utilizando nuestras obras protegidas por derechos de autor quedará revocada.</p>
+<p>Podremos vigilar, filtrar, publicar, eliminar, modificar, almacenar y revisar los Contenidos Generados por el Usuario o las comunicaciones que se envíen a través de un Servicio Disney (si bien no estaremos obligados a ello), en cualquier momento y por cualquier causa, incluyendo con el fin de garantizar que tales Contenidos Generados por el Usuario o comunicaciones cumplen con lo dispuesto en estas condiciones, sin necesidad de preaviso. No asumimos ninguna responsabilidad (ni suscribimos o avalamos) los consejos, opiniones, informaciones o recomendaciones que los usuarios publiquen o envíen.</p>
+<p><span style="text-decoration: underline;">Cuentas</span></p>
+<p>Algunos Servicios Disney permiten o exigen la creación de una cuenta para fines de participación o para obtener unos beneficios adicionales. Ud. deberá facilitar y mantener información completa, correcta y actualizada, incluyendo sus datos de contacto a efectos de notificaciones y demás comunicaciones y sus datos de pago. No podrá Ud. suplantar la identidad de otras personas o entidades ni falsear la relación que mantiene con éstas, incluyendo la prohibición de uso del nombre de usuario, contraseña o los datos de cuenta de otras personas, sus nombres o apariencia, ni podrá facilitar datos falsos de su padre o tutor. Ud. acepta que podremos adoptar las medidas necesarias para verificar la corrección de la información que nos facilite, incluyendo los datos de contacto de los padres o tutores.</p>
+<p>Hemos adoptado e implementado una política que contempla la cancelación, en determinadas circunstancias, de las cuentas de usuarios que infrinjan reiteradamente los derechos de autor. Adicionalmente, podremos suspender o cancelar su cuenta y su capacidad de uso de los Servicios Disney si participa en cualquier tipo de conducta ilegal o la fomenta, o si no cumple con lo dispuesto en estas condiciones o en cualesquiera otras condiciones adicionales que resulten de aplicación.</p>
+<p><span style="text-decoration: underline;">Contraseñas y Seguridad</span></p>
+<p>Ud. deberá adoptar todas las medidas oportunas para mantener la confidencialidad de su nombre de usuario y contraseña, y será el responsable de todas las actividades realizadas con su cuenta sobre las que pueda tener un control razonable. Asimismo, deberá notificarnos inmediatamente cualquier uso no autorizado de su nombre de usuario, contraseña y demás datos de cuenta, así como de cualquier otra infracción de la seguridad que detecte en relación con su cuenta o los Servicios Disney.</p>
+<p>La seguridad, integridad y confidencialidad de su información es muy importante para nosotros. Hemos implementado medidas de seguridad técnicas, administrativas y físicas diseñadas para proteger su información frente a posibles actividades no autorizadas de acceso, revelación, uso y modificación.</p>
+<p><b>4.      Operaciones de Pago</b></p>
+<p><span style="text-decoration: underline;">Identidad del Vendedor</span></p>
+<p>Las ventas son realizadas por Disney Interactive o por el vendedor identificado en el momento de la venta, si es distinto. Si Ud. tiene alguna duda acerca de su pedido, póngase en contacto con el vendedor en la dirección indicada y éste le facilitará la ayuda que precise. Algunos puntos de venta incluidos en los Servicios Disney son gestionados por terceros. En tal caso, otras condiciones de venta distintas o adicionales podrían serle de aplicación, por lo que deberá leerlas cuando se le presenten.</p>
+<p><span style="text-decoration: underline;">Contenidos Digitales y Elementos Virtuales</span></p>
+<p>Podremos ofrecerle la obtención de licencias relativas a aplicaciones, juegos, software u otros contenidos digitales a través de los Servicios Disney a cambio del pago de una tarifa. Cuando Ud. adquiera una licencia de acceso a dicho material desde un Servicio Disney, las tarifas le serán comunicadas a través del Servicio Disney antes de completar la operación de compra de la licencia.</p>
+<p>La adquisición de elementos virtuales o monedas de juego es un pago a cambio de la obtención de una licencia limitada y no susceptible de cesión para poder acceder a dichos contenidos o funcionalidades de los Servicios Disney y utilizarlos. Los elementos virtuales (incluyendo los personajes y nombres de personajes) o monedas de juego que Ud. adquiera o que se le ofrezcan a través de los Servicios Disney únicamente podrán utilizarse en relación con dichos Servicios Disney cuando hayan sido obtenidos o desarrollados por Ud. como consecuencia del juego. Estos elementos no son canjeables o reembolsables y no podrán comercializarse fuera del entorno de los Servicios Disney a cambio de dinero u otros artículos de valor. Podremos modificar o cancelar los elementos virtuales o monedas de juego en cualquier momento.</p>
+<p><span style="text-decoration: underline;">Subscripciones</span></p>
+<p>El acceso a algunos Servicios Disney requiere el pago de una suscripción. Al contratar una suscripción, estará aceptando la renovación automática de la misma y, salvo que cancele su suscripción, nos autoriza a facturarle conforme al método de pago elegido con respecto al periodo de renovación. El periodo de auto-renovación tendrá la misma duración que el periodo de suscripción inicial salvo que se le comunique lo contrario en el momento de la venta. La tarifa de renovación no será superior a la del periodo de suscripción inmediatamente anterior, excluyendo posibles promociones y descuentos de precio, salvo que le comuniquemos algún cambio de tarifa con carácter previo a la auto-renovación. Ocasionalmente, podremos ofrecer la suscripción de prueba gratuita a un Servicio Disney. Si se registra en una suscripción de prueba gratuita, comenzaremos a facturarle cuando dicha suscripción de prueba gratuita haya expirado, salvo que cancele la suscripción antes de la correspondiente fecha de expiración.</p>
+<p><span style="text-decoration: underline;">El Proceso de Pedido</span></p>
+<p>Ud. tendrá ocasión de revisar y confirmar su pedido, incluyendo la dirección de entrega (en su caso), el método de pago y los datos del producto. Le enviaremos una notificación cuando aceptemos su pedido considerándose dicha aceptación completa y válidamente comunicada a todos los efectos en el momento en el que enviemos la notificación. En ese momento, se habrá celebrado el contrato de compraventa, el cual será vinculante tanto para Ud. como para nosotros. El riesgo de pérdida relativo a los artículos adquiridos y la responsabilidad de su seguro se transmitirá a Ud. a la entrega de los correspondientes artículos.</p>
+<p>Nos reservamos el derecho a rechazar o cancelar cualquier pedido con carácter previo a la entrega. Entre los supuestos que pueden implicar la cancelación del pedido se incluyen errores tipográficos o del sistema, incorrecciones en la información relativa a los productos, los precios o a la disponibilidad del producto, equidad entre clientes cuando el suministro esté limitado y otros problemas identificados por nuestros departamentos de crédito o fraude. Asimismo, podremos solicitar una verificación o información adicional antes de aceptar un pedido. Nos pondremos en contacto con Ud. si alguna parte de su pedido es cancelado o si se precisa información adicional para aceptar su pedido. Si su pedido es cancelado después de que hayamos tramitado el pago pero antes de realizarse la entrega, procederemos a reembolsarle el pago realizado.</p>
+<p><span style="text-decoration: underline;">Pagos y Facturación</span></p>
+<p>Cuando facilite información de pago, Ud. manifiesta y garantiza que dicha información es correcta, que está autorizado para utilizar el método de pago indicado, y que nos notificará cualquier cambio en los datos de pago. Nos reservamos el derecho a utilizar servicios de actualización de tarjetas de crédito de terceros con el fin de obtener las fechas reales de expiración de las tarjetas de crédito.</p>
+<p><span style="text-decoration: underline;">Derecho de Cancelación. Devolución de mercancía</span></p>
+<p>Cuando se suscriba a un Servicio Disney, Ud. podrá cancelar su contrato en un plazo de catorce (14) días tras la recepción y aceptación de estas condiciones y recibirá el reembolso íntegro de la tarifa de suscripción abonada. En lo que respecta a las suscripciones semestrales y anuales, si se recibe una notificación de cancelación en los treinta (30) primeros días a contar desde el primer día de facturación inicial, se le reembolsará la tarifa de suscripción abonada. En el caso de que le reembolsemos la tarifa de suscripción, seguirá estando obligado a abonar el resto de pagos en los que haya incurrido.</p>
+<p>Al adquirir una licencia de acceso a contenidos digitales o elementos virtuales, Ud. tendrá oportunidad de dar su consentimiento a la entrega en el momento de la compra. Su consentimiento a la entrega implica su aceptación de la pérdida del derecho de cancelación y del carácter no reembolsable de la tarifa relativa a la adquisición de la licencia.</p>
+<p>Ud. dispondrá de un plazo de treinta (30) días a contar desde la fecha de recepción de los artículos físicos para poder cancelar el contrato celebrado con Ud. y devolver los artículos. Este derecho no es de aplicación a los artículos con respecto a los cuales hayamos indicado en los Servicios Disney que no podrán ser objeto de devolución, incluyendo las grabaciones de audio y video, software informático, CD, DVD y otros soportes físicos que hayan sido desprecintados. Si devuelve artículos que no son defectuosos, podremos solicitarle que abone el coste de dicha devolución y deducir una suma razonable en el caso de que haya utilizado los artículos.</p>
+<p>Si desea efectuar una cancelación, deberá seguir las instrucciones de cancelación del correspondiente Servicio Disney. Puede consultar <a title="Spanish / Español – Sample Cancellation Form – August 9, 2014" href="/spanish-espanol-disney-terms-of-use-august-9-2014/spanish-espanol-sample-cancellation-form-august-9-2014/"><span style="text-decoration: underline;">aquí</span></a> el modelo de formulario de cancelación.</p>
+<p><span style="text-decoration: underline;">Artículos Personalizados</span></p>
+<p>Los derechos de cancelación y devolución no son de aplicación a los artículos personalizados. No podrán realizarse cancelaciones o cambios de productos personalizados una vez que se haya remitido el pedido y tampoco podrán devolverse los artículos personalizados salvo que exista algún error de fabricación o defecto del producto. Nos reservamos el derecho a rechazar, a nuestra elección exclusiva, pedidos de productos personalizados. El uso indebido de nuestro servicio de personalización implicará la cancelación de su pedido y la devolución de los pagos realizados.</p>
+<p><span style="text-decoration: underline;">Precios; Impuestos</span></p>
+<p>Podremos revisar los precios de los productos y servicios que ofrecemos. Si abona una tarifa de suscripción periódica a un Servicio Disney, le comunicaremos con una antelación razonable cualquier cambio de las tarifas o de los métodos de facturación con respecto a la fecha de entrada en vigor de dicho cambio, y Ud. podrá cancelar su suscripción antes de implementarse el cambio en cuestión. Cuando realice un pedido, calcularemos los impuestos de aplicación e incluiremos dicho cálculo en el total a efectos informativos. El importe real de impuestos que se aplicará a su pedido y que se facturará a través del método de pago elegido dependerá del cálculo realizado en la fecha de envío, con independencia de cuándo se haya cursado el pedido.</p>
+<p><span style="text-decoration: underline;">Envíos Internacionales; Derechos de Aduana</span></p>
+<p>Cuando Ud. solicite la entrega de artículos en países distintos del país donde se encuentra el vendedor, es posible que deba abonar derechos de importación y otros impuestos. El pago de estos impuestos y de cualesquiera otras tasas aduaneras adicionales será por cuenta de Ud. En lo que respecta a los artículos enviados al extranjero, es posible que la garantía del fabricante no sea válida; que no estén disponibles las opciones de servicio de dicho fabricante; que los manuales, las instrucciones y las advertencias de seguridad no estén en el idioma del país de destino; que los artículos y demás materiales de acompañamiento no estén diseñados con arreglo a las normas, especificaciones, y obligaciones de etiquetado del país de destino; y que los artículos no se adecuen al voltaje del país de destino (precisando en tal caso el uso de un adaptador o conversor). Ud. será el responsable de garantizar que los artículos pueden ser legalmente importados al país de destino. Al realizar un pedido, el receptor será el importador nominal y deberá cumplir con todas las leyes y normativas del país de destino.</p>
+<p><b>5.      Concursos</b></p>
+<p>Los concursos a los que tenga acceso a través de un Servicio Disney podrán estar sujetos a determinadas normas y condiciones complementarias, si bien serán de aplicación las siguientes normas generales en caso de no existir otras condiciones en contrario en las normas o condiciones complementarias del concurso.</p>
+<p><span style="text-decoration: underline;">Entradas</span></p>
+<p>Su entrada al concurso se considerará &#8220;Contenidos Generados por el Usuario&#8221; y estará sujeta a todas las disposiciones de estas condiciones que rigen su envío y nuestro uso de los Contenidos Generados por el Usuario. Podrán quedar descalificadas aquellas entradas que se presenten después de la fecha límite, que se hayan extraviado, que hayan sido dirigidas de forma incorrecta, que contengan datos corruptos, que sean incompletas ilegibles o inválidas, o cuando no se haya facilitado el correspondiente consentimiento del padre o tutor. Las entradas a los concursos están limitadas a una por persona, estando prohibido presentar entradas a través de agentes o terceros así como el uso de identidades múltiples. Asimismo, se prohíbe el uso de programas automatizados y las entradas o votos generados de esta forma, quedando descalificados todos estos votos y entradas.</p>
+<p>Nos reservamos el derecho a modificar, suspender, cancelar o anular un concurso, a ampliar o reanudar el plazo de presentación de entradas, así como a descalificar a cualquier participante o desestimar cualquier entrada, en cualquier momento y sin necesidad de preaviso. Lo anteriormente dispuesto será de aplicación cuando no podamos garantizar el correcto desarrollo del concurso por causas técnicas, legales o por otros motivos, o en caso de que sospechemos que alguna persona ha manipulado las entradas o los resultados, ha facilitado información falsa o ha incurrido en algún comportamiento carente de ética. En el supuesto de que cancelemos o suspendamos un concurso, los premios podrán adjudicarse de cualquier forma que consideremos justa y conveniente de conformidad con las leyes locales que resulten de aplicación al concurso.</p>
+<p><span style="text-decoration: underline;">Criterios de Participación</span></p>
+<p>Para participar en un concurso, deberá Ud. ser un usuario registrado de los Servicios Disney y disponer de una cuenta activa con datos de contacto actualizados. No será necesario realizar ninguna compra para participar en un concurso y, en este sentido, ninguna compra aumentará sus posibilidades de recibir un premio. No podrán participar en los concursos nuestros empleados (o sus familiares directos) ni ninguna otra persona profesionalmente relacionada con el concurso. Si el participante es menor de 18 años (o no tiene la mayoría de edad legal estipulada en la legislación aplicable) pero cumple los criterios de participación, podremos precisar el consentimiento del padre o tutor antes de aceptar la entrada del participante. Nos reservamos el derecho a solicitar un documento acreditativo de la identidad o a verificar las condiciones de participación y las posibles entradas ganadoras, así como a adjudicar cualquier premio a un ganador en persona. Los concursos serán nulos cuando estén prohibidos o restringidos por ley. Podrá solicitarse a los posibles ganadores que residan en países en los que los concursos requieran un elemento de pericia que respondan a una prueba matemática para poder optar a ganar un premio.</p>
+<p><span style="text-decoration: underline;">Premios</span></p>
+<p>No se ofrecerán pagos en metálico u otros premios alternativos, si bien nuestra compañía (o la parte que proporcione el premio) se reserva el derecho a sustituir el premio por otro similar de valor equivalente o superior. Los ganadores no podrán vender o ceder los premios (salvo a un hijo u otro familiar). Únicamente estará disponible el número de premios indicado con respecto al concurso y todos los premios serán adjudicados siempre y cuando se reciba un número suficiente de entradas válidas. Los premios podrán ser válidamente reclamados antes de la fecha establecida en relación con el concurso, tras la cual, no se elegirá a ningún ganador alternativo ni se adjudicarán premios no reclamados. Salvo que se indique lo contrario en la descripción del premio previa a la entrada, los ganadores deberán sufragar todos los costes y gastos derivados de la reclamación de un premio. Los impuestos correrán por cuenta de cada ganador exclusivamente, si bien nos reservamos el derecho a practicar las retenciones fiscales que correspondan, obligándose cada ganador a completar cualquier formulario fiscal que se precise.</p>
+<p>Al aceptar un premio, Ud. estará aceptando participar en iniciativas publicitarias razonables relativas al concurso, otorgándonos el derecho incondicional a incluir su nombre, ciudad, municipio, localidad, provincia o país, apariencia, los datos del premio y las declaraciones que haya realizado acerca del concurso para fines publicitarios y promocionales y para cumplir con las leyes y normativas de aplicación, todo ello sin necesidad de obtener su permiso o de ofrecerle una compensación adicional. Como condición para la recepción de un premio, podrá solicitarse a los ganadores (o a sus padres o tutores) que firmen y devuelvan una declaración jurada de capacidad para participar en el concurso, exclusión de responsabilidad y cesión de derechos publicitarios.</p>
+<p><b>6.      Disposiciones Adicionales</b></p>
+<p><span style="text-decoration: underline;">Política de Presentación de Ideas y Materiales No Solicitados</span></p>
+<p>La política de empresa que venimos aplicando tradicionalmente no nos permite aceptar o considerar ideas creativas, sugerencias o materiales no solicitados. En relación con cualquier elemento que nos envíe (con independencia de que lo hayamos solicitado o no), Ud. acepta que las ideas creativas, las sugerencias y el resto de materiales remitidos no estarán sujetos a ninguna obligación de confidencialidad, que no se creará o inferirá ninguna relación confidencial o fiduciaria entre Ud. y nosotros, y que no podrá esperar ningún tipo de revisión, compensación o retribución por ello.</p>
+<p><span style="text-decoration: underline;">Reclamaciones por Infracción de Derechos de Autor </span></p>
+<p>Las notificaciones de presuntas infracciones de derechos de autor y las respuestas a dichas notificaciones deberán enviarse a nuestro agente designado:</p>
+<p>TWDC Designated Agent<br />
+The Walt Disney Company<br />
+500 South Buena Vista Street<br />
+Burbank, California 91521, USA<br />
+Teléfono: +1 818-560-1000<br />
+Fax: +1 818-560-4299<br />
+E-mail: designated.agent@dig.twdc.com</p>
+<p>Únicamente podremos aceptar notificaciones en los idiomas en los que ofrezcamos estas condiciones.</p>
+<p>&nbsp;</p>
+<p>Responderemos con celeridad a cualquier demanda de infracción de derechos de propiedad intelectual que se cometa mediante el uso de los Servicios Disney y sea notificada a nuestro agente designado en materia de derechos de propiedad intelectual, designado anteriormente, de conformidad con la ley Digital Millennium Copyright Act de 1998 (“DMCA”) de EE. UU. u otra legislación aplicable. Respecto a los Servicios Disney alojados en Estados Unidos, las notificaciones a este respecto deben incluir la información requerida indicada en la DMCA, la cual se describe de forma detallada <a title="Spanish / Español  – DMCA Notices – August 9, 2014" href="https://disneytermsofuse.com/spanish/dmca-notices/"><span style="text-decoration: underline;">aquí</span>.</a></p>
+<p><span style="text-decoration: underline;">Arbitraje Vinculante y Renuncia a la Presentación de Demanda Colectiva</span></p>
+<p>Ud. y Disney Interactive se obligan a arbitrar cualquier conflicto que surja entre las partes, exceptuando los conflictos relativos al ejercicio de nuestros derechos de propiedad intelectual. El término &#8220;conflicto&#8221; significa cualquier conflicto, procedimiento o controversia entre Ud. y nosotros que se refiera a los Servicios Disney o a estas condiciones, con independencia de que traiga causa contractual o extracontractual o se fundamente en una garantía, ley, normativa u otro principio conforme a Derecho o a los principios de equidad. Usted y Disney Interactive confieren al árbitro autorización exclusiva para resolver cualquier controversia relacionada con la interpretación, aplicabilidad o exigibilidad de las presentes condiciones o la elaboración de este contrato, incluida la posibilidad de someter a arbitraje cualquier controversia o demanda en relación con la anulación de parte o la totalidad de estas condiciones.</p>
+<p>En caso de conflicto, Ud. o Disney Interactive (según corresponda) deberá enviar a la otra parte una notificación de conflicto consistente en una declaración escrita especificando el nombre, la dirección y los datos de contacto de la parte que envía la notificación, los hechos que dan lugar al conflicto y las medidas de subsanación que se solicitan. Las notificaciones de conflicto enviadas a Disney Interactive deberán dirigirse a <i>Disney Interactive, 500 South Buena Vista Street, Burbank, California 91521, USA, Attn: Legal/Arbitration Notice</i>. En el caso opuesto, nosotros le enviaremos las notificaciones de conflicto a los datos de contacto que tengamos acerca de Ud. Tanto Ud. como Disney Interactive procurarán resolver cualquier conflicto mediante negociación informal en un plazo de sesenta (60) días a contar desde la fecha de envío de la notificación de conflicto. Una vez transcurridos los sesenta (60) días, cualquiera de las partes podrá iniciar el procedimiento arbitral. Asimismo, Ud. podrá someter el conflicto ante un tribunal de demandas de menor cuantía cuando el conflicto en cuestión reúna los requisitos para ser dilucidado en un tribunal de demandas de menor cuantía, con independencia de que se haya procedido previamente a la negociación informal.</p>
+<p>Si Ud. y Disney Interactive no logran solucionar un conflicto mediante la negociación informal o en un tribunal de demandas de menor cuantía, cualquier intento de resolver el conflicto deberá realizarse exclusivamente mediante arbitraje vinculante. UD. RENUNCIA A SU DERECHO A RESOLVER CUALQUIER CONTROVERSIA POR VÍA JUDICIAL ANTE UN JUEZ O JURADO. En lugar de ello, todos los conflictos deberán resolverse con la mediación de un árbitro neutral cuyo laudo tendrá carácter definitivo, exceptuando el derecho de recurso limitado contemplado en la Ley de Arbitraje Federal de EE.UU (<i>U.S. Federal Arbitration Act</i>). El procedimiento arbitral será llevado a cabo por la Asociación Americana de Arbitraje (<i>American Arbitration Association</i> &#8211; “AAA”) según sus Normas de Arbitraje Comercial y sus Procedimientos Complementarios para Conflictos de Consumo. Para obtener información adicional, visite la dirección www.adr.org o, si está en Estados Unidos, llame al teléfono 800-778-7879. El arbitraje podrá administrarse en persona, mediante la presentación de documentos, por vía telefónica u online. El árbitro podrá concederle, a título individual, la misma indemnización por daños y perjuicios que habría estimado un tribunal, incluyendo las medidas de subsanación de carácter declaratorio o suspensivo, pero únicamente en la medida de lo necesario para satisfacer su demanda individual.</p>
+<p>Salvo que el árbitro determine que el arbitraje carece de base legal o ha sido iniciado con fines ilícitos, Disney Interactive abonará todos los costes y gastos de presentación de documentos, de la AAA y del árbitro. Si el árbitro emite un laudo por una cantidad superior a la cifra indicada en nuestra última oferta de acuerdo por escrito realizada con carácter previo a la elección del árbitro (o, en caso de no haber realizado ninguna oferta de acuerdo antes de seleccionar al árbitro), le abonaremos la cantidad estipulada en el laudo o mil dólares estadounidenses (US $1.000), si esta última cantidad es mayor, y abonaremos a su abogado (en su caso) el importe de sus honorarios, y procederemos al reembolso de todos los gastos (incluyendo los honorarios y gastos de peritos) en que Ud. o su abogado hayan incurrido razonablemente en el marco de la investigación, preparación y seguimiento de su demanda arbitral. Renunciamos a nuestro derecho a solicitar un laudo que establezca la devolución a nuestro favor de los honorarios de abogados y gastos judiciales relacionados con cualquier arbitraje que no carezca de base legal entre Ud. y nosotros.</p>
+<p>Si es Ud. residente en Estados Unidos, el arbitraje tendrá lugar en cualquier lugar razonablemente conveniente para Ud. En lo que respecta a los no residentes en Estados Unidos, el procedimiento arbitral se iniciará en el distrito de Manhattan, Nueva York, Estados Unidos de América, y Ud. y Disney Interactive acuerdan someterse la jurisdicción de los tribunales federales o estatales allí situados, al objeto de exigir la realización del arbitraje, suspender el procedimiento en espera del resultado del arbitraje, o confirmar, modificar, anular o ejecutar la decisión del laudo dictado por el árbitro.</p>
+<p>LOS PROCEDIMIENTOS DE RESOLUCIÓN DE CONFLICTOS MEDIANTE NEGOCIACIÓN O POR VÍA JUDICIAL EN CUALQUIER FUERO SE REALIZARÁN A TÍTULO INDIVIDUAL. Ni Ud. ni Disney Interactive tratarán de resolver un conflicto mediante demanda colectiva, acción privada cuya competencia corresponda a la Fiscalía General del Estado, o cualquier otro procedimiento en el que cualquiera de las partes intervenga o trate de intervenir en calidad de representante. Ningún arbitraje o procedimiento podrá combinarse con otro sin el previo consentimiento por escrito de todas las partes del arbitraje o procedimiento en cuestión. Si esta renuncia a la presentación de demanda colectiva es declarada ilegal o inaplicable con respecto a la totalidad o a determinadas partes de un conflicto, las partes afectadas quedarán excluidas y se procederá a su resolución en un tribunal de justicia, quedando el resto del conflicto sujeto a arbitraje.</p>
+<p><span style="text-decoration: underline;">Jurisdicción</span></p>
+<p>Ud. acepta que todos los procedimientos conforme a Derecho o a los principios de equidad relativos a estas condiciones o a los Servicios Disney que no sean objeto de arbitraje deberán presentarse exclusivamente ante los tribunales estatales o federales del distrito de Manhattan, Nueva York, Estados Unidos de América, a quienes corresponderá la jurisdicción exclusiva, y Ud. acepta someterse a la jurisdicción de dichos tribunales para la resolución judicial del correspondiente procedimiento.</p>
+<p><span style="text-decoration: underline;">Ley Aplicable</span></p>
+<p>Estas condiciones se regirán e interpretarán de conformidad con las leyes del Estado de Nueva York y de EE.UU., con exclusión de las normas sobre conflicto de leyes.</p>
+<p><span style="text-decoration: underline;">Nulidad Parcial</span></p>
+<p>En caso de que cualquier disposición de estas condiciones sea declarada ilegal, nula o inaplicable por cualquier causa, dicha disposición quedará eliminada del resto de condiciones sin que ello afecte a la validez y aplicabilidad de todas las demás disposiciones.</p>
+<p><span style="text-decoration: underline;">Vigencia Poscontractual </span></p>
+<p>Las disposiciones incluidas en estas condiciones que por su naturaleza deban permanecer vigentes tras la finalización de estas condiciones, permanecerán vigentes tras dicha finalización.</p>
+<p><span style="text-decoration: underline;">Renuncia</span></p>
+<p>Las renuncias por nuestra parte ante cualquier disposición de estas condiciones no se considerarán una renuncia permanente o a posteriori con respecto a dicha disposición o a cualquier otra y, de igual modo, las omisiones por nuestra parte a la exigencia de cualquier derecho o disposición conforme a estas condiciones no constituirá una renuncia a tal derecho o disposición.</p>
+
+					<div class="clearboth"></div>
+
+										
+				</div><!-- .entry -->
+
+				
+			</div><!-- #post-## -->
+
+			
+		
+
+
+	<div class="clearboth"></div>
+	</div><!-- #main_inner -->
+	</div><!-- #main -->
+
+
+<div class="clearboth"></div>
+
+	</div><!-- #content_inner -->
+</div><!-- #content -->
+
+<div id="footer">
+	<div class="multibg">
+		<div class="multibg"></div>
+	</div>
+	<div id="footer_inner">
+		<div class="one_half"></div><div class="one_half last"></div><div class="clearboth"></div></div><!-- #footer_inner -->
+	</div><!-- #footer -->
+
+<div id="sub_footer"><div id="sub_footer_inner"><div class="copyright_text">&copy; Disney. All rights reserved.</div><div class="footer_links"><ul id="menu-footer" class=""><li id="menu-item-1973" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1973"><a target="_blank" href="https://disneytermsofuse.com/">Terms of Use</a></li>
+<li id="menu-item-1975" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1975"><a target="_blank" href="https://privacy.thewaltdisneycompany.com/">Privacy Policy</a></li>
+<li id="menu-item-1976" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1976"><a target="_blank" href="https://privacy.thewaltdisneycompany.com/current-privacy-policy/your-california-privacy-rights/">Your California Privacy Rights</a></li>
+<li id="menu-item-1977" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1977"><a target="_blank" href="https://privacy.thewaltdisneycompany.com/for-parents/childrens-online-privacy-policy/">Children&#8217;s Online Privacy Policy</a></li>
+<li id="menu-item-1978" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1978"><a target="_blank" href="https://preferences-mgr.truste.com/?type=disneycolor&#038;affiliateId=115">Interest-Based Ads</a></li>
+<li id="menu-item-3321" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3321"><a target="_blank" href="https://privacy.thewaltdisneycompany.com/en/dnsmi/">Do Not Sell My Info</a></li>
+</ul></div></div><!-- #sub_footer_inner --></div><!-- #sub_footer --></div><!-- #body_inner -->
+
+
+<!-- BEGIN DTSS DDM Tealium Web Analytics -->						
+
+<script language="JavaScript">
+	(function(a,b,c,d){
+		a="//cdn.media.disneyatoz.com/analytics/corp-batch-1/utag.js";
+		b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+		a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+	})();
+</script> 
+<!-- END DTSS DDM Tealium Web Analytics -->						
+
+			<script type='text/javascript' src='https://disneytermsofuse.com/app/themes/elegance/lib/scripts/prettyphoto/js/jquery.prettyPhoto.js?ver=dtss.4'></script>
+<script type='text/javascript' src='https://disneytermsofuse.com/app/themes/elegance/lib/scripts/flexslider/jquery.flexslider-min.js?ver=dtss.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ajaxsearchlite = {"ajaxurl":"https:\/\/disneytermsofuse.com\/wp\/wp-admin\/admin-ajax.php","backend_ajaxurl":"https:\/\/disneytermsofuse.com\/wp\/wp-admin\/admin-ajax.php","js_scope":"jQuery"};
+var ASL = {"ajaxurl":"https:\/\/disneytermsofuse.com\/wp\/wp-admin\/admin-ajax.php","backend_ajaxurl":"https:\/\/disneytermsofuse.com\/wp\/wp-admin\/admin-ajax.php","js_scope":"jQuery","detect_ajax":"0","scrollbar":"1","js_retain_popstate":"0","version":"4736"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://disneytermsofuse.com/app/plugins/ajax-search-lite/js/min/jquery.ajaxsearchlite.min.js?ver=4.7.26'></script>
+<script type='text/javascript' src='https://cdn.media.disneyatoz.com/includes/js/dtssdma.js?ver=1.0'></script>
+<script type='text/javascript'>
+var mejsL10n = {"language":"en","strings":{"mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen-off":"Turn off Fullscreen","mejs.fullscreen-on":"Go Fullscreen","mejs.download-video":"Download Video","mejs.fullscreen":"Fullscreen","mejs.time-jump-forward":["Jump forward 1 second","Jump forward %1 seconds"],"mejs.loop":"Toggle Loop","mejs.play":"Play","mejs.pause":"Pause","mejs.close":"Close","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.time-skip-back":["Skip back 1 second","Skip back %1 seconds"],"mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.mute-toggle":"Mute Toggle","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.ad-skip":"Skip ad","mejs.ad-skip-info":["Skip in 1 second","Skip in %1 seconds"],"mejs.source-chooser":"Source Chooser","mejs.stop":"Stop","mejs.speed-rate":"Speed Rate","mejs.live-broadcast":"Live Broadcast","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script type='text/javascript' src='https://disneytermsofuse.com/wp/wp-includes/js/mediaelement/mediaelement-and-player.min.js?ver=4.2.6-78496d1'></script>
+<script type='text/javascript' src='https://disneytermsofuse.com/wp/wp-includes/js/mediaelement/mediaelement-migrate.min.js?ver=4.9.13'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://disneytermsofuse.com/wp/wp-includes/js/mediaelement/wp-mediaelement.min.js?ver=4.9.13'></script>
+<script type='text/javascript' src='https://disneytermsofuse.com/wp/wp-includes/js/underscore.min.js?ver=1.8.3'></script>
+<script type='text/javascript' src='https://disneytermsofuse.com/app/plugins/ddm-tealium/js/dmatealium.js?ver=4.9.13'></script>
+<script type="text/javascript">/* <![CDATA[ */jQuery( '#main_inner' ).preloader({ imgSelector: '.blog_index_image_load span img', imgAppend: '.blog_index_image_load', oneachload: function(image) { jQuery(image).parent().parent().next().fadeIn(200); } });jQuery( '.one_column_portfolio' ).preloader({ imgSelector: '.portfolio_img_load span img', imgAppend: '.portfolio_img_load', oneachload: function(image) { jQuery(image).parent().parent().next().fadeIn(200); } });jQuery( '.two_column_portfolio' ).preloader({ imgSelector: '.portfolio_img_load span img', imgAppend: '.portfolio_img_load', oneachload: function(image) { jQuery(image).parent().parent().next().fadeIn(200); } });jQuery( '.three_column_portfolio' ).preloader({ imgSelector: '.portfolio_img_load span img', imgAppend: '.portfolio_img_load', oneachload: function(image) { jQuery(image).parent().parent().next().fadeIn(200); } });jQuery( '.four_column_portfolio' ).preloader({ imgSelector: '.portfolio_img_load span img', imgAppend: '.portfolio_img_load', oneachload: function(image) { jQuery(image).parent().parent().next().fadeIn(200); } });jQuery( '.portfolio_gallery.large_post_list' ).preloader({ imgSelector: '.portfolio_img_load span img', imgAppend: '.portfolio_img_load', oneachload: function(image) { jQuery(image).parent().parent().next().fadeIn(200); } });jQuery( '.portfolio_gallery.medium_post_list' ).preloader({ imgSelector: '.portfolio_img_load span img', imgAppend: '.portfolio_img_load' });jQuery( '.portfolio_gallery.small_post_list' ).preloader({ imgSelector: '.portfolio_img_load span img', imgAppend: '.portfolio_img_load' });jQuery( '#main_inner' ).preloader({ imgSelector: '.portfolio_full_image span img', imgAppend: '.portfolio_full_image' });jQuery( '#main_inner' ).preloader({ imgSelector: '.blog_sc_image_load span img', imgAppend: '.blog_sc_image_load' , oneachload: function(image) { jQuery(image).parent().parent().next().fadeIn(200); } });jQuery( '#main_inner, #sidebar_inner' ).preloader({ imgSelector: '.fancy_image_load span img', imgAppend: '.fancy_image_load', oneachload: function(image){var imageCaption = jQuery(image).parent().parent().next();if(imageCaption.length>0){imageCaption.remove();jQuery(image).parent().addClass('has_caption_frame');jQuery(image).parent().append(imageCaption);jQuery(image).next().css('display','block');}}});jQuery( '#intro_inner' ).preloader({ imgSelector: '.fancy_image_load span img', imgAppend: '.fancy_image_load', oneachload: function(image){var imageCaption = jQuery(image).parent().parent().next();if(imageCaption.length>0){imageCaption.remove();jQuery(image).parent().addClass('has_caption_frame');jQuery(image).parent().append(imageCaption);jQuery(image).next().css('display','block');}}});function mysite_jcarousel_setup(c) {c.clip.parent().parent().parent().parent().parent().removeClass('noscript');var jcarousel_img_load = c.clip.children().children().find('.post_grid_image .portfolio_img_load');if( jcarousel_img_load.length>1 ) {jcarousel_img_load.each(function(i) {var filename = jQuery(this).attr('href'),videos=['swf','youtube','vimeo','mov'];for(var v in videos){if(filename.match(videos[v])){jQuery(this).css('backgroundImage','url(' +assetsUri+ '/play.png)');}else{jQuery(this).css('backgroundImage','url(' +assetsUri+ '/zoom.png)');}}jQuery(this).next().fadeIn(200);});}}/* ]]> */</script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"129fe16bc0","applicationID":"215508892,101161962","transactionName":"ZQZbZ0sDWEZWUU0MCVxMeFBNC1lbGEJYAgM=","queueTime":0,"applicationTime":125,"atts":"SUFYEQMZS0g=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
