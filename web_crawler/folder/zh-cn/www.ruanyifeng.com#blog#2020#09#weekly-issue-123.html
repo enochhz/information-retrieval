@@ -1,0 +1,2141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="Movable Type  5.2.2" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--link rel="stylesheet" href="http://www.ruanyifeng.com/blog/styles.css" type="text/css" /-->
+<link rel="start" href="http://www.ruanyifeng.com/blog/" title="Home" />
+<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="http://feeds.feedburner.com/ruanyifeng" />
+<script type="text/javascript" src="http://www.ruanyifeng.com/blog/mt.js"></script>
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">
+<dc:title>RESTful API 设计指南</dc:title>
+<dc:description>网络应用程序，分为前端和后端两个部分。当前的发展趋势，就是前端设备层出不穷（手机、平板、桌面电脑、其他专用设备......）。...</dc:description>
+<dc:creator>阮一峰</dc:creator>
+<dc:date>2014-05-22T20:54:31+08:00</dc:date>
+<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/3.0/" />
+</Work>
+<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+</License>
+</rdf:RDF>
+-->
+
+<style>
+body {
+  background-color: #f5f5d5;
+}
+
+#container::before {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+  text-align: center;
+  content: "本站显示不正常，可能因为您使用了广告拦截器。";
+}
+
+</style>
+<script>
+function loadjscssfile(filename, filetype){
+    if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+//loadjscssfile("http://www.ruanyifeng.com/blog/styles.css", "css");
+loadjscssfile('/static/themes/theme_scrapbook/theme_scrapbook.min.css', "css");
+
+
+function checker() {
+// var img = document.querySelector('img[src^="http://www.ruanyifeng.com/blog/images"]');
+var img = document.querySelector('a > img[src*="wangbase.com/blogimg/asset/"]');
+  if (img && window.getComputedStyle(img).display === 'none'){
+    var sponsor = document.querySelector('.entry-sponsor');
+    var prompt = document.createElement('div');
+    prompt.style = 'border: 1px solid #c6c6c6;border-radius: 4px;background-color: #f5f2f0;padding: 15px; font-size: 14px;';
+  prompt.innerHTML = '<p>您使用了广告拦截器，导致本站内容无法显示。</p><p>请将 www.ruanyifeng.com 加入白名单，解除广告屏蔽后，刷新页面。谢谢。</p>';
+    sponsor.parentNode.replaceChild(prompt, sponsor);
+    document.querySelector('#main-content').innerHTML = '';
+  }
+}
+
+setTimeout(checker, 1000);
+</script>
+
+    
+    <link rel="prev" href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-122.html" title="科技爱好者周刊（第 122 期）：谈谈互联网公司的高估值" />
+    <link rel="next" href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-124.html" title="科技爱好者周刊（第 124 期）：华为如何考核员工" />
+    
+    <title>科技爱好者周刊（第 123 期）：互联网公司与湘军的军制 - 阮一峰的网络日志</title>
+</head>
+<body id="scrapbook" class="mt-entry-archive one-column">
+<script>
+if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) document.body.classList.add('mobile');
+
+/*
+window.addEventListener('load', function(event) {
+  setTimeout(function () {
+    hab('#sup-post-2');
+    hab('#cre-inner');
+  }, 1000);
+});
+*/
+</script>
+    <div id="container">
+        <div id="container-inner">
+
+            <div id="header">
+    <div id="header-inner">
+        <div id="header-content">
+
+
+            <div id="header-name">阮一峰的网络日志 <span id="site_location"> » <a href="http://www.ruanyifeng.com/blog/" accesskey="1">首页</a></span><span id="site_archive"> » <a href="http://www.ruanyifeng.com/blog/archives.html">档案</a></span>
+</div>
+
+<div id="google_search">
+<!-- SiteSearch Google -->
+<form action="https://www.baidu.com/s" target="_blank" method="get" id="cse-search-box">
+  <div>
+  <input type="text" size="20" name="origin" class="searchbox" id="sbi" value="" />
+  <input type="hidden" name="wd" value="" />
+  <!--input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' inurl:www.ruanyifeng.com/blog'" /-->
+  <input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' 阮一峰'" />
+</div>
+</form>
+
+<!-- SiteSearch Google -->
+</div>
+<div id="feed_icon">
+<a href="/feed.html" title="订阅Feed">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAUzSURBVHjavFdbbFRVFF3nPjoz7dTWTittaW0jUDRAUqaNojyqREnEQKgfUj9MqqAmhqRt/OCD4CuY+Kckoh+aiGKC+gMJbdHoRysJ8dkhhmJLNdDKtJU+6GMK87j3Hs85d2Z6HzNtMYWb3Dn3NWftvfba+5xNYDl+e6Fkj6yqb/oDRbWq14vlPBLRKCITkxf0ROLt+hNjp1PPSRK4kA3vF1dXNRcWlyA2OQU9eos9opAkAiKxD+XkKO6t15aRWO7J/MgmAZU8MEgexgZHMX518Dh72sYMmVKShnxWuWHdHtxKIDIYTgMuDzgfmSOIQkYMpdUF8OY92Hytt4/jvkg47czzU16iQovM3QFwmNck+Yyduu7D6NA0Z6JR4THntFs9V4tWQg6Ui3s6MwKDncsFTnXKLJhDSeUK3AgPtyhccDzmVs999buRt/1Vm4i0od+hX7+MRG87jPGB/w1u8FPj9xEw7McVrnYuOCvtpjTth3J/nTg99c8LRhKhr6D3dTB5R24bXFwbMXBsyZzeoXaycEpJ95TB09AGX/NpqLVNtw8urnVzLvHjFNxiFqRy2OOHuqUVnue+ACkoWzo4O6lGzTmuHq6nPvY2m9rVqjrIK2rMEKxqyG5NPAKt+wjo0LklgfNxJkZMA3KJvqRUk3z5UFY3QH14P0h+WUY79HPvgv7VuSg4ZRGY1YgZgqXmORccF17sy2ehnf9AeO085K2HQFbtXBScj0LcpgF2cN+WV+DZ/LJQu6gD4R7oV7pBJwbSgtMvfiPoVp56DySwxm7EtkMs1WdAB7qzggsDJKQYsHucSkOudrkiCPWR/fA2nYCn8SNIK4NptSMyAu3sAdDRkIsJdfth0LzSrODUoPNZ4KI9SxJI5UHk7D4GdQfz2us31c7CoHMjRkKuDPHseCMrONVhNcDJwMJpKFVvg9L4OaTiNWm1x789KCqkrXhVBiEz0WYCT2nAzQAD1/vaETv1GrRfP4Vx5cfMNcDPwvP0h0DhanPym7OIf/+O67vcJ1/PCJ4KgdzaUP6Wz+dU+5yIL6fV+PsHGAOdwlPpvvUOyeeAVGyCdqkDNB6DPjsBSrnndfOGevOh3RhGItxvA+fX1CtbGFhgYUFkFMZPR6F1HnClHq8HyubWtJexX06CRmdt33hrd7nA7SFY4qoGpnYuOKcRykPPgDCBcsHx9Iv+fNL2PueBehCWUfYQIIMGLOCcOmXDXsh1+yCt35tUPfvzGFuSvzvoinXOxqa02qOhM6733nVP2MAdaej2XN11DPKjLZCD+yBvahGCo7JfTKAN9UD7s8Oe9zUNIhz8fWI8DG2k38WCFdxugANcXrvTVd1IEbuv3Jour7Hzn7jLMBNfKs7R3i67gRVrbeCOEDhinmWhAatsqdquM2XzHZINhK2cqTjHr/XZdVJUbgN3MWAVXKbSyg9jesRW2xP9di+lwrL5ojM3m2H/kG9hwcIA37c71W6wJdW2J2S5nrjYbq/t1AHAhJsKQeyfPvf6IMJgghPJhFZ4x0KlfLFvt22du45Au/A1SOlGc0P672XXwhLtOcM0kTTEMMd0qkVmMNXxMd/tsedUjInr4SQDgOfeXMSiN0FCL5WHah4L1qqYXPJOJlttd+a5M+YpcG5poLYKQ5f+6JJ4r8bbJYP47hq4r7QAs9PjYNhHJd4o8l5taiwuOpa7AS4XKqI/5NjJbTnaWK92nLdLuhQAJayRNMiygXPBeQN+Qbvu0zDc3y+aUzhbkGR73sI7ljvUnndx2q3t+X8CDAD66FtrIL864AAAAABJRU5ErkJggg==" alt="" style="border: 0pt none;" />
+</a></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+            <div id="content">
+                <div id="content-inner">
+
+
+                    <div id="alpha">
+                        <div id="alpha-inner">
+
+
+                            <div id="entry-2204" class="entry-asset asset hentry">
+                                <div class="asset-header">
+<div class="asset-nav entry-nav">
+
+<div class="entry-location">
+<ul>
+<li>上一篇：<a href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-122.html" title="科技爱好者周刊（第 122 期）：谈谈互联网公司的高估值">科技爱好者周刊（第&nbsp;1</a></li>
+<li>下一篇：<a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-124.html" title="科技爱好者周刊（第 124 期）：华为如何考核员工">科技爱好者周刊（第&nbsp;1</a></li>
+</ul>
+</div>
+
+
+    
+                                    <div class="entry-categories">
+                                        <p>分类<span class="delimiter">：</span></p>
+                                        <ul>
+                                            <li><a href="http://www.ruanyifeng.com/blog/weekly/" rel="tag">周刊</a></li>
+                                        </ul>
+                                    </div>
+    
+
+
+                                            
+<div class="entry-location-mobile" style="float: right;">
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-122.html" title="科技爱好者周刊（第 122 期）：谈谈互联网公司的高估值">⇐&nbsp;</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-124.html" title="科技爱好者周刊（第 124 期）：华为如何考核员工">&nbsp;⇒</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+                          
+<article class="hentry">
+                                    <h1 id="page-title" class="asset-name entry-title">科技爱好者周刊（第 123 期）：互联网公司与湘军的军制</h1>
+                                            <div id="share_button" class="social-share" style="float:right;padding-right:2em;padding-top:1em;"></div>
+
+<div class="asset-meta">
+                                        
+
+                                            <p class="vcard author">作者： <a class="fn url" href="http://www.ruanyifeng.com">阮一峰</a></p>
+                                    <p>日期： <a href="http://www.ruanyifeng.com/blog/2020/09/"><abbr class="published" title="2020-09-04T08:39:13+08:00">2020年9月 4日</abbr></a></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+                                
+                                <div class="asset-content entry-content" id="main-content">
+
+                                    <!-- div class="asset-body" -->
+                                        <p>这里记录每周值得分享的科技内容，周五发布。</p>
+
+                                    <!-- /div -->
+
+
+                                    <!-- div id="more" class="asset-more" -->
+                                        <p>本杂志开源（GitHub: <a href="https://github.com/ruanyf/weekly">ruanyf/weekly</a>），欢迎提交 issue，投稿或推荐科技内容。</p>
+
+<p>周刊讨论区的帖子<a href="https://github.com/ruanyf/weekly/issues/1392">《谁在招人？》</a>，提供大量就业信息，欢迎访问或发布工作/实习岗位。</p>
+
+<h2>封面图</h2>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020083102.jpg" alt="" title="" /></p>
+
+<p>8月30日，一个三岁台湾女童不小心被风筝缠住身体。一阵大风吹来，就飞上了天，至少五层楼高。所幸风筝下落被众人抓住，女童没有大碍。（<a href="https://www.twoeggz.com/info/703338.html">via</a>）</p>
+
+<h2>本周话题：互联网公司与湘军的军制</h2>
+
+<p>大学里，我读过一本历史学著作，罗尔纲的<a href="https://baike.baidu.com/item/%E6%B9%98%E5%86%9B%E5%85%B5%E5%BF%97">《湘军兵志》</a>。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090303.jpg" alt="" title="" /></p>
+
+<p>湘军是清朝末年曾国藩在湖南省组建的一支军队，清朝全靠它，打败了太平天国。这里有一个疑问：为什么国家的正规军（绿营）接连战败，但是一支地方的民兵部队却能连克强敌？湘军到底有何不同？</p>
+
+<p>经过研究，罗尔纲先生得出结论：湘军最大的不同，就是它的制度。</p>
+
+<p>一般来说，军队都是国家招募的，但是湘军不是，士兵都是将领个人招募。曾国藩让将领自己去招兵，你招来多少人，就带领多少人。这样就导致了，招来的都是老乡、朋友、姻亲、同学，变成了将领的私人军队，军饷往往也必须自己解决。</p>
+
+<p>这样的制度意味着，一支军队都是熟人组成的，只听命于主将，别人指挥不动，士兵的奖惩都由主将说了算。所以，湘军的凝聚力、服从性和战斗力大大强于绿营，后者完全是一盘散沙，无心战斗。</p>
+
+<p>我觉得，互联网公司跟湘军有类似之处，尤其是大公司。互联网公司内部也是一个个小团队，每个团队都是由主管组建和招募。组员的所有利益都在主管手里，工作绩效、晋升、奖金都是主管说了算。这就跟湘军的指挥和管理制度很像。</p>
+
+<p>这样的团队，好处是比较容易指挥，战斗力有保证；坏处是主管决定了你的生杀大权，导致组员必须迎合讨好主管。现实中，有人甚至形容存在"跪舔主管"的现象。很多人想象中，互联网公司的管理，应该是比较先进和科学的，其实不完全是，也存在很多封建的成分。</p>
+
+<h2>React 教学视频</h2>
+
+<p>本周的课程资料是，开课吧提供的 React 教学视频。</p>
+
+<p>大家都知道，React 虽然是全世界影响力最大的前端框架，但是难度并不低。学会它的整个 API 要花不少时间，理解设计思想和掌握底层原理更不容易。</p>
+
+<p>但是，React 在国内有着广泛的生产应用，面试也是一定会问到的。如果不懂它的技术栈，就会大大降低个人竞争力。许多同学没有做好前期准备，直接看文档，导致进度缓慢，不少人抱怨苦苦学了1个多月，还是似懂非懂。</p>
+
+<p>别着急，开课吧的 <strong>《React 原理剖析 + 组件化》</strong> 系统视频，不仅讲解了基础原理，而且其中的综合实战项目包含了 react、react-router、redux、react-redux、antd 等 React 全家桶相关技术点的相关使用，内容针对性比较强。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090302.jpg" alt="" title="" /></p>
+
+<p>这个视频课程现在限量免费开放，仅限100名，需要的同学可以点击<a href="https://wx.kaikeba.com/vip_course/afzg70hmbg/6aehur8rcv?tenant=wx5046bc7413796142">这个链接</a>，或者扫描下面二维码领取。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090301.jpg" alt="" title="" /></p>
+
+<h2>资讯</h2>
+
+<p>1、<a href="https://www.washingtonpost.com/world/asia_pacific/facial-recognition-china-animals-farms-agriculture/2020/08/23/9808c710-d6fb-11ea-b9b2-1ea733b97910_story.html">牛脸识别</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082408.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082409.jpg" alt="" title="" /></p>
+
+<p>《华尔街邮报》报道，河北省的奶牛场正在使用"牛脸识别"技术。通过摄像头识别每头奶牛，记录它们的健康状况、授精日期、妊娠试验结果等。</p>
+
+<p>如果一头牛显示出疾病或其他问题的症状，饲养员马上就会在手机上收到警报。以前对奶牛的监控，都是通过耳朵打孔（下图）或戴在脚踝上的电子标签。这些方法不仅很麻烦，而且奶牛一直在努力清除身上的异物，很多时候都会让标识脱落。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082407.jpg" alt="" title="" /></p>
+
+<p>2、<a href="https://www.raspberrypi.org/blog/raspberry-pi-listening-posts-hear-the-borneo-rainforest/">婆罗洲雨林的声音</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082501.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082504.jpg" alt="" title="" /></p>
+
+<p>世界自然基金会（WWF）资助了  <a href="http://acoustics.safeproject.net/06:00/10/51503">SAFE Acoustics 项目</a>，在印尼婆罗洲雨林里面放置收音头。用户可以在项目网站上收听雨林的实时声音或者录音，比如黎明日出的声音（上图）。</p>
+
+<p>收音头通过太阳能板供电，收录的声音由一个树莓派编码，然后通过 3G 网络发给服务器（下图）。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082502.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082503.jpg" alt="" title="" /></p>
+
+<p>3、<a href="https://www.theverge.com/2020/8/24/21399749/apple-store-retail-singapore-floating-design-marina-bay-sands">水上苹果商店</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082505.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082506.jpg" alt="" title="" /></p>
+
+<p>世界第一家水上苹果商店，即将在新加坡开幕。这是全球第512家苹果商店，它浮在水面上，像一艘宇宙飞船，必须通过水上走廊才能进入商店。</p>
+
+<p>到了晚上亮灯，这个商店就像一个海上的灯笼。官方宣传手册这样介绍："晚上，球体散发出温暖的光芒，让人联想起中秋节期间传统灯笼的设计。商店的鸟瞰图则像是凝视着天空的玻璃虹膜。"</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082507.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082508.jpg" alt="" title="" /></p>
+
+<p>4、<a href="https://www.wired.com/story/dicekeys-cryptography/">密码盒</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082311.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082312.jpg" alt="" title="" /></p>
+
+<p>安全的做法是，每个网站使用不同的、完全不可猜测的密码。密码生成软件一般用来达到这个目的，但是加州大学伯克利分校的计算机科学家最近发明了实体的密码生成器，叫做 DiceKeys。</p>
+
+<p>一个塑料盒子里面放着25个骰子，每个骰子的6个面上都印着不同的随机字符。只要扔一把骰子，然后将它们重新放到盒子里，就会得到一个随机的结果。然后，它有一个配套的手机 App，对着盒子扫描一下，就会记住每个骰子的方向和字符，生成一个高强度密码。你可以把这个密码盒保存起来，下次要用时，再对着它扫描一下，就会重新得到密码。</p>
+
+<p>5、<a href="https://techxplore.com/news/2020-08-wireless-device-fuel-sunlight-carbon.html">人工光合作用</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082605.jpg" alt="" title="" /></p>
+
+<p>剑桥大学的研究人团队开发出一种设备，可以利用阳光，将二氧化碳和水转化为燃料，无需任何电力或其他能源。也就是说，他们正在尝试实现人工光合作用。</p>
+
+<p>这种设备使用一种感光纸，上面有催化剂，可以利用阳光的能量，将二氧化碳和水转化为氧气和甲酸，从而当作燃料使用。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082604.jpg" alt="" title="" /></p>
+
+<p>6、<strong>一句话消息</strong></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://nintendosmash.com/over-three-billion-people-worldwide-now-play-video-games-study-reports/">研究报告</a>称，目前全球有31亿人玩视频游戏，其中有一半只在手机上玩。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082302.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://www.nytimes.com/2020/08/29/us/japan-flying-car.html/">日本公司 SkyDrive</a> 称，它已经制造完成了"飞行汽车"，世界第一台垂直起降的电动飞行器，试飞了四分钟。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020083001.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://www.cnbc.com/2020/08/31/amazon-prime-now-drone-delivery-fleet-gets-faa-approval.html">亚马逊</a>获得美国政府批准，可以使用无人机送货。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090102.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://siberiantimes.com/other/others/news/giant-new-50-metre-deep-crater-opens-up-in-arctic-tundra/">北极</a>新出现了一个深达50米的巨型"火山口"，据信这是由于地下甲烷爆炸导致的。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020083004.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020083005.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://www.zdnet.com/article/mozilla-research-browsing-histories-are-unique-enough-to-reliably-identify-users/">Mozilla 的员工</a>发现，只要根据某个人的50条～150条的浏览历史，就足以识别一个人。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090203.jpg" alt="" title="" /></p>
+
+<h2>文章</h2>
+
+<p>1、<a href="http://www.plainenglish.co.uk/how-to-write-in-plain-english.html">如何用简单英语写作</a>（英文）</p>
+
+<p>本文介绍几个很实用的英语写作规则，帮助你写出简单易懂的英语。</p>
+
+<p>2、<a href="https://willschenk.com/articles/2020/gitlog_in_sqlite/">如何使用 SQL 查询 Git 日志</a>（英文）</p>
+
+<p>本文介绍如何将 Git 日志导出到 SQLite 数据库，从而可以用 SQL 语句进行查询。</p>
+
+<p>3、<a href="https://blog.digitalbunker.dev/2020/08/28/how-do-global-positioning-systems-gps-work/">GPS 定位原理</a>（英文）</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082902.jpg" alt="" title="" /></p>
+
+<p>本文介绍 GPS 卫星系统如何能够定位，写得比较容易懂。定位的关键是卫星上的原子钟必须准确报时。</p>
+
+<p>4、<a href="http://tech.sina.com.cn/csj/2020-08-10/doc-iivhuipn7797138.shtml">芯片国产化的三大障碍</a>（中文）</p>
+
+<p>中国想要摆脱芯片对外国技术的依赖，必须克服三大障碍：光刻机、芯片设计软件、高纯度硅材料。每一项的难度都极高。</p>
+
+<p>5、<a href="https://robertovitillo.com/default-timeouts/">异步操作需要设置超时</a>（英文）</p>
+
+<p>本文是一个提醒，进行异步操作的时候（比如 AJAX 请求），要设置超时。因为 AJAX 默认没有超时限制，浏览器会一直等下去，极端情况下，可能会耗尽套接字的资源池。</p>
+
+<p>6、<a href="https://news.sina.com.cn/c/2020-08-29/doc-iivhvpwy3734657.shtml">任正非：为什么华为现在要搞基础研究？</a>（中文）</p>
+
+<p>2020年7月29-31日，任正非访问上海交通大学、复旦大学、东南大学、南京大学的讲话摘要。</p>
+
+<p>7、<a href="https://www.collabora.com/news-and-blog/blog/2020/08/27/using-the-linux-kernel-case-insensitive-feature-in-ext4/">如何让 Linux 不区分文件名大小写</a>（英文）</p>
+
+<p>Linux 5.2 开始，支持不区分文件名大小写，本文教你怎么打开这个功能。</p>
+
+<p>8、<a href="https://trineo.com/blog/2020/08/phishing-resistant-one-time-codes">短消息发送一次性验证码的标准</a>（英文）</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090101.jpg" alt="" title="" /></p>
+
+<p>很多网站采用短消息发送一次性验证码，作为用户认证的手段。苹果和谷歌已经商定了短消息格式标准，GitHub 开始采用这个标准。</p>
+
+<p>9、<a href="https://dev.to/thawkin3/common-mistakes-with-react-keys-1jcc">React 列表 key 属性的三个常见错误</a>（英文）</p>
+
+<p>React 框架要求列表的每一项都带有<code>key</code>属性，本文介绍这个属性的三个需要注意的地方。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://github.com/twbs/icons">Bootstrap 图标库</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082901.jpg" alt="" title="" /></p>
+
+<p>Bootstrap 的图标库发布1.0正式版，包含1100多个图标，全部都是 SVG 格式，可以插入 img 标签。</p>
+
+<p>2、<a href="https://github.com/ranger/ranger">ranger</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020083003.jpg" alt="" title="" /></p>
+
+<p>一个命令行的文件管理器，支持 Vi 快捷键。</p>
+
+<p>3、<a href="https://dystroy.org/broot/">Broot</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090104.jpg" alt="" title="" /></p>
+
+<p>一个很有特色的命令行目录浏览工具，有很多功能，比如列出每个子目录的大小。</p>
+
+<p>4、<a href="https://www.radsix.com/">Nessie</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090106.jpg" alt="" title="" /></p>
+
+<p>一个极简的浏览器，快速、占用资源低、不需要安装，绿色使用。</p>
+
+<p>5、<a href="https://github.com/alin23/Lunar">Lunar</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090202.jpg" alt="" title="" /></p>
+
+<p>调节 Mac 电脑外接显示器亮度的软件，可以根据时间，自动调节亮度。</p>
+
+<p>6、<a href="https://github.com/TurboWay/bigdata_practice">nginx 日志分析可视化</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090206.jpg" alt="" title="" /></p>
+
+<p>一个完整的大数据实践项目，通过 hive 分析 nginx 日志，将分析结果通过 flask + echarts 进行可视化展示。（<a href="https://github.com/ruanyf/weekly/issues/1394">@TurboWay</a> 投稿）</p>
+
+<p>7、<a href="https://github.com/tal-tech/go-zero">go-zero</a></p>
+
+<p>一个国产的 web 和 rpc 微服务框架，含极简的 API 定义和生成工具 goctl，可以根据定义的 api 文件一键生成各语言的调用代码。（<a href="https://github.com/ruanyf/weekly/issues/1397">@yangyongzhen</a> 投稿）</p>
+
+<p>8、<a href="https://github.com/headllines/hackernews-daily">hackernews-daily</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090207.jpg" alt="" title="" /></p>
+
+<p>订阅 Hacker News 每日排名最高的10条新闻。具体方法是，通过 GitHub Actions 定时执行脚本，获取帖子，记录到了项目的 issue 里，用户通过 watch GitHub 仓库或者 RSS 订阅。（<a href="https://github.com/ruanyf/weekly/issues/1398">@timqian</a> 投稿）</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://searx.space/">searx.space</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082303.jpg" alt="" title="" /></p>
+
+<p><a href="https://github.com/asciimoo/searx">searX</a> 是一个开源的搜索引擎，汇总来自70多个搜索服务（包括谷歌）的结果，不跟踪也不分析用户。使用时，需要自己架设实例。这个网站列出了世界各地现有的实例，以及访问速度的实时统计。</p>
+
+<p>2、<a href="https://cs193p.sites.stanford.edu/">iOS 开发课程</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082905.jpg" alt="" title="" /></p>
+
+<p>斯坦福大学的高质量免费课程，使用了最新的 SwiftUI，充分展示了 APP 开发的整个流程，适合新手进行 iOS 的开发入门。（<a href="https://github.com/ruanyf/weekly/issues/1393">@BranLiang</a> 投稿）</p>
+
+<p>3、<a href="https://www.cable.co.uk/mobiles/worldwide-data-pricing/">1GB 手机流量的价格</a></p>
+
+<p>该网站收集全世界各国家和地区的 1GB 手机流量的价格。中国大陆的平均价格是0.61美元，排在第12位，属于手机上网很便宜的地方。美国平均需要8美元，排在第188位，是非常贵的地方。</p>
+
+<p>4、<a href="https://www.codewithrepl.it/python-projects-for-beginners.html">面向初学者的 Python 项目</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082309.jpg" alt="" title="" /></p>
+
+<p>一本免费 Python 教程，使用 Repl.it 在线编程环境学习 Python。</p>
+
+<p>5、<a href="https://github.com/zhaoolee/OnlineToolsBook">在线工具秘籍</a></p>
+
+<p>这个中文仓库收集各种好用的在线小工具。（<a href="https://github.com/ruanyf/weekly/issues/1391">@zhaoolee</a> 投稿）</p>
+
+<p>6、<a href="https://course.fast.ai/">面向程序员的实用深度学习</a></p>
+
+<p>fast.ai 公司推出的深度学习教程。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://basementgeographer.com/the-longest-train-ride-in-the-world/">世界最长的火车路线</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082606.jpg" alt="" title="" /></p>
+
+<p>目前，世界最长的火车路线是从葡萄牙波尔图开始，一直到达越南南部，全长17000公里。你可以全程乘坐火车，但需要经过多次换车。</p>
+
+<p>整个路程最快也要耗时327小时，相当于13天半，总票价2000美元以上。</p>
+
+<p>2、<a href="https://www.iquilezles.org/blog/?p=4582">巴比伦乘法公式</a></p>
+
+<p>古代巴比伦人使用下面的公式，计算两个数的乘积。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082906.jpg" alt="" title="" /></p>
+
+<p>这个公式可以使用几何图形证明，请看下面的瓷砖图案。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082907.jpg" alt="" title="" /></p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://www-cs-faculty.stanford.edu/~knuth/email.html">高德納自述：我对电子邮件的态度</a></p>
+
+<p>1990年1月1日以后，我就一直很快乐，因为我不再收电子邮件了。</p>
+
+<p>我从1975年左右开始使用电子邮件，在我看来，用了15年的电子邮件已经足够了。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090304.jpg" alt="" title="" /></p>
+
+<p>我的工作需要长时间的学习和集中注意力。我的目标是详尽地学习计算机科学的某些领域，然后尝试消化这些知识，将它们转化为没有时间进行此类学习的人们可以访问的形式。所以，我没有多余的时间，可以花在电子邮件上。</p>
+
+<p>另一方面，我写书时需要与世界各地成千上万的人交流。我也想对阅读这些书并有疑问或意见的人们做出回应。我的目标是每6个月有一天来处理这些通信。因此，如果你想就任何主题写信给我，请将信件发送至以下地址。</p>
+
+<blockquote>
+  <p>Donald E. Knuth 教授 <br />
+计算机科学系 斯坦福大学 <br />
+盖茨大楼4B <br />
+斯坦福大学 <br />
+CA 94305-9045美国</p>
+</blockquote>
+
+<p>我有一位很棒的秘书，她会看收到的邮件，进行分类处理，放入缓冲区，我会定期清空该区。</p>
+
+<p>我的秘书还会打印发到 taocp@cs.stanford.edu 或 knuth-bug@cs.stanford.edu 的所有非垃圾邮件 ，以便我有空时进行书面答复。</p>
+
+<p>您也可以尝试通过650-725-4671传真给我，但我不怎么会看。</p>
+
+<p>2、<a href="https://thebarentsobserver.com/en/security/2020/08/rosatom-releases-previously-classified-documentary-video-50-mt-novaya-zemlya-test">沙皇核弹纪录片</a></p>
+
+<p>今年8月20日，为了纪念苏联核工业发展75周年，俄罗斯在 YouTube 上发布了一部讲述沙皇核弹的纪录片。</p>
+
+<p>沙皇炸弹只是一个绰号，这枚核弹的正式名称为 RDS-220，是人类有史以来制造并引爆的最大核武器。</p>
+
+<p>1961年7月，苏联领导人尼基塔·赫鲁晓夫下令，在苏联与美国的政治局势日趋紧张的情况下，研制一枚巨型核炸弹。</p>
+
+<p>赫鲁晓夫想要一种一亿吨当量的武器，为了达到这种能量级别，工程师在热核弹头上增加了第三级引爆，普通的氢弹只包括两级引爆。计算了极端情况下核辐射之后，工程师们觉得一亿吨当量太可怕了，决定降低到5000万吨，相当于约3,800枚广岛炸弹同时爆炸。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082306.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082307.jpg" alt="" title="" /></p>
+
+<p>由于爆炸能量还是太大，采取了很多措施，保证投弹的飞机能够在投弹后，及时飞离现场。其中一个措施是为飞机涂上特殊的白色反光涂料，保护飞机免受爆炸热辐射引起的热量的伤害。另一个措施是，炸弹上装了一个重达一吨的降落伞，减缓它的下落速度。</p>
+
+<p>1961年10月30日，这枚核弹正式引爆。除了投弹的飞机，当天还有第二架飞机升空，拍摄和监视辐射情况。</p>
+
+<p>纪录片展示了引爆的整个过程。首先，巨型炸弹通过铁路运输到 Olenya 空军基地，然后装上 Tu-95 飞机，起飞并横越巴伦支海，在 Matochkin 海峡附近释放引爆。纪录片从多个方向和距离，显展示了末日般的爆炸声和随后的蘑菇云。</p>
+
+<p>炸弹在离地面4000米处引爆。如纪录片中所见，火球闪光的持续时间比任何其他核武器所看到的都要长。爆炸闪光的圆顶本身达到了20公里，而绝对破坏环的半径为35公里。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082305.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020082304.jpg" alt="" title="" /></p>
+
+<p>爆炸40秒后，烈焰穹顶达到30公里，然后发展成蘑菇云，其直径飙升至60-65公里，直径为90公里。距离引爆点55公里的一个小镇，大部分建筑物被摧毁。</p>
+
+<p>尽管在距地面4公里处引爆，但世界范围内仍测量到相当于里氏5.0级以上的地震冲击波。</p>
+
+<p>爆炸时，携带炸弹的 Tu-95 飞机已经飞出了很远。但是，爆炸的冲击波使飞机失去控制，立即下跌了1000米的高度，但后来安全着陆。</p>
+
+<p>在纪录片中，据说1000公里以外都看到了爆炸的闪光。整个斯堪的纳维亚半岛都测量到了辐射尘埃，国际社会纷纷进行谴责。</p>
+
+<p>美国不甘示弱，随后在太平洋地区也进行了巨型的核试验。最终，这两个超级大国意识到，大气核试验会带来巨大的放射性尘埃，对谁都没有好处。1963年，美国和苏联签署了《部分禁止核试验条约》，禁止在大气层，外层空间和水下进行试验。</p>
+
+<p>1990年，苏联进行了最后两次地下核试验。</p>
+
+<p>1996年，联合国通过了《全面禁止核试验条约》，禁止进行任何核武器试验爆炸。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>架构师的工作不是做出决策，而是尽可能久地推迟决策，先在不做出重大决策的情况下构建程序，以便以后有足够信息时再做出决策。</p>
+
+<p>-- <a href="https://tomgamon.com/posts/2020-08-25-dont-marry-your-design/">Bob Martin</a></p>
+
+<p>2、</p>
+
+<p>公钥加密已经发明40多年了，但是我们仍然把魔术数字印在信用卡上，任何看到它们的人都可以未经授权拿走我们所有的钱。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=24277899">Hacker News 读者</a></p>
+
+<p>3、</p>
+
+<p>我曾经极度贫穷，冬天开不起暖气。我发现，最好的取暖方法是晚上在毛毯下塞一只猫，放在两腿之间，并且将毯子拉到头顶上方，留出缝隙以呼吸。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=24277128">Hacker News 读者</a></p>
+
+<p>4、</p>
+
+<p>我加入谷歌，是因为需要更多钱；离开谷歌，是因为需要更多时间。</p>
+
+<p>-- <a href="https://theartofmachinery.com/2020/08/04/leaving_google.html">《离开谷歌的这五年》</a></p>
+
+<p>5、</p>
+
+<p>压力分成好几种。有一些压力让你感觉快要死了，另一些压力让你感觉自己更有生命力。</p>
+
+<p>-- <a href="https://theartofmachinery.com/2020/08/04/leaving_google.html">《离开谷歌的这五年》</a></p>
+
+<p>6、</p>
+
+<p>如果微软推出容器服务，有些人是不会买的。但是，GitHub 的容器服务，他们就会买。我认为，这就是微软收购 GitHub 的部分原因。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=24346163">Hacker News 读者</a>评论 <a href="https://github.blog/2020-09-01-introducing-github-container-registry/">GitHub 推出容器仓库服务</a></p>
+
+<h2>回顾</h2>
+
+<p>2019年的本周（第 72 期）：<a href="http://www.ruanyifeng.com/blog/2019/09/weekly-issue-72.html">当代人不再有手稿</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/201909/bg2019090502.jpg" alt="" title="" /></p>
+
+<p>2018年的本周（第 20 期）：<a href="http://www.ruanyifeng.com/blog/2018/08/weekly-issue-20.html">不读大学的替代方案</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/201808/bg2018083101.jpg" alt="" title="" /></p>
+
+<h2>订阅</h2>
+
+<p>这个周刊每周五发布，同步更新在<a href="http://www.ruanyifeng.com/blog">阮一峰的网络日志</a>和<a href="http://weixin.sogou.com/weixin?query=%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97">微信公众号</a>。</p>
+
+<p>微信搜索"阮一峰的网络日志"或者扫描二维码，即可订阅。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2018/bg2018042311.jpg" alt="" title="" /></p>
+
+<p>（完）</p>
+
+                                    <!-- /div -->
+
+                                </div>
+    <script type="text/javascript" src="/newwindow.js"></script>
+                                <div class="asset-footer">
+
+<h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2020-09-04T08:39:13+08:00">2020年9月 4日</abbr></li>
+
+</ul>
+                                </div>
+</article>
+                            </div>
+
+
+
+
+<div id="related_entries">
+<h2>相关文章</h2>
+<ul>
+
+<li><strong>2020.09.18: <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html">科技爱好者周刊（第 125 期）：数字人民币要取代谁</a></strong>
+
+                           <div class="entry-body">
+                              这里记录每周值得分享的科技内容，周五发布。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.09.11: <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-124.html">科技爱好者周刊（第 124 期）：华为如何考核员工</a></strong>
+
+                           <div class="entry-body">
+                              这里记录每周值得分享的科技内容，周五发布。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.08.28: <a href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-122.html">科技爱好者周刊（第 122 期）：谈谈互联网公司的高估值</a></strong>
+
+                           <div class="entry-body">
+                              这里记录每周值得分享的科技内容，周五发布。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.08.21: <a href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-121.html">科技爱好者周刊（第 121 期）：为什么人类没有越来越闲？</a></strong>
+
+                           <div class="entry-body">
+                              这里记录每周值得分享的科技内容，周五发布。
+
+                           </div>
+
+</li>
+
+ 
+</ul>
+</div>
+
+
+
+                    
+
+                    <div id="comments" class="comments">
+
+
+    
+    
+        
+    <h2 class="comments-header">留言（37条）</h2>
+
+    <div id="comments-content" class="comments-content" style="clear: left;">
+        
+        <div id="comment-421951" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.chengxiangqian.com/" href="http://www.chengxiangqian.com/" target="_blank" rel="nofollow">江湖人称向前兄</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421951">
+            <p>“我加入谷歌，是因为需要更多钱；离开谷歌，是因为需要更多时间。”把谷歌换成别的公司，估计是大多数人都 写照</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:01 AM">2020年9月 4日 09:01</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421951">#</a>
+ | <a href="#comment-text" title="引用江湖人称向前兄的这条留言" onclick="return CommentQuote('comment-quote-421951','江湖人称向前兄');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421952" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://space.bilibili.com/503792864" href="https://space.bilibili.com/503792864" target="_blank" rel="nofollow">Zhengyaing</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421952">
+            <p>今天周五！！！！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:03 AM">2020年9月 4日 09:03</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421952">#</a>
+ | <a href="#comment-text" title="引用Zhengyaing的这条留言" onclick="return CommentQuote('comment-quote-421952','Zhengyaing');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421953" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://ashtwo.cn" href="http://ashtwo.cn" target="_blank" rel="nofollow">ashtwo</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421953">
+            <p>这水上苹果商店有种宝可梦里水系道馆的感觉</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:04 AM">2020年9月 4日 09:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421953">#</a>
+ | <a href="#comment-text" title="引用ashtwo的这条留言" onclick="return CommentQuote('comment-quote-421953','ashtwo');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421955" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">zz</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421955">
+            <p>压力分成好几种。有一些压力让你感觉快要死了，另一些压力让你感觉自己更有生命力。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:21 AM">2020年9月 4日 09:21</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421955">#</a>
+ | <a href="#comment-text" title="引用zz的这条留言" onclick="return CommentQuote('comment-quote-421955','zz');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421956" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">osmond</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421956">
+            <p>巴比伦的公式对应的几何图案看懂了，可是他们都能做平方（(a+b)²）及除法（除以4）运算了，居然做不了乘法运算（需要这么复杂的变换）</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:26 AM">2020年9月 4日 09:26</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421956">#</a>
+ | <a href="#comment-text" title="引用osmond的这条留言" onclick="return CommentQuote('comment-quote-421956','osmond');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421957" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://zhaokaifeng.com/" href="https://zhaokaifeng.com/" target="_blank" rel="nofollow">荒原之梦</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421957">
+            <p>印尼雨林的声音作为白噪音很不错。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:37 AM">2020年9月 4日 09:37</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421957">#</a>
+ | <a href="#comment-text" title="引用荒原之梦的这条留言" onclick="return CommentQuote('comment-quote-421957','荒原之梦');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421958" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">gcry</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421958">
+            <p>葡萄牙首都里斯本不是波尔图</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:40 AM">2020年9月 4日 09:40</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421958">#</a>
+ | <a href="#comment-text" title="引用gcry的这条留言" onclick="return CommentQuote('comment-quote-421958','gcry');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421959" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">lk</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421959">
+            <p>了解一周讯息</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:40 AM">2020年9月 4日 09:40</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421959">#</a>
+ | <a href="#comment-text" title="引用lk的这条留言" onclick="return CommentQuote('comment-quote-421959','lk');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421960" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Dyxang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421960">
+            <p>"世界最长的火车路线"往期周刊好像提到过吧</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:46 AM">2020年9月 4日 09:46</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421960">#</a>
+ | <a href="#comment-text" title="引用Dyxang的这条留言" onclick="return CommentQuote('comment-quote-421960','Dyxang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421961" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">火焰库拉</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421961">
+            <p>雨林声音好像以前有发过</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  9:46 AM">2020年9月 4日 09:46</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421961">#</a>
+ | <a href="#comment-text" title="引用火焰库拉的这条留言" onclick="return CommentQuote('comment-quote-421961','火焰库拉');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421962" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://springboot.io" href="https://springboot.io" target="_blank" rel="nofollow">KevinBlandy</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421962">
+            <p>goaccess分析Nginx日志也不错。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 10:00 AM">2020年9月 4日 10:00</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421962">#</a>
+ | <a href="#comment-text" title="引用KevinBlandy的这条留言" onclick="return CommentQuote('comment-quote-421962','KevinBlandy');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421963" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://博客.卅卅.我爱你" href="https://博客.卅卅.我爱你" target="_blank" rel="nofollow">Rivalsa</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421963">
+            <p>关于巴比伦乘法公式：这个公式是用来算两个数的乘积的，但后面展开的算式中的平方不还是两个数的乘积么，这应该属于递归吧，感觉会异常的复杂。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 10:07 AM">2020年9月 4日 10:07</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421963">#</a>
+ | <a href="#comment-text" title="引用Rivalsa的这条留言" onclick="return CommentQuote('comment-quote-421963','Rivalsa');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421964" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://wss.cool" href="https://wss.cool" target="_blank" rel="nofollow">哇嘎立马西大</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421964">
+            <p>好像很久以前的周刊也有过一次深林中声音直播的消息。忘记了跟这次的“婆罗洲雨林的声音”是不是一个。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 10:07 AM">2020年9月 4日 10:07</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421964">#</a>
+ | <a href="#comment-text" title="引用哇嘎立马西大的这条留言" onclick="return CommentQuote('comment-quote-421964','哇嘎立马西大');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421965" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">阮一峰</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421965">
+            <p>@gcry：谢谢已经更正了。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 10:08 AM">2020年9月 4日 10:08</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421965">#</a>
+ | <a href="#comment-text" title="引用阮一峰的这条留言" onclick="return CommentQuote('comment-quote-421965','阮一峰');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421966" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">sjfkai</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421966">
+            <p>看完芯片那篇，真的好难啊  ????</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 10:34 AM">2020年9月 4日 10:34</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421966">#</a>
+ | <a href="#comment-text" title="引用sjfkai的这条留言" onclick="return CommentQuote('comment-quote-421966','sjfkai');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421968" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">何望，</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421968">
+            <blockquote>
+<pre>引用Rivalsa的发言：</pre>
+
+<p>关于巴比伦乘法公式：这个公式是用来算两个数的乘积的，但后面展开的算式中的平方不还是两个数的乘积么，这应该属于递归吧，感觉会异常的复杂。</p>
+
+</blockquote>
+
+<p>他们可能不知道平方展开式，因为他们看图就可以得到 (a+b)平方和 (a-b) 平方了</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 11:34 AM">2020年9月 4日 11:34</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421968">#</a>
+ | <a href="#comment-text" title="引用何望，的这条留言" onclick="return CommentQuote('comment-quote-421968','何望，');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421970" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">coon</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421970">
+            <p>读完回味，难道地下核爆就不污染环境了么？自行知乎去了，博主辛苦！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 12:06 PM">2020年9月 4日 12:06</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421970">#</a>
+ | <a href="#comment-text" title="引用coon的这条留言" onclick="return CommentQuote('comment-quote-421970','coon');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421971" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Gantrol</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421971">
+            <p>那个乘法公式，估计是配合平方表的。而且，可能当时的数字形式更适合用平方表达。毕竟不是现在的阿拉伯数字。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 12:48 PM">2020年9月 4日 12:48</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421971">#</a>
+ | <a href="#comment-text" title="引用Gantrol的这条留言" onclick="return CommentQuote('comment-quote-421971','Gantrol');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421972" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Guest</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421972">
+            <p>1GB流量最便宜的竟然是印度。。。。。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  2:34 PM">2020年9月 4日 14:34</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421972">#</a>
+ | <a href="#comment-text" title="引用Guest的这条留言" onclick="return CommentQuote('comment-quote-421972','Guest');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421977" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ricky</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421977">
+            <p>求教， 公钥加密与信用卡的魔法数字有什么关系？我觉得，这只能说是银行发放密码的渠道有问题，和公钥扯不上关系。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  4:38 PM">2020年9月 4日 16:38</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421977">#</a>
+ | <a href="#comment-text" title="引用ricky的这条留言" onclick="return CommentQuote('comment-quote-421977','ricky');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421981" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">afei</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421981">
+            <blockquote>
+<pre>引用osmond的发言：</pre>
+
+<p>巴比伦的公式对应的几何图案看懂了，可是他们都能做平方（(a+b)²）及除法（除以4）运算了，居然做不了乘法运算（需要这么复杂的变换）</p>
+
+</blockquote>
+
+<p>你可以反过来看，这个公式可以把平法和除法转为乘法</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  5:43 PM">2020年9月 4日 17:43</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421981">#</a>
+ | <a href="#comment-text" title="引用afei的这条留言" onclick="return CommentQuote('comment-quote-421981','afei');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421985" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Arun</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421985">
+            <blockquote>
+<pre>引用Guest的发言：</pre>
+
+<p>1GB流量最便宜的竟然是印度。。。。。</p>
+
+</blockquote>
+
+<p>收入不一样，消费都不一样</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020  6:17 PM">2020年9月 4日 18:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421985">#</a>
+ | <a href="#comment-text" title="引用Arun的这条留言" onclick="return CommentQuote('comment-quote-421985','Arun');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421990" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">bbb</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421990">
+            <blockquote>
+<pre>引用ricky的发言：</pre>
+
+<p>求教， 公钥加密与信用卡的魔法数字有什么关系？我觉得，这只能说是银行发放密码的渠道有问题，和公钥扯不上关系。</p>
+
+</blockquote>
+
+<p>作者是抱怨公钥发明这么多年了，还不是作为最基础的安全设施得到使用。。。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 10:06 PM">2020年9月 4日 22:06</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421990">#</a>
+ | <a href="#comment-text" title="引用bbb的这条留言" onclick="return CommentQuote('comment-quote-421990','bbb');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421991" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">bbb</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421991">
+            <p>大家都好聪明啊，巴比伦那个我weibo与这里看了两次了都没看出来图像与公式之间的关系。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 10:07 PM">2020年9月 4日 22:07</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421991">#</a>
+ | <a href="#comment-text" title="引用bbb的这条留言" onclick="return CommentQuote('comment-quote-421991','bbb');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-421992" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">bbb</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-421992">
+            <blockquote>
+<pre>引用bbb的发言：</pre>
+
+<p>大家都好聪明啊，巴比伦那个我weibo与这里看了两次了都没看出来图像与公式之间的关系。</p>
+
+</blockquote>
+
+<p>啊，回完这个贴，刚刚第三次看，突然就看懂了。。A是长方形长边。。B是长方形短边。。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  4, 2020 10:10 PM">2020年9月 4日 22:10</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-421992">#</a>
+ | <a href="#comment-text" title="引用bbb的这条留言" onclick="return CommentQuote('comment-quote-421992','bbb');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422041" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">mored</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422041">
+            <blockquote>
+<pre>引用bbb的发言：</pre>
+
+<p></p>
+
+<p>作者是抱怨公钥发明这么多年了，还不是作为最基础的安全设施得到使用。。。</p>
+
+</blockquote>
+
+<p>如果用魔术数字可以未经授权拿走你们所有的钱，那么公钥加密后的魔术数字，任何看到它们的人还是可以未经授权拿走你们所有的钱！！！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  5, 2020  4:41 PM">2020年9月 5日 16:41</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422041">#</a>
+ | <a href="#comment-text" title="引用mored的这条留言" onclick="return CommentQuote('comment-quote-422041','mored');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422044" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">卞林夫</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422044">
+            <p>向鄔达克达致敬！上海不愧为魔都，海纳百川，有容乃大！老鄔没有户口，也在上海有所作为！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  6, 2020  9:22 AM">2020年9月 6日 09:22</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422044">#</a>
+ | <a href="#comment-text" title="引用卞林夫的这条留言" onclick="return CommentQuote('comment-quote-422044','卞林夫');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422065" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://foamzou.com" href="https://foamzou.com" target="_blank" rel="nofollow">foamzou</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422065">
+            <blockquote>
+<pre>引用zz的发言：</pre>
+
+<p>压力分成好几种。有一些压力让你感觉快要死了，另一些压力让你感觉自己更有生命力。</p>
+
+</blockquote>
+
+<p>这估计要看回报</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  6, 2020  5:57 PM">2020年9月 6日 17:57</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422065">#</a>
+ | <a href="#comment-text" title="引用foamzou的这条留言" onclick="return CommentQuote('comment-quote-422065','foamzou');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422066" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://woodloch.blog" href="https://woodloch.blog" target="_blank" rel="nofollow">木澤</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422066">
+            <p>沒想到台灣的新聞居然上封面了<br />
+真的是非常驚險，好在是好的結果</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  7, 2020 10:34 AM">2020年9月 7日 10:34</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422066">#</a>
+ | <a href="#comment-text" title="引用木澤的这条留言" onclick="return CommentQuote('comment-quote-422066','木澤');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422068" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">oi</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422068">
+            <p>谁扼住了华为：美日半导体霸权的三张牌<br />
+这篇文章才让我真正了解了国内半导体现状</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  7, 2020 11:30 AM">2020年9月 7日 11:30</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422068">#</a>
+ | <a href="#comment-text" title="引用oi的这条留言" onclick="return CommentQuote('comment-quote-422068','oi');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422072" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Rudy</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422072">
+            <blockquote>
+<pre>引用江湖人称向前兄的发言：</pre>
+
+<p>“我加入谷歌，是因为需要更多钱；离开谷歌，是因为需要更多时间。”把谷歌换成别的公司，估计是大多数人都 写照</p>
+
+</blockquote>
+
+<p>妥妥的现实</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  7, 2020  2:35 PM">2020年9月 7日 14:35</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422072">#</a>
+ | <a href="#comment-text" title="引用Rudy的这条留言" onclick="return CommentQuote('comment-quote-422072','Rudy');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422092" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">bbb</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422092">
+            <blockquote>
+<pre>引用mored的发言：</pre>
+
+<p></p>
+
+<p>如果用魔术数字可以未经授权拿走你们所有的钱，那么公钥加密后的魔术数字，任何看到它们的人还是可以未经授权拿走你们所有的钱！！！</p>
+
+</blockquote>
+
+<p>原理不一样的，私钥是除了你自己任何都看不到的。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  8, 2020  9:04 AM">2020年9月 8日 09:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422092">#</a>
+ | <a href="#comment-text" title="引用bbb的这条留言" onclick="return CommentQuote('comment-quote-422092','bbb');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422093" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Cosplay.Cook</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422093">
+            <p>不光是互联网公司吧，任何有规模的团体都是类似，拉帮结派，很正常，人之常情。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  8, 2020  9:29 AM">2020年9月 8日 09:29</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422093">#</a>
+ | <a href="#comment-text" title="引用Cosplay.Cook的这条留言" onclick="return CommentQuote('comment-quote-422093','Cosplay.Cook');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422102" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://ningxiaofa.top" href="http://ningxiaofa.top" target="_blank" rel="nofollow">宁小法</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422102">
+            <p>还是要每周看一下，接收一下新的信息~~~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September  8, 2020  4:20 PM">2020年9月 8日 16:20</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422102">#</a>
+ | <a href="#comment-text" title="引用宁小法的这条留言" onclick="return CommentQuote('comment-quote-422102','宁小法');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422242" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://tommy0604.github.io/" href="https://tommy0604.github.io/" target="_blank" rel="nofollow">啊啵呲嘚</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422242">
+            <p>引用：“Mozilla 的员工发现，只要根据某个人的50条～150条的浏览历史，就足以识别一个人。”</p>
+
+<p>我觉得不行，如果一个人只在几个网站徘徊，很难识别一个人<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 11, 2020  6:14 PM">2020年9月11日 18:14</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422242">#</a>
+ | <a href="#comment-text" title="引用啊啵呲嘚的这条留言" onclick="return CommentQuote('comment-quote-422242','啊啵呲嘚');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422327" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">终清瘟</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422327">
+            <p>湘军之所以战斗力强，是因为部队里面很多士兵之间都是老乡亲戚，战场上你杀我三大爷，我带全村跟你拼命。<br />
+互联网公司的职员莫非都是老乡亲戚？<br />
+什么叫生搬硬套，这就叫生搬硬套。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 14, 2020  8:32 PM">2020年9月14日 20:32</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422327">#</a>
+ | <a href="#comment-text" title="引用终清瘟的这条留言" onclick="return CommentQuote('comment-quote-422327','终清瘟');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422714" class="comment">
+    <div id="comment-last" class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">flight.cai</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422714">
+            <p>漂亮国为啥要封你，很简单，因为你这腔调就是要来吃独食。关起门来护住自己的食，跑到外头抢别人的饭碗。这产业又不是你搞出来的，还有脸吃独食这脸皮厚的我看不懂。欧洲日本看得倒是很清楚，不过他们只是没那个体量来搞你罢了~~说到底，咱们的这个价值观是真的不行~~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020  1:13 PM">2020年9月24日 13:13</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html#comment-422714">#</a>
+ | <a href="#comment-text" title="引用flight.cai的这条留言" onclick="return CommentQuote('comment-quote-422714','flight.cai');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    </div>
+        
+    
+
+
+    
+    
+    <div class="comments-open" id="comments-open">
+        <h2 class="comments-open-header">我要发表看法</h2>
+        <div class="comments-open-content">
+
+        
+            <div id="comment-greeting"></div>
+
+            <form method="post" action="http://www.ruanyifeng.com/cgi-bin/mtos/mt-comments.cgi" name="comments_form" id="comments-form" onsubmit="return pleaseWait();">
+                <input type="hidden" name="static" value="1" />
+                <input type="hidden" name="entry_id" value="2204" />
+                <input type="hidden" name="__lang" value="en" />
+                <input type="hidden" name="parent_id" value="" id="comment-parent-id" />
+                <input type="hidden" name="armor" value="1" />
+                <input type="hidden" name="preview" value="" />
+                <input type="hidden" name="sid" value="" />
+                <div id="comments-open-data">
+            <div id="comments-open-text">
+                    <p><label for="comment-text">您的留言
+                    （HTML标签部分可用）</label></p>
+                    <p><textarea id="comment-text" name="text" rows="10" cols="50"></textarea></p>
+                </div>
+                    <div id="comment-form-name">
+                        <p><label for="comment-author">您的大名：</label></p>
+                        <p><input id="comment-author" name="author" size="30" value="" />  <span class="hint"> &laquo;-必填</span></p>
+                    </div>
+                    <div id="comment-form-email">
+                        <p><label for="comment-email">电子邮件：</label></p>
+                        <p><input id="comment-email" name="email" size="30" value="" />  <span class="hint"> &laquo;-必填，不公开</span></p>
+                    </div>
+                    <div id="comment-form-url">
+                        <p><label for="comment-url">个人网址：</label></p>
+                        <p><input id="comment-url" name="url" size="30" value="" />  <span class="hint"> &laquo;-我信任你，不会填写广告链接</span></p>
+                    </div>
+                    <div id="comment-form-remember-me">
+                        <p>
+                        <label for="comment-bake-cookie">记住个人信息？</label><input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="!this.checked?forgetMe(document.comments_form):rememberMe(document.comments_form)" value="1" accesskey="r" /></p>
+                    </div>
+                </div>
+                    <div id="comment-form-reply" style="display:none">
+                    <input type="checkbox" id="comment-reply" name="comment_reply" value="" onclick="mtSetCommentParentID()" />
+                    <label for="comment-reply" id="comment-reply-label"></label>
+                </div>
+                <div id="comments-open-captcha"></div>
+                <div id="comments-open-footer">
+<div id="wait" style="display:none;">
+<p><strong>正在发表您的评论，请稍候</strong></p>
+<p>
+<input type="text" name="percent" size="3" style="font-family:Arial; color:black;text-align:center; border-width:medium; border-style:none;">           
+<input type="text" name="chart" size="46" style="font-family:Arial;font-weight:bolder; color:black; padding:0px; border-style:none;">
+</p>
+</div>
+
+                    <p><input type="submit" accesskey="s" name="post" id="comment-submit" value="发表" />  <span class="hint"> &laquo;- 点击按钮</span></p>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <script type="text/javascript" src="http://www.ruanyifeng.com/blog/js/prism.js"></script>
+        <script type="text/javascript" src="/blog/checker.js"></script> 
+            <div id="footer">
+<div id="footer-inner">
+  <div id="footer-content">
+
+      
+<!--
+      <section> 
+     </section>
+  <p><a title="Instagram" target="_blank" href="http://instagram.com/ruanyf">Instagram</a></p>
+       <p><a title="订阅" href="https://app.feedblitz.com/f/f.fbz?Sub=348868" target="_blank">邮件订阅</a></p>
+  
+       <h2>Feed</h2>
+       <p><a title="FeedBurner" href="http://feeds.feedburner.com/ruanyifeng" target="_blank">FeedBurner</a></p>
+       <p><a title="atom.xml" href="http://www.ruanyifeng.com/blog/atom.xml" target="_blank">atom.xml</a></p>
+     
+      <p>支付宝：<a title="支付宝" href="alipays://platformapi/startapp?appId=20000067&url=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog" target="_blank">yifeng.ruan@gmail.com</a></p>
+-->
+
+     <section>
+<!--
+       <h2>授权方式</h2>
+       <p><a title="许可证" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">自由转载-非商用-非衍生-保持署名</a></p>
+       <h2>微信公号</h2>
+       <h2>社交帐号</h2>
+       <h2>联系方式</h2>
+     -->
+       <p><img src="https://www.wangbase.com/blogimg/asset/202001/bg2020013101.jpg" alt="微信扫描"></p>
+       <p>
+         <a title="微博" href="http://weibo.com/ruanyf" target="_blank">Weibo</a> | 
+         <a title="Twitter" target="_blank" href="https://twitter.com/ruanyf">Twitter</a> |
+         <a title="GitHub" target="_blank" href="https://github.com/ruanyf">GitHub</a>
+       </p>
+     
+     <p>Email: <a title="电子邮件" href="mailto:yifeng.ruan@gmail.com" target="_blank">yifeng.ruan@gmail.com</a></p>
+     </section>
+  
+  
+
+
+  </div>
+</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46829782-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript" src="/blog/stats.js"></script>
+<script>
+var supportImg = document.querySelector('#support-img');
+
+if (supportImg && _hmt) {
+  _hmt.push(['_trackEvent', 'banner', 'load']);
+  supportImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'banner', 'click']);
+  }, false);
+}
+
+var homepageImg = document.querySelector('#homepage_sponsor');
+if (homepageImg && _hmt) {
+  _hmt.push(['_trackEvent', 'homepage-banner', 'load']);
+  homepageImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'homepage-banner', 'click']);
+  }, false);
+}
+</script>
+
+
+<div id="share_button_proto" style="display:none;">
+<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a>
+
+
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=15e016b4-0028-44f1-a40d-a3c9d9c13c28&style=10&bgcolor=#fff&bp=weixin,qqim,qzone,qqmb,sinaminiblog,fanfou,xueqiu,douban,facebook,twitter,gplus,instapaper&ssc=false"></script>
+<script type="text/javascript" charset="utf-8">
+bShare.addEntry({
+    title: document.getElementById("page-title").innerHTML,
+url:window.location.href
+});
+</script>
+</div>
+
+<script>
+document.getElementById("share_button").innerHTML=document.getElementById("share_button_proto").innerHTML;
+</script>
+
+
+
+
+
+        </div>
+    </div>
+</body>
+</html>

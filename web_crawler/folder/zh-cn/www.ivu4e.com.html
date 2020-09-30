@@ -1,0 +1,456 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>编程技术_踩坑日志_进阶指南_无知人生</title>
+<meta name="keywords" content="编程语言,计算机技术,操作系统,踩坑日志,Bug解决方案,Debug,进阶成长" />
+<meta name="description" content="不积跬步，无以至千里；不积小流，无以成江海。记录点滴编程之旅，分享些许踩坑日志，交流一点赚钱话题，早日迈向财务自由的阶梯。" />
+<link href="/css/base.css" rel="stylesheet">
+<link href="/css/m.css" rel="stylesheet">
+
+</head>
+<body>
+<!--top begin-->
+<header id="header">
+  <div class="navbox">
+    <h2 id="mnavh"><span class="navicon"></span></h2>
+    <div class="logo"><a href="https://www.ivu4e.com" title="无知人生">无知人生</a></div>
+    <nav>
+      <ul id="starlist">
+        <li><a href="/index.html">首页</a></li>
+ <li class="menu"><a href="/blog/">博客日志</a>
+ 
+        <ul class="sub">
+       
+       <li><a href="/blog/essay/" title="随笔">随笔</a></li>
+       
+       <li><a href="/blog/abstract/" title="文摘">文摘</a></li>
+       
+       <li><a href="/blog/EmpireCMS/" title="帝国CMS">帝国CMS</a></li>
+       
+       <li><a href="/blog/web/" title="网页网站">网页网站</a></li>
+       
+       <li><a href="/blog/lib-frame/" title="库&amp;框架">库&amp;框架</a></li>
+       
+       <li><a href="/blog/build/" title="项目构建">项目构建</a></li>
+       
+       <li><a href="/blog/lang/" title="编程语言">编程语言</a></li>
+       
+       <li><a href="/blog/cld-services/" title="云服务">云服务</a></li>
+       
+       <li><a href="/blog/system/" title="操作系统">操作系统</a></li>
+       
+       <li><a href="/blog/database/" title="数据库">数据库</a></li>
+       
+       <li><a href="/blog/image/" title="图形图像">图形图像</a></li>
+       
+       <li><a href="/blog/officeoa/" title="办公OA">办公OA</a></li>
+       
+       <li><a href="/blog/iot/" title="物联网">物联网</a></li>
+       
+       <li><a href="/blog/service/" title="运维日志">运维日志</a></li>
+       
+       <li><a href="/blog/algorithm/" title="算法">算法</a></li>
+       
+        </ul>
+        <span></span>
+ 
+</li><li class="menu"><a href="/collection/">专栏文集</a>
+ 
+        <ul class="sub">
+       
+       <li><a href="/collection/memoirs/" title="回忆录">回忆录</a></li>
+       
+       <li><a href="/collection/summary/" title="思考总结">思考总结</a></li>
+       
+       <li><a href="/collection/deep-learning/" title="深度学习">深度学习</a></li>
+       
+       <li><a href="/collection/mp-weixin/" title="微信公众号开发">微信公众号开发</a></li>
+       
+       <li><a href="/collection/miniprogram/" title="微信小程序开发">微信小程序开发</a></li>
+       
+       <li><a href="/collection/company/" title="从零开公司">从零开公司</a></li>
+       
+       <li><a href="/collection/live/" title="生活积累">生活积累</a></li>
+       
+       <li><a href="/collection/python/" title="Python入门教程">Python入门教程</a></li>
+       
+        </ul>
+        <span></span>
+ 
+</li><li class="menu"><a href="/rule/">规矩方圆</a>
+ 
+        <ul class="sub">
+       
+       <li><a href="/rule/standard/" title="编码规范">编码规范</a></li>
+       
+       <li><a href="/rule/pattern/" title="设计模式">设计模式</a></li>
+       
+       <li><a href="/rule/word/" title="名词解释">名词解释</a></li>
+       
+        </ul>
+        <span></span>
+ 
+</li><li class="menu"><a href="/resource/">资源教程</a>
+ 
+        <ul class="sub">
+       
+       <li><a href="/resource/manual/" title="语言手册">语言手册</a></li>
+       
+       <li><a href="/resource/ebook/" title="电子书">电子书</a></li>
+       
+       <li><a href="/resource/video/" title="视频教程">视频教程</a></li>
+       
+       <li><a href="/resource/course/" title="教程">教程</a></li>
+       
+       <li><a href="/resource/image/" title="图标图片">图标图片</a></li>
+       
+        </ul>
+        <span></span>
+ 
+</li><li class="menu"><a href="/toolbox/">工具箱</a>
+ 
+        <ul class="sub">
+       
+       <li><a href="/toolbox/code/" title="编程工具">编程工具</a></li>
+       
+       <li><a href="/toolbox/newwork/" title="网络工具">网络工具</a></li>
+       
+       <li><a href="/toolbox/common/" title="常用工具">常用工具</a></li>
+       
+       <li><a href="/toolbox/online/" title="在线工具">在线工具</a></li>
+       
+       <li><a href="/toolbox/recover/" title="数据恢复">数据恢复</a></li>
+       
+       <li><a href="/toolbox/media/" title="音频视频">音频视频</a></li>
+       
+        </ul>
+        <span></span>
+ 
+</li><li class="menu"><a href="/windvane/">风向标</a>
+ 
+        <ul class="sub">
+       
+       <li><a href="/windvane/technology-stack/" title="技术栈">技术栈</a></li>
+       
+       <li><a href="/windvane/roadmap/" title="路线图">路线图</a></li>
+       
+       <li><a href="/windvane/thoughts/" title="前路之思">前路之思</a></li>
+       
+       <li><a href="/windvane/born-to-die/" title="向死而生">向死而生</a></li>
+       
+       <li><a href="/windvane/sees/" title="见闻">见闻</a></li>
+       
+        </ul>
+        <span></span>
+ 
+</li><li class="menu"><a href="/opr-pro/">运营推广</a>
+ 
+        <ul class="sub">
+       
+       <li><a href="/opr-pro/operation/" title="产品运营">产品运营</a></li>
+       
+       <li><a href="/opr-pro/marketing/" title="网络营销">网络营销</a></li>
+       
+       <li><a href="/opr-pro/promotion/" title="网络推广">网络推广</a></li>
+       
+       <li><a href="/opr-pro/seo/" title="SEO技术">SEO技术</a></li>
+       
+        </ul>
+        <span></span>
+ 
+</li><li class="menu"><a href="/fin-free/">爱财有道</a>
+ 
+        <ul class="sub">
+       
+       <li><a href="/fin-free/fraud-trap/" title="骗局陷阱">骗局陷阱</a></li>
+       
+       <li><a href="/fin-free/bond/" title="债券投资">债券投资</a></li>
+       
+       <li><a href="/fin-free/cybermoney/" title="虚拟货币">虚拟货币</a></li>
+       
+       <li><a href="/fin-free/stock/" title="股票投资">股票投资</a></li>
+       
+       <li><a href="/fin-free/road/" title="致富之路">致富之路</a></li>
+       
+        </ul>
+        <span></span>
+ 
+</li>      </ul>
+    </nav>
+    <div class="searchico"></div>
+  </div>
+<div class="searchbox">
+  <div class="search">
+    <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+      <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字词" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
+      <input name="show" value="title" type="hidden">
+      <input name="tempid" value="1" type="hidden">
+      <input name="tbname" value="news" type="hidden">
+      <input name="Submit" class="input_submit" value="搜索" type="submit">
+    </form>
+  </div>
+  <div class="searchclose"></div>
+</div>
+</header>
+<!--top end-->
+<div class="container"> 
+  <!--lbox begin-->
+  <div class="lbox"> 
+    <!--banbox begin-->
+    <div class="banbox">
+      <div class="banner">
+        <div id="banner" class="fader">
+                    <div class="slide"><a href="/e/public/ClickAad?adid=5" target="_blank"><img src="https://www.ivu4e.com/ue-upload/image/20200304/1583322995655526.png" alt="派币（PI Network）π币 派型网络是什么？为什么这么火？前景如何？"></a><span><a href="/e/public/ClickAad?adid=5" target="_blank">派币（PI Network）π币 派型网络是什么？为什么这么火？前景如何？</a></span></div>
+                    <div class="slide"><a href="/e/public/ClickAad?adid=3" target="_blank"><img src="/ue-upload/image/20190719/1563512794106141.jpg" alt="向员工计费的公司"></a><span><a href="/e/public/ClickAad?adid=3" target="_blank">向员工计费的公司</a></span></div>
+                    <div class="slide"><a href="/e/public/ClickAad?adid=2" target="_blank"><img src="/ue-upload/image/20190717/1563348313950303.png" alt="Change your words,change your world"></a><span><a href="/e/public/ClickAad?adid=2" target="_blank">Change your words,change your world</a></span></div>
+                    <div class="slide"><a href="/e/public/ClickAad?adid=1" target="_blank"><img src="/ue-upload/image/20190717/1563348201548674.png" alt="泰国经典感人广告，一个善良的人会得到什么？"></a><span><a href="/e/public/ClickAad?adid=1" target="_blank">泰国经典感人广告，一个善良的人会得到什么？</a></span></div>
+                   <div class="fader_controls">
+            <div class="page prev" data-target="prev"></div>
+            <div class="page next" data-target="next"></div>
+            <ul class="pager_list">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--banbox end--> 
+    <!--headline begin-->
+    <div class="headline">
+      <ul>
+              <li><a href="/blog/essay/2020-01-29/314.html" title="您的帐号不符合辅助验证资格"><img src="/thumbs/202005/5oKo55qE5biQ5Y+35LiN56ym5ZCI6L6F5Yqp6aqM6K+B6LWE5qC8.png" alt="您的帐号不符合辅助验证资格"><span>您的帐号不符合辅助验证资格</span></a></li>
+              <li><a href="/toolbox/newwork/2019-08-13/103.html" title="Mac系统下Chrome浏览器代理设置"><img src="/thumbs/202005/TWFj57O757uf5LiLQ2hyb21l5rWP6KeI5Zmo5Luj55CG6K6+572u.png" alt="Mac系统下Chrome浏览器代理设置"><span>Mac系统下Chrome浏览器代理设置</span></a></li>
+            </ul>
+    </div>
+    <!--headline end-->
+    <div class="clearblank"></div>
+    <div class="whitebg bloglist">
+      <h2 class="htitle htitle-new">最新博文<a class="blog-more" href="/time/" target="_blank">查看更多&gt;&gt;</a></h2>
+      <ul>
+      
+<li><h3 class="blogtitle"><a href="/picture/funny/2020-09-25/535.html" target="_blank" title="老婆噗通一声跪下了">老婆噗通一声跪下了</a></h3><p class="blogtext"><a href="/picture/funny/2020-09-25/535.html" target="_blank">中国特色的冷笑话老婆噗通一声跪下了</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/picture/funny/">搞笑图片</a>】</span><span>阅读数 0</span><span>点赞数 0</span><span>评论数 0</span></p><a href="/picture/funny/2020-09-25/535.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/fin-free/bond/2020-09-25/534.html" target="_blank" title="可转债慢谈（五）：如何质押正回购？">可转债慢谈（五）：如何质押正回购？</a></h3><p class="blogtext"><a href="/fin-free/bond/2020-09-25/534.html" target="_blank">　　前面博文里曾讲过正回购循环套作企业债，因为企业债的年收益与正回购借钱成本之间存在明确的利差收益，企业债质押回购套作是一种较低风险的收益比较明确的理财方式。 　　</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/fin-free/bond/">债券投资</a>】</span><span>阅读数 3</span><span>点赞数 1</span><span>评论数 0</span></p><a href="/fin-free/bond/2020-09-25/534.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/fin-free/bond/2020-09-25/533.html" target="_blank" title="为什么可转债会出现高溢价？">为什么可转债会出现高溢价？</a></h3><p class="blogtext"><a href="/fin-free/bond/2020-09-25/533.html" target="_blank">为什么可转债能保持那么高的溢价?这个问题让人很不解，像横河转债溢价252.85%、广电转债溢价169.38%、亚药转债溢价139.96%，如此高的溢价还能保持那么久，而且很多高溢价的交投还</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/fin-free/bond/">债券投资</a>】</span><span>阅读数 2</span><span>点赞数 1</span><span>评论数 0</span></p><a href="/fin-free/bond/2020-09-25/533.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/fin-free/stock/2020-09-23/532.html" target="_blank" title="为什么季度末底年底资金紧张？">为什么季度末底年底资金紧张？</a></h3><span class="blogpic imgscale"><a href="/fin-free/stock/2020-09-23/532.html" title=""><img src="/thumbs/202009/5Li65LuA5LmI5a2j5bqm5pyr5bqV5bm05bqV6LWE6YeR57Sn5byg77yf.png" alt="为什么季度末底年底资金紧张？"></a></span><p class="blogtext"><a href="/fin-free/stock/2020-09-23/532.html" target="_blank">这个季度底的周期特征与其它周期要区别对待，与四季度相似但又有不同；这个季度底赶上的是中秋节、国庆节是花钱的节日，却没有任何的收入；而四季度公司有年终奖，有分红，各种红包发不</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/fin-free/stock/">股票投资</a>】</span><span>阅读数 4</span><span>点赞数 1</span><span>评论数 0</span></p><a href="/fin-free/stock/2020-09-23/532.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/resource/course/2020-09-21/531.html" target="_blank" title="手把手教你构建 C 语言编译器">手把手教你构建 C 语言编译器</a></h3><p class="blogtext"><a href="/resource/course/2020-09-21/531.html" target="_blank">“手把手教你构建 C 语言编译器” 这一系列教程将带你从头编写一个 C 语言的编译器。希望通过这个系列，我们能对编译器的构建有一定的了解，同时，我们也将构建出一个能用的 C 语言编译器，尽管有许多语法并不支持。</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/resource/course/">教程</a>】</span><span>阅读数 3</span><span>点赞数 1</span><span>评论数 0</span></p><a href="/resource/course/2020-09-21/531.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/EmpireCMS/2020-09-20/530.html" target="_blank" title="帝国CMS后台启用SESSION验证后所有后台页面空白">帝国CMS后台启用SESSION验证后所有后台页面空白</a></h3><p class="blogtext"><a href="/blog/EmpireCMS/2020-09-20/530.html" target="_blank">本来用的好好的，昨天登录后台查看系统设置中的安全参数配置时，看到有启用SESSION验证选项，然后就是选择为开启，保存了，结果就所有后台页面都不能访问了，变成了空白页面，强制刷新也</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/EmpireCMS/">帝国CMS</a>】</span><span>阅读数 2</span><span>点赞数 1</span><span>评论数 0</span></p><a href="/blog/EmpireCMS/2020-09-20/530.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/essay/2020-09-16/529.html" target="_blank" title="关于划词翻译、百度翻译">关于划词翻译、百度翻译</a></h3><p class="blogtext"><a href="/blog/essay/2020-09-16/529.html" target="_blank">近期不知道是什么原因，划词翻译的翻译自动变成了百度翻译，这倒是也没什么，关键是有意思的事情出现了，使用划词翻译“prajna”时得到的结果是克罗地亚语“正面”，而通过网页却得到</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/essay/">随笔</a>】</span><span>阅读数 4</span><span>点赞数 2</span><span>评论数 0</span></p><a href="/blog/essay/2020-09-16/529.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/web/2020-09-08/528.html" target="_blank" title="ueditor 无法远程抓取百家号文章中的gif图片Bug解决方法">ueditor 无法远程抓取百家号文章中的gif图片Bug解决方法</a></h3><p class="blogtext"><a href="/blog/web/2020-09-08/528.html" target="_blank">今天转载了一篇百家号的文章“涿州桃园路开始封闭施工”，发现文章的静态图片能够远程抓取成功，保存到自己的服务器上；但是动图gif就远程抓取失败了，后台返回的错误信息是链接con</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/web/">网页网站</a>】</span><span>阅读数 12</span><span>点赞数 3</span><span>评论数 0</span></p><a href="/blog/web/2020-09-08/528.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/abstract/2020-09-08/527.html" target="_blank" title="涿州桃园路开始封闭施工雨污水管道的梳理整治">涿州桃园路开始封闭施工雨污水管道的梳理整治</a></h3><span class="blogpic imgscale"><a href="/blog/abstract/2020-09-08/527.html" title=""><img src="/thumbs/202009/5ra-5bee5qGD5Zut6Lev5byA5aeL5bCB566h6YGT55qE5qKz55CG5pW05rK7.jpeg" alt="涿州桃园路开始封闭施工雨污水管道的梳理整治"></a></span><p class="blogtext"><a href="/blog/abstract/2020-09-08/527.html" target="_blank">2020年9月6日，桃园路被围挡起来开始施工，在桃园路与仁和路红绿灯处，就可以看到绿色的围挡，一直往东都在进行施工围挡。建设周期180日历天；计划开工日期：2020年 9 月 1 日，计划完工日期：2021年 3月1日；</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/abstract/">文摘</a>】</span><span>阅读数 9</span><span>点赞数 2</span><span>评论数 0</span></p><a href="/blog/abstract/2020-09-08/527.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/fin-free/road/2020-09-05/526.html" target="_blank" title="如何投资？如何理财？">如何投资？如何理财？</a></h3><p class="blogtext"><a href="/fin-free/road/2020-09-05/526.html" target="_blank">这是一个大问题。先试着回答几个问题：一、你的资金规模是多少？二、你的投资目的是什么？三、你能承受多大的风险？四、你愿意投入多少时间？五、你期望的收益是多少？六、你做为什么身</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/fin-free/road/">致富之路</a>】</span><span>阅读数 4</span><span>点赞数 3</span><span>评论数 0</span></p><a href="/fin-free/road/2020-09-05/526.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/essay/2020-09-03/525.html" target="_blank" title="记一次电器事故">记一次电器事故</a></h3><span class="blogpic imgscale"><a href="/blog/essay/2020-09-03/525.html" title=""><img src="/thumbs/202009/6K6w5LiA5qyh55S15Zmo5LqL5pWF.png" alt="记一次电器事故"></a></span><p class="blogtext"><a href="/blog/essay/2020-09-03/525.html" target="_blank">2020年9月1日 星期一晚上九点多，先是开着了灯都伴着一声响烧坏了，然后看到手机充电头冒了一股白烟，庆幸的是当时好像手机还插着呢，并没有坏，事后检查家里的几个插着的手机充电头</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/essay/">随笔</a>】</span><span>阅读数 8</span><span>点赞数 2</span><span>评论数 0</span></p><a href="/blog/essay/2020-09-03/525.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/EmpireCMS/2020-09-03/524.html" target="_blank" title="帝国CMS标签模板列表内容模板empirenews.listtemp变量添加点赞数功能">帝国CMS标签模板列表内容模板empirenews.listtemp变量添加点赞数功能</a></h3><p class="blogtext"><a href="/blog/EmpireCMS/2020-09-03/524.html" target="_blank">帝国CMS标签模板列表内容模板变量中有很多可以用的变量，但有时候可能缺少你想要的变量，那怎么办呢？可以通过修改代码来扩展它。比如我想扩展一个点赞数量的变量：列表内容模板变</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/EmpireCMS/">帝国CMS</a>】</span><span>阅读数 6</span><span>点赞数 2</span><span>评论数 0</span></p><a href="/blog/EmpireCMS/2020-09-03/524.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/lang/2020-09-02/523.html" target="_blank" title="java实现遍历整个目录及子目录查找包含指定内容文件的功能">java实现遍历整个目录及子目录查找包含指定内容文件的功能</a></h3><p class="blogtext"><a href="/blog/lang/2020-09-02/523.html" target="_blank">本站是基于帝国CMS系统创建的，但是其模板标签缺少点赞数的功能，所以需要自己的扩展，但这个功能是在哪个文件中实现的呢？就需要根据模板标签的内容去文件中查找，那么多的文件手动</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/lang/">编程语言</a>】</span><span>阅读数 5</span><span>点赞数 2</span><span>评论数 0</span></p><a href="/blog/lang/2020-09-02/523.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/service/2020-08-31/522.html" target="_blank" title="如何查看计算机服务器断电重启时间？(图文)">如何查看计算机服务器断电重启时间？(图文)</a></h3><span class="blogpic imgscale"><a href="/blog/service/2020-08-31/522.html" title=""><img src="/thumbs/202008/5aaC5L2V5p_l55yL6K6h566X5py65pyN5ZCv5pe26Ze077yfKOWbvuaWhyk=.png" alt="如何查看计算机服务器断电重启时间？(图文)"></a></span><p class="blogtext"><a href="/blog/service/2020-08-31/522.html" target="_blank">公司自建的机房，但是不知道是什么原因，经常出现意外断电的情况，所以想知道具体是什么时间出现了断电的问题。查看方法开始菜单选择控制面板，打开事件查看器，展开Windows日志》系</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/service/">运维日志</a>】</span><span>阅读数 9</span><span>点赞数 3</span><span>评论数 0</span></p><a href="/blog/service/2020-08-31/522.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/abstract/2020-08-23/521.html" target="_blank" title="以后的农业可能都是这个样子(图文)">以后的农业可能都是这个样子(图文)</a></h3><span class="blogpic imgscale"><a href="/blog/abstract/2020-08-23/521.html" title=""><img src="/thumbs/202008/5Lul5ZCO55qE5Yac5Lia5Y_v6IO96YO95piv6L_Z5Liq5qC35a2Q.jpeg" alt="以后的农业可能都是这个样子(图文)"></a></span><p class="blogtext"><a href="/blog/abstract/2020-08-23/521.html" target="_blank">阿联酋的垂直农业由于高温和缺水，沙漠国家阿联酋每年平均只有12天降雨，没有自己的农业，粮食和蔬菜都依赖进口。随着人口的增长，阿联酋希望确保食品供应，开始发展垂直农业。垂直农</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/abstract/">文摘</a>】</span><span>阅读数 8</span><span>点赞数 3</span><span>评论数 0</span></p><a href="/blog/abstract/2020-08-23/521.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/abstract/2020-08-23/520.html" target="_blank" title="情商和智商这东西，大多数人都没有">情商和智商这东西，大多数人都没有</a></h3><p class="blogtext"><a href="/blog/abstract/2020-08-23/520.html" target="_blank">一个长久成功的人，必然不是只靠智商或者情商，而是智商和情商被政商或者财商统一了。汽车只是汽车，会变形合体的汽车，才是变形金刚。</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/abstract/">文摘</a>】</span><span>阅读数 11</span><span>点赞数 3</span><span>评论数 0</span></p><a href="/blog/abstract/2020-08-23/520.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/toolbox/newwork/2020-08-21/519.html" target="_blank" title="sock5代理工作原理">sock5代理工作原理</a></h3><p class="blogtext"><a href="/toolbox/newwork/2020-08-21/519.html" target="_blank">sock5代理工作原理出处：darkness fallen时间：Wed, 26 Apr 2006 11:42:15 +0000作者：hjma地址：http://hjma.scgy.org/blog/bo-blog/read.php?3内容：sock5代理的工作程序是：1。需要</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/toolbox/newwork/">网络工具</a>】</span><span>阅读数 8</span><span>点赞数 2</span><span>评论数 0</span></p><a href="/toolbox/newwork/2020-08-21/519.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/web/2020-08-11/518.html" target="_blank" title="js禁止页面滚动">js禁止页面滚动</a></h3><p class="blogtext"><a href="/blog/web/2020-08-11/518.html" target="_blank">开发网页的时候有一个比较常见的需求，在使用层来模拟弹窗时，需要通过js脚本来实现禁止滑动弹窗后面的主体页面。具体应该如何实现呢?</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/web/">网页网站</a>】</span><span>阅读数 13</span><span>点赞数 1</span><span>评论数 0</span></p><a href="/blog/web/2020-08-11/518.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/web/2020-08-06/517.html" target="_blank" title="图片放大查看上一张下一张功能实现方法">图片放大查看上一张下一张功能实现方法</a></h3><span class="blogpic imgscale"><a href="/blog/web/2020-08-06/517.html" title=""><img src="/thumbs/202008/5Zu_54mH5pS_5aSn5p_l55yL5LiK5LiA5byg5Yqf6IO95a6e546w5pa55rOV.png" alt="图片放大查看上一张下一张功能实现方法"></a></span><p class="blogtext"><a href="/blog/web/2020-08-06/517.html" target="_blank">最近在做一个网页上放大查看图片的功能，网上找到强大的jQuery图片查看器插件Viewer.js，但不是自己想要的样子，所以自己实现了一个。</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/web/">网页网站</a>】</span><span>阅读数 13</span><span>点赞数 2</span><span>评论数 0</span></p><a href="/blog/web/2020-08-06/517.html" class="viewmore">阅读全文</a></li>
+
+<li><h3 class="blogtitle"><a href="/blog/web/2020-08-06/516.html" target="_blank" title="div中内容上下居中小结">div中内容上下居中小结</a></h3><p class="blogtext"><a href="/blog/web/2020-08-06/516.html" target="_blank">虽然div中内容上下居中的问题已经是一个比较古老的话题，但是最近发现还是有很多前端开发者在询问如何实现。其实网络上已经有很多资料和案例了，我这里再总结一下几个比较常见的处理方式。</a> </p><p class="bloginfo"><i class="avatar"><img src="/images/avatar.jpg" alt="微wx笑的头像"></i><span>微wx笑</span><span></span><span>【<a href="/blog/web/">网页网站</a>】</span><span>阅读数 11</span><span>点赞数 1</span><span>评论数 0</span></p><a href="/blog/web/2020-08-06/516.html" class="viewmore">阅读全文</a></li>
+      </ul>
+      <a class="blog-more" href="/time/index_2.html" target="_blank">查看更多&gt;&gt;</a>
+    </div>
+    <!--bloglist end-->
+  </div>
+  <div class="rbox">
+    <div class="card">
+      <h2>微wx笑名片</h2>
+      <p>网名：微wx笑</p>
+      <p>职业：传说中的程序猿</p>
+      <p>现居：<a href="https://www.ivu4e.com/windvane/sees/2019-08-19/112.html" target="_blank">天下第一州</a></p>
+      <p>Email：ivu4e@qq.com</p>
+      <ul class="linkmore">
+        <li><a href="http://www.ivu4e.com" target="_blank" class="iconfont icon-zhuye" title="网站地址"></a></li>
+        <li><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=JRQQHRMWFR0RExRlVFQLRkpI" target="_blank" class="iconfont icon-youxiang" title="我的邮箱"></a></li>
+        <li><a href="http://wpa.qq.com/msgrd?v=3&uin=1586308461&site=qq&menu=yes" target="_blank" class="iconfont icon---" title="QQ联系我"></a></li>
+        <li id="weixin"><a href="#" target="_blank" class="iconfont icon-weixin" title="关注我的微信公众号"></a><i><img src="images/mp-weixiao.jpg" alt="二维码-微信公众号微wx笑"></i></li>
+      </ul>
+    </div>
+
+    <div class="whitebg paihang">
+  <h2 class="htitle htitle-hot">点击排行</h2>
+  <section class="topnews imgscale"><i></i><a href="/blog/essay/2020-01-29/314.html"><img src="/thumbs/202005/5oKo55qE5biQ5Y+35LiN56ym5ZCI6L6F5Yqp6aqM6K+B6LWE5qC8.png" alt="您的帐号不符合辅助验证资格"><span>您的帐号不符合辅助验证资格</span></a></section>
+  <ul>
+    <li><i></i><a href="/blog/essay/2020-01-29/314.html" target="_blank">您的帐号不符合辅助验证资格</a></li>
+    <li><i></i><a href="/collection/mp-weixin/issue/2019-10-09/243.html" target="_blank">该账号部分功能由以下服务商提供是什么意思</a></li>
+    <li><i></i><a href="/toolbox/newwork/2019-08-13/103.html" target="_blank">Mac系统下Chrome浏览器代理设置</a></li>
+    <li><i></i><a href="/blog/essay/2019-12-24/301.html" target="_blank">药店的赠品，鼻渊通窍颗粒涨价的原因，有什么替代品吗？</a></li>
+    <li><i></i><a href="/fin-free/cybermoney/2020-03-15/337.html" target="_blank">派币（PI Network）π币 安卓Android 苹果 Apple iPhone APP 下载安装教程</a></li>
+    <li><i></i><a href="/blog/system/2020-01-15/306.html" target="_blank">你的windows7电脑不受支持</a></li>
+    <li><i></i><a href="/blog/system/2019-08-07/95.html" target="_blank">windows无法连接到打印机 操作失败,错误为 0x000000c1</a></li>
+    <li><i></i><a href="/toolbox/newwork/2019-10-16/259.html" target="_blank">V2Ray 的传入协议 VMess、Shadowsocks、Blackhole、Freedom、SOCKS</a></li>
+    <li><i></i><a href="/blog/essay/2020-01-15/307.html" target="_blank">综合所得预扣预缴表 缴款失败，失败原因[LC_HSF_INVOKE_RATE_LIMITED_OR_CIRCUITBREAKER_EXCEPTION]</a></li>
+    <li><i></i><a href="/blog/essay/2020-04-14/395.html" target="_blank">自2020年12月开始，Flash Player 将不再受支持，怎么禁止该提示呢？</a></li>
+  </ul>
+</div>
+    <div class="whitebg tuijian">
+      <h2 class="htitle htitle-recommend">推荐阅读</h2>
+       <section class="topnews imgscale"><a href="/blog/web/2019-08-19/111.html"><img src="/thumbs/202005/5Yeg5byg5Zu+6K6p5L2g55yL5oeCV2ViQXNzZW1ibHk=.png" alt=""><span>几张图让你看懂WebAssembly</span></a></section>
+      <ul>
+
+<li><a href="/collection/summary/2019-08-15/107.html" target="_blank"><i><img src="/thumbs/202005/5L2c5Li65LiA5Liq56iL5bqP5ZGY5oiR5LuA5LmI6KaB5YaZ5Y2a5a6i77yf.png" alt=""></i><p>作为一个程序员我为什么要写博客？</p></a></li>
+
+<li><a href="/collection/deep-learning/2019-08-15/106.html" target="_blank"><i><img src="/ue-upload/image/20190815/1565841268934856.png" alt=""></i><p>5分钟搞懂什么是深度学习</p></a></li>
+
+<li><a href="/resource/course/2019-07-29/75.html" target="_blank"><i><img src="/thumbs/202005/5b6u6L2v5a6Y5pa55LiK57q-IFB5dGhvbiDmlZnnqIs=.png" alt=""></i><p>微软官方上线 Python 教程</p></a></li>
+
+<li><a href="/blog/EmpireCMS/2019-07-25/62.html" target="_blank"><i><img src="/thumbs/202006/5Z_65LqO5bid5Zu9Q01T55qE5bu656uZ5pel5b_X.jpeg" alt=""></i><p>基于帝国CMS的建站日志</p></a></li>
+
+<li><a href="/blog/essay/2019-07-23/55.html" target="_blank"><i><img src="/ue-upload/image/20190723/1563868234754034.png" alt=""></i><p>一个通过写代码做公益平台，你值得加入！</p></a></li>
+
+      </ul>
+</div>
+    <!--
+<div class="ad whitebg imgscale">
+      <ul>
+        <a href="/"><img src="/images/ad.jpg"></a>
+      </ul>
+</div>
+-->
+        <div class="whitebg wenzi">
+      <h2 class="htitle htitle-like">猜你喜欢</h2>
+      <ul>
+                <li><a href="/blog/web/2019-08-19/111.html" target="_blank">几张图让你看懂WebAssembly</a></li>
+                <li><a href="/about/2019-08-24/151.html" target="_blank">服务条款</a></li>
+                <li><a href="/blog/web/2019-09-07/202.html" target="_blank">主机Nginx的错误日志分析整理</a></li>
+                <li><a href="/blog/essay/2019-07-23/55.html" target="_blank">一个通过写代码做公益平台，你值得加入！</a></li>
+                <li><a href="/about/2019-08-24/153.html" target="_blank">更新日志</a></li>
+                <li><a href="/blog/essay/2019-07-31/78.html" target="_blank">VITAS 秋天的叶子 歌词</a></li>
+                <li><a href="/about/2019-08-24/150.html" target="_blank">关于我们</a></li>
+                <li><a href="/blog/web/2019-09-04/186.html" target="_blank">百度UEditor远程图片抓取代码存在的Bug</a></li>
+                <li><a href="/blog/EmpireCMS/2019-09-05/193.html" target="_blank">帝国CMS内容模板IF条件判断</a></li>
+                <li><a href="/blog/EmpireCMS/2019-09-05/194.html" target="_blank">帝国CMS为文章数据表添加字段，标明文章是否为原创</a></li>
+                <li><a href="/about/2019-08-24/152.html" target="_blank">法律声明</a></li>
+                <li><a href="/blog/image/2019-09-04/185.html" target="_blank">PNG,JPEG,BMP,GIF图片格式对比</a></li>
+                <li><a href="/blog/EmpireCMS/2019-08-30/171.html" target="_blank">帝国7.5cms不支持emoji表情的解决方法</a></li>
+                <li><a href="/blog/lang/2019-09-04/180.html" target="_blank">PHP下载远程图片的几种方法总结</a></li>
+                <li><a href="/blog/image/2019-09-04/183.html" target="_blank">BMP图片格式详解</a></li>
+                <li><a href="/blog/cld-services/2019-09-07/203.html" target="_blank">5分钟在大米云上基于WordPress搭建一个博客</a></li>
+                <li><a href="/blog/lang/2019-08-30/172.html" target="_blank">java实现遍历整个目录查找文件内容的功能</a></li>
+                <li><a href="/windvane/roadmap/2019-09-05/191.html" target="_blank">如何做好一次知识或技术分享</a></li>
+                <li><a href="/toolbox/recover/2019-09-06/200.html" target="_blank">删库不跑路-详解MySQL数据恢复</a></li>
+                <li><a href="/blog/web/2019-09-07/201.html" target="_blank">个人博客网站建设，我为什么要用帝国cms？</a></li>
+              </ul>
+    </div>
+    <!--
+<div class="ad whitebg imgscale">
+      <ul>
+        <a href="/"><img src="/images/ad02.jpg"></a>
+      </ul>
+</div>
+-->
+    <div class="whitebg cloud">
+ <h2 class="htitle htitle-tags"><a href="/tags.html" target="_blank">标签云</a></h2>
+<p>
+<a href="/e/tags/?tagid=1" target="_blank">帝国CMS</a> <a href="/e/tags/?tagid=32" target="_blank">PHP</a> <a href="/e/tags/?tagid=25" target="_blank">Java</a> <a href="/e/tags/?tagid=16" target="_blank">CSS</a> <a href="/e/tags/?tagid=153" target="_blank">微信小程序</a> <a href="/e/tags/?tagid=52" target="_blank">阿里云</a> <a href="/e/tags/?tagid=19" target="_blank">Mac</a> <a href="/e/tags/?tagid=5" target="_blank">UEditor</a> <a href="/e/tags/?tagid=94" target="_blank">Nginx</a> <a href="/e/tags/?tagid=12" target="_blank">Chrome</a> <a href="/e/tags/?tagid=95" target="_blank">mysql</a> <a href="/e/tags/?tagid=85" target="_blank">CentOS</a> <a href="/e/tags/?tagid=433" target="_blank">在线编程</a> <a href="/e/tags/?tagid=432" target="_blank">开发者社区</a> <a href="/e/tags/?tagid=82" target="_blank">程序员</a> <a href="/e/tags/?tagid=69" target="_blank">Python</a> <a href="/e/tags/?tagid=231" target="_blank">JavaScript</a> <a href="/e/tags/?tagid=228" target="_blank">服务器</a> <a href="/e/tags/?tagid=219" target="_blank">可转债</a> <a href="/e/tags/?tagid=216" target="_blank">派币</a> <a href="/e/tags/?tagid=211" target="_blank">pinetwork</a> <a href="/e/tags/?tagid=137" target="_blank">微信公众号</a> <a href="/e/tags/?tagid=78" target="_blank">代理</a> <a href="/e/tags/?tagid=68" target="_blank">Windows</a> <a href="/e/tags/?tagid=300" target="_blank">总结</a> <a href="/e/tags/?tagid=221" target="_blank">股票</a> <a href="/e/tags/?tagid=196" target="_blank">新型冠状病毒</a> <a href="/e/tags/?tagid=152" target="_blank">教程</a> <a href="/e/tags/?tagid=136" target="_blank">JS</a> <a href="/e/tags/?tagid=53" target="_blank">Linux</a> <a href="/e/tags/?tagid=401" target="_blank">VPN</a> <a href="/e/tags/?tagid=362" target="_blank">R420</a> <a href="/e/tags/?tagid=361" target="_blank">PowerEdge</a> <a href="/e/tags/?tagid=360" target="_blank">DELL</a> <a href="/e/tags/?tagid=220" target="_blank">债券</a> <a href="/e/tags/?tagid=209" target="_blank">HTTP</a> <a href="/e/tags/?tagid=168" target="_blank">电影</a> <a href="/e/tags/?tagid=142" target="_blank">未来</a> <a href="/e/tags/?tagid=117" target="_blank">蜘蛛</a> <a href="/e/tags/?tagid=114" target="_blank">数据库</a>      
+</p>
+</div>
+        <div class="whitebg notice">
+      <h2 class="htitle htitle-notice">评论排行</h2>
+      <ul>
+<li><a href="/blog/EmpireCMS/2019-07-24/56.html" target="_blank">帝国cms整合多彩主题评论插件2.0(7.0~7.5)记录</a></li>
+<li><a href="/blog/EmpireCMS/2019-08-30/171.html" target="_blank">帝国7.5cms不支持emoji表情的解决方法</a></li>
+<li><a href="/collection/summary/2019-09-05/188.html" target="_blank">【逻辑思考】我们要有把坏事看成好事的能力</a></li>
+<li><a href="/blog/EmpireCMS/2019-06-25/7.html" target="_blank">【帝国CMS】灵动标签SQL调用广告插件管理幻灯片内容</a></li>
+<li><a href="/blog/EmpireCMS/2019-07-04/25.html" target="_blank">帝国cms 怎么统计点赞数量?(图文)</a></li>
+<li><a href="/blog/essay/2019-07-23/55.html" target="_blank">一个通过写代码做公益平台，你值得加入！</a></li>
+<li><a href="/blog/essay/2019-04-28/1.html" target="_blank">学豆奖励清单与规则</a></li>
+<li><a href="/blog/EmpireCMS/2019-06-27/13.html" target="_blank">帝国CMS调用评论最多最新文章</a></li>
+<li><a href="/blog/EmpireCMS/2019-07-28/72.html" target="_blank">帝国cms文章内容页展示评论及优化回复功能</a></li>
+<li><a href="/collection/deep-learning/2019-08-15/106.html" target="_blank">5分钟搞懂什么是深度学习</a></li>
+      </ul>
+    </div>
+    <div class="whitebg tongji">
+      <h2 class="htitle htitle-siteinfo">站点信息</h2>
+      <ul>
+        <li><b>建站时间</b>：2018-10-24</li>
+        <li><b>服务期限</b>：<a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=e1j7k7lp" target="_blank" title="阿里云ECS 2027年4月21日到期">阿里云ECS 2027年到期</a></li>
+        <li><b>主题模板</b>：基于<a href="/blog/EmpireCMS/2019-07-25/62.html" target="_blank">《今夕何夕》</a>修改</li>
+        <li><b>文章统计</b>：499篇</li>
+        <li><b>文章评论</b>：34条</li>
+        <li><b>文章阅读</b>：106338次</li>
+        <li><b>文章点赞</b>：3187次</li>
+        <li><b>微信公众号</b>：扫描二维码，关注我们</li>
+        <img src="/images/mp-weixiao.jpg" class="tongji_gzh" alt="二维码-微信公众号-微wx笑">
+      </ul>
+</div>
+  </div>
+</div>
+<footer>
+  <div class="box">
+    <div class="wxbox">
+      <ul>
+        <li><img src="/images/mp-weixiao.jpg" alt="二维码-微信公众号微wx笑" title="二维码-微信公众号微wx笑"><span>微信公众号</span></li>
+        <li><img src="/images/weiwei-ivu4e.jpg" alt="二维码-助理:薇薇" title="二维码-助理:薇薇"><span>助理:薇薇</span></li>
+      </ul>
+    </div>
+    <div class="endnav">
+        <ul class="foot-link clearfix">
+            <li><a href="/about/2019-08-24/150.html" target="_blank">关于我们</a><span>|</span></li>
+            <li><a href="/about/2019-08-24/151.html" target="_blank">法律声明</a><span>|</span></li>
+            <li><a href="/sitemap.xml" target="_blank" title="网站地图">网站地图</a><span>|</span></li>
+            <li><a href="/link.html" target="_blank">友情链接</a><span>|</span></li>
+            <li><a href="/about/2019-09-17/217.html" target="_blank">赞助合作</a><span>|</span></li>
+            <li><a href="/toolbox/online/2019-08-23/145.html" target="_blank">在线工具</a></li>
+        </ul>
+        <ul class="foot-link clearfix">
+            <li><a href="/about/2019-08-24/150.html" target="_blank">关于本站</a><span>|</span></li>
+            <li><a href="/about/2019-08-24/151.html" target="_blank">服务条款</a><span>|</span></li>
+            <li><a href="/about/2019-08-24/153.html" target="_blank">更新日志</a><span>|</span></li>
+            <li><a href="/link.html" target="_blank">友情链接</a><span>|</span></li>
+            <li><a href="/about/2019-09-17/217.html" target="_blank">赞助本站</a><span>|</span></li>
+            <li><a href="/online-tools/replace.htm" target="_blank">查找替换</a>&nbsp;<a href="/online-tools/js_passwd/passwd.html" target="_blank">密码生成器</a></li>
+        </ul>
+        <ul class="foot-link clearfix">
+            <li><a href="/about/2019-08-24/150.html" target="_blank">联系我们</a><span>|</span></li>
+            <li><a href="/about/2019-08-24/151.html" target="_blank">免责条款</a><span>|</span></li>
+            <li><a href="/about/2019-08-24/154.html" target="_blank">聆听反馈</a><span>|</span></li>
+            <li><a href="/about/2019-09-08/205.html" target="_blank">交换友链</a><span>|</span></li>
+            <li><a href="/about/2019-09-17/217.html" target="_blank">广告投放</a><span>|</span></li>
+           <li><a href="/online-tools/spao.htm" target="_blank">DOM对象属性查看器</a>&nbsp;<a href="/online-tools/combination.htm" target="_blank">字符组合生成器</a></li>
+        </ul>
+      <p class="copy">Copyright &copy; <a href="https://www.ivu4e.com" target="_blank">www.ivu4e.com</a> All Rights Reserved.   本网站运行在<a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=e1j7k7lp" target="_blank">阿里云</a>上，使用<a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=e1j7k7lp" target="_blank">ECS云服务器</a>。</p>
+    </div>
+  </div>
+  <a href="#">
+    <div class="top"></div>
+  </a>
+</footer>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2be9ecd5b16e649c8a9b6b2b46a20b94";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script src="/js/jquery-1.8.3.min.js" ></script>
+<!--[if lt IE 9]>
+<script src="/js/modernizr.js"></script>
+<![endif]-->
+<script src="/js/comm.js"></script>
+</body>
+</html>
