@@ -4,3 +4,4 @@ pandas==1.1.2
 langdetect==1.0.8
 requests==2.22.0
 lxml==4.5.0
+ultimate-sitemap-parser==0.5

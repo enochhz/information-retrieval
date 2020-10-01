@@ -63,3 +63,72 @@
 61,#core-navigation,unknown url type: '#core-navigation'
 62,#jump-linkhttps,unknown url type: '#jump-linkhttps'
 63,techcrunch.com,unknown url type: 'techcrunch.com'
+64,techcrunch.com,unknown url type: 'techcrunch.com'
+65,https://crunchbase.com/organization/canvas-venture-fund,HTTP Error 403: Forbidden
+66,https://www.crunchbase.com/person/natasha-mascarenhas-734f,HTTP Error 403: Forbidden
+67,techcrunch.com,unknown url type: 'techcrunch.com'
+68,https://www.linkedin.com/in/taylorhatmaker,HTTP Error 999: Request denied
+69,https://crunchbase.com/organization/insidesherpa,HTTP Error 403: Forbidden
+70,https://crunchbase.com/organization/canvas-venture-fund,HTTP Error 403: Forbidden
+71,https://www.somewheregood.com/,HTTP Error 403: Forbidden
+72,techcrunch.com,unknown url type: 'techcrunch.com'
+73,techcrunch.com,unknown url type: 'techcrunch.com'
+74,techcrunch.com,unknown url type: 'techcrunch.com'
+75,https://www.linkedin.com/in/taylorhatmaker,HTTP Error 999: Request denied
+76,https://www.crunchbase.com/person/taylor-hatmaker,HTTP Error 403: Forbidden
+77,techcrunch.com,unknown url type: 'techcrunch.com'
+78,techcrunch.com,unknown url type: 'techcrunch.com'
+79,techcrunch.com,unknown url type: 'techcrunch.com'
+80,https://techcrunch.com/,'WebCrawler' object has no attribute 'check_robots_txt'
+81,https://techcrunch.com/,'WebCrawler' object has no attribute 'check_robots_txt'
+82,https://techcrunch.com/,'WebCrawler' object has no attribute 'check_robots_txt'
+83,https://techcrunch.com/,'WebCrawler' object has no attribute 'check_robots_txt'
+84,https://techcrunch.com/,'WebCrawler' object has no attribute 'check_robots_txt'
+85,techcrunch.com,unknown url type: 'techcrunch.com'
+86,https://www.gelesis.com//plenity-clinical-data/,<urlopen error [Errno 54] Connection reset by peer>
+87,#fastco,<urlopen error no host given>
+88,techcrunch.com,unknown url type: 'techcrunch.com'
+89,techcrunch.com,unknown url type: 'techcrunch.com'
+90,techcrunch.com,unknown url type: 'techcrunch.com'
+91,techcrunch.com,unknown url type: 'techcrunch.com'
+92,https://www.amazon.com/gp/product/0062456474/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0062456474&linkCode=as2&tag=lifsgoltic-20&linkId=3NJCKSMPW3IZO4PY,HTTP Error 503: Service Unavailable
+93,https://www.wsj.com/articles/palantirs-and-asanas-dueling-ipos-to-test-direct-listing-process-nyse-11601402163,HTTP Error 404: Not Found
+94,index.cfm?bay=content.view&cpid=2143,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+95,index.cfm?bay=content.view&cpid=1559,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+96,"javascript:openBrWindow('http://www.charitynavigator.org/index.cfm?bay=glossary.word&gid=83&print=1','glossary','scrollbars=yes,width=760,height=400')","<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+97,index.cfm?bay=content.view&cpid=5593,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+98,"javascript:openBrWindow('http://www.charitynavigator.org/index.cfm?bay=glossary.word&gid=64&print=1','glossary','scrollbars=yes,width=760,height=400')","<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+99,"javascript:openBrWindow('http://www.charitynavigator.org/index.cfm?bay=glossary.word&word=Working%20Capital%20Ratio&mid=4&cid=19&print=1','glossary','scrollbars=yes,width=760,height=400')","<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+100,techcrunch.com,unknown url type: 'techcrunch.com'
+101,https://www.gelesis.com//,<urlopen error [Errno 54] Connection reset by peer>
+102,#,<urlopen error no host given>
+103,https://www.cnn.com/2019/04/29/health/obesity-weight-loss-capsule-plenity-gelesis-fda/index.html/africa,HTTP Error 404: Not Found
+104,https://www.cnn.com/2019/04/29/health/obesity-weight-loss-capsule-plenity-gelesis-fda/index.html/business/videos,HTTP Error 404: Not Found
+105,https://jamanetwork.com/journals/jama/fullarticle/2528211,[Errno 54] Connection reset by peer
+106,https://www.cnn.com/2019/04/29/health/obesity-weight-loss-capsule-plenity-gelesis-fda/index.html/style/videos,HTTP Error 404: Not Found
+107,https://www.cnn.com/2019/04/29/health/obesity-weight-loss-capsule-plenity-gelesis-fda/index.html/specials/politics/fact-check-politics,HTTP Error 404: Not Found
+108,https://www.cnn.com/2019/04/29/health/obesity-weight-loss-capsule-plenity-gelesis-fda/index.html/politics,HTTP Error 404: Not Found
+109,techcrunch.com,unknown url type: 'techcrunch.com'
+110,https://www.cnn.com/2019/04/29/health/obesity-weight-loss-capsule-plenity-gelesis-fda/index.html//coupons.cnn.com,HTTP Error 404: Not Found
+111,techcrunch.com,unknown url type: 'techcrunch.com'
+112,http://cnnnewsource.com,"<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'cnnnewsource.com'. (_ssl.c:1076)>"
+113,#nav-group-1b333,<urlopen error no host given>
+114,https://www.gramercypediatrics.com/dr-dyan-hes/bio/,HTTP Error 403: Bad Behavior
+115,#,<urlopen error no host given>
+116,#content,<urlopen error no host given>
+117,#nav-group-50d98,<urlopen error no host given>
+118,javascript:void(0);,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+119,techcrunch.com,unknown url type: 'techcrunch.com'
+120,https://twitter.com/intent/tweet?text=I'm listening to the trailer for Season 2 of @thecitypod: thecitypodcast.com,"URL can't contain control characters. ""/intent/tweet?text=I'm listening to the trailer for Season 2 of @thecitypod: thecitypodcast.com"" (found at least ' ')"
+121,mailto:?subject=QAnon%3A%20The%20conspiracy%20theory%20explained%2C%20after%20Q%20posters%20spotted%20at%20Trump's%20Florida%20rally%20-%20from%20USA%20TODAY&body=QAnon%3A%20The%20conspiracy%20theory%20explained%2C%20after%20Q%20posters%20spotted%20at%20Trump's%20Florida%20rally%0A%0A%22Q%22%20is%20a%20reference%20to%20QAnon%2C%20a%20group%20of%20people%20attempting%20to%20decode%20vague%2C%20anonymous%C2%A0comments%20posted%20on%20dark%20web%20message%20boards%20such%20as%204chan%2C%20%208chan.%0A%0ACheck%20out%20this%20story%20on%20usatoday.com%3A%20https%3A%2F%2Fwww.usatoday.com%2Fstory%2Fnews%2Fnation-now%2F2018%2F08%2F01%2Fqanon-trump-florida-rally-what-q-signs-mean%2F878642002%2F,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+122,#transcriptModal9,<urlopen error no host given>
+123,http://www.americanpressinstitute.org/,HTTP Error 404: Not Found
+124,https://www.storytellersproject.com/,HTTP Error 503: Max restarts limit reached
+125,#shareModal7,<urlopen error no host given>
+126,#top,<urlopen error no host given>
+127,http://www.junziboxue.com,"<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.junziboxue.com'. (_ssl.c:1076)>"
+128,../../../,encoding with 'idna' codec failed (UnicodeError: label empty or too long)
+129,../../../pl/gd/202007/t20200727_196657.html,encoding with 'idna' codec failed (UnicodeError: label empty or too long)
+130,http://www.cfcpn.com/,<urlopen error [Errno 60] Operation timed out>
+131,http://www.jrj.com.cn/,'utf-8' codec can't decode byte 0xa3 in position 278: invalid start byte
+132,https://www.bilibili.com/video/BV1Ua4y1e7rC/,HTTP Error 403: Forbidden
