@@ -25,9 +25,10 @@ class WebCrawler:
     page_map = {}
     error_map = {}
     skip = 0
+    site_map = False
     html_content_folder = 'folder' 
 
-    def __init__(self, seed_url, language = 'en', page_limit = 5):
+    def __init__(self, seed_url, language = 'en', page_limit = 5, site_map = False):
         self.to_be_visited_pages = [seed_url]
         self.page_map, self.error_map = {}, {}
         self.banned_hosts = set()
@@ -35,6 +36,7 @@ class WebCrawler:
         self.visited_hosts = set()
         self.lang  = language
         self.page_limit = page_limit
+        self.site_map = site_map
         FileManager.make_directories(self.html_content_folder, self.lang)
     
     def parse_pages(self) -> None:
@@ -44,8 +46,9 @@ class WebCrawler:
                 self.to_be_visited_pages.remove(page_url)
                 host_name = HTMLPageHelper.extract_host_name(page_url)
                 if (not self.valid_page_url(host_name, page_url)) or (not self.valid_host_name(host_name)): continue
-                site_map_pages = RobotsHelper.pages_from_sitemap(page_url) # Get pages from sitemap
-                self.to_be_visited_pages.extend(site_map_pages)
+                if self.site_map:
+                    site_map_pages = RobotsHelper.pages_from_sitemap(page_url) # Get pages from sitemap
+                    self.to_be_visited_pages.extend(site_map_pages)
                 if not self.parse_and_store_page(host_name, page_url): continue
                 print(page_url)
             except Exception as e: 
@@ -99,10 +102,10 @@ class WebCrawler:
     
 # english_seed_url = 'https://www.yahoo.com/'
 english_seed_url = 'https://techcrunch.com/'
-# WebCrawler(english_seed_url, language='en', page_limit=5).parse_pages()
+WebCrawler(english_seed_url, language='en', page_limit=5, site_map=False).parse_pages()
 
 chinese_seed_url = 'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html'
-WebCrawler(chinese_seed_url, language='zh-cn', page_limit=5).parse_pages()
+# WebCrawler(chinese_seed_url, language='zh-cn', page_limit=5).parse_pages()
 
 spanish_seed_url = 'https://espndeportes.espn.com/'
 # spanish_seed_url = 'https://www.milanuncios.com/'

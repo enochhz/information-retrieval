@@ -132,3 +132,4 @@
 130,http://www.cfcpn.com/,<urlopen error [Errno 60] Operation timed out>
 131,http://www.jrj.com.cn/,'utf-8' codec can't decode byte 0xa3 in position 278: invalid start byte
 132,https://www.bilibili.com/video/BV1Ua4y1e7rC/,HTTP Error 403: Forbidden
+133,techcrunch.com,unknown url type: 'techcrunch.com'
