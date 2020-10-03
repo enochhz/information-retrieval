@@ -30,6 +30,8 @@ class NoiseRemover:
             b.extract()
         for b in body.select("footer"):
             b.extract()
+        for b in body.select("style"):
+            b.extract()
 
         body_string_quotes_cleaned = self.clean_quotes(str(body))
 
