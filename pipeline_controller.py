@@ -26,10 +26,11 @@ class PipelineController:
             for html in html_list:
                 noise_remover.remove_noise(html, language)
 
-url_map = {
-    'https://techcrunch.com/': 'en',
-    'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html': 'zh-cn',
-    'https://www.bbc.com/mundo/noticias-internacional-54320690': 'es',
-}
-html_folder = 'folder'
-PipelineController(url_map, html_folder).start()
+if __name__ == '__main__':
+    url_map = {
+        'https://techcrunch.com/': 'en',
+        'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html': 'zh-cn',
+        'https://www.bbc.com/mundo/noticias-internacional-54320690': 'es',
+    }
+    html_folder = 'folder'
+    PipelineController(url_map, html_folder).start()
