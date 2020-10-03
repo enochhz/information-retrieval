@@ -1,8 +1,7 @@
-# information-retrieval
+# Information Retrieval Project 1
 
-## How to Run Web Crawler
+## How to start the pipeline?
 ```
-cd web_cralwer
-pip3 install -r requirments.txt
-python3 web_cralwer.py
+pip3 install -r requirements.txt
+python3 pipeline_controller.py
 ```

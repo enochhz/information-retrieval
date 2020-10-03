@@ -1,0 +1,2658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="Movable Type  5.2.2" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--link rel="stylesheet" href="http://www.ruanyifeng.com/blog/styles.css" type="text/css" /-->
+<link rel="start" href="http://www.ruanyifeng.com/blog/" title="Home" />
+<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="http://feeds.feedburner.com/ruanyifeng" />
+<script type="text/javascript" src="http://www.ruanyifeng.com/blog/mt.js"></script>
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">
+<dc:title>RESTful API 设计指南</dc:title>
+<dc:description>网络应用程序，分为前端和后端两个部分。当前的发展趋势，就是前端设备层出不穷（手机、平板、桌面电脑、其他专用设备......）。...</dc:description>
+<dc:creator>阮一峰</dc:creator>
+<dc:date>2014-05-22T20:54:31+08:00</dc:date>
+<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/3.0/" />
+</Work>
+<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+</License>
+</rdf:RDF>
+-->
+
+<style>
+body {
+  background-color: #f5f5d5;
+}
+
+#container::before {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+  text-align: center;
+  content: "本站显示不正常，可能因为您使用了广告拦截器。";
+}
+
+</style>
+<script>
+function loadjscssfile(filename, filetype){
+    if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+//loadjscssfile("http://www.ruanyifeng.com/blog/styles.css", "css");
+loadjscssfile('/static/themes/theme_scrapbook/theme_scrapbook.min.css', "css");
+
+
+function checker() {
+// var img = document.querySelector('img[src^="http://www.ruanyifeng.com/blog/images"]');
+var img = document.querySelector('a > img[src*="wangbase.com/blogimg/asset/"]');
+  if (img && window.getComputedStyle(img).display === 'none'){
+    var sponsor = document.querySelector('.entry-sponsor');
+    var prompt = document.createElement('div');
+    prompt.style = 'border: 1px solid #c6c6c6;border-radius: 4px;background-color: #f5f2f0;padding: 15px; font-size: 14px;';
+  prompt.innerHTML = '<p>您使用了广告拦截器，导致本站内容无法显示。</p><p>请将 www.ruanyifeng.com 加入白名单，解除广告屏蔽后，刷新页面。谢谢。</p>';
+    sponsor.parentNode.replaceChild(prompt, sponsor);
+    document.querySelector('#main-content').innerHTML = '';
+  }
+}
+
+setTimeout(checker, 1000);
+</script>
+
+    
+    <link rel="prev" href="http://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html" title="轻松学会 React 钩子：以  useEffect() 为例" />
+    <link rel="next" href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-126.html" title="科技爱好者周刊（第 126 期）：内卷化是什么？" />
+    
+    <title>科技爱好者周刊（第 125 期）：数字人民币要取代谁 - 阮一峰的网络日志</title>
+</head>
+<body id="scrapbook" class="mt-entry-archive one-column">
+<script>
+if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) document.body.classList.add('mobile');
+
+/*
+window.addEventListener('load', function(event) {
+  setTimeout(function () {
+    hab('#sup-post-2');
+    hab('#cre-inner');
+  }, 1000);
+});
+*/
+</script>
+    <div id="container">
+        <div id="container-inner">
+
+            <div id="header">
+    <div id="header-inner">
+        <div id="header-content">
+
+
+            <div id="header-name">阮一峰的网络日志 <span id="site_location"> » <a href="http://www.ruanyifeng.com/blog/" accesskey="1">首页</a></span><span id="site_archive"> » <a href="http://www.ruanyifeng.com/blog/archives.html">档案</a></span>
+</div>
+
+<div id="google_search">
+<!-- SiteSearch Google -->
+<form action="https://www.baidu.com/s" target="_blank" method="get" id="cse-search-box">
+  <div>
+  <input type="text" size="20" name="origin" class="searchbox" id="sbi" value="" />
+  <input type="hidden" name="wd" value="" />
+  <!--input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' inurl:www.ruanyifeng.com/blog'" /-->
+  <input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' 阮一峰'" />
+</div>
+</form>
+
+<!-- SiteSearch Google -->
+</div>
+<div id="feed_icon">
+<a href="/feed.html" title="订阅Feed">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAUzSURBVHjavFdbbFRVFF3nPjoz7dTWTittaW0jUDRAUqaNojyqREnEQKgfUj9MqqAmhqRt/OCD4CuY+Kckoh+aiGKC+gMJbdHoRysJ8dkhhmJLNdDKtJU+6GMK87j3Hs85d2Z6HzNtMYWb3Dn3NWftvfba+5xNYDl+e6Fkj6yqb/oDRbWq14vlPBLRKCITkxf0ROLt+hNjp1PPSRK4kA3vF1dXNRcWlyA2OQU9eos9opAkAiKxD+XkKO6t15aRWO7J/MgmAZU8MEgexgZHMX518Dh72sYMmVKShnxWuWHdHtxKIDIYTgMuDzgfmSOIQkYMpdUF8OY92Hytt4/jvkg47czzU16iQovM3QFwmNck+Yyduu7D6NA0Z6JR4THntFs9V4tWQg6Ui3s6MwKDncsFTnXKLJhDSeUK3AgPtyhccDzmVs999buRt/1Vm4i0od+hX7+MRG87jPGB/w1u8FPj9xEw7McVrnYuOCvtpjTth3J/nTg99c8LRhKhr6D3dTB5R24bXFwbMXBsyZzeoXaycEpJ95TB09AGX/NpqLVNtw8urnVzLvHjFNxiFqRy2OOHuqUVnue+ACkoWzo4O6lGzTmuHq6nPvY2m9rVqjrIK2rMEKxqyG5NPAKt+wjo0LklgfNxJkZMA3KJvqRUk3z5UFY3QH14P0h+WUY79HPvgv7VuSg4ZRGY1YgZgqXmORccF17sy2ehnf9AeO085K2HQFbtXBScj0LcpgF2cN+WV+DZ/LJQu6gD4R7oV7pBJwbSgtMvfiPoVp56DySwxm7EtkMs1WdAB7qzggsDJKQYsHucSkOudrkiCPWR/fA2nYCn8SNIK4NptSMyAu3sAdDRkIsJdfth0LzSrODUoPNZ4KI9SxJI5UHk7D4GdQfz2us31c7CoHMjRkKuDPHseCMrONVhNcDJwMJpKFVvg9L4OaTiNWm1x789KCqkrXhVBiEz0WYCT2nAzQAD1/vaETv1GrRfP4Vx5cfMNcDPwvP0h0DhanPym7OIf/+O67vcJ1/PCJ4KgdzaUP6Wz+dU+5yIL6fV+PsHGAOdwlPpvvUOyeeAVGyCdqkDNB6DPjsBSrnndfOGevOh3RhGItxvA+fX1CtbGFhgYUFkFMZPR6F1HnClHq8HyubWtJexX06CRmdt33hrd7nA7SFY4qoGpnYuOKcRykPPgDCBcsHx9Iv+fNL2PueBehCWUfYQIIMGLOCcOmXDXsh1+yCt35tUPfvzGFuSvzvoinXOxqa02qOhM6733nVP2MAdaej2XN11DPKjLZCD+yBvahGCo7JfTKAN9UD7s8Oe9zUNIhz8fWI8DG2k38WCFdxugANcXrvTVd1IEbuv3Jour7Hzn7jLMBNfKs7R3i67gRVrbeCOEDhinmWhAatsqdquM2XzHZINhK2cqTjHr/XZdVJUbgN3MWAVXKbSyg9jesRW2xP9di+lwrL5ojM3m2H/kG9hwcIA37c71W6wJdW2J2S5nrjYbq/t1AHAhJsKQeyfPvf6IMJgghPJhFZ4x0KlfLFvt22du45Au/A1SOlGc0P672XXwhLtOcM0kTTEMMd0qkVmMNXxMd/tsedUjInr4SQDgOfeXMSiN0FCL5WHah4L1qqYXPJOJlttd+a5M+YpcG5poLYKQ5f+6JJ4r8bbJYP47hq4r7QAs9PjYNhHJd4o8l5taiwuOpa7AS4XKqI/5NjJbTnaWK92nLdLuhQAJayRNMiygXPBeQN+Qbvu0zDc3y+aUzhbkGR73sI7ljvUnndx2q3t+X8CDAD66FtrIL864AAAAABJRU5ErkJggg==" alt="" style="border: 0pt none;" />
+</a></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+            <div id="content">
+                <div id="content-inner">
+
+
+                    <div id="alpha">
+                        <div id="alpha-inner">
+
+
+                            <div id="entry-2207" class="entry-asset asset hentry">
+                                <div class="asset-header">
+<div class="asset-nav entry-nav">
+
+<div class="entry-location">
+<ul>
+<li>上一篇：<a href="http://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html" title="轻松学会 React 钩子：以  useEffect() 为例">轻松学会&nbsp;React&nbsp;</a></li>
+<li>下一篇：<a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-126.html" title="科技爱好者周刊（第 126 期）：内卷化是什么？">科技爱好者周刊（第&nbsp;1</a></li>
+</ul>
+</div>
+
+
+    
+                                    <div class="entry-categories">
+                                        <p>分类<span class="delimiter">：</span></p>
+                                        <ul>
+                                            <li><a href="http://www.ruanyifeng.com/blog/weekly/" rel="tag">周刊</a></li>
+                                        </ul>
+                                    </div>
+    
+
+
+                                            
+<div class="entry-location-mobile" style="float: right;">
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html" title="轻松学会 React 钩子：以  useEffect() 为例">⇐&nbsp;</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-126.html" title="科技爱好者周刊（第 126 期）：内卷化是什么？">&nbsp;⇒</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+                          
+<article class="hentry">
+                                    <h1 id="page-title" class="asset-name entry-title">科技爱好者周刊（第 125 期）：数字人民币要取代谁</h1>
+                                            <div id="share_button" class="social-share" style="float:right;padding-right:2em;padding-top:1em;"></div>
+
+<div class="asset-meta">
+                                        
+
+                                            <p class="vcard author">作者： <a class="fn url" href="http://www.ruanyifeng.com">阮一峰</a></p>
+                                    <p>日期： <a href="http://www.ruanyifeng.com/blog/2020/09/"><abbr class="published" title="2020-09-18T08:40:00+08:00">2020年9月18日</abbr></a></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+                                
+                                <div class="asset-content entry-content" id="main-content">
+
+                                    <!-- div class="asset-body" -->
+                                        <p>这里记录每周值得分享的科技内容，周五发布。</p>
+
+                                    <!-- /div -->
+
+
+                                    <!-- div id="more" class="asset-more" -->
+                                        <p>本杂志开源（GitHub: <a href="https://github.com/ruanyf/weekly">ruanyf/weekly</a>），欢迎提交 issue，投稿或推荐科技内容。</p>
+
+<p>周刊讨论区的帖子<a href="https://github.com/ruanyf/weekly/issues/1392">《谁在招人？》</a>，提供大量就业信息，欢迎访问或发布工作/实习岗位。</p>
+
+<h2>封面图</h2>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091705.jpg" alt="" title="" /></p>
+
+<p>西班牙加纳利岛的人们，在火山灰上挖坑种葡萄。火山灰排水快，种出来的葡萄更适合酿酒。（<a href="https://www.instagram.com/p/CFMtHr3jOtR/">via</a>）</p>
+
+<h2>本周话题：数字人民币要取代谁</h2>
+
+<p>数字人民币，已经传了很久了，但它到底是什么东西，媒体却不提。</p>
+
+<p>本周，人民银行的副行长写了<a href="https://www.financialnews.com.cn/ll/gdsj/202009/t20200914_200849.html">一篇文章</a>，第一段就回答了这个问题。</p>
+
+<blockquote>
+  <p>"数字人民币主要定位于流通中现金。......国家有必要利用新技术对现金进行数字化，为数字经济发展提供通用性的基础货币。"</p>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091414.jpg" alt="" title="" /></p>
+
+<p>现在清楚了，数字人民币根本不是加密货币，而是人民币现金的数字形式，主要用于网上支付。</p>
+
+<p>但是，网上支付早不是问题了，支付宝和微信支付用得好好的，为什么央行还要推行数字人民币呢？上面那篇文章，同样解释了数字人民币的运作模式。</p>
+
+<blockquote>
+  <p><strong>"中央银行在数字人民币体系中居于中心地位，负责向指定商业银行批发数字人民币并进行全生命周期管理，商业银行等机构负责面向社会公众提供数字人民币兑换流通服务。"</strong></p>
+</blockquote>
+
+<p>看到了吗，中央银行主管数字人民币，只有指定的商业银行才能对公众提供服务。也就是说，以后网上支付的时候，你不会只用微信支付和支付宝，还可以用商业银行的客户端。这就是说， <strong>数字人民币就是商业银行的网上支付服务。</strong></p>
+
+<p>前一段时间，建行的数字人民币客户端泄漏。顶部的四个主要功能按钮是付款、收款、扫一扫和转款，正好验证了央行的说法。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091413.jpg" alt="" title="" /></p>
+
+<p>我想，这就是中央银行想要推广数字人民币的主要原因。现在的局面是，两家互联网巨头，掌握了全国的数字支付，它们还都是私人公司。国有商业银行和银联的云闪付，根本拿不到市场份额。中央银行应该是比较担心这个，不愿数字支付被腾讯和阿里垄断，希望商业银行能挤进去。</p>
+
+<p>这对消费者是有利的。两大巨头现在各占山头，阿里系不支持微信支付，腾讯系不支持支付宝。数字人民币出来以后，所有平台都必须支持（它是法定货币）。我猜想，将来应该只有一个统一的二维码，不管是用微信、支付宝还是商业银行的 App 扫描，都能支付。不像现在，商家都要贴两个二维码，蓝的一个、绿的一个。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091703.jpg" alt="" title="" /></p>
+
+<p>但是，数字支付业务其实是无利可图的。它不像信用卡支付，提供方不仅赚不到手续费，还要往里面贴钱。维护硬件和开发软件都需要巨大的投入，而且对可靠性的要求特别高，服务不能中断，更不能出错。微信和支付宝其实都把扫码支付当作流量入口，而不是利润来源。</p>
+
+<p>我很好奇，数字人民币的服务器，将来由谁维护？是不是中央银行以后也会有一个专门的 DevOps 部门？但是，这种赚不到钱、技术难度大、工程师薪水又极高的业务，国有单位能搞好吗？</p>
+
+<h2>大数据分析实战课</h2>
+
+<p>如今，全球早已步入数据时代，数据行业高速发展，相关岗位缺口已超150万，薪资超过传统岗位。据估计，未来十年，数据相关岗位将扩张5倍，人才缺口明显。</p>
+
+<p>很多人希望进入数据分析行业，却经常遇到以下问题：</p>
+
+<ul>
+<li>Excel、SQL、Python......一大堆数据分析工具，不知道该学哪个。</li>
+<li>只学了理论却没有实战经验，得不到企业的青睐。</li>
+<li>一想到面试就紧张，应聘时不知道怎么应对提问。</li>
+</ul>
+
+<p>本周的课程资料是开课吧提供的 <strong>《大数据分析实战课》</strong> ，4大实战项目，带你实际操作真实业务场景下的数据分析，以案例为导向，快速积累数据分析的实战经验。</p>
+
+<ul>
+<li>项目一：利用 Python 实现办公自动化。</li>
+<li>项目二：海量数据图形可视化。</li>
+<li>项目三：电商数据分析及可视化展示。</li>
+<li>项目四：玩转高精文本分析。</li>
+</ul>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202008/bg2020081102.jpg" alt="" title="" /></p>
+
+<p>本课程由资深大数据专家潘海超老师亲授，让你在短时间内 Get 数据分析实战技能，迅速掌握 BAT、TMB 等互联网大厂主流工具，快速积累数据分析的实战经验。</p>
+
+<p>《大数据分析实战课》现在限时优惠，原价599元， <strong>现仅需  0 元。</strong> 名额有限，先到先得，微信扫描下面二维码立即报名。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091604.jpg" alt="" title="" /></p>
+
+<h2>资讯</h2>
+
+<p>1、<a href="https://buzzorange.com/techorange/2018/11/23/plane-with-no-moving-parts/">电子风飞机</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090408.jpg" alt="" title="" /></p>
+
+<p>飞机一般使用螺旋桨或涡轮作为动力，最近麻省理工学院研发出利用电极产生离子风作为动力的飞机。早在上个世纪60年代，人们就已经发现电流会在薄电极和厚电极之间产生离子风（下图）。这是首次将这种现象用于飞机，让离子风成为推动飞机的气流。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090409.jpg" alt="" title="" /></p>
+
+<p>它的好处是，由于动力来自电流，不需要机械动力，所以整个飞机可以没有会动的部件，从而降低噪音（飞机发动机的噪音非常大），缩减保养成本，以及减少污染。缺点是动力有限，目前只能让不到 10 公斤的小飞机起飞，还无法载人。</p>
+
+<p>2、<a href="https://threadreaderapp.com/thread/1301708467925741568.html">内装试纸的电子妊娠测试笔</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090503.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090504.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090505.jpg" alt="" title="" /></p>
+
+<p>一位推特用户最近购买了电子妊娠测试笔，瑞士精密诊断有限公司的产品。他将电子笔拆开以后，震惊地发现，里面居然装了试纸。真正起测试作用的是这张试纸，而不是电子设备。</p>
+
+<p>电路的核心是几个光传感器，用来识别试纸显示的条纹，转成电信号，将测试结果显示在液晶屏幕上。这样做虽然使得测试结果更容易解读，但是复杂性增加了好多倍，价格整整贵了25倍。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090506.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090507.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090508.jpg" alt="" title="" /></p>
+
+<p>3、<a href="https://www.smithsonianmag.com/smart-news/your-next-digital-tablet-could-be-made-paper-180975727/">纸张键盘</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090603.jpg" alt="" title="" /></p>
+
+<p>普渡大学的工程师发明了一种新技术，可以将任何纸张（旧报纸或打印纸）变成计算机键盘。具体做法是，先在纸张上涂一层特殊油墨，然后在油墨上设置电路。电路之间通过摩擦会产生电，而每次按钮都会造成摩擦，因此就为"键盘"提供了电。</p>
+
+<p>所以，纸质键盘不需要电源，完全是自供电，再通过蓝牙连接到计算机或手机，从而变成输入设备。根据发明团队的设想，这种技术可以用在商品包装上，用来检验是否真品，或者查看食品保质期。</p>
+
+<p>4、<a href="https://sichuan.scol.com.cn/cddt/202007/57855226.html">城市森林花园</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091706.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091707.jpg" alt="" title="" /></p>
+
+<p>成都有一个8栋楼居民小区，每栋楼30层，每一家住户都有40平米～100平米室外庭院，可以种花种菜，看上去像城市森林一样。</p>
+
+<p>庭院的填土层有60厘米厚，在靠墙的地方还可以做一个向上50厘米的树池，这样在靠墙的地方便有1米多深的覆土，可以栽种4到5米高的树，并将树干固定在墙上，以防大风将树刮倒或使其摇晃，在其它不靠墙的地方才栽种1~2米的低矮植物、果树或灌木。物业还为每家安装了自动喷琳系统。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091708.jpg" alt="" title="" /></p>
+
+<p>5、<a href="https://www.bbc.com/news/science-environment-54066586">世界最大数码相机</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091103.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091105.jpg" alt="" title="" /></p>
+
+<p>智利维拉鲁宾天文台安装了一台世界最大的数码相机，高达32亿像素，用来拍摄整个天空的数十亿颗恒星和星系的位置，而且还会捕捉任何移动或闪烁的东西。</p>
+
+<p>这台相机的光传感器由189个单独的 CCD 组成，正在加利福尼亚的实验室进行测试，已经组成完成。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091104.jpg" alt="" title="" /></p>
+
+<p>为了测试它的性能，工程师们用它拍摄西兰花。如果一切顺利，它将在2022年下半年投入工作。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091102.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091106.jpg" alt="" title="" /></p>
+
+<p>6、<strong>一句话消息</strong></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://twitter.com/vidister/status/1304542559210024962">网友</a>将网线的一根铜绞线剪断，两端插入苹果。信号照样传输，网速非常好。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091201.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://www.cnn.com/2020/09/09/us/robot-dogs-us-air-force-test-intl-hnk-scli-scn/index.html">美国空军</a>开始试验，机器狗与士兵一起巡逻。机器狗的正式产品名叫做"自动无人地面车辆"。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091403.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091404.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://edition.cnn.com/style/article/diamond-auction-hong-kong/index.html">香港</a>下月将拍卖一颗102.39克拉的钻石，这是有史以来第八颗被拍卖的超过100克拉的钻石。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091306.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="http://world.people.com.cn/n1/2020/0907/c1002-31852279.html">埃及政府</a>9月6日宣布，出土了13具2500年前的木棺，自从下葬后就没有打开过。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091307.jpg" alt="" title="" /></p>
+
+<blockquote>
+  <ul>
+<li><a href="https://www.theguardian.com/business/2020/sep/14/global-oil-demand-may-have-passed-peak-says-bp-energy-report">英国石油公司</a>发表研究报告，认为世界石油消费量疫情前已经到达顶峰，此后可能会不断下降。</li>
+</ul>
+</blockquote>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://www.generationatomic.org/skim/the-nuclear-heartbeat-of-space-exploration">核电池可以用于太空旅行</a>（英文）</p>
+
+<p>本文介绍了核电池的原理（利用放射性元素衰变产生的能量），以及用于太空旅行的可能性。</p>
+
+<p>2、<a href="https://xtrp.io/blog/2020/09/12/using-the-monte-carlo-tree-search-algorithm-in-an-ai-to-beat-2048-and-other-games/">使用蒙特卡洛算法玩2048</a>（英文）</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091303.jpg" alt="" title="" /></p>
+
+<p>2048 是一个4x4的方块游戏，只要两个相同数字相邻，就可以合并为一个数字。本文讲解了如何用蒙特卡洛算法进行简单模拟，让计算机自己解决2048游戏。</p>
+
+<p>3、<a href="https://juejin.im/post/6864381092061773831">微前端"容器"---- microcosmos 实现</a>（中文）</p>
+
+<p>本文讨论了微前端的概念和实现，可以用来了解"微前端"这种新的做法。（<a href="https://github.com/ruanyf/weekly/issues/1407">@chuifengji</a> 投稿）</p>
+
+<p>4、<a href="https://blog.8bitbuddhism.com/2019/12/01/how-to-use-your-android-tablet-as-second-monitor/">如何将 Android 平板电脑用作第二台显示器</a>（英文）</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091601.jpg" alt="" title="" /></p>
+
+<p>作者介绍如何将一块旧的安卓平板，当作电脑的副屏，使用 VNC 协议显示远程桌面。</p>
+
+<p>5、<a href="https://www.mikealche.com/software-development/a-simple-explanation-of-the-for-await-of-statement-in-node-js">for await ... of 语句解释</a>（英文）</p>
+
+<p>ES6 引入了 for await ... of 新语法，用来遍历异步迭代器，很多人还不熟悉。本文是对它的简单解释。</p>
+
+<p>6、<a href="https://blog.bitsrc.io/6-reasons-to-use-react-hooks-instead-of-classes-7e3ee745fe04">使用 React 钩子而不是类的6个理由</a>（英文）</p>
+
+<p>本文总结 React 钩子比类更有优势的6个方面，比如不再有 this 问题，也不用再绑定方法了。</p>
+
+<p>7、<a href="https://jakearchibald.com/2020/avif-has-landed/">AVIF 格式初探</a>（英文）</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091711.jpg" alt="" title="" /></p>
+
+<p>AVIF 是一种开源图片格式，源自 AV1 视频格式。各个平台基本上都会支持，这篇文章对比了它与 JPEG 和 WebP 格式，结果很不错。</p>
+
+<p>8、<a href="https://philna.sh/blog/2020/08/06/how-to-stream-file-downloads-in-Node-js-with-got/">Node.js 如何下载流传输文件</a>（英文）</p>
+
+<p>本文介绍如何使用 Got 这个库，以流传输的形式（stream）下载文件。</p>
+
+<p>9、<a href="https://simonwillison.net/2020/May/21/dogsheep-photos/">从 Apple Photos 找出（机器认定的）最美照片</a>（英文）</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202005/bg2020052402.jpg" alt="" title="" /></p>
+
+<p>苹果的 Apple Photos 会对用户拍摄的每一张照片，运行机器学习模型来识别照片的内容，然后得出一个叫做"ZBEHAVIORALSCORE"的"总体美学评分"，保存在本地的 SQLite 数据库里面。</p>
+
+<p>作者对这个数据库使用 SQL 查询，找出计算机认为的某个主题（比如"鸟类"）的最佳照片。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://www.diffchecker.com/">Diffchecker</a></p>
+
+<p>一个在线工具，可以检查文本、图片、PDF 之间的差异。</p>
+
+<p>2、<a href="https://github.com/blackjack4494/youtube-dlc">youtube-dlc</a></p>
+
+<p>一个命令行工具，youtube-dl 的分叉，用来下载 Youtube 和其他视频网站的视频。分叉的主要原因是，youtube-dl 目前有点陷入停滞，很多 issue 没有回应，因此有人就另起炉灶，这个版本的开发现在非常活跃。</p>
+
+<p>3、<a href="https://github.com/fastai/fastmac/">fastmac</a></p>
+
+<p>有时候，你需要 Mac 电脑的环境，但是手边又没有 mac 电脑。这个工具利用 GitHub Actions 提供的资源，让你可以免费使用 Mac 的命令行环境，不过只能使用一小会。</p>
+
+<p>4、<a href="https://www.screely.com/">Screely</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091323.jpg" alt="" title="" /></p>
+
+<p>一个在线工具，可以生成网页展示效果的示意图。</p>
+
+<p>5、<a href="https://poolside.fm/">Poolside FM</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091503.jpg" alt="" title="" /></p>
+
+<p>一个在线的复古风格音乐电台。（<a href="https://github.com/ruanyf/weekly/issues/1406">@freezsun</a> 投稿）</p>
+
+<p>6、<a href="https://mimestream.com/">Mimestream</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091504.jpg" alt="" title="" /></p>
+
+<p>前苹果邮件客户端工程师 Neil Jhaveri 推出的 Gmail macOS 原生客户端，外观简洁大方，十分契合原生风格，参考<a href="https://www.cnbeta.com/articles/tech/1027397.htm">介绍文章</a>。（<a href="https://github.com/ruanyf/weekly/issues/1408">@dushi792</a> 投稿）</p>
+
+<p>7、<a href="https://github.com/parzulpan/real-live">real-live</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091505.jpg" alt="" title="" /></p>
+
+<p>一个开源的直播聚合收看平台。采用 Qt 作为前端框架，后端用到 Requests、MySQL、Redis技术等，目前支持在该平台收看 36 个视频直播、59 个高清电视频道和 74 个广播电台。（<a href="https://github.com/ruanyf/weekly/issues/1409">@parzulpan</a> 投稿）</p>
+
+<p>8、<a href="https://github.com/CasterWx/kibana-eye">kibana-eye</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091507.jpg" alt="" title="" /></p>
+
+<p>ELK 平台（Elasticsearch，Logstash，Kibana）的定时任务管理工具，可以聚合处理日志，生成报表信息，通过邮件/钉钉等方式发送通知。（<a href="https://github.com/ruanyf/weekly/issues/1413">@CasterWx</a> 投稿）</p>
+
+<p>9、<a href="https://lofimusic.app">LofiMusic</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091509.jpg" alt="" title="" /></p>
+
+<p>一个开源的背景音乐播放网站。</p>
+
+<p>10、<a href="https://beeware.org/">BeeWare</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091701.jpg" alt="" title="" /></p>
+
+<p>一个 Python 工具，让你的 Python 代码可以打包成跨平台图形界面应用，尤其是可以打包成手机 App，支持 iOS、Android、Windows、MacOS、Linux、Web 等平台。</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://aggregatedawesome.com/">Aggregated Awesome</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091702.jpg" alt="" title="" /></p>
+
+<p>GitHub 上面有很多 awesome 的仓库，收集某个主题的所有有用的内容。这个网页整理了一个 awesome 仓库的清单。</p>
+
+<p>2、<a href="https://app.ignitionrobotics.org/GoogleResearch/fuel/collections/Google%20Scanned%20Objects">Fuel Collection</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091101.jpg" alt="" title="" /></p>
+
+<p>谷歌对大量日常物品进行了 3D 扫描，将数据放在网上，提供公开下载。</p>
+
+<p>3、<a href="https://primes.utm.edu/curios/">Prime Curios!</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091301.jpg" alt="" title="" /></p>
+
+<p>这个网站收集各种与质数相关的数字，比如 561 的平方加2和减2会得到两个连续的质数。</p>
+
+<p>4、<a href="http://data.iana.org/TLD/tlds-alpha-by-domain.txt">顶级域名列表</a></p>
+
+<p>互联网号码分配局（IANA）官方的目前所有顶级域名（TLD）的列表，共有1508个。如果排除国家和地区的 TLD，则为1260个。</p>
+
+<p>5、<a href="https://github.com/lotabout/write-a-C-interpreter/tree/master/tutorial/en">如何写一个简单的 C 语言解释器</a></p>
+
+<p>一个英语教程，通过写一个简单的 C 语言解释器，理解编译原理。</p>
+
+<p>6、<a href="https://webrtc.github.io/samples/">WebRTC 示例仓库</a></p>
+
+<p>WebRTC 是浏览器点对点通信的 API，这个仓库给出了各种使用示例，覆盖了主要的使用场景。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://zh.wikipedia.org/wiki/%E9%BB%91%E6%B2%B3-%E8%85%BE%E5%86%B2%E7%BA%BF">黑河-腾冲线</a></p>
+
+<p>中国地图上，从黑河到腾冲画一条线，这条线以东住着全国94%的人口。这是1935年由地理学家胡焕庸首次提出。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020090907.jpg" alt="" title="" /></p>
+
+<p>2、<a href="https://designyoutrust.com/2020/09/olympus-mons-the-largest-volcano-in-the-solar-system/">太阳系最高的火山</a></p>
+
+<p>火星上面的奥林匹斯山（Olympus Mons）高达21公里，是珠穆朗玛峰的两倍半。它是目前已知太阳系最大的火山，也是最高的山峰之一。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091001.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091002.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091003.jpg" alt="" title="" /></p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://www.nationalgeographic.com/news/2017/07/plastic-produced-recycling-waste-ocean-trash-debris-environment/">塑料垃圾星球</a></p>
+
+<p>随着石化工业的发展，塑料大规模进入人类生活，迄今不过只有60年的历史。但是，60年来，人类已经创造了83亿吨的塑料，其中大部分是一次性产品，最终都变成了垃圾。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091606.jpg" alt="" title="" /></p>
+
+<p>83亿吨塑料之中，9%被回收，12%被焚化，剩下的79%就都成了塑料垃圾。这些垃圾有些堆积在垃圾填埋场中，还有一些就散落大自然中，其中相当一部分进入了海洋。</p>
+
+<p>更可怕的是，塑料的增长速度大约是每15年翻一番，超过了其他所有人造材料。而且，塑料的使用周期特别短。钢材有一半用于建筑业，使用寿命长达数十年，而塑料生产出来，不到一年就有一半变成了垃圾，其中很大部分只用于包装。</p>
+
+<p>塑料需要400多年的时间才能降解。据估计，每年有800万吨塑料流入海洋。到2050年，海洋中的塑料废物总重量，将多于鱼类的重量。与此同时，陆地上的垃圾填埋场那时必须填埋120亿吨塑料。人类将生活在一个遍布塑料垃圾的星球，其实现在已经是这样了。</p>
+
+<p>2、<a href="https://www.smithsonianmag.com/science-nature/corn-future-hundreds-years-old-and-makes-its-own-mucus-180969972/">固氮玉米</a></p>
+
+<p>空气的最大成分（78%）是氮气，但是很奇怪，植物却普遍缺少氮元素。农作物必须施加氮肥，才能提高产量、改善品质。因为大多数植物无法直接通过氮气吸收氮元素。</p>
+
+<p>只有少数植物不需要氮肥，主要是豆科类植物，自身就具有将空气中的氮气合成氮肥的能力。植物学家一直梦想将这种"固氮能力"移植到其他植物。全球种植面积最大的农作物是玉米，它就成为移植"固氮能力"的首选目标。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091107.jpg" alt="" title="" /></p>
+
+<p>1980年代，一个美国农业科学家在墨西哥南部，发现了一些奇怪的玉米。这种玉米高达5、6米，比普通玉米高得多，但是需要6～8个月才成熟，比普通玉米的3个月长得多。最惊人的是，它不需要施加氮肥，就可以在贫瘠土地上长得很好。也就是说，这是全世界独一无二的具有"固氮能力"的玉米！</p>
+
+<p>进一步研究，科学家发现这种玉米有气根，一部分根系暴露在空气中，这也是全世界唯一有气根的玉米。这些绿色和玫瑰色的气根，上面有透明的糖浆状粘液。科学家怀疑，这就是它们毋需施肥的秘密----这些粘液能固氮。换言之，玉米气根中有固氮菌；玉米利用固氮菌为自己施肥。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091108.jpg" alt="" title="" /></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091109.jpg" alt="" title="" /></p>
+
+<p>当年没有 DNA 工具来研究玉米如何固氮的细节，这一发现被搁置了20年。直到2005年，才用尖端技术，确认粘液中的细菌正在从空气中吸收氮，将其转化为玉米可以吸收的形式。</p>
+
+<p>如今，经过十多年的基因分析，科学家发表了最新的研究成果，这种固氮特性可以移植到常规玉米中，这很可能会导致农业革命，取代一部分氮肥。</p>
+
+<p>氮气合成为氮肥，可能是20世纪的最大成就之一。合成氮技术一共获得过三个诺贝尔奖。这是当之无愧的，据估计，从1908年至2008年间，农作物的单产增加了一倍以上，其中的一大原因就是人类会制造氮肥了。没有氮肥，为了生产同样数量的粮食，我们需要的耕地数量会比现在多四倍，世界人口也就不可能在20世纪大幅增长。</p>
+
+<p>但是，氮肥生产需要消耗世界1％至2％的能源，并排放大量温室气体。合成氮通常会从田野冲入水道，导致大量藻类大量繁殖，从而吸收所有氧气，杀死鱼类和其他生物。如此多的氮进入河流和溪流，以至于世界河流的河口形成了大面积的死区。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>2002年，我在中关村一间不算豪华的酒店里专访 NVIDIA CEO 黄仁勋的时候，他小声对我说，英特尔有 CPU，我们有 GPU。</p>
+
+<p>他说得那么不自信。我也只是微笑着容忍他将 NVIDIA 和 Intel 相提并论。18年过去，NVIDIA 市值超过 Intel。</p>
+
+<p>-- 刘韧</p>
+
+<p>2、</p>
+
+<p>2005年，我的毕业论文的《参考书目》部分包含了152个 URL。为了纪念毕业十五周年，我重新检查了这些 URL，其中82个不再起作用。我因此假定，互联网链接的腐烂率是57%。</p>
+
+<p>--<a href="https://www.lightbluetouchpaper.org/2020/09/03/a-measurement-of-link-rot-57/">《测量链接腐烂率》</a></p>
+
+<p>3、</p>
+
+<p>李光耀在新加坡的成功，不仅是因为他的专制主义，而且还因为新加坡决策精英阶层的纯粹实用主义。他们没有固定不变的意识形态，而是选择合适的意识形态。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=24382427">Hacker News 读者</a></p>
+
+<p>4、</p>
+
+<p>互联网软件行业的开发模式，已经从漫长的开发周期和专门的质量保证（QA）阶段，转移到了快节奏的连续集成/连续交付（CI / CD）管道，这样做极大地提高了迭代速度。</p>
+
+<p>-- <a href="https://engineering.linkedin.com/blog/2020/production-testing-with-dark-canaries">《黑暗金丝雀模式的生产模式》</a></p>
+
+<p>5、</p>
+
+<p>你能在下面的一副扑克牌中，快速找到三个方块的那张牌吗？这就是用户面对大型菜单进行导航时的感受。</p>
+
+<p>-- <a href="https://uxmovement.com/navigation/solving-the-megaton-problem-with-mega-menus/">《大菜单导航的解决方案》</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091401.jpg" alt="" title="" /></p>
+
+<p>6、</p>
+
+<p>三年前，我们搬到伦敦教书，一直租房住，现在可以买房了。</p>
+
+<p>-- <a href="https://www.imperial.ac.uk/news/203853/imperial-mathematician-scoops-3m-breakthrough-prize/">英国马丁·海尔教授</a>（Martin Hairer）的获奖感言。他获得了今年的数学突破奖，奖金为300万美元，这是目前奖金最高的科学奖项。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091308.jpg" alt="" title="" /></p>
+
+<p>7、</p>
+
+<p>它还没有死，但确实已经写完了。</p>
+
+<p>-- <a href="https://momentjs.com/docs/#/-project-status/">Moment.js</a> 宣布停止开发，进入维护状态。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/202009/bg2020091508.jpg" alt="" title="" /></p>
+
+<h2>回顾</h2>
+
+<p>2019年的本周（第 74 期）：<a href="http://www.ruanyifeng.com/blog/2019/09/weekly-issue-74.html">信息的商业模式为什么不是收费</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/201909/bg2019091910.jpg" alt="" title="" /></p>
+
+<p>2018年的本周（第 22 期）：<a href="http://www.ruanyifeng.com/blog/2018/09/weekly-issue-22.html">猴子自拍，版权归谁</a></p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/201809/bg2018091401.jpg" alt="" title="" /></p>
+
+<h2>订阅</h2>
+
+<p>这个周刊每周五发布，同步更新在<a href="http://www.ruanyifeng.com/blog">阮一峰的网络日志</a>和<a href="http://weixin.sogou.com/weixin?query=%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97">微信公众号</a>。</p>
+
+<p>微信搜索"阮一峰的网络日志"或者扫描二维码，即可订阅。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2018/bg2018042311.jpg" alt="" title="" /></p>
+
+<p>（完）</p>
+
+                                    <!-- /div -->
+
+                                </div>
+    <script type="text/javascript" src="/newwindow.js"></script>
+                                <div class="asset-footer">
+
+<h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2020-09-18T08:40:00+08:00">2020年9月18日</abbr></li>
+
+</ul>
+                                </div>
+</article>
+                            </div>
+
+
+
+
+<div id="related_entries">
+<h2>相关文章</h2>
+<ul>
+
+<li><strong>2020.09.25: <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-126.html">科技爱好者周刊（第 126 期）：内卷化是什么？</a></strong>
+
+                           <div class="entry-body">
+                              这里记录每周值得分享的科技内容，周五发布。（ 通知：下周是十一假期，周刊将提前到9月30日周三发布。 ）
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.09.11: <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-124.html">科技爱好者周刊（第 124 期）：华为如何考核员工</a></strong>
+
+                           <div class="entry-body">
+                              这里记录每周值得分享的科技内容，周五发布。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.09.04: <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-123.html">科技爱好者周刊（第 123 期）：互联网公司与湘军的军制</a></strong>
+
+                           <div class="entry-body">
+                              这里记录每周值得分享的科技内容，周五发布。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.08.28: <a href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-122.html">科技爱好者周刊（第 122 期）：谈谈互联网公司的高估值</a></strong>
+
+                           <div class="entry-body">
+                              这里记录每周值得分享的科技内容，周五发布。
+
+                           </div>
+
+</li>
+
+ 
+</ul>
+</div>
+
+
+
+                    
+
+                    <div id="comments" class="comments">
+
+
+    
+    
+        
+    <h2 class="comments-header">留言（48条）</h2>
+
+    <div id="comments-content" class="comments-content" style="clear: left;">
+        
+        <div id="comment-422498" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.chengxiangqian.com/" href="http://www.chengxiangqian.com/" target="_blank" rel="nofollow">江湖人称向前兄</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422498">
+            <p>“互联网链接的腐烂率是57%。”确实，很多收藏的链接过一段就404了</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:07 AM">2020年9月18日 09:07</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422498">#</a>
+ | <a href="#comment-text" title="引用江湖人称向前兄的这条留言" onclick="return CommentQuote('comment-quote-422498','江湖人称向前兄');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422501" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">凉瓜拌面</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422501">
+            <p>这种赚不到钱、技术难度大、工程师薪水又极高的业务，国有单位能搞好吗？<br />
+赚不到钱吗？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:30 AM">2020年9月18日 09:30</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422501">#</a>
+ | <a href="#comment-text" title="引用凉瓜拌面的这条留言" onclick="return CommentQuote('comment-quote-422501','凉瓜拌面');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422502" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://zhengyaing.com" href="http://zhengyaing.com" target="_blank" rel="nofollow">Zhengyaing</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422502">
+            <p>网线断了几根依然可用的。。。。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:31 AM">2020年9月18日 09:31</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422502">#</a>
+ | <a href="#comment-text" title="引用Zhengyaing的这条留言" onclick="return CommentQuote('comment-quote-422502','Zhengyaing');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422504" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">墨菲斯托同学</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422504">
+            <p>最近也在关注数字人民币（DECP）<br />
+按我的理解，DECP不是取代微信、支付宝、银联云闪付这类通道的，而是与纸币、央行人民币储备同等地位的法定货币，它是类似于TCP/IP的底层，而不是https这样的应用层面。<br />
+既然是取代纸币与银行储备，那么它的特点就是：<br />
+1.区块链的可溯源，能有效跟踪货币流向；反洗钱、异常外汇流动、诈骗都是重点应用区域<br />
+2.数字货币本身的安全性、合法性，能有效防止假币和虚假支付（现在电子支付其实已经解决了假币问题），现在主要解决虚假支付（虚假二维码、冒充他人特征的收款）<br />
+3.以后微信、支付宝同样必须使用DECP交易，受到央行统一监管，用户在微信支付宝账户里余额与自己的DECP账户唯一对应，而不是现在的资金池模式。<br />
+4.实际民用场景中，支持有限的无网络交易（在验证环节和授信额度上做文章）</p>
+
+<p>技术上我认为问题不大，12306、央行第二代网络支付系统这类超大规模高并发系统已经成熟，加上腾讯阿里参与标准制定必然要入伙提供支持。</p>
+
+<p>数字人民币无利可图吗？如果了解外汇和反洗钱在国家金融战略中的重要地位就会发现，DECP就是万能防水胶，堵住所有漏点才是它的作用</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:39 AM">2020年9月18日 09:39</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422504">#</a>
+ | <a href="#comment-text" title="引用墨菲斯托同学的这条留言" onclick="return CommentQuote('comment-quote-422504','墨菲斯托同学');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422505" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">加菲猫</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422505">
+            <p>“网友将网线的一根铜绞线剪断，两端插入苹果。信号照样传输，网速非常好。”这则新闻的图片有问题。网线传输数据只使用8芯中的4根芯，蓝色线是不使用的，即使剪断蓝色线，对网络也没有影响。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:43 AM">2020年9月18日 09:43</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422505">#</a>
+ | <a href="#comment-text" title="引用加菲猫的这条留言" onclick="return CommentQuote('comment-quote-422505','加菲猫');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422506" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ruiiiii</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422506">
+            <p>16日的热搜之一就是“猴子偷了手机自拍并录了一段吃播！”和2018年的本周博客遥相呼应！<br />
+另外，好奇成都的“垂直森林”的房价是多少呢？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:45 AM">2020年9月18日 09:45</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422506">#</a>
+ | <a href="#comment-text" title="引用ruiiiii的这条留言" onclick="return CommentQuote('comment-quote-422506','ruiiiii');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422508" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">andy</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422508">
+            <blockquote>
+<pre>引用江湖人称向前兄的发言：</pre>
+
+<p>“互联网链接的腐烂率是57%。”确实，很多收藏的链接过一段就404了</p>
+
+</blockquote>
+
+<p>也可能是找不到IP地址</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  9:48 AM">2020年9月18日 09:48</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422508">#</a>
+ | <a href="#comment-text" title="引用andy的这条留言" onclick="return CommentQuote('comment-quote-422508','andy');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422509" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://www.xttblog.com" href="https://www.xttblog.com" target="_blank" rel="nofollow">业余草</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422509">
+            <p>@墨菲斯托同学：</p>
+
+<p>很赞同！很看好数字人民币！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:04 AM">2020年9月18日 10:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422509">#</a>
+ | <a href="#comment-text" title="引用业余草的这条留言" onclick="return CommentQuote('comment-quote-422509','业余草');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422510" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422510">
+            <blockquote>
+<pre>引用凉瓜拌面的发言：</pre>
+
+<p>这种赚不到钱、技术难度大、工程师薪水又极高的业务，国有单位能搞好吗？<br />
+赚不到钱吗？</p>
+
+</blockquote>
+
+<p>属实赚不到钱，但是国家基础设施不太考虑盈利<br />
+发行纸币考虑过赚钱的问题么？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:09 AM">2020年9月18日 10:09</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422510">#</a>
+ | <a href="#comment-text" title="引用threezhiwang的这条留言" onclick="return CommentQuote('comment-quote-422510','threezhiwang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422511" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://zhaokaifeng.com/?p=2446" href="https://zhaokaifeng.com/?p=2446" target="_blank" rel="nofollow">荒原之梦</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422511">
+            <p>我曾出于防伪的目的设想过一种“半数字化”的人民币：基于认证中心的新型纸质货币防伪方案。但在这篇文章写出来没多久就看到了央行开发数字货币的新闻。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:10 AM">2020年9月18日 10:10</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422511">#</a>
+ | <a href="#comment-text" title="引用荒原之梦的这条留言" onclick="return CommentQuote('comment-quote-422511','荒原之梦');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422512" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422512">
+            <p>理解的很到位<br />
+但我觉得应该用不到区块链的思想<br />
+区块链的核心是去中心化<br />
+而央行就是中心化<br />
+其实就是给每张币设计一个唯一标识<br />
+然后央行记录标识的拥有者<br />
+货币数值化可溯源之后<br />
+会带来海量的财政收入<br />
+基础设施自然不考虑盈利<br />
+没准比发行纸币的成本更低呢<br />
+纸币上那么多高科技还有人工成本保密成本，还有折旧<br />
+至于wepay/alipay根本就不是数字货币<br />
+而是货币数字化<br />
+货币数字化很早就有了<br />
+银行转账<br />
+不过没有国民级应用罢了<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:15 AM">2020年9月18日 10:15</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422512">#</a>
+ | <a href="#comment-text" title="引用threezhiwang的这条留言" onclick="return CommentQuote('comment-quote-422512','threezhiwang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422513" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">墨菲斯托同学</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422513">
+            <p>国际货币基金组织统计,全球每年非法洗钱的数额约占世界各国GDP总和的2%到5%,大约在1.5万亿至3万亿美元之间,且以每年1000亿美元递增。<br />
+2015年，中国每年的洗钱规模不少于2000亿元人民币，大体相当于中国经济总量的2%。</p>
+
+<p>就这一项就足够回本了吧</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:19 AM">2020年9月18日 10:19</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422513">#</a>
+ | <a href="#comment-text" title="引用墨菲斯托同学的这条留言" onclick="return CommentQuote('comment-quote-422513','墨菲斯托同学');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422514" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">墨菲斯托同学</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422514">
+            <p>目前看来，区块链的中心思想去中心化是应用的，不过基于国家战略安全的要求，使用的是有限去中心化（即只有授权服务器才能验证交易真伪）。<br />
+因为理论上，在完全去中心化网络中，敌国只需要部署51%的节点即可篡改整个网络的数据，这在国家战略中是不允许的。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:24 AM">2020年9月18日 10:24</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422514">#</a>
+ | <a href="#comment-text" title="引用墨菲斯托同学的这条留言" onclick="return CommentQuote('comment-quote-422514','墨菲斯托同学');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422515" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422515">
+            <p>那不叫赚钱<br />
+那叫财政收入<br />
+基础设施的投入不考虑回本<br />
+军费支出考虑回本么<br />
+在更高的维度衡量<br />
+我理解你想表达的<br />
+我想说的是国家行为不考虑盈利<br />
+而是考虑国家利益<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:25 AM">2020年9月18日 10:25</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422515">#</a>
+ | <a href="#comment-text" title="引用threezhiwang的这条留言" onclick="return CommentQuote('comment-quote-422515','threezhiwang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422516" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422516">
+            <p>那不叫有限去中心化<br />
+那叫分布式<br />
+比特币的51%衡量是基于比特币设计的数学难题<br />
+如果量子计算机落地或者数学理论突飞猛进<br />
+51%是守不住<br />
+所以中央政府搞的一定是中心化的<br />
+只有在平行主权间才有可能去中心化<br />
+比如现在美币是中心化的<br />
+所以我们要搞国际货币去中心化<br />
+不要大家都被美帝收铸币税<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:29 AM">2020年9月18日 10:29</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422516">#</a>
+ | <a href="#comment-text" title="引用threezhiwang的这条留言" onclick="return CommentQuote('comment-quote-422516','threezhiwang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422517" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">哈哈</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422517">
+            <blockquote>
+<pre>引用凉瓜拌面的发言：</pre>
+
+<p>这种赚不到钱、技术难度大、工程师薪水又极高的业务，国有单位能搞好吗？<br />
+赚不到钱吗？</p>
+
+</blockquote>
+
+<p>这种赚不到钱、技术难度大、工程师薪水又极高的业务，私人企业能搞好吗？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:33 AM">2020年9月18日 10:33</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422517">#</a>
+ | <a href="#comment-text" title="引用哈哈的这条留言" onclick="return CommentQuote('comment-quote-422517','哈哈');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422518" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://readhop.com" href="https://readhop.com" target="_blank" rel="nofollow">Long</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422518">
+            <p>发行纸币当然是赚钱的（铸币税）而且政府的主要收入方式之一 至于数字货币倒不是为了赚钱 一方面当然是不想让民企通过电子钱包控制这么大笔钱 另一方面就像楼上所说 中心化的数字货币可以实现全方面的溯源和控制 可以追踪方面比什么天网效率更高</p>
+
+<p>最后电子支付如支付宝是非常赚钱的 大家的钱放支付宝 阿里可以拿去任意投资借贷 跟银行的概念很像 但不受银监会监管</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:34 AM">2020年9月18日 10:34</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422518">#</a>
+ | <a href="#comment-text" title="引用Long的这条留言" onclick="return CommentQuote('comment-quote-422518','Long');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422519" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">网友</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422519">
+            <p>成都的“垂直森林”。我担心房屋会不会因为植物的生长和土壤被压坏、垮塌</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:53 AM">2020年9月18日 10:53</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422519">#</a>
+ | <a href="#comment-text" title="引用网友的这条留言" onclick="return CommentQuote('comment-quote-422519','网友');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422520" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.junziboxue.com" href="http://www.junziboxue.com" target="_blank" rel="nofollow">megaTrends</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422520">
+            <p>棺木那个，感觉是上周埋的</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 10:57 AM">2020年9月18日 10:57</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422520">#</a>
+ | <a href="#comment-text" title="引用megaTrends的这条留言" onclick="return CommentQuote('comment-quote-422520','megaTrends');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422522" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">大唐人士</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422522">
+            <blockquote>
+<pre>引用凉瓜拌面的发言：</pre>
+
+<p>这种赚不到钱、技术难度大、工程师薪水又极高的业务，国有单位能搞好吗？<br />
+赚不到钱吗？</p>
+
+</blockquote>
+
+<p>国家可以用的手段真的是太多了，公务员工资也不高，为什么大家趋之若鹜？给个北京上海户口，分套房之类的对政府来说还不是so easy</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 11:00 AM">2020年9月18日 11:00</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422522">#</a>
+ | <a href="#comment-text" title="引用大唐人士的这条留言" onclick="return CommentQuote('comment-quote-422522','大唐人士');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422523" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">magicV</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422523">
+            <p>哈哈，看了12306的进步，我相信国有企业一样可以搞好这些事。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 11:44 AM">2020年9月18日 11:44</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422523">#</a>
+ | <a href="#comment-text" title="引用magicV的这条留言" onclick="return CommentQuote('comment-quote-422523','magicV');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422524" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">墨菲斯托同学</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422524">
+            <p>我理解的中心化是相对的，如果只把央行作为唯一节点，那DECP当然是绝对中心化的，所有交易围绕央行。<br />
+但是目前看来，区块链在DECP技术上的应用，仍然是以（有限）去中心化为前提的，即只有授权的机构才能参与鉴权。<br />
+实际应用中，央行并不是唯一节点，所有商业银行、保险、证券类金融公司全部参与作为节点，才能从整个金融行业实现交易鉴权的全覆盖和相互印证。否则DECP不过是央行的私账可以任人打扮，对于国家金融战略是有明显弱点的（即攻击央行即可摧毁国家金融体系）。<br />
+从这个角度来看，DECP仍然是具有去中心化特点的，尽管它是有限的去中心化，而不是比特币这类民间组织的完全去中心化</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020 11:55 AM">2020年9月18日 11:55</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422524">#</a>
+ | <a href="#comment-text" title="引用墨菲斯托同学的这条留言" onclick="return CommentQuote('comment-quote-422524','墨菲斯托同学');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422526" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">irvingtest</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422526">
+            <p>阮老师商业嗅觉不行啊。数字货币商业变现途径太多了<br />
+你要消费数字货币，就要往账户里存钱。那么问题来了，广大用户都被吸引往你账户里存钱储蓄了，这存款能干什么？这就是最大的盈利机会啊<br />
+再比如，数以亿计的用户每天消费记录，这数据不值钱吗？每年出个每个细分行业的消费分析报告，多少行业老板抢着要？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  2:01 PM">2020年9月18日 14:01</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422526">#</a>
+ | <a href="#comment-text" title="引用irvingtest的这条留言" onclick="return CommentQuote('comment-quote-422526','irvingtest');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422527" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">lk</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422527">
+            <p>强迫症的本质是个人的思维模式以及心理习性，所以要改变的是这个</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  2:04 PM">2020年9月18日 14:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422527">#</a>
+ | <a href="#comment-text" title="引用lk的这条留言" onclick="return CommentQuote('comment-quote-422527','lk');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422529" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">wadang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422529">
+            <p>”但是，这种赚不到钱、技术难度大、工程师薪水又极高的业务，国有单位能搞好吗？“</p>
+
+<p>比起各地的纸币工厂，设备，油墨、特种纸张，存储，运输的费用，数字货币应该有成本优势吧。</p>
+
+<p>技术难度大，工程师薪水高的三大电信运营商业没那么差吧，5G建设方面也是世界第一梯队吧。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  2:17 PM">2020年9月18日 14:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422529">#</a>
+ | <a href="#comment-text" title="引用wadang的这条留言" onclick="return CommentQuote('comment-quote-422529','wadang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422530" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">yizhognchuanqi</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422530">
+            <p>中央银行的平均薪金&福利水平应该比一般公司的devops部门的工程师平均水平高多了吧</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  2:59 PM">2020年9月18日 14:59</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422530">#</a>
+ | <a href="#comment-text" title="引用yizhognchuanqi的这条留言" onclick="return CommentQuote('comment-quote-422530','yizhognchuanqi');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422531" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">啊啵呲嘚</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422531">
+            <p>没有什么是外包解决不了的</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  5:15 PM">2020年9月18日 17:15</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422531">#</a>
+ | <a href="#comment-text" title="引用啊啵呲嘚的这条留言" onclick="return CommentQuote('comment-quote-422531','啊啵呲嘚');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422542" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">arno</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422542">
+            <p>自然垄断有时尽，法定垄断无穷匮。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 18, 2020  8:06 PM">2020年9月18日 20:06</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422542">#</a>
+ | <a href="#comment-text" title="引用arno的这条留言" onclick="return CommentQuote('comment-quote-422542','arno');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422544" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">曹春</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422544">
+            <p>千兆网线需要8根都通才行。百兆网线只要 1236这4根通了就行。看图片是蓝色断了。<br />
+橙白，橙，绿白，蓝，蓝白，绿，棕白，棕<br />
+1     2   3     4    5    6    7    8<br />
+所有蓝色断了，正常通信没问题。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 19, 2020 11:19 AM">2020年9月19日 11:19</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422544">#</a>
+ | <a href="#comment-text" title="引用曹春的这条留言" onclick="return CommentQuote('comment-quote-422544','曹春');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422548" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://www.ivu4e.com" href="https://www.ivu4e.com" target="_blank" rel="nofollow">微wx笑</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422548">
+            <blockquote>
+<pre>引用墨菲斯托同学的发言：</pre>
+
+<p>目前看来，区块链的中心思想去中心化是应用的，不过基于国家战略安全的要求，使用的是有限去中心化（即只有授权服务器才能验证交易真伪）。<br />
+因为理论上，在完全去中心化网络中，敌国只需要部署51%的节点即可篡改整个网络的数据，这在国家战略中是不允许的。</p>
+
+</blockquote>
+
+<p>有限去中心化就是联盟链的应用吧</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 19, 2020  4:05 PM">2020年9月19日 16:05</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422548">#</a>
+ | <a href="#comment-text" title="引用微wx笑的这条留言" onclick="return CommentQuote('comment-quote-422548','微wx笑');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422549" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://www.ivu4e.com" href="https://www.ivu4e.com" target="_blank" rel="nofollow">微wx笑</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422549">
+            <p>数字人民币是不是可以让运钞车消失了？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 19, 2020  4:17 PM">2020年9月19日 16:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422549">#</a>
+ | <a href="#comment-text" title="引用微wx笑的这条留言" onclick="return CommentQuote('comment-quote-422549','微wx笑');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422552" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">电视猫</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422552">
+            <p>大吃一惊 博主是经济学博士 不会不知道 数字人民币是用来割韭菜 准备关门搞计划经济的节奏 却大加赞赏 可见统战无处不在</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 20, 2020  7:38 AM">2020年9月20日 07:38</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422552">#</a>
+ | <a href="#comment-text" title="引用电视猫的这条留言" onclick="return CommentQuote('comment-quote-422552','电视猫');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422554" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">openadmin</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422554">
+            <p><a href="https://reposhub.com" rel="nofollow">https://reposhub.com</a> 也是一个收集整理 github awesome 仓库内容的网站。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 20, 2020 10:17 AM">2020年9月20日 10:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422554">#</a>
+ | <a href="#comment-text" title="引用openadmin的这条留言" onclick="return CommentQuote('comment-quote-422554','openadmin');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422569" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">encro</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422569">
+            <p>这对消费者是有利的。</p>
+
+<p>看到这句就想“未必吧”，</p>
+
+<p>为了统一监管，然后提高民营门槛，降低体验的事情应该也做得不少吧。</p>
+
+<p>只是另外两家已经做得够大了，目前已经不好监管了，怕引起民愤罢了，所以目前手段是温水著蛤蟆？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 20, 2020  4:30 PM">2020年9月20日 16:30</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422569">#</a>
+ | <a href="#comment-text" title="引用encro的这条留言" onclick="return CommentQuote('comment-quote-422569','encro');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422604" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">佚名氏</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422604">
+            <blockquote>
+<pre>引用加菲猫的发言：</pre>
+
+<p>“网友将网线的一根铜绞线剪断，两端插入苹果。信号照样传输，网速非常好。”这则新闻的图片有问题。网线传输数据只使用8芯中的4根芯，蓝色线是不使用的，即使剪断蓝色线，对网络也没有影响。</p>
+
+</blockquote>
+
+<p>百兆才只用四根，千兆要八根齐全，不过文章没有说清楚这些。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 21, 2020  5:08 PM">2020年9月21日 17:08</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422604">#</a>
+ | <a href="#comment-text" title="引用佚名氏的这条留言" onclick="return CommentQuote('comment-quote-422604','佚名氏');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422605" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">统一战线无线不在</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422605">
+            <blockquote>
+<pre>引用电视猫的发言：</pre>
+
+<p>大吃一惊 博主是经济学博士 不会不知道 数字人民币是用来割韭菜 准备关门搞计划经济的节奏 却大加赞赏 可见统战无处不在</p>
+
+</blockquote>
+
+<p>博主天天赞美华为，你还不知道吗？博主政治觉悟非常高的。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 21, 2020  5:32 PM">2020年9月21日 17:32</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422605">#</a>
+ | <a href="#comment-text" title="引用统一战线无线不在的这条留言" onclick="return CommentQuote('comment-quote-422605','统一战线无线不在');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422608" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://eureka.name" href="https://eureka.name" target="_blank" rel="nofollow">Eureka</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422608">
+            <blockquote>
+<pre>引用江湖人称向前兄的发言：</pre>
+
+<p>“互联网链接的腐烂率是57%。”确实，很多收藏的链接过一段就404了</p>
+
+</blockquote>
+
+<p>所以象IPFS这样的基础存储应用应该开始发挥作用了。<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 21, 2020  9:30 PM">2020年9月21日 21:30</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422608">#</a>
+ | <a href="#comment-text" title="引用Eureka的这条留言" onclick="return CommentQuote('comment-quote-422608','Eureka');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422633" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://woodloch.blog" href="https://woodloch.blog" target="_blank" rel="nofollow">木澤</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422633">
+            <p>沒想到還有這麼多木乃伊可以出土~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 22, 2020  4:58 PM">2020年9月22日 16:58</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422633">#</a>
+ | <a href="#comment-text" title="引用木澤的这条留言" onclick="return CommentQuote('comment-quote-422633','木澤');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422658" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">FantasyGao</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422658">
+            <p>一张纸币在交易流通中，流通成本实际是占面额一部分的，比如印钞成本、安全运输成本，还有一些附带的如印钞机生产、维护、验钞机等。如果没有这些流程，那数字人民币会比同面额纸币的更具价值，这些溢出的价值用来维护服务器、技术人力是绰绰有余的。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020 10:37 AM">2020年9月23日 10:37</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422658">#</a>
+ | <a href="#comment-text" title="引用FantasyGao的这条留言" onclick="return CommentQuote('comment-quote-422658','FantasyGao');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422662" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">flight.cai</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422662">
+            <p>对我而言，数字货币就像是以前学校里教的学费，每张毛爷爷上都得留个签名~~为避免遭到污损人民币的指控，以前都是用的铅笔，可随时擦去。而用了数字技术，不仅有签名、时间戳，还有各种可追溯信息，并且这些数据可以永存。。。对于这么完美的jiankong技术，你知道，我国一定是能做好的~~这点毋庸置疑~~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020  3:21 PM">2020年9月23日 15:21</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422662">#</a>
+ | <a href="#comment-text" title="引用flight.cai的这条留言" onclick="return CommentQuote('comment-quote-422662','flight.cai');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422701" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422701">
+            <blockquote>
+<pre>引用encro的发言：</pre>
+
+<p>这对消费者是有利的。</p>
+
+<p>看到这句就想“未必吧”，</p>
+
+<p>为了统一监管，然后提高民营门槛，降低体验的事情应该也做得不少吧。</p>
+
+<p>只是另外两家已经做得够大了，目前已经不好监管了，怕引起民愤罢了，所以目前手段是温水著蛤蟆？</p>
+
+</blockquote>
+
+<p>两家只是货币数字化，不是严格意义的数字货币。<br />
+可能从体验上来讲是一样的。<br />
+但是从严格意义上讲，差距很大。<br />
+比如货币数字化，wepay无法从法理上进行增发货币。<br />
+而数字货币就可以。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020  5:07 PM">2020年9月23日 17:07</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422701">#</a>
+ | <a href="#comment-text" title="引用threezhiwang的这条留言" onclick="return CommentQuote('comment-quote-422701','threezhiwang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422702" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422702">
+            <blockquote>
+<pre>引用flight.cai的发言：</pre>
+
+<p>对我而言，数字货币就像是以前学校里教的学费，每张毛爷爷上都得留个签名~~为避免遭到污损人民币的指控，以前都是用的铅笔，可随时擦去。而用了数字技术，不仅有签名、时间戳，还有各种可追溯信息，并且这些数据可以永存。。。对于这么完美的jiankong技术，你知道，我国一定是能做好的~~这点毋庸置疑~~</p>
+
+</blockquote>
+
+<p>好角度，好思路</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020  5:08 PM">2020年9月23日 17:08</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422702">#</a>
+ | <a href="#comment-text" title="引用threezhiwang的这条留言" onclick="return CommentQuote('comment-quote-422702','threezhiwang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422703" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">threezhiwang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422703">
+            <blockquote>
+<pre>引用墨菲斯托同学的发言：</pre>
+
+<p>我理解的中心化是相对的，如果只把央行作为唯一节点，那DECP当然是绝对中心化的，所有交易围绕央行。<br />
+但是目前看来，区块链在DECP技术上的应用，仍然是以（有限）去中心化为前提的，即只有授权的机构才能参与鉴权。<br />
+实际应用中，央行并不是唯一节点，所有商业银行、保险、证券类金融公司全部参与作为节点，才能从整个金融行业实现交易鉴权的全覆盖和相互印证。否则DECP不过是央行的私账可以任人打扮，对于国家金融战略是有明显弱点的（即攻击央行即可摧毁国家金融体系）。<br />
+从这个角度来看，DECP仍然是具有去中心化特点的，尽管它是有限的去中心化，而不是比特币这类民间组织的完全去中心化</p>
+
+</blockquote>
+
+<p>中本聪的去中心化的思路是通过解数学难题去验证算力<br />
+通过算力比较去抗衡中心<br />
+在中央政府下的其他各子节点<br />
+没有必要去浪费算力去证明中心<br />
+做好同步即可<br />
+类似于PKI的逻辑<br />
+最根的CA一定是物理背书的<br />
+第一次认证一定是线下面对面的。<br />
+真正的去中心化的实践方向在国际货币中。<br />
+DECP到底和人民币国际化是一个概念还是两个概念是定义的问题。<br />
+但从技术手段来讲。<br />
+人民币国际化要解决的问题是铸币税国家货币超发问题。<br />
+人民币数字化要解决的问题是国家对经济领域的监管问题。<br />
+个人拙见。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 23, 2020  5:16 PM">2020年9月23日 17:16</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422703">#</a>
+ | <a href="#comment-text" title="引用threezhiwang的这条留言" onclick="return CommentQuote('comment-quote-422703','threezhiwang');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422708" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">烤鱼</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422708">
+            <blockquote>
+<pre>引用电视猫的发言：</pre>
+
+<p>大吃一惊 博主是经济学博士 不会不知道 数字人民币是用来割韭菜 准备关门搞计划经济的节奏 却大加赞赏 可见统战无处不在</p>
+
+</blockquote>
+
+<p>"国际清算银行（Bank for International Settlements）2019年的一项调查显示，全球66家央行中，超过80%的央行参与了主权数字货币项目。"<br />
+大家都要搞货币经济吗?请问你对经济学有何高见?</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020  2:04 AM">2020年9月24日 02:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422708">#</a>
+ | <a href="#comment-text" title="引用烤鱼的这条留言" onclick="return CommentQuote('comment-quote-422708','烤鱼');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422712" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">flight.cai</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422712">
+            <p>@threezhiwang：</p>
+
+<p>人民币国际化首先要解决的问题难道不是自由兑换？<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020 11:38 AM">2020年9月24日 11:38</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422712">#</a>
+ | <a href="#comment-text" title="引用flight.cai的这条留言" onclick="return CommentQuote('comment-quote-422712','flight.cai');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422713" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">flight.cai</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422713">
+            <p>成都的垂直森林好几年前 米兰世博会那会儿就有，而且比成都设计得好看，层次感强 绿植颜色丰富~~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020 11:44 AM">2020年9月24日 11:44</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422713">#</a>
+ | <a href="#comment-text" title="引用flight.cai的这条留言" onclick="return CommentQuote('comment-quote-422713','flight.cai');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422720" class="comment">
+    <div  class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Cosplay.Cook</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422720">
+            <blockquote>
+<pre>引用ruiiiii的发言：</pre>
+
+<p>16日的热搜之一就是“猴子偷了手机自拍并录了一段吃播！”和2018年的本周博客遥相呼应！<br />
+另外，好奇成都的“垂直森林”的房价是多少呢？</p>
+
+</blockquote>
+
+<p>3万多</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020  2:10 PM">2020年9月24日 14:10</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422720">#</a>
+ | <a href="#comment-text" title="引用Cosplay.Cook的这条留言" onclick="return CommentQuote('comment-quote-422720','Cosplay.Cook');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-422721" class="comment">
+    <div id="comment-last" class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Cosplay.Cook</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-422721">
+            <blockquote>
+<pre>引用magicV的发言：</pre>
+
+<p>哈哈，看了12306的进步，我相信国有企业一样可以搞好这些事。</p>
+
+</blockquote>
+
+<p>对不起，12306是阿里帮做的<br />
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="September 24, 2020  2:19 PM">2020年9月24日 14:19</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html#comment-422721">#</a>
+ | <a href="#comment-text" title="引用Cosplay.Cook的这条留言" onclick="return CommentQuote('comment-quote-422721','Cosplay.Cook');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    </div>
+        
+    
+
+
+    
+    
+    <div class="comments-open" id="comments-open">
+        <h2 class="comments-open-header">我要发表看法</h2>
+        <div class="comments-open-content">
+
+        
+            <div id="comment-greeting"></div>
+
+            <form method="post" action="http://www.ruanyifeng.com/cgi-bin/mtos/mt-comments.cgi" name="comments_form" id="comments-form" onsubmit="return pleaseWait();">
+                <input type="hidden" name="static" value="1" />
+                <input type="hidden" name="entry_id" value="2207" />
+                <input type="hidden" name="__lang" value="en" />
+                <input type="hidden" name="parent_id" value="" id="comment-parent-id" />
+                <input type="hidden" name="armor" value="1" />
+                <input type="hidden" name="preview" value="" />
+                <input type="hidden" name="sid" value="" />
+                <div id="comments-open-data">
+            <div id="comments-open-text">
+                    <p><label for="comment-text">您的留言
+                    （HTML标签部分可用）</label></p>
+                    <p><textarea id="comment-text" name="text" rows="10" cols="50"></textarea></p>
+                </div>
+                    <div id="comment-form-name">
+                        <p><label for="comment-author">您的大名：</label></p>
+                        <p><input id="comment-author" name="author" size="30" value="" />  <span class="hint"> &laquo;-必填</span></p>
+                    </div>
+                    <div id="comment-form-email">
+                        <p><label for="comment-email">电子邮件：</label></p>
+                        <p><input id="comment-email" name="email" size="30" value="" />  <span class="hint"> &laquo;-必填，不公开</span></p>
+                    </div>
+                    <div id="comment-form-url">
+                        <p><label for="comment-url">个人网址：</label></p>
+                        <p><input id="comment-url" name="url" size="30" value="" />  <span class="hint"> &laquo;-我信任你，不会填写广告链接</span></p>
+                    </div>
+                    <div id="comment-form-remember-me">
+                        <p>
+                        <label for="comment-bake-cookie">记住个人信息？</label><input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="!this.checked?forgetMe(document.comments_form):rememberMe(document.comments_form)" value="1" accesskey="r" /></p>
+                    </div>
+                </div>
+                    <div id="comment-form-reply" style="display:none">
+                    <input type="checkbox" id="comment-reply" name="comment_reply" value="" onclick="mtSetCommentParentID()" />
+                    <label for="comment-reply" id="comment-reply-label"></label>
+                </div>
+                <div id="comments-open-captcha"></div>
+                <div id="comments-open-footer">
+<div id="wait" style="display:none;">
+<p><strong>正在发表您的评论，请稍候</strong></p>
+<p>
+<input type="text" name="percent" size="3" style="font-family:Arial; color:black;text-align:center; border-width:medium; border-style:none;">           
+<input type="text" name="chart" size="46" style="font-family:Arial;font-weight:bolder; color:black; padding:0px; border-style:none;">
+</p>
+</div>
+
+                    <p><input type="submit" accesskey="s" name="post" id="comment-submit" value="发表" />  <span class="hint"> &laquo;- 点击按钮</span></p>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <script type="text/javascript" src="http://www.ruanyifeng.com/blog/js/prism.js"></script>
+        <script type="text/javascript" src="/blog/checker.js"></script> 
+            <div id="footer">
+<div id="footer-inner">
+  <div id="footer-content">
+
+      
+<!--
+      <section> 
+     </section>
+  <p><a title="Instagram" target="_blank" href="http://instagram.com/ruanyf">Instagram</a></p>
+       <p><a title="订阅" href="https://app.feedblitz.com/f/f.fbz?Sub=348868" target="_blank">邮件订阅</a></p>
+  
+       <h2>Feed</h2>
+       <p><a title="FeedBurner" href="http://feeds.feedburner.com/ruanyifeng" target="_blank">FeedBurner</a></p>
+       <p><a title="atom.xml" href="http://www.ruanyifeng.com/blog/atom.xml" target="_blank">atom.xml</a></p>
+     
+      <p>支付宝：<a title="支付宝" href="alipays://platformapi/startapp?appId=20000067&url=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog" target="_blank">yifeng.ruan@gmail.com</a></p>
+-->
+
+     <section>
+<!--
+       <h2>授权方式</h2>
+       <p><a title="许可证" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">自由转载-非商用-非衍生-保持署名</a></p>
+       <h2>微信公号</h2>
+       <h2>社交帐号</h2>
+       <h2>联系方式</h2>
+     -->
+       <p><img src="https://www.wangbase.com/blogimg/asset/202001/bg2020013101.jpg" alt="微信扫描"></p>
+       <p>
+         <a title="微博" href="http://weibo.com/ruanyf" target="_blank">Weibo</a> | 
+         <a title="Twitter" target="_blank" href="https://twitter.com/ruanyf">Twitter</a> |
+         <a title="GitHub" target="_blank" href="https://github.com/ruanyf">GitHub</a>
+       </p>
+     
+     <p>Email: <a title="电子邮件" href="mailto:yifeng.ruan@gmail.com" target="_blank">yifeng.ruan@gmail.com</a></p>
+     </section>
+  
+  
+
+
+  </div>
+</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46829782-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript" src="/blog/stats.js"></script>
+<script>
+var supportImg = document.querySelector('#support-img');
+
+if (supportImg && _hmt) {
+  _hmt.push(['_trackEvent', 'banner', 'load']);
+  supportImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'banner', 'click']);
+  }, false);
+}
+
+var homepageImg = document.querySelector('#homepage_sponsor');
+if (homepageImg && _hmt) {
+  _hmt.push(['_trackEvent', 'homepage-banner', 'load']);
+  homepageImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'homepage-banner', 'click']);
+  }, false);
+}
+</script>
+
+
+<div id="share_button_proto" style="display:none;">
+<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a>
+
+
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=15e016b4-0028-44f1-a40d-a3c9d9c13c28&style=10&bgcolor=#fff&bp=weixin,qqim,qzone,qqmb,sinaminiblog,fanfou,xueqiu,douban,facebook,twitter,gplus,instapaper&ssc=false"></script>
+<script type="text/javascript" charset="utf-8">
+bShare.addEntry({
+    title: document.getElementById("page-title").innerHTML,
+url:window.location.href
+});
+</script>
+</div>
+
+<script>
+document.getElementById("share_button").innerHTML=document.getElementById("share_button_proto").innerHTML;
+</script>
+
+
+
+
+
+        </div>
+    </div>
+</body>
+</html>
