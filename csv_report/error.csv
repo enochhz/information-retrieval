@@ -1,0 +1,19 @@
+,root_url,error_info
+0,techcrunch.com,unknown url type: 'techcrunch.com'
+1,#comment-text,<urlopen error no host given>
+2,http://www.wdw6.com/,'utf-8' codec can't decode byte 0xb7 in position 255: invalid start byte
+3,#comments,<urlopen error no host given>
+4,http://www.miibeian.gov.cn,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+5,javascript:;,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+6,www.bbc.com,unknown url type: 'www.bbc.com'
+7,techcrunch.com,unknown url type: 'techcrunch.com'
+8,#issuecomment-681328773,<urlopen error no host given>
+9,mailto:stevenzhaoshuai@didiglobal.com,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+10,mailto:herman.xiong@caidao1.com,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+11,#issuecomment-691866466,<urlopen error no host given>
+12,http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=JRQQHRMWFR0RExRlVFQLRkpI,'utf-8' codec can't decode byte 0xd3 in position 107: invalid continuation byte
+13,mailto:1152534558@qq.com,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+14,mailto:huweiyun@youzan.com,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+15,mailto:yifeng.ruan@gmail.com,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+16,#issuecomment-694621397,<urlopen error no host given>
+17,www.bbc.com,unknown url type: 'www.bbc.com'
