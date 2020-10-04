@@ -54,7 +54,7 @@ class WebCrawler:
         FileManager.write_to_csv(self.page_map, 'root_url', 'num_of_out_links', f'./{self.csv_folder}/info.csv') # Write outlinks analysis csv
         FileManager.write_to_csv(self.error_map, 'root_url', 'error_info', f'./{self.csv_folder}/error.csv') # Write error csv
     
-    def crawl_new_page(self):
+    def crawl_new_page(self) -> None:
         try:
             page_url = random.choices(self.to_be_visited_pages)[0] # Pick a random page from the queue
             self.to_be_visited_pages.remove(page_url)
