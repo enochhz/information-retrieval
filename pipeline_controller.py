@@ -16,7 +16,7 @@ class PipelineController:
 
     def crawl_pages(self):
         for seed_url, language in self.url_maps.items():
-            WebCrawler(seed_url, language=language, page_limit=5, html_content_folder = self.html_folder).parse_pages()
+            WebCrawler(seed_url, language=language, page_limit=100, html_content_folder = self.html_folder, batch_size=10).parse_pages()
 
     def remove_noise(self):
         languages = ['en', 'es', 'zh-cn']
@@ -29,7 +29,7 @@ class PipelineController:
 if __name__ == '__main__':
     url_map = {
         'https://techcrunch.com/': 'en',
-        'http://www.ruanyifeng.com/blog/2020/09/weekly-issue-125.html': 'zh-cn',
+        'https://www.chineseinla.com/': 'zh-cn',
         'https://www.bbc.com/mundo/noticias-internacional-54320690': 'es',
     }
     html_folder = 'folder'

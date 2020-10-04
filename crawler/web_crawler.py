@@ -1,4 +1,5 @@
 import os
+import threading
 import csv
 import re
 import random
@@ -27,7 +28,7 @@ class WebCrawler:
     skip = 0
     site_map = False
 
-    def __init__(self, seed_url, language = 'en', page_limit = 5, site_map = False, html_content_folder = 'folder', csv_folder = 'csv_report'):
+    def __init__(self, seed_url, language = 'en', page_limit = 5, site_map = False, html_content_folder = 'folder', csv_folder = 'csv_report', batch_size=5):
         self.to_be_visited_pages = [seed_url]
         self.page_map, self.error_map = {}, {}
         self.banned_hosts = set()
@@ -38,24 +39,34 @@ class WebCrawler:
         self.site_map = site_map
         self.html_content_folder = html_content_folder
         self.csv_folder = csv_folder
+        self.batch_size = batch_size
         FileManager.make_directories(self.html_content_folder, self.lang, csv_folder)
     
     def parse_pages(self) -> None:
         while (len(self.to_be_visited_pages) > 0) and (len(self.page_map.keys()) < self.page_limit): # Limit is not hit
-            try:
-                page_url = random.choices(self.to_be_visited_pages)[0] # Pick a random page from the queue
-                self.to_be_visited_pages.remove(page_url)
-                host_name = HTMLPageHelper.extract_host_name(page_url)
-                if (not self.valid_page_url(host_name, page_url)) or (not self.valid_host_name(host_name)): continue
-                if self.site_map:
-                    site_map_pages = RobotsHelper.pages_from_sitemap(page_url) # Get pages from sitemap
-                    self.to_be_visited_pages.extend(site_map_pages)
-                if not self.parse_and_store_page(host_name, page_url): continue
-                print(page_url)
-            except Exception as e: 
-                self.error_map[page_url] = str(e)
+            threads = list()
+            for i in range(self.batch_size):
+                threads.append(threading.Thread(target=self.crawl_new_page))
+            for thread in threads:
+                thread.start()
+            for thread in threads:
+                thread.join()
         FileManager.write_to_csv(self.page_map, 'root_url', 'num_of_out_links', f'./{self.csv_folder}/info.csv') # Write outlinks analysis csv
         FileManager.write_to_csv(self.error_map, 'root_url', 'error_info', f'./{self.csv_folder}/error.csv') # Write error csv
+    
+    def crawl_new_page(self):
+        try:
+            page_url = random.choices(self.to_be_visited_pages)[0] # Pick a random page from the queue
+            self.to_be_visited_pages.remove(page_url)
+            host_name = HTMLPageHelper.extract_host_name(page_url)
+            if (not self.valid_page_url(host_name, page_url)) or (not self.valid_host_name(host_name)): return
+            if self.site_map:
+                site_map_pages = RobotsHelper.pages_from_sitemap(page_url) # Get pages from sitemap
+                self.to_be_visited_pages.extend(site_map_pages)
+            if not self.parse_and_store_page(host_name, page_url): return 
+            print(page_url)
+        except Exception as e: 
+            self.error_map[page_url] = str(e)
     
     def valid_page_url(self, host_name: str, page_url: str) -> bool:
         """
