@@ -17,41 +17,44 @@ class NoiseRemover:
         html_text = self.get_html_from_file(file_path)
         soup = BeautifulSoup(html_text, "html.parser")
         body = soup.find("body")
+        
+        if body is not None:
+            # remove script
+            for b in body.select("script"):
+                b.extract()
+            # remove image tags
+            for b in body.select("img"):
+                b.extract()
+            for b in body.select("input"):
+                b.extract()
+            for b in body.select("a"):
+                b.extract()
+            for b in body.select("footer"):
+                b.extract()
+            for b in body.select("style"):
+                b.extract()
 
-        # remove script
-        for b in body.select("script"):
-            b.extract()
-        # remove image tags
-        for b in body.select("img"):
-            b.extract()
-        for b in body.select("input"):
-            b.extract()
-        for b in body.select("a"):
-            b.extract()
-        for b in body.select("footer"):
-            b.extract()
-        for b in body.select("style"):
-            b.extract()
+            body_string_quotes_cleaned = self.clean_quotes(str(body))
 
-        body_string_quotes_cleaned = self.clean_quotes(str(body))
+            body_tokens = nltk.tokenize.word_tokenize(body_string_quotes_cleaned)
 
-        body_tokens = nltk.tokenize.word_tokenize(body_string_quotes_cleaned)
+            body_tokens_clean = self.customize_tokenizer(body_tokens)
+            # print(body_tokens_clean)
 
-        body_tokens_clean = self.customize_tokenizer(body_tokens)
-        # print(body_tokens_clean)
+            # If chinese, extra tokenize step
+            if lang == "zh-cn":
+                body_tokens_clean = self.chinese_tokenize(body_tokens_clean)
 
-        # If chinese, extra tokenize step
-        if lang == "zh-cn":
-            body_tokens_clean = self.chinese_tokenize(body_tokens_clean)
+            self.prefix_sum_tags(body_tokens_clean)
 
-        self.prefix_sum_tags(body_tokens_clean)
+            i, j = self.noise_remove(body_tokens_clean)
+            # print("i: " + str(i))
+            # print("j: " + str(j))
+            # print(body_tokens_clean[i : j + 1])
 
-        i, j = self.noise_remove(body_tokens_clean)
-        # print("i: " + str(i))
-        # print("j: " + str(j))
-        # print(body_tokens_clean[i : j + 1])
-
-        self.store_tokens_to_html(body_tokens_clean[i : j + 1])
+            self.store_tokens_to_html(body_tokens_clean[i : j + 1])
+        else:
+            print("Given HTML does not have a body")
 
     def get_html_from_file(self, file_path):
         with codecs.open(file_path, "r", "utf-8") as file:
