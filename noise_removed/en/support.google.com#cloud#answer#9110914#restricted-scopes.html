@@ -1,0 +1,639 @@
+Last modified on: October 8, 2020 
+If your app uses Google APIs to access Google users' data, you might have to complete a verification process before you make your app publicly available for the first time. 
+The applicability of this requirement to your app depends mostly on two factors: the type of user data you access—public profile information, calendar entries, files in Drive, and so on—and the degree of access you need—read-only, read and write, and so on. When you use OAuth 2.0 to get permission from your users to access this data, you use strings called 
+scopes 
+to specify the type of data you want to access and how much access you need. If your app requests scopes categorized as 
+sensitive 
+or 
+restricted 
+, you will probably need to complete the verification process( see, however, the exceptions). 
+A few examples of sensitive scopes are some of the scopes used by the Calendar API, People API, and YouTube Data API, but there are others. Restricted scopes are fewer in number, currently including only scopes used by the Gmail API and Drive API. 
+The process you need to complete depends on whether your app requests sensitive scopes, or restricted scopes( all apps must complete the first process, brand verification): 
+All apps that access Google APIs 
+must verify that they accurately represent their identity and intent as specified by Google's. If you change any of the details that appear on your OAuth consent screen, such as the project's icon, display name, homepage or privacy policy URL, or authorized domains, you need to have your app re-verified for branding prior to updates being published to your OAuth consent screen. This brand verification process typically takes 2-3 business days. 
+Apps that request sensitive scopes 
+must verify that they follow. This sensitive scopes verification process typically takes 3-5 business days to complete. 
+Apps that request restricted scopes 
+must also verify that they follow, but they must also meet the. One of these additional requirements is that if the app accesses or has the capability to access Google user data from or through a server, the system must undergo an independent( 3P) security assessment. For this reason, this restricted scopes verification process can potentially take several weeks to complete. 
+The rest of this page describes these requirements and the verification processes in more detail. 
+Preparing for verification: 
+Sensitive and restricted scopes 
+Sensitive scopes 
+Some of the scopes used by the following APIs are considered sensitive; see the API's documentation or look for the lock icon in the Cloud Console. If your app requests sensitive scopes, and does n't meet any of the criteria for an exception( see below), you will need to verify that your app follows the 
+For a complete list of Google APIs, see. To check if scopes are sensitive or restricted, add the scopes to your project via the. 
+Restricted scopes 
+If your app requests any of the following scopes, and does n't meet any of the criteria for an exception( see below), you will need to satisfy both the and the, which requires a more extensive review process. 
+Gmail API 
+https: //mail.google.com/( includes any usage of IMAP, SMTP, and POP3 protocols) 
+https: //www.googleapis.com/auth/gmail.readonly 
+https: //www.googleapis.com/auth/gmail.metadata 
+https: //www.googleapis.com/auth/gmail.modify 
+https: //www.googleapis.com/auth/gmail.insert 
+https: //www.googleapis.com/auth/gmail.compose 
+https: //www.googleapis.com/auth/gmail.settings.basic 
+https: //www.googleapis.com/auth/gmail.settings.sharing 
+For descriptions of each scope, please refer to. 
+Drive API 
+https: //www.googleapis.com/auth/drive 
+https: //www.googleapis.com/auth/drive.readonly 
+https: //www.googleapis.com/auth/drive.activity 
+https: //www.googleapis.com/auth/drive.activity.readonly 
+https: //www.googleapis.com/auth/drive.scripts 
+https: //www.googleapis.com/auth/drive.metadata 
+https: //www.googleapis.com/auth/drive.metadata.readonly 
+For descriptions of each scope, please refer to. 
+Drive APIs will launch as restricted starting in 2020 and will be a phased rollout. If you were already approved for these Drive APIs under the sensitive scopes verification process, then we will notify you when your application must reverify as restricted. New apps requesting restricted scopes Drive APIs must undergo the sensitive scopes verification process but will be expected to undergo the restricted scopes verification process at a later date. 
+Exceptions to verification requirements 
+If your app is going to be used in any of the following scenarios, you do not need to submit it for review: 
+Personal Use: 
+The app is not shared with anyone else or will be used by fewer than 100 users. Note that your app will be subject to the unverified app screen and the 100-user cap will be in effect. 
+Development/Testing/Staging: 
+If your app is in development/testing/staging mode and not ready to be publicly accessible, then you do not need to submit your app for verification. Note that your app will be subject to the unverified app screen and the 100-user cap will be in effect. 
+Service-owned Data Only: 
+The app only accesses its own data( using a Service Account), and not user data( linked to a Google Account). 
+To understand what service accounts are, see. 
+For instructions on using a service account, see. 
+Internal Use: 
+The app is used only by people in your G Suite or Cloud Identity organization. Note that your app will be subject to the unverified app screen and the 100-user cap will be in effect. 
+Learn more about. 
+Learn how to mark your app as internal in the FAQ 
+Domain-wide Installation: 
+The app is used only by G Suite enterprise users. Access will depend on permission being granted by the domain administrator. G Suite domain administrators are the only ones that can whitelist the app for use within their domains. 
+To learn how to make your app Domain-Wide Install, see 
+SMTP/IMAP/WP: 
+The app is used to send emails through WordPress, or similar single-account SMTP plugins. 
+Preparing for verification 
+Before you submit your app for verification, complete these tasks: 
+All apps 
+All apps that request access to data using Google APIs must complete brand verification: 
+Ensure your app complies with the and. 
+Confirm your app does n't fall under any of the use cases listed in the. 
+If you use Google Sign-In Scopes in your app, ensure that your app complies with the branding guidelines. 
+Verify ownership of your project's authorized domains using the Search Console. Use an account that is either a Project Owner or a Project Editor of your Cloud Console project. 
+Make sure all branding information on the OAuth consent screen, such as the project name shown to users, support email, homepage URL, privacy policy URL, and so on, accurately represents the app's identity. 
+Make sure that your homepage meets the following requirements: 
+Your homepage must be publicly accessible, and not behind a sign-in page. 
+Your homepage must make clear its relevance to the app you 're verifying. 
+Your homepage must be accurate, inclusive, and easily accessible to all users. 
+Links to the Google Play Store or Facebook are not considered valid application homepages. 
+Make sure that your app's Privacy Policy meets the following requirements: 
+The Privacy Policy must be visible to users, hosted within the domain of your website, and linked from the OAuth consent screen on the Google API Console. 
+The Privacy Policy must disclose the manner in which your application accesses, uses, stores, or shares Google user data. Your use of Google user data must be limited to the practices disclosed in your published Privacy Policy. 
+Apps requesting sensitive scopes 
+Complete the preparation steps for. 
+Prepare a detailed justification for each requested scope as well as an explanation for why a narrower scope would n't be sufficient. For example: 
+My app will use https: //www.googleapis.com/auth/calendar to show a user's Google calendar data on the scheduling screen of my app, so that users can manage their schedules through my app and sync the changes with their Google calendar. 
+Your requested scope must be as granular as possible( if your requested scope goes beyond the usage needed, then we will either reject your request or suggest a more applicable scope). 
+Prepare a video that fully demonstrates the OAuth grant process by users and shows, in detail, the usage of sensitive scopes in the app. 
+Show the OAuth grant process that users will experience, in English( the consent flow, and, if you use Google Sign-in, the sign-in flow). 
+Show that the OAuth Consent Screen correctly displays the App Name. 
+Show that the URL bar of the OAuth Consent Screen correctly includes your app's Client ID. 
+Note: 
+This is not required for native Android and iOS apps. 
+Show how the data will be used by demonstrating the functionality enabled by each sensitive and restricted scope you request. 
+Upload the video to YouTube. You 'll need to provide a link to the video as part of the verification process. Let us know if your app requires registration or features a local login. If any of your OAuth clients are not ready for production, we suggest you delete or remove them from the project requesting verification. You can do this in the. 
+Apps requesting restricted scopes 
+Complete the preparation steps for and. 
+Ensure your app complies with the, Google's, and the 
+Ensure your app is one of the allowed types specified in the Limited Use section of the. 
+If your app is a task automation platform: your demo video must showcase how multiple API workflows are created and automated, and in which direction( s) user data flows. 
+Ensure your app will be prepared to migrate to more granular API scopes in case your currently approved scope( s) usage is overly broad. 
+Prepare a video that fully demonstrates the OAuth grant process by users and shows, in detail, the usage of sensitive and restricted scopes in the app. 
+Show the OAuth grant process that users will experience, in English( the consent flow, and, if you use Google Sign-in, the sign-in flow). 
+Show that the OAuth Consent Screen correctly displays the App Name. 
+Show that the URL bar of the OAuth Consent Screen correctly includes your app's Client ID. 
+Note: 
+This is not required for native Android and iOS apps. 
+Show how the data will be used by demonstrating the functionality enabled by each sensitive and restricted scope you request. 
+If you use multiple clients, and therefore have multiple client IDs, show how data is accessed on each OAuth client. 
+Submitting your app for verification 
+To submit for verification, follow the steps below: 
+Go to the OAuth consent screen page. 
+Click the Project selector drop-down at the top of the page. 
+On the 
+Select from 
+dialog that appears, select your project. 
+If you ca n't find your project, and you know your project ID, you can construct a URL in your browser in the format https: //console.cloud.google.com/apis/credentials/consent? project=[ PROJECT_ID] where[ PROJECT_ID] is the project ID you want to use. 
+Enter the information required on the configuration page, and then click 
+Submit 
+for verification. 
+In the 
+Verification required 
+window that appears, enter a contact email address and the appropriate justifications, and then click 
+Submit 
+to start the verification process. 
+After you submit your app, the Trust& amp; Safety team will follow up by email with any additional information they need or steps you must complete. 
+Security assessment 
+If you submitted an app that requests restricted scopes, and the app accesses Google user data from or through a server, one of the follow-up verification steps will be to get your app reviewed by an independent security assessor. This assessment helps keep Google users' data safe by verifying that all apps that access Google user data demonstrate a minimum level of capability in handling data securely and deleting user data upon user request. 
+Assessments will be conducted by a Google-designated third-party assessor, may cost between$ 15,000 and$ 75,000( or more) depending on the complexity of the application, and will be payable by the developer. This fee may be required whether or not your app passes the assessment. We expect that fees will include a remediation assessment if needed. If your app has previously completed an adequate security assessment as determined by the assessor, you will be able to provide a letter of assessment that may reduce the scope of the review. 
+OAuth API verification FAQ 
+This section has answers to frequently asked questions about Google Cloud OAuth policy violations. 
+The following FAQs apply for sensitive and restricted scope verification. 
+Type of verification 
+Why this is needed 
+Expected end-to-end time* 
+Brand verification 
+Ensure that an app accurately represents its identity and intent per the via verifying icon, display name, URLs, domain ownership, etc. 
+2-3 days 
+Sensitive scope verification 
+Ensure that an app's usage of sensitive scopes is not deceptive, to protect user data per the. 
+3-5 days 
+Restricted scope verification and security assessment 
+Ensure that an app does not misuse user data obtained using restricted scopes per the and the. Security assessment is required for apps that store( or transmit) data via servers. 
+4-8 weeks 
+* 
+End-to-end 
+time will vary based on developer responsiveness. 
+For information about what happens if you do n't submit your app for verification, see For information about what happens when you do n't need to submit your app for verification, see The three types of verification listed in the preceding table can be done individually or combined if you have added or modified the app's branding information, requested sensitive scopes, and/or requested restricted scopes. 
+Your app might need to go through verification if: 
+Your app uses any of the sensitive or restricted scopes to request Google User Data. 
+You want your application to display an icon or display name instead of the redirect URL domain on the OAuth consent screen. 
+The number of authorized domains for your apps for a project. 
+There are changes to the OAuth consent screen after your app has been approved. 
+You do not need to submit your app for review if it's going to be used in any of the following scenarios: 
+Personal Use: The app is not shared with anyone else or will be used by fewer than 100 users. Hence, you can continue using the app by bypassing the unverified app warning during sign-in. 
+SMTP/IMAP/WP: The app is used to send emails through WordPress, or similar single account SMTP plug-ins. 
+Internal Use: An app is internal when the people in your domains only use it internally. Learn more about. Learn how to mark your app as internal in the FAQ 
+Domain-Wide Install: If your app is intended for only G Suite enterprise users, access will depend on permission being granted by the domain administrator. G Suite domain administrators are the only ones that can whitelist the app for use within their domains. To learn how to make your app Domain-Wide Install, see 
+Development/Testing/Staging: If your app is in development/testing/staging mode and not ready to be publicly accessible, then you do not need to submit your app for verification. Note that your app will be subject to the unverified app screen and the 100-user cap will be in effect when an app is in development/testing/staging. 
+Service Accounts: When your app is trying to access data from users' Google Cloud project and can run API requests on its behalf. To understand what service accounts are, see. For instructions on using a service account, see. 
+The app verifications are expected to take 3-5 days to account for clarification questions and re-submissions. Note that the verification will take longer to complete, likely several weeks. User access to the app for existing approved scopes will not be impacted during the verification process. 
+If you 're an Apps Script developer, and the project owner is using a G Suite account and the project is only used by Google Accounts in the project owner's domain, then your project is automatically internal-only. Learn more about OAuth Client Verification. 
+If your app is only for your organization or G Suite domain, you can mark it as internal-only in the OAuth consent screen configuration: 
+Go to the Cloud Console page. 
+Click the 
+Project selector 
+drop-down at the top of the page. 
+On the 
+Select from 
+dialog that appears, select your project. 
+Under 
+Application type 
+, select 
+Internal 
+, and then click 
+Save 
+. 
+If you do n't see this option, then your project might not be part of an organization. To determine if your project is part of an organization: 
+Go to the Cloud Console IAM& amp; admin page. 
+Click the 
+Project selector 
+drop-down at the top of the page. 
+On the 
+Select from 
+dialog that appears, select your project. 
+The 
+Location 
+section displays your project's location in its Organization. If the section is blank, then your project needs to be migrated to an Organization. Learn more about,, and. 
+Only project owners and editors can submit a project for verification. 
+Before you submit for verification, make sure you understand the verification requirements: 
+Review the and to get familiar with the updated policies and secure handling requirement. 
+Review the FAQ below. 
+To submit for verification, follow the steps below: 
+Go to the Cloud Console page. 
+Click the 
+Project selector 
+drop-down at the top of the page. 
+On the 
+Select from 
+dialog that appears, select your project. 
+If you ca n't find your project, and you know your project ID, you can construct a URL in your browser in the format 
+https: //console.cloud.google.com/apis/credentials/consent? project=[ PROJECT_ID] 
+where[ PROJECT_ID] is the project ID you want to use. 
+Enter the information required on the configuration page, and then click 
+Submit for verification 
+. 
+In the 
+Verification required 
+dialog that appears, enter the appropriate justifications, and then click 
+Submit 
+to start the verification process. 
+Learn more about. 
+To view the API scopes: 
+Go to the page. 
+Ensure the relevant project is selected. 
+Search for and enable the API for which you need the scopes to be verified. 
+Enabled API scopes are visible in scope picker on 
+OAuth Credentials 
+page 
+For a detailed list of APIs and relevant OAuth scopes, see. 
+Note: 
+For Apps Scripts projects, see the guide for more instructions. 
+If you need help deciding which scopes to use for your app, please refer to the documentation. 
+To check your project's verification status: 
+Go to the Cloud Console page. 
+Click the 
+Project selector 
+drop-down at the top of the page. 
+On the 
+Select from 
+dialog that appears, select your project. 
+If you ca n't find your project, and you know your project ID, you can construct a URL in your browser in the format 
+https: //console.cloud.google.com/apis/credentials/consent? project=[ PROJECT_ID] 
+where[ PROJECT_ID] is the project ID you want to use. 
+If you have submitted your project and it's currently in review, 
+Being verified 
+will display under 
+Verification status 
+. For more information about other verification statuses, see the page. 
+To ensure a streamlined verification process, please ensure that all the required information is included, such as the following: 
+Verify domain ownership of 
+all your authorized domains 
+with Google through by using an account that is either a 
+Project Owner 
+or a 
+Project Editor 
+on your OAuth Project. 
+Note 
+: If you are using a third party service provider and your domain is owned by them, then you need to provide a detailed justification for us to validate it. 
+Make sure that your application homepage links to an externally accessible domain that describes the necessary content, context, or connection to the app that you are submitting. 
+Placing sign-in restrictions on the homepage is only allowed for internal apps, which are not subject to the verification process. For more information, see. 
+Links to the Google Play Store or Facebook are not considered valid application homepages. 
+Make sure that your app's Privacy Policy meets the following requirements: 
+The Privacy Policy 
+must be visible to users 
+, hosted within the domain of your website, and linked to the OAuth consent screen on the. 
+The Privacy Policy must disclose the 
+manner in which your application accesses, uses, stores, or shares Google user data 
+. Your use of Google user data must be limited to the practices disclosed in your published Privacy Policy. 
+Make sure that each scope that you 're requesting has an explanation for its use/need for the project, as well as a justification for why a narrower scope would be insufficient. 
+Make sure all OAuth branding information on the OAuth consent screen, such as the project name shown to users, support email, homepage URL, privacy policy URL, and so on, accurately represents the app's identity. 
+If you use in your app, please ensure that your app is compliant per these. 
+Please include a YouTube link to a demo video demonstrating the OAuth grant process by users and explaining, in detail, the usage of sensitive and restricted scopes within the app's functionality for 
+each OAuth client 
+belonging to the project. 
+Note that the video should clearly show the app's details such as the app name, OAuth client ID, and so on. For multiple client IDs, the demo video should show usage of sensitive and restricted scopes on each client. 
+Including the video along with the verification request will speed up the approval process significantly. 
+Note that approval will not be granted if scope usage on each OAuth client ID is not adequately explained. Additionally, if any of your OAuth clients in the project requesting verification are not ready for testing, we will be unable to complete our review and your request will be rejected. We require that you separate your test and production projects and move OAuth clients still in development into a test project before requesting verification. Your apps will be thoroughly reviewed by our teams. 
+For information about 
+using the new consent screenflow 
+, see. 
+If you are requesting a, please reference the section. 
+Please ensure that the YouTube link to a demo video demonstrates the OAuth grant process by users and explains the usage of sensitive and restricted scopes within the app's functionality for 
+each OAuth client 
+belonging to the project. 
+Note that the video must clearly show the app's details such as the app name, OAuth Client ID, etc. as applicable. 
+The demo video must show usage of sensitive and restricted scopes on each client. 
+Including the video along with the verification request will speed up the approval process significantly. Note that approval will not be granted if scope usage on each OAuth client ID is not adequately explained. 
+Additionally, if any of your OAuth clients in the project requesting verification are not ready to be productionized, we will be unable to complete our review and your request will be rejected. We require that you separate your testing/development and production projects. Our teams will thoroughly review your apps. 
+You can review the following guides on how to make a screencast on your Mac or PC: 
+You can add new sensitive or restricted scopes in the Cloud Console page and click 
+Submit for Verification 
+. However, we will only approve those new scopes along with your existing sensitive or restricted scope verification. If you begin to use the new sensitive or restricted scopes before they are approved, users will experience the and the app will be subject to the 100-user quota. 
+For the restricted scope verification when a security assessment is required, verification is complete only after the security assessment is complete and you have provided evidence via a Letter of Assessment. 
+You can access data from your users' Google Cloud projects by creating a service account to represent your service, and then having your customers grant that service account appropriate access to their cloud data using IAM policies. Note that you might want to create a service account per customer if you need to avoid confused deputy problems. To familiarize yourself and educate your users on using service accounts and updating cloud IAM policies, see the following articles. 
+Service Account Creation: 
+IAM Policies: 
+If your users are having issues creating a service account or using IAM policies to grant your project the appropriate permissions, please direct them to. 
+If you do n't submit your app for review: 
+If your public app uses any sensitive or restricted scopes that permit access to certain user data, users of your app will see an Unverified App warning screen. 
+To protect users and Google systems from abuse, apps that use OAuth and Google Identity have a 100-user quota restriction based on the risk level of the OAuth scopes the app uses. Failure to get your app verified might result in exhaustion of your project's 100-user quota and cause Google sign-in to be disabled. Learn more about. 
+If the app has been rejected for or scopes, users' access to the unapproved sensitive or restricted scopes in the app via OAuth will no longer work. 
+If your app was previously approved for sensitive scopes and has been rejected via the restricted scope verification, here are the steps to take to restore sensitive scope access for your app: 
+If your app still needs access to sensitive scopes only, do the following: 
+Remove the use of restricted scopes from your app code and from the Cloud Console page. 
+On the Cloud Console page, register all the sensitive scopes you 're requesting access to and click 
+Submit for Verification 
+. 
+If you believe your app's use of restricted scopes is compliant with the and you want to reapply, do the following: 
+For a faster verification turnaround, ensure that your app complies with our policy. For more information, see 
+On the Cloud Console page, register the restricted scopes you 're requesting access to and click 
+Submit for Verification 
+. 
+When you reapply for verification, all required materials need to be resubmitted. The end-to-end timeframes will take several weeks. 
+To protect users and Google systems from abuse, unverified apps that are accessing restricted or sensitive scopes have a 100 new-user quota restriction. Failure to get your app verified before making requests to sensitive or restricted scopes will result in your project's 100 new-user quota eventually getting exhausted and Google sign-in being disabled for your users. Learn more about. 
+This is caused by approved apps making requests to sensitive or restricted scopes that were not approved during the verification process. Review the approved scopes in your Cloud Console for the project and make sure that the codebase of your app is not requesting any scopes that are not listed. 
+If you need assistance with identifying which unapproved scopes your project is requesting, reach out by directly responding to the last email that the verification team sent you. After the scopes are identified, do the following: 
+If the scopes are not needed, remove requests for the scopes from your codebase. 
+If the scopes are needed, add them to the Cloud Console and submit them for verification. 
+This is caused by the project actively making requests for restricted or sensitive scopes that have not yet been approved/verified. If you need assistance with identifying which unapproved scopes your project is requesting, reach out by directly responding to the last email that the verification team sent you. After the scopes are identified, do the following: 
+If the scopes are not needed, remove requests for the scopes from your codebase. 
+If the scopes are needed, add them to the Cloud Console and submit them for verification. 
+Sensitive scopes allow access to Google User Data. If an app uses sensitive scopes, it must comply with the and have its OAuth consent screen configuration verified by Google. 
+The app verification process can take anywhere from 3 to 5 business days. 
+Like sensitive scopes, restricted scopes allow access to Google User Data. If an app uses restricted scopes, it must comply with the and have its OAuth consent screen configuration verified by Google. In addition, Google verifies that an app that uses restricted scopes complies with the. 
+Gmail APIs( currently enforced) 
+https: //mail.google.com/( includes any usage of REST, IMAP, SMTP, and POP3 protocols) 
+https: //www.googleapis.com/auth/gmail.readonly 
+https: //www.googleapis.com/auth/gmail.metadata 
+https: //www.googleapis.com/auth/gmail.modify 
+https: //www.googleapis.com/auth/gmail.insert 
+https: //www.googleapis.com/auth/gmail.compose 
+https: //www.googleapis.com/auth/gmail.settings.basic 
+https: //www.googleapis.com/auth/gmail.settings.sharing 
+Starting in 2020, the following Drive scopes will become. You do not need to submit for Drive restricted scopes verification before then, but you 'll need to go through the existing Drive if you have a production app and have n't already done so. For more information, see the FAQ 
+Drive APIs( not yet enforced as Restricted) 
+https: //www.googleapis.com/auth/drive 
+https: //www.googleapis.com/auth/drive.readonly 
+https: //www.googleapis.com/auth/drive.activity 
+https: //www.googleapis.com/auth/drive.activity.readonly 
+https: //www.googleapis.com/auth/drive.scripts 
+https: //www.googleapis.com/auth/drive.metadata 
+https: //www.googleapis.com/auth/drive.metadata.readonly 
+The sensitive scope app verification verifies compliance with the. 
+The restricted scope app verification verifies compliance with the Google API User Data Policy and an additional set of requirements for restricted scopes outlined in. 
+If the app needs to use the new restricted scopes to prepare for the restricted scope verification, you can do the following now to ensure a smooth verification process in 2020. Enforcement for Drive restricted scope policies will be a phased rollout. If you were already approved for these APIs under the sensitive scope verification process, then we will notify you when your application must be reverified. Until then, new apps that have n't been approved for the Drive scopes will need to undergo the sensitive scope verification process. 
+If your app is for internal organization usage only, be sure to mark the app as internal. For instructions, see the FAQ. Public enterprise apps that request restricted scopes and are used by other enterprises are affected by this policy change and will need to submit their app for verification. Regardless of whether an app requires verification or not, G Suite administrators are and can whitelist apps as needed for their businesses. 
+Ensure that project are up to date so that Google can communicate important policy updates and impact related to a developers' app with the developer. Ensure that are up to date so that users can contact the developer as needed. 
+Remove any unused and test clients from the project before requesting verification. 
+Ensure that all scopes that your Google API project uses appear in your project's OAuth consent screen scope configuration in the Google API Console. For instructions, see in the`` Setting up OAuth 2.0'' help article. 
+Ensure that your scope usage is as narrow as possible, and be prepared to tell us why a narrower scope is insufficient in the verification process. 
+Verify domain ownership of all your authorized domains with Google through by using an account that is either a Project Owner or a Project Editor on your OAuth Project. 
+Note: 
+If a third-party service provider owns your domain, then you need to provide a detailed justification for us to validate it. 
+Ensure that your app's Privacy Policy meets the following requirements: 
+The Privacy Policy must be visible to users, hosted within the domain of your website, and linked to the OAuth consent screen on the. 
+The Privacy Policy must be compliant with the and the. It must disclose the manner in which your application accesses, uses, stores, or shares Google user data. Your use of Google user data must be limited to the practices disclosed in your published Privacy Policy. 
+If you are using, you need to submit for verification. You 
+do not 
+need to submit for verification if any of the following applies to your project: 
+Your project uses Gmail Add-ons that does n't use any of the restricted scopes. 
+Only owners use the project: 
+if the project is only used by owners of the project, no action is required. To determine whether you are an owner( versus an editor or viewer): 
+Go to the GCP Console page. 
+Click the 
+Project selector 
+drop-down at the top of the page. 
+On the 
+Select from 
+dialog that appears, select your project. 
+Your roles are listed next to your email address in the 
+Members 
+list. 
+If you are n't an developer AND the project is part of an Organization and is for internal use only: 
+If the project owner is using a G Suite account and the project is only used by Google Accounts in the project owner's Organization, no action is required. 
+To determine if your project is part of an Organization: 
+Go to the GCP Console IAM& amp; admin page. 
+Click the 
+Project selector 
+drop-down at the top of the page. 
+On the 
+Select from 
+dialog that appears, select your project. 
+The 
+Location 
+section displays your project's location in its Organization. If the section is blank, then your project needs to be migrated to an Organization. Learn more about,, and. 
+To indicate that the application is for internal use: 
+Go to the GCP Console page. 
+Click the 
+Project selector 
+drop-down at the top of the page. 
+On the 
+Select from 
+dialog that appears, select your project. 
+Under 
+Application type 
+, select 
+Internal 
+, and then click 
+Save 
+. 
+If you are an developer: 
+The project does n't have users outside of your G Suite domain: 
+If the project owner is using a G Suite account and the project is only used by Google Accounts in the project owner's domain, no action is required. Learn more about OAuth Client Verification. 
+To determine if you have an Apps Script that needs to be submitted for verification even if you have users outside of your G Suite domain: 
+Open the script in the Apps Script editor. 
+Select 
+Resources& gt; Cloud Platform project 
+. 
+In the dialog that appears, click the top link, which is typically something like 
+[ Script Name]- project-id-123456789012 
+. 
+If you can access the project using that link, then you need to submit for verification. If you do n't see a link in the dialog and a message displays that`` This script has an Apps-Script-managed Cloud Platform project'', then you do n't need to submit for verification. 
+If your project is used by Google Accounts outside of your organization, such as the general public, 
+you need to submit your app for verification 
+. 
+You can skip the verification process if your app is solely built for G Suite customers and if the customers' domain admin whitelists your app by completing the following steps: 
+Make sure your project is marked as 
+Public 
+on the OAuth consent configuration page on Cloud Console. 
+Ask your customers' domain admin to so that unverified app UI will not be shown to users on that domain. Note that administrators for those enterprise accounts can. 
+Note that the following users will still experience the unverified app UI and eventually a user cap will be enforced: 
+Users trying to access the app from any domain that has n't explicitly whitelisted your app 
+Consumer users trying to authorize access to your app 
+If your application does n't fit the usage pattern in the preceding description, then you need to submit your application for verification. If you allow 
+only enterprise accounts 
+to use your app, be prepared to provide us with a sample enterprise account for verification purposes. 
+Yes, because IMAP and SMTP usage might require using https: //mail.google.com/, you will need to submit your app for the restricted scope verification for this determination. If your usage of IMAP/SMTP is deemed to violate the minimum scope policy within the verification process, you will need to migrate to using the Gmail API. 
+In some cases, apps will be required to migrate the scopes they are currently using to new ones that meet the minimum scope requirements. An example of this is migration of the use of the full mail scope( "mail.google.com") to the read-only scope( "gmail.readonly"). To minimize impact on your users, follow these steps: 
+Obtain approval for the new scopes with an approved verification request( refer to). 
+the prior user token to the scope that will be removed or remove access to the app entirely: for example, the token with https: //mail.google.com/ access that is being removed. You might consider doing the revocation while your users are using your app so that you can prompt for user consent immediately. 
+Prompt your users to re-consent with the new scopes: for example, gmail.readonly without. 
+Remove the scope that is being phased out of your API Console's OAuth registration. 
+If you do n't follow these steps, then any user with an active token that still has access to the scope being phased out will receive a Security Center warning to to your data. This occurs because the user has an active token where the API scope has not been verified any longer. If your app does not revoke the token as described in the preceding list, the user will continue to receive this warning message. 
+There are currently no key enforcement dates at this time for the Gmail restricted scopes verification process. However, please continue to check this page for any deadline updates. 
+The restricted scopes verification process checks for compliance in multiple areas. Verification is expected to take several weeks to account for clarification questions and re-submissions. It is common to experience many back-and-forths during this review process. Any outstanding items will be communicated to you in the verification thread. Failure to comply with these requirements will likely result in a rejection of your request. 
+Please ensure that all contacts associated with the verification of your project are included in the verification thread to avoid missing any key communications. 
+Yes, all Google Cloud projects that access restricted scopes must be submitted for verification. This also means that all OAuth Clients within a project requesting restricted scopes must be ready for verification once submitted. We suggest you delete or remove OAuth Clients that are not ready for production before submitting a verification request. 
+Yes, your app will need to be submitted for verification. If it is not, access to all restricted and non-restricted API scopes will be disabled for consumer accounts. 
+Your verification can be completed faster if your submission is as detailed and thorough as possible. Please make sure the following are prepared: 
+Your app can be accessed and used by our verification team with their test accounts. 
+Your app's website is complete, descriptive and includes easy access to the privacy policy. 
+If your app uses restricted scopes, ensure your app's privacy policy complies with the of the API policies. 
+Homepage requirements 
+Your homepage must link to an externally accessible domain that describes the necessary content, context, or connection to the app you are submitting. 
+Your homepage must not be a link to a sign-in page. 
+Your homepage must explain with transparency the purpose for which your application requests user data. 
+Your homepage must thoroughly describe how your app enhances user functionality. 
+Your homepage must be accurate, inclusive, and easily accessible to all users. 
+Your Privacy Policy must be accessible from your homepage URL and visible to users. The Privacy Policy must clearly disclose the manner in which your application accesses, uses, stores, or shares Google user data. 
+Verified domains and accessible URL/URL links 
+You must verify 
+the domain ownership for all authorized domains listed in your request: 
+Go to the to complete the domain verification process. 
+The account you use 
+must be either a 
+Project Owner 
+or a 
+Project Editor 
+of your project. 
+Scopes selection and justification 
+Your requested scope( s) must be 
+as granular as possible 
+( if your requested scope goes beyond the usage needed, then we will either reject your request or suggest a more applicable scope). 
+You must provide a 
+detailed justification 
+for your requested scope( s) as well as an explanation for why a narrower scope would n't be sufficient. Example: 
+My app will use https: //www.googleapis.com/auth/calendar to show a user's Google calendar data on the scheduling screen of my app, so that users can manage their schedules through my app and sync the changes with their Google calendar. 
+App demonstration video 
+You must provide a YouTube link to a video, in English, that fully 
+demonstrates the OAuth grant process 
+by users and shows, in detail, the usage of restricted/sensitive scopes within the 
+app's functionality 
+for each OAuth client belonging to the project. 
+The video must clearly show the app's details such as the app name, OAuth Client ID, etc. as applicable. 
+The demo video must show usage of sensitive and restricted scopes on each OAuth client. 
+Including the video along with the verification request will speed up the approval process significantly. We will not grant approval if you do n't adequately explain scope usage on each OAuth client ID. 
+Additionally, if any of your OAuth clients, in the project requesting verification, are not ready to be put into production, we will not be able to complete our review and your request will be rejected. We require that you separate your testing/development and production projects. We will thoroughly test your apps. 
+Failure to satisfy/provide the preceding information might result in a rejection of your request. To avoid this outcome, update the applicable information in your request to meet our requirements. 
+Security assessment 
+If your application is sending or has the ability to send Google user data from a Restricted Scope to remote servers, 
+then our verification process 
+requires 
+that your app undergo a 
+security assessment 
+to demonstrate a minimum level of capability in handling data securely and deleting user data upon user request. Depending on the scope and complexity of your app, the cost for the third-party assessment might vary from$ 15,000 to$ 75,000. 
+Apps not applicable for verification 
+Apps for internal use only( single domain use) 
+Apps for personal use only 
+Apps that are Gmail SMTP plugins for WordPress 
+Apps that are in development or staging/testing 
+As new policies for APIs are announced, your app will need to be re-verified. Any changes made to your app to comply with the policy should enable the verification to be completed more efficiently, though your app may need to address API-specific policies. 
+After an app has been verified and designated as a reporting or monitoring, users need to re-grant access on a regular basis, such as every 90 days. Refresh tokens for this app type will have a defined time period. While the app is in verification, it will be exempt from token expiration until the verification is complete. 
+To ensure the best user experience, all apps should follow the requirements that are already in place. Apps are encouraged to check for token expiration on token exchange and prompt users to with user notification delivered via email, web interstitial or mobile app notification. For example, many apps already send users an email to re-connect access when their token is expired after a user changes their password. 
+Users are most likely to respond when the benefit of this app is clear from the notification. For example, if your app provides delayed flight notifications, your re-consent notification can remind the user that they should re-connect account access if they'd like to continue receiving notifications for their flights. 
+To prompt users for re-grant to the user's account, your app can use the same OAuth that was used when the user first signed up for your app with the addition of the URL parameter 
+prompt=consent 
+as described in the. Google OAuth will generate a new refresh token and send it back to your app. This new token now needs to be used going forward. 
+If your app is a task automation platform that connects user data between apps( like Zapier) and its use of restricted scopes data would be considered appropriate under the "Applications that enhance the email experience for productivity purposes" category, you would be required to comply with additional guidelines in order to be approved for restricted scope access. Submit your application for these scopes, and we will provide these guidelines during your verification process. 
+If you are unsure of your app's Application Type, you can select 
+None of these 
+when submitting the app for verification and our verification team will make this determination. 
+The following application types are examples of apps that are no longer allowed per the: 
+Mobile keyboards. 
+Applications that export email on a one-time or manual basis. 
+Applications that continuously and automatically backup email are permitted. 
+Apps that store or backup data other than email messages in Gmail. 
+Security apps, including those that scan for malware or identify spam or phishing emails. 
+All apps that request restricted scopes must show a Limited Use disclosure on their project's homepage or on a page one click away from the homepage that complies with the, including the Limited Use requirements. 
+This Limited Use disclosure should be written by you, the developer, and should meet the following requirements: 
+The disclosure should clearly describe the app's compliance with the, including the Limited Use requirements. 
+You must provide a link to the URL where the disclosure is hosted. 
+The disclosure must be easily visible to all users. 
+The disclosure must be accessible on the project's homepage URL or one click away from the homepage URL. 
+The disclosure must be under 500 characters. 
+For example: 
+(({ App's} use of information received from Google APIs will adhere to the, including the Limited Use requirements." 
+If you are unable to add a disclosure, then your app's privacy policy must comply with the following requirements. This option might make the review time for your app longer. 
+The Limited Use requirements have four elements: 
+Allowed Use: 
+Developers are only allowed to use restricted scope data to provide or improve user-facing features that are prominent from the requesting app's user interface. It should be clear to your users why and how you use the restricted scope data they 've chosen to share with you. 
+Allowed Transfer: 
+Developers are only allowed to transfer restricted scope data to others if that transfer is( a) necessary to provide or improve user-facing features that are prominent from the requesting app's user interface,( b) to comply with applicable laws, or( c) a part of a merger, acquisition or sale of assets of the developer. All other transfers or sales of user data are completely prohibited. 
+Prohibited Advertising: 
+Developers are never allowed to use or transfer restricted scope data to serve users advertisements. This includes personalized, re-targeted and interest-based advertising. 
+Prohibited Human Interaction: 
+Developers can not allow humans to read restricted scope user data. For example, a developer with access to a user's data is not allowed to have one of its employees read through a user's emails. There are four limited exceptions to this rule:( a) the developer obtains a user's consent to read specific messages( for example, for tech support),( b) it's necessary for security purposes( for example, investigating abuse),( c) to comply with applicable laws, and( d) the developer aggregates and anonymizes the data and only uses it for internal operations( for example, reporting aggregate statistics in an internal dashboard). 
+You can only complete the verification process if your privacy policy complies with the Limited Use requirements. For example, if your privacy policy states "App collects data from your electronic messages( email), and we share that data with our advertising partners for marketing purposes," then your app can not complete the verification process. This is true even if you disclose elsewhere in your product that your app follows the Limited Use Requirements. 
+Apps distributed on Google Play are subject to the. 
+If your privacy policy describes practices around your app's use of restricted scope data that violate the Limited Use requirements, it is inconsistent with these requirements. The following examples show practices that would be inconsistent with the Limited Use requirements for restricted scopes: 
+Example 1: Market Research Not Permitted 
+We share your information with the following: 
+Affiliates who enhance our market research capabilities by combining the information we collect with other information available to them from other sources; 
+[ Reason: Impermissible transfer of data, if using data from a restricted API scope.] 
+Third-party business partners that work with us to develop and resell products; 
+[ Reason: Impermissible transfer of data, if using data from a restricted API scope.] 
+and 
+Customers that have access to our market research datasets and analyses. 
+[ Reason: Impermissible use and transfer of data, if using data from a restricted API scope.] 
+Example 2: Transfer of Anonymized Datasets Not Permitted 
+The app uses your information as described in this policy, which includes 
+creating anonymized datasets to improve our products and services and the products and services of our affiliates. 
+[ Reason: Impermissible use and transfer of data to improve services outside the app using a restricted scope.] 
+We do not share, sell, or transfer your personal data for purposes other than those outlined in this policy. 
+We might, however, disclose aggregated information about our users, and information that does not identify any individual, without restriction. 
+[ Reason: Impermissible transfer and potential human reading of data. As a reminder, even aggregated and anonymized data are subject to Limited Use requirements.] 
+Example 3: Transfer with User Consent Not Permitted 
+We might share your information in any other way we might describe when you provide the information and for any other purpose with your consent. 
+[ Reason: Impermissible use and transfer. Note that the Limited Use restrictions apply even if you seek permission from your users.] 
+Example 4: Advertising with User Data from Restricted Scopes Not Permitted 
+We transfer information to advertising partners who work with our App under confidentiality agreements. 
+[ Reason: Impermissible transfer and use; confidentiality agreements do not make the transfer or use for advertising permissible under the Limited Use requirements.] 
+We might use your information to deliver advertisements according to our advertisers' target-audience preferences with your express consent. 
+[ Reason: Impermissible use of data for advertising. Note that the Limited Use restrictions apply even if you seek permission from your users.] 
+We might also use your information to 
+personalize your content, marketing, and recommendations, including to target content and services to more closely match your interests and location. 
+[ Reason: Impermissible use of data for advertising. Your app can continue to deliver advertisements but can not use the user data from restricted scopes to affect advertising. Personalization of content and recommendations that follow the Limited Use requirements are permitted.] 
+The following is an example of language that might be appropriate if your app uses data from restricted scopes and is a web email client app. 
+You might decide to incorporate language from the Limited Use requirements, or other policies, directly into your privacy policy. However, keep in mind that the might change from time to time and that you are responsible for ensuring that your privacy policy remains consistent with these policies and other applicable laws/regulations around changes to your privacy policy and data practices. The details of your privacy policy will depend on your app and your data practices, including what data from restricted scopes you collect and use. 
+Additional Limits on Use of Your Google User Data: Notwithstanding anything else in this Privacy Policy, if you provide the App access to the following types of your Google data, the App's use of that data will be subject to these additional restrictions: 
+The App will only use access to read, write, modify, or control Gmail message bodies( including attachments), metadata, headers, and settings to provide a web email client that allows users to compose, send, read, and process emails and will not transfer this Gmail data to others unless doing so is necessary to provide and improve these features, comply with applicable law, or as part of a merger, acquisition, or sale of assets. 
+The App will not use this Gmail data for serving advertisements. 
+The App will not allow humans to read this data unless we have your affirmative agreement for specific messages, doing so is necessary for security purposes such as investigating abuse, to comply with applicable law, or for the App's internal operations and even then only when the data have been aggregated and anonymized. 
+Only data from restricted scopes needs to comply with our. 
+The exact wording of your privacy policy will largely depend on your specific data practices, including how you use, store, or transfer other data you collect. We recommend seeking legal advice on what's right for your app. 
+If you use broad terms in your privacy policy to refer to data from restricted scopes and other types of data, we will interpret your disclosures as applying to user data from restricted scopes. Where possible, you should refer to data from restricted scopes separately in your privacy policy. For example, if your app uses data from restricted scopes, as well as other data obtained from your users in your app, you can separate your disclosures on how you use those different sources of data. 
+Describing how your app uses Google user data consistent with Google policies through a public web-accessible disclosure( such as an in-product disclosure on the application homepage, or public FAQ) is enough for going through the verification process. 
+For example, your public FAQ could contain a statement like the following: 
+(({ App's} use of information received from Google APIs will adhere to Google API Services User Data Policy, including the Limited Use requirements." 
+For more information about the Limited Use disclosure requirements, see 
+To help keep user data safe, we are requiring apps that are requesting restricted scopes and store data or have the ability to store data on( or transmit data through) servers that are not fully managed Google services to demonstrate a minimum level of capability in handling data securely and deleting user data upon user request. Customers manage Google Cloud and FirebaseCP services, so they would still require a security assessment. Google fully manages storing user data in Google Drive via drive.appdata, so this type of data storage does not require a security assessment. All apps are required to get their app reassessed on an annual basis. For more information, see 
+First, your application will be reviewed for compliance with the via the restricted scope verification you submit through the. Upon completing most of the checks in the restricted scope verification, you will receive an email with third-party security assessors who you can contact and use to perform your security assessment. 
+Assessments will be conducted by a Google-designated third-party assessor, may cost between$ 15,000 and$ 75,000( or more) depending on the complexity of the application, and will be payable by the developer. This fee may be required whether or not your app passes the assessment. We expect that fees will include a remediation assessment if needed. If your app has previously completed an adequate security assessment as determined by the assessor, you will be able to provide a letter of assessment that may reduce the scope of the review. 
+All apps are required to get their app reassessed on an annual basis. For more information, see 
+We strongly recommend that you work with the security assessor to demonstrate secure handling of all Google user data like Contacts and Calendar that your app requests, even though these OAuth API scopes are n't considered yet. Your app may be subject to future security assessment for these scopes. 
+The security assessment includes the following. 
+External Network Penetration Testing: Identify potential vulnerabilities in external, internet-facing infrastructure, systems such as the following: 
+Discovery and enumeration of live hosts, open ports, services, unpatched software, administration interfaces, authentication endpoints lacking MFA, and other external-facing assets 
+Automated vulnerability scanning combined with manual validation 
+Brute-forcing of authentication endpoints, directory listings, and other external assets 
+Analysis of potential vulnerabilities to validate and develop complex attack chaining patterns and custom exploits 
+Potential exploitation of software vulnerabilities, insecure configurations, and design flaws 
+Application Penetration Testing: Identify potential vulnerabilities in application that access Google user data such as the following: 
+Real-world attack simulation focused on identification and exploitation 
+Discovery of attack surface, authorization bypass, and input validation issues 
+Automated vulnerability scanning combined with manual validation 
+Exploitation of software vulnerabilities, insecure configurations, design flaws, and weak authentication 
+Analysis of vulnerabilities to validate and develop complex attack chaining patterns and custom exploits 
+Verify the ability for users to delete their account with no external indication that the user or user's content is accessible. 
+Deployment Review: Identify exploits and vulnerabilities in developer infrastructure such as the following: 
+Gathering all available configuration settings and metadata as well as manual techniques to build a profile of the cloud environment 
+Analyzing collected information to identify any gaps or deviations from accepted cloud security best practices 
+Manually examining configuration settings to locate anomalies and issues such as weak IAM policies, exposed storage containers, poorly defined security groups, insecure cloud services usage, and insecure key management 
+Exploitation of vulnerabilities, insecure configurations, design flaws, and weak authentication—as needed 
+Verifying that storage of OAuth tokens and user data from Restricted Scopes is encrypted at rest and keys and key material are managed appropriately, such as stored in a hardware security module or equivalent-strength key management system 
+Ensuring that developer access to the deployment environment is secured with multi-factor authentication 
+Policy and Procedure Review: Review and examine the efficacy of information security policies and procedures such as the following: 
+Incident Response Plan: Establishes roles, responsibilities, and actions when an incident occurs 
+Risk Management Policy: Identifies, reduces, and prevents undesirable incidents or outcomes 
+Vulnerability Disclosure Program: Provides a means for external parties to report vulnerabilities 
+Information Security Policy: Ensures that all users comply with rules and guidelines related to the security of the information stored digitally at any point in the network 
+Privacy User Data Detection: Ensures that users can delete their accounts and related user data by demonstrating an account deletion if relevant 
+The list of activities may be updated quarterly. All apps are required to get their app reassessed on an annual basis. For more information, see 
+You should closely review the security requirements listed below that are typically applied to outsourced software that is used by Google. Your security assessor may apply these requirements based on the circumstances of your app. 
+The assessment fee is paid directly to the assessor and not to Google. A certified third party will complete the security assessment to ensure the confidentiality of your application. Depending on the scope and complexity of your app, the cost for the third-party assessment may vary from$ 15,000 to$ 75,000. Smaller apps will be on the lower end, while more complex apps will require more review and expense. 
+Existing assessments that meet the security assessment program standards might reduce the scope and cost of your review. The assessors will consider existing assessments in their review. 
+Because we 've pre-selected industry-leading assessors, the letter of assessment your app will receive can be used for other certifications or customer engagements where a security assessment is needed. 
+Local client applications are generally applications that only run, store, and process data on the user's device( like a computer, mobile phone, or tablet). While user actions may cause data to leave a device( such as sending an email), local client applications do not transmit restricted scope data to the developer's servers( or servers specified by the developer), unless the user explicitly configured the application to do so. This would include local email clients, file managers, and calendar and contact management applications that do n't utilize cloud services or only transmit restricted scope data to user-configured destinations. Applications that send restricted scope data to a developer's or third-party's servers without explicit user-initiated action, such as setting up a backup capability, will not be considered a local client. 
+These applications may be exempt from the secure handling policy because the security assessment( and successful securement of a Letter of Assessment) primarily addresses risks associated with developers obtaining and storing data on servers. 
+Developers should specify in the verification application whether they believe the application is a local client application, and we will work with the developer to verify that is the case. 
+In general, the security assessment must be done once a year. If your app has been using the same set of restricted scopes as when your app went through the security assessment, your app does not need to go through an 
+additional 
+assessment; however, it will still be required to get an annual reassessment. For more information, see 
+However, if your app only recently started requesting additional restricted scopes after the security assessment was completed, your app will need to go through an additional security assessment to ensure secure implementation of the new scopes. The additional security assessment should be smaller in scope. 
+To the extent that your app is sending user data to any other service or hosted on a third-party service such as a cloud platform, they are also in scope for the assessment. Services that are SOC 2 Type II compliant are expected to meet the security assessment standards. During the assessment, you provide these certifications to the assessors. Any third-party services that are not SOC 2 Type II compliant are in-scope for assessment and likely to significantly increase the scope and cost of the assessment. 
+If your app has any security-related assessments or certifications such as a SOC 2 Type II that were received within the last nine months, you might be able to use these artifacts. Make sure you submit these certification details to the assessor, and the assessor will validate that the underlying assessment activities in those certifications have met the security assessment standards set by Google. 
+You will be required to have a vulnerability disclosure program as part of the security assessment. If you do n't already have one, you 're free to choose how and with which vendor to set up a vulnerability disclosure program. To request more details about HackerOne, fill out to connect with someone regarding a`` response program.`` 
+The following scenarios do not require a security assessment. 
+Local Data Storage: 
+If you do n't want to go through a security assessment, you need to change your server storage to 
+local storage only 
+. If your app has server-side OAuth flow implemented, your app also needs to change to client-side OAuth flow. Local client applications do n't need to undergo a security assessment because data is run, stored, and processed only on the user's device( such as a computer, mobile phone, or tablet). 
+No Restricted Scopes Requested: 
+You can update your project so that it does not request any restricted scopes, thereby avoiding the security assessment requirement. 
+Fewer than 100 Users: 
+If your app is intended for a small audience and your users are in direct interaction with you, your app will be granted access for up to 100 users with an. 
+Users are Enterprise Accounts: 
+If only G Suite accounts use your app, a G Suite domain administrator can enable your app via or. Your app can also be listed on the. 
+Apps accessing restricted scopes are required to reverify their app for compliance and complete a security assessment every 12 months from your Google LOA approval date to keep access to any verified restricted scopes. If your app is adding a new restricted scope, your app might need to be reassessed to cover the additional scope if it was not included in a prior security assessment. 
+If you complete your annual security reassessment within 5 months of your original deadline, the next reassessment deadline will be based on the original deadline rather than the date you actually completed your reassessment. For example, if your original deadline is Dec 1, 2020 and you complete a security reassessment on Nov 1, 2020 then your next re-assessment deadline will be Dec 1, 2021. 
+The assessor will share the LOA with Google immediately after it is shared with you so that your app can be approved as soon as possible. If you do n't want approval immediately after your LOA is shared with you, then please let the assessor know in advance, and Google will await your response to proceed with approval of your app. 
+Before your reassessment, your app will need to be reverified for compliance with the Google APIs Terms of Service, Google's, and the. The Trust and Safety team will contact you to get the reverification process started. 
+After your app passes reverification, reach out to your last year's security assessor for details on the scope and cost of your reassessment. If you choose to go to another security assessor for your reassessment, you will need to share your report from the previous year with the new assessor. 
+If you plan on adding or removing restricted scopes to your project during your security assessment, please notify your security assessor in advance and make the relevant changes to your Google Cloud Console. Scope changes during assessment might change the scope and cost. For more information, see 
+If you have any additional projects that you would like to include in your Letter of Assessment, please be sure that those projects have gone through the OAuth verification process and that Google granted you eligibility to go through a security assessment. You should then notify your security assessor of these additional projects. You wo n't be required to get a security assessment for projects with no restricted scopes. 
+To receive an LOA, you must have remediated any critical or high findings from the current year's assessment test, and remediate any mandatory SAQ findings. 
+The third-party security assessor will need read-only access to the cloud system where Google production data will be stored. More popular cloud providers such as AWS, GCP, and Azure provide read-only security auditor roles. The security assessor will use these roles to review configuration and deployment settings in production. The security assessor will also need read-only permission to all available security groups and clusters to run tools or scripts that analyze the security posture of the cloud environment. One popular tool that is often used by the security assessors is, which is free and can be run beforehand to preview results. 
+If you can not provide remote read-only production access to the third-party security assessment, you may need to bring the third party assessor onsite for the assessment, or may choose to allow the third-party assessor to review the relevant configurations via a remote screen share/web conference. The remote screen share/web conference approach allows you to remain in control of the cloud system while the security assessor provides which commands to enter and reviews results. This approach will take more time and therefore will be a more costly assessment. 
+We require the annual security reassessment to be a complete test of your application whether you have made any changes or not. 
+Google API Security Rewards Program is a bug bounty program that Google offers in collaboration with HackerOne. It recognizes the contributions of security researchers who invest their time and effort in helping make apps using OAuth more secure. 
+The goal of the program is to identify and mitigate vulnerabilities in third-party applications accessing OAuth restricted scopes and to keep users, developers, and the Google OAuth API ecosystem safe. 
+To keep developers and their users safe, OAuth apps that use and that have more than 50,000 users are automatically enrolled into the program after they have passed the security assessment requirement. 
+A researcher identifies a vulnerability in an in-scope app and reports it directly to the app's developer via their current vulnerability disclosure process. 
+Developers are required to resolve qualifying OAuth vulnerabilities within 30 days of being notified of the issue. Vulnerabilities that exceed the expected time to resolution will be considered in violation of the SLA. 
+After the vulnerability has been resolved or has exceeded the SLA, the researcher can submit a claim for a reward from the Google API Security Rewards Program. This is in addition to any reward that the app developer may independently offer. 
+HackerOne's role is to validate that submitted vulnerabilities meet the requirements for the rewards program. They will coordinate directly with the developers to verify that the details of the reports are accurate and that the vulnerabilities have been resolved. 
+HackerOne will notify Google of apps with ongoing SLA violations. 
+If the developer exceeds the SLA in fixing qualifying vulnerabilities, Google may suspend an app's access to Google APIs. 
+If a critical vulnerability is not resolved within a reasonable amount of time, your use of the API may be suspended due to failure to comply with the "maintain a secure operating environment" requirement in the. 
+You can submit feedback to:. The verification team will review feedback, but will not respond directly to submissions.

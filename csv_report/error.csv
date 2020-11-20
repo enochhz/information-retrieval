@@ -1,0 +1,184 @@
+,root_url,error_info
+0,techcrunch.com,unknown url type: 'techcrunch.com'
+1,#,<urlopen error no host given>
+2,https://www.blissfully.com/platform/workflows-automation/it-automations//platform/workflows-automation/,HTTP Error 404: Not Found
+3,https://www.blissfully.com/privacy//platform/it-collaboration/rbac/,HTTP Error 404: Not Found
+4,https://www.blissfully.com/platform/workflows-automation/it-automations//platform/security-and-compliance/compliance-workflows/,HTTP Error 404: Not Found
+5,www.blissfully.com,unknown url type: 'www.blissfully.com'
+6,#ftoc-heading-4,<urlopen error no host given>
+7,https://www.blissfully.com/platform/workflows-automation/it-automations//platform/system-of-record/vendor-management/,HTTP Error 404: Not Found
+8,https://www.blissfully.com/privacy//platform/system-of-record/saas-management/,HTTP Error 404: Not Found
+9,#zone-preface4-wrapper,<urlopen error no host given>
+10,http://blissfully.com/platform/it-collaboration/employee-portal//use-cases/spend-optimization/,HTTP Error 404: Not Found
+11,#ftoc-heading-2,<urlopen error no host given>
+12,www.aboutads.info,unknown url type: 'www.aboutads.info'
+13,#ftoc-heading-12,<urlopen error no host given>
+14,#ftoc-heading-10,<urlopen error no host given>
+15,mailto:security@blissfully.com,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+16,blissfully.com,unknown url type: 'blissfully.com'
+17,,'NoneType' object has no attribute 'group'
+18,https://www.blissfully.com/gdpr//use-cases/employee-on-and-offboarding/,HTTP Error 404: Not Found
+19,#zone-preface2-wrapper,<urlopen error no host given>
+20,{{'global.menu.external.daaPrivacyPolicyLink' | translate}},"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+21,{{'global.menu.external.daaTermsOfServiceLink' | translate}},"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+22,https://www.blissfully.com/privacy//platform/workflows-automation/,HTTP Error 404: Not Found
+23,https://www.blissfully.com/blog/orphaned-subscriptions//categories/,HTTP Error 404: Not Found
+24,mailto:support@blissfully.com,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+25,https://www.blissfully.com/platform/security-and-compliance//platform/security-and-compliance/casb-lite/,HTTP Error 404: Not Found
+26,https://www.blissfully.com/blog/saas-spend-optimization-for-finance//platform/workflows-automation/saas-operations/,HTTP Error 404: Not Found
+27,https://www.blissfully.com/spend-optimization//spend-optimization/free-saas-audit,HTTP Error 404: Not Found
+28,#ftoc-heading-5,<urlopen error no host given>
+29,https://www.blissfully.com/privacy//platform/security-and-compliance/compliance-workflows/,HTTP Error 404: Not Found
+30,#ftoc-heading-6,<urlopen error no host given>
+31,#ftoc-heading-1,<urlopen error no host given>
+32,{{'global.menu.external.reportAProblemLink' | translate}},"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+33,https://developers.google.com/terms/api-services-user-data-policy//console.firebase.google.com,HTTP Error 404: Not Found
+34,#unverified-app-screen,<urlopen error no host given>
+35,https://www.blissfully.com/platform/security-and-compliance//platform/workflows-automation/vendor-workflows,HTTP Error 404: Not Found
+36,{{'global.menu.external.daaPrinciplesLink' | translate}},"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+37,https://www.blissfully.com/blog/saas-spend-optimization-for-finance//blog/saas-spending-to-double-by-2020-will-you-be-ready/,HTTP Error 404: Not Found
+38,#application-types,<urlopen error no host given>
+39,../printing/photo-prints/,encoding with 'idna' codec failed (UnicodeError: label empty or too long)
+40,https://developers.google.com/site-policies//play.google.com/apps/publish,HTTP Error 404: Not Found
+41,{{'global.menu.external.helpWithChoicesLink' | translate}},"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+42,#ftoc-heading-9,<urlopen error no host given>
+43,twitter.com,unknown url type: 'twitter.com'
+44,https://cloud.google.com/support//pricing/,HTTP Error 404: Not Found
+45,https://www.blissfully.com/blog/saas-spend-optimization-for-finance//platform/workflows-automation/it-automations,HTTP Error 404: Not Found
+46,developers.google.com,unknown url type: 'developers.google.com'
+47,https://store.google.com/us/product/google_nest_hub/regionpicker,HTTP Error 404: Not Found
+48,https://www.blissfully.com/platform/it-collaboration/rbac//platform/it-collaboration/employee-help-desk/,HTTP Error 404: Not Found
+49,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/importing-your-projects-to-github/support-for-subversion-clients,HTTP Error 404: Not Found
+50,{{'global.menu.external.frequentlyAskedQuestionsLink' | translate}},"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+51,https://cloud.google.com/support//products/data-transfer,HTTP Error 404: Not Found
+52,https://github.com/nccgroup/ScoutSuite/nccgroup/ScoutSuite/blob/master/dev-requirements.txt,HTTP Error 404: Not Found
+53,#contentsecuritypolicy,<urlopen error no host given>
+54,#cloning-with-github-cli,<urlopen error no host given>
+55,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/site-policy/github-sensitive-data-removal-policy,HTTP Error 404: Not Found
+56,https://developers.google.com/maps/faq//maps/apis-by-platform,HTTP Error 404: Not Found
+57,https://electronjs.org/docs/docs/api/structures,HTTP Error 404: Not Found
+58,#cite_ref-Trends_3-0,<urlopen error no host given>
+59,#submit-app-ver,<urlopen error no host given>
+60,https://github.com/nccgroup/ScoutSuite/nccgroup/ScoutSuite,HTTP Error 404: Not Found
+61,https://cloud.google.com/support//solutions/data-management/,HTTP Error 404: Not Found
+62,https://en.wikipedia.org/wiki/Uncontrolled_format_string/wiki/Argument,HTTP Error 404: Not Found
+63,{{'global.menu.external.understandingHowOnlineAdvertisingWorksLink' | translate}},"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+64,#api-key-restrictions,<urlopen error no host given>
+65,docs.github.com,unknown url type: 'docs.github.com'
+66,https://electronjs.org/docs/docs/development/pull-requests,HTTP Error 404: Not Found
+67,#restricted-scopes,<urlopen error no host given>
+68,https://support.google.com/cloud/contact/free_trial_support//status.cloud.google.com,HTTP Error 404: Not Found
+69,https://developers.google.com/site-policies/terms,HTTP Error 404: Not Found
+70,https://cloud.google.com/support//solutions#industry-solutions,HTTP Error 404: Not Found
+71,https://store.google.com/us/product/google_nest_hub/product/google_nest_hub_specs,HTTP Error 429: Too Many Requests
+72,https://en.wikipedia.org/wiki/Uncontrolled_format_string/wiki/IEEE_Computer_Society,HTTP Error 404: Not Found
+73,https://github.com/nccgroup/ScoutSuite/nccgroup/ScoutSuite/commit/9d5bf5bab6ef632c13ef75940250a51caf00bdb7,HTTP Error 404: Not Found
+74,https://electronjs.org/docs/docs/api/ipc-renderer,HTTP Error 404: Not Found
+75,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/about-archiving-repositories,HTTP Error 404: Not Found
+76,https://www.blissfully.com/topics/saas-spend//platform/security-and-compliance/access-management/,HTTP Error 404: Not Found
+77,../printing/,encoding with 'idna' codec failed (UnicodeError: label empty or too long)
+78,cloud.google.com,unknown url type: 'cloud.google.com'
+79,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/restricting-access-to-your-organizations-data,HTTP Error 404: Not Found
+80,funcref.php,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+81,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/getting-started-with-github/learning-about-github,HTTP Error 404: Not Found
+82,https://electronjs.org/docs/languages/bg-BG,HTTP Error 404: Not Found
+83,https://trademark-list.openjsf.org,'utf-8' codec can't decode byte 0xbf in position 10: invalid start byte
+84,https://support.google.com/googleapi/answer/6158846/googleapi/?hl=en,HTTP Error 404: Not Found
+85,https://en.wikipedia.org/wiki/Uncontrolled_format_string/wiki/Improper_input_validation,HTTP Error 404: Not Found
+86,http://blissfully.com/platform/security-and-compliance/auditing-and-evidence//platform/workflows-automation/saas-operations/,HTTP Error 404: Not Found
+87,https://github.com/nccgroup/ScoutSuite/topics/azure,HTTP Error 404: Not Found
+88,#usage_calculated,<urlopen error no host given>
+89,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/restricting-repository-visibility-changes-in-your-organization,HTTP Error 404: Not Found
+90,https://electronjs.org/docs/languages/hi-IN,HTTP Error 404: Not Found
+91,#usage-monitor,<urlopen error no host given>
+92,https://www.pcisecuritystandards.org/security_standards//assessors_and_solutions/give_assessor_feedback,HTTP Error 404: Not Found
+93,https://github.com/nccgroup/ScoutSuite/topics/aws,HTTP Error 404: Not Found
+94,https://cloud.google.com/support//containers,HTTP Error 404: Not Found
+95,#whatcountries,<urlopen error no host given>
+96,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/authenticating-to-github/signing-commits,HTTP Error 404: Not Found
+97,https://electronjs.org/docs/docs/development/build-instructions-macos,HTTP Error 404: Not Found
+98,https://php.net/manual/en/function.libxml-disable-entity-loader.php/manual/en/language.functions.php,HTTP Error 404: Not Found
+99,#requesting-restricted-scopes,<urlopen error no host given>
+100,https://developers.google.com/apps-script/guides/client-verification/apps-script/guides/import-export,HTTP Error 404: Not Found
+101,https://en.wikipedia.org/wiki/Uncontrolled_format_string/wiki/Wikipedia:Contents,HTTP Error 404: Not Found
+102,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/getting-started-with-github/keyboard-shortcuts,HTTP Error 404: Not Found
+103,#mapswithoutapi,<urlopen error no host given>
+104,https://cloud.google.com/support//storage/archival,HTTP Error 404: Not Found
+105,https://php.net/manual/en/function.libxml-disable-entity-loader.php/manual/en/wrappers.php,HTTP Error 404: Not Found
+106,https://translate.google.com/?hl=en&tab=uT,HTTP Error 403: Forbidden
+107,https://developers.google.com/apps-script/guides/client-verification/apps-script,HTTP Error 404: Not Found
+108,https://support.google.com/cloud/contact/free_trial_support/solutions/data-lake,HTTP Error 404: Not Found
+109,https://www.blissfully.com/topics/saas-spend//platform/system-of-record/,HTTP Error 404: Not Found
+110,"https://play.google.com/about/families/coppa-compliance/child-directed//googleplay/android-developer/topic/9872026?hl=en&ref_topic=9871627,9857238,2856718,/googleplay/android-developer/?hl=en/googleplay/android-developer/topic/3308856?hl=en&ref_topic=9857238,2856718,","[Errno 63] File name too long: 'folder/en/play.google.com#about#families#coppa-compliance#child-directed##googleplay#android-developer#topic#9872026?hl=en&ref_topic=9871627,9857238,2856718,#googleplay#android-developer#?hl=en#googleplay#android-developer#topic#3308856?hl=en&ref_topic=9857238,2856718,.html'"
+111,https://electronjs.org/docs/docs/api/environment-variables,HTTP Error 404: Not Found
+112,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/managing-your-organizations-ssh-certificate-authorities,HTTP Error 404: Not Found
+113,https://store.google.com/us/product/google_nest_hub/product/google_nest_hub_setup,HTTP Error 429: Too Many Requests
+114,https://php.net/manual/en/function.libxml-disable-entity-loader.php/manual/en/refs.basic.text.php,HTTP Error 404: Not Found
+115,https://www.blissfully.com/blog/saas-spend-optimization-for-finance//platform/security-and-compliance/access-management/,HTTP Error 404: Not Found
+116,#webenvironment,<urlopen error no host given>
+117,https://developers.google.com/apps-script/guides/client-verification/terms/site-terms,HTTP Error 404: Not Found
+118,https://www.pcisecuritystandards.org/security_standards//program_training_and_qualification/cpsa_qualification,HTTP Error 404: Not Found
+119,http://blissfully.com/platform/it-collaboration/employee-portal//platform/workflows-automation/,HTTP Error 404: Not Found
+120,https://www.tensorflow.org/tutorials/install,HTTP Error 404: Not Found
+121,https://docs.github.com/articles/which-remote-url-should-i-use/en/free-pro-team@latest/github/setting-up-and-managing-billing-and-payments-on-github/upgrading-your-github-subscription,HTTP Error 404: Not Found
+122,#user_cap,<urlopen error no host given>
+123,github.com,unknown url type: 'github.com'
+124,https://support.google.com/cloud/contact/free_trial_support/spanner,HTTP Error 404: Not Found
+125,../home/how-it-works/,encoding with 'idna' codec failed (UnicodeError: label empty or too long)
+126,https://en.wikipedia.org/wiki/Uncontrolled_format_string/wiki/Tim_Newsham,HTTP Error 404: Not Found
+127,https://www.pcisecuritystandards.org/security_standards//about_us/newsroom?type=media_coverage,HTTP Error 404: Not Found
+128,http://blissfully.com/platform/security-and-compliance/auditing-and-evidence//customers/,HTTP Error 404: Not Found
+129,https://php.net/manual/en/function.libxml-disable-entity-loader.php/my.php,HTTP Error 404: Not Found
+130,#usage_apis,<urlopen error no host given>
+131,#verification-requirements,<urlopen error no host given>
+132,https://support.google.com/cloud/contact/free_trial_support/partners/become-a-partner/,HTTP Error 404: Not Found
+133,https://cloud.google.com/support//support/docs/community,HTTP Error 404: Not Found
+134,f/page_viewforum/f_4.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+135,f/page_viewtopic/t_56082.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+136,https://www.chineseinla.com//f/page_viewforum/f_39.html,'utf-8' codec can't decode byte 0xbe in position 47217: invalid start byte
+137,f/page_viewtopic/t_51175.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+138,f/page_viewtopic/t_56711.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+139,"javascript:setSiteLanguage('zlang','gb',15)","<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+140,f/page_viewforum/f_25.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+141,javascript:void(0),"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+142,f/page_viewtopic/t_82488.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+143,http://www.taihewang.com,<urlopen error [Errno 60] Operation timed out>
+144,f/page_viewtopic/t_120024.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+145,register.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+146,f/page_viewtopic/t_50566.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+147,javascript:cancelCompanyCollect(15762),"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+148,https://www.chineseinla.com//lawyer/task_view/id_15762/王太和律师事务所.html/lawyer/task_view/id_17697/%E7%BE%8E%E5%9B%BD%E8%81%94%E9%82%A6%E4%B8%93%E4%B8%9A%E5%BE%8B%E5%B8%88%E6%A5%BC.html/lawyer/task_view/id_81504/%E5%BE%B7%E7%BA%B3%E5%BE%8B%E5%B8%88%E4%BA%8B%E5%8A%A1%E6%89%80.html,[Errno 63] File name too long: 'folder/zh-cn/www.chineseinla.com##lawyer#task_view#id_15762#王太和律师事务所.html#lawyer#task_view#id_17697#%E7%BE%8E%E5%9B%BD%E8%81%94%E9%82%A6%E4%B8%93%E4%B8%9A%E5%BE%8B%E5%B8%88%E6%A5%BC.html#lawyer#task_view#id_81504#%E5%BE%B7%E7%BA%B3%E5%BE%8B%E5%B8%88%E4%BA%8B%E5%8A%A1%E6%89%80.html'
+149,,'NoneType' object has no attribute 'group'
+150,f/page_viewtopic/t_64454.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+151,www.chineseinhi.com,unknown url type: 'www.chineseinhi.com'
+152,f/page_viewtopic/t_80954.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+153,"javascript:TB_show(null,'/index3.php?option=com_v2_forum&task=login.tb')","<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+154,javascript:searchCompanyGlobal(),"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+155,"javascript:setSiteLanguage('zlang','tw',15)","<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+156,f/page_viewtopic/t_80458.html,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+157,https://www.taringa.net//facuqueladra,HTTP Error 404: Not Found
+158,https://www.taringa.net//+deportes/lio-la-emboca-otra-vez-1-0-quiero-darle-una-alegria-a-la-gente_306ail,HTTP Error 404: Not Found
+159,https://www.taringa.net//+humor/soccer-player-s_306a2c,HTTP Error 404: Not Found
+160,https://www.taringa.net//+ciencia_educacion/aprende-a-programar-desde-cero-curso-online-gratuito_3062vx,HTTP Error 404: Not Found
+161,https://www.taringa.net//+humor/necesito-10-millones-de-pesos-para-ser-feliz-y-te-lo-muestro_3068oh,HTTP Error 404: Not Found
+162,www.taringa.net,unknown url type: 'www.taringa.net'
+163,https://www.taringa.net//community-rules,HTTP Error 404: Not Found
+164,https://www.taringa.net//+economia_negocios,HTTP Error 404: Not Found
+165,#,<urlopen error no host given>
+166,taringa.freshdesk.com,unknown url type: 'taringa.freshdesk.com'
+167,https://www.taringa.net//+fogfx,HTTP Error 404: Not Found
+168,https://www.taringa.net//+crypto/que-son-las-finanzas-descentralizadas-o-defi_2obfqg,HTTP Error 404: Not Found
+169,https://www.taringa.net//+humor/image_306aws,HTTP Error 404: Not Found
+170,https://www.taringa.net//+hazlo_tu_mismo,HTTP Error 404: Not Found
+171,#portal-cookie-info,<urlopen error no host given>
+172,javascript:print();,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+173,freshdesk.es,unknown url type: 'freshdesk.es'
+174,mailto:support@freshdesk.com,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+175,https://freshdesk.es/vi/,HTTP Error 404: Not Found
+176,https://freshdesk.es/de/,HTTP Error 404: Not Found
+177,https://freshdesk.es/es/pricing/free-support-software/,HTTP Error 404: Not Found
+178,tel:+34518880864,"<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+179,#83306574840788,<urlopen error no host given>
+180,https://taringa.freshdesk.com/support/signup,"HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.
+The last 30x error message was:
+Found"

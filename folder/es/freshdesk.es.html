@@ -1,0 +1,1978 @@
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Freshdesk España | Help desk software de Freshworks</title>
+      <meta name="description" content="Freshdesk es un help desk software con automatizaciones inteligentes para hacer las cosas más rápido. ¡Regístrese para una prueba gratuita hoy!">
+      <meta name="keywords" content="">
+        <link rel="icon" size="16x16" type="image/png" href="/static-assets/images/favicon/fworks.png"/>
+        <link rel="icon" size="96x96" type="image/png" href="/static-assets/images/favicon/fworks.png"/>
+        <link rel="icon" size="32x32" type="image/png" href="/static-assets/images/favicon/fworks.png"/>
+        <link rel="icon" size="192x192" type="image/png" href="/static-assets/images/favicon/fworks.png"/>
+        <link rel="apple-touch-icon" size="16x16" type="image/png" href="/static-assets/images/favicon/fworks.png"/>
+        <link rel="apple-touch-icon" size="96x96" type="image/png" href="/static-assets/images/favicon/fworks.png"/>
+        <link rel="apple-touch-icon" size="32x32" type="image/png" href="/static-assets/images/favicon/fworks.png"/>
+        <link rel="apple-touch-icon" size="192x192" type="image/png" href="/static-assets/images/favicon/fworks.png"/>
+
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="on" http-equiv="cleartype"/>
+
+      <meta property="og:url" content="freshdesk.com/es/">
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Freshdesk España | Help desk software de Freshworks">
+      <meta property="og:description" content="Freshdesk es un help desk software con automatizaciones inteligentes para hacer las cosas más rápido. ¡Regístrese para una prueba gratuita hoy!">
+        <link rel="canonical" href="https://freshdesk.com/es/">
+
+      <meta property="og:image" content="" />
+      <meta name="og:image" content="" />
+
+      <meta name="twitter:title" content="Freshdesk España | Help desk software de Freshworks" />
+      <meta name="twitter:description" content="Freshdesk es un help desk software con automatizaciones inteligentes para hacer las cosas más rápido. ¡Regístrese para una prueba gratuita hoy!" />
+      <meta property="twitter:image" content="" />
+      <meta content="true" name="HandheldFriendly"/>
+      <meta content="320" name="MobileOptimized"/>
+      <meta content="yes" name="apple-mobile-web-app-capable"/>
+      <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+      <meta content="telephone=no" name="format-detection"/>
+      <meta content="address=no" name="format-detection"/>
+    <script>
+      try {
+        // url sanitize -- update current search after removing vulnerable params in the url
+
+        var currentSearch = (function sanitizeQueryParams (queryString) {
+          if (!queryString) return '';
+          var decoded;
+          try { // handle malformed URL with lone '%' char
+            decoded = decodeURIComponent(queryString);
+          } catch (e) {
+            decoded = queryString.replace(/%/g, '')
+          }
+          if (decoded.indexOf('%') > -1) {
+            return sanitizeQueryParams(decoded);
+          }
+          var queryParams = decoded.slice(1).split('&').map(function (param) {
+            var pair = param.replace(/[<>()]/g, '').split('=');
+            // handle broken query param before encoding
+            if(pair.length < 2) return pair; 
+            return pair[0] + '=' + encodeURIComponent(pair[1]);
+          }).join('&');
+          return queryParams;
+        })(window.location.search);
+
+
+        if (currentSearch) {
+          var queryParams = currentSearch.split('&');
+          var blackListedQueryParams = /(first_name|first-name|last-name|last_name|email|company|domain-|phone).*/gi
+
+          var cleanQueryParams = '?'    
+          queryParams.forEach(function(query) {
+            // Handling emails
+            if (query.indexOf('@') !== -1 ) {
+              return;
+            };
+            // Handle cases that match regex
+            var queryLeft = query.trim().split('=')[0]
+            if (blackListedQueryParams.test(queryLeft)) return;
+            cleanQueryParams += `${query}&`
+          });
+          // Remove any trailing &
+          cleanQueryParams = cleanQueryParams.replace(/&$/, '');
+          // Change the params if there is a mismatch
+          if (window.location.search !== cleanQueryParams) {
+            window.history.replaceState(null, null, cleanQueryParams);
+          }    
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    </script>
+      <script src='//cdn.zarget.com/61608/70421.js' defer></script>
+    <script type="text/javascript" defer>
+      window.socTrack = {
+          siteid: "www.freshworks.com",
+          isFormTrackingEnabled: false,
+          isApiModeEnabled: true
+      };
+      (function(i, s, o, g) {
+          var a = s.createElement(o);
+          a.src = g;
+          var m = s.getElementsByTagName('head')[0];
+          m.appendChild(a);
+      })(window, document, 'script', (/^http:/.test(document.location) ? 'http' : 'https') + '://cdn-public.sociabble.com/blob/js/leadgen/track.min.js?v=1.7')
+    </script>
+    <link href="/static-assets/css/site.css?66fde8dc1896cdd5520181ad6d87abee" rel="stylesheet" />
+      <link href="/static-assets/css/fdesk.css?d88b086369be1648f09601fc9d9dbde5" rel="stylesheet" />
+    
+    <style type="text/css">
+      /*.apos-ui .apos-field-object {
+          border: 1px solid #d8d8d8;
+          padding: 20px;
+      }*/
+    </style>
+    <script type="text/javascript">
+      window.FW = {
+        cbQueue: [],
+        onLoad: function(){
+          this.cbQueue.push(arguments)
+          document.cookie = 'cssVersion=66fde8dc1896cdd5520181ad6d87abee'
+        }
+      };
+    </script>
+      <!-- Data Layer Initialization -->
+<script type="text/javascript">
+  window.addEventListener('load', function () {
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+          'event': 'tvc_pageDomain',
+          'pageDomain': 'FDesk'
+      });
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KH9KHM');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KH9KHM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!-- Render Google Tag Manager Scripts  for different locales -->
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5C68P7');</script>
+
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5C68P7" height=0 width=0 style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- End Google Tag Manager Rendering -->
+
+<!-- Freshsales Snippet -->
+<script defer type="text/javascript">
+function createTempFunction(function_name) { (window.freshsales)[function_name]=function() { (window.freshsales).push([function_name].concat(Array.prototype.slice.call(arguments,0))) }; } (function(url, app_token) { window.assets_url='//d952cmcgwqsjf.cloudfront.net'; window.freshsales = window.freshsales || []; functions_list='init identify trackPageView trackEvent set'.split(' '); for(var i=0; i < functions_list.length; i++) { var function_name = functions_list[i]; createTempFunction(function_name); } var script_tag = document.createElement('script'); script_tag.async=1; script_tag.src= window.assets_url +'/assets/analytics.js'; var first_script_tag = document.getElementsByTagName('script')[0]; first_script_tag.parentNode.insertBefore(script_tag,first_script_tag); freshsales.init(url, app_token); })('//freshdesk.freshsales.io','b378480c7346207c720ef22b32b399f6');
+</script>
+<!-- End Freshsales Snippet -->
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WQKBJ88');</script>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQKBJ88" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <link
+          rel="alternate"
+          hreflang= "x-default"
+          href="https://freshdesk.com"
+        />
+          <link
+            rel="alternate"
+            hreflang= "en-US"
+            href="https://freshdesk.com"
+          />
+          <link
+            rel="alternate"
+            hreflang= "en-NL"
+            href="https://freshdesk.com/eu/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "en-FR"
+            href="https://freshdesk.com/eu/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "en-ES"
+            href="https://freshdesk.com/eu/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "en-DE"
+            href="https://freshdesk.com/eu/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "en-SE"
+            href="https://freshdesk.com/eu/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "de"
+            href="https://freshdesk.com/de/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "nl"
+            href="https://freshdesk.com/nl/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "fr"
+            href="https://freshdesk.com/fr/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "sv"
+            href="https://freshdesk.com/se/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "es-ES"
+            href="https://freshdesk.com/es/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "es-MX"
+            href="https://freshdesk.com/latam/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "es-CO"
+            href="https://freshdesk.com/latam/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "es-AR"
+            href="https://freshdesk.com/latam/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "pt-BR"
+            href="https://freshdesk.com/br/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "ru"
+            href="https://freshdesk.com/ru/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "ja-JP"
+            href="https://freshdesk.com/jp/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "ko"
+            href="https://freshdesk.com/ko/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "it"
+            href="https://freshdesk.com/it/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "zh-hans"
+            href="https://freshdesk.com/cn/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "th"
+            href="https://freshdesk.com/th/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "vi"
+            href="https://freshdesk.com/vi/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "pl"
+            href="https://freshdesk.com/pl/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "zh-hant"
+            href="https://freshdesk.com/hk/"
+          />
+          <link
+            rel="alternate"
+            hreflang= "tr"
+            href="https://freshdesk.com/tr/"
+          />
+      
+
+
+  </head>
+  <body  class=" nav-transparent   " data-product-name="fdesk" data-lang=es >
+      
+    <header>
+      <nav class="nav-light-bg  ">
+            
+      
+<div class="nav-super-wrapper nav-wrapper-border">
+  <div class="nav-super l-page clearfix-lg">
+    <span class="nav-super-item home-link">
+      <a href="https://www.freshworks.com/es/">
+        
+    <img 
+        class="logo logo-fworks nav-super-logo"
+        src="/static-assets/images/common/company/logos/logo-fworks-black.svg"
+        alt="Freshworks"
+    />
+      </a>
+    </span>
+    <ul class="l-nav-list nav-super-menu">
+        <li class="nav-super-item  card-nav has-sub-menu  "
+        >
+              <span class="nav-super-label">Productos</span>
+              <i class="icon-arrow-down nav-sub-toggle"></i>
+              
+  <ul class="l-nav-list nav-sub-menu">
+    <div class="nav-featured-product-row">
+              <div class="row">
+                <div class="col-md-4">
+                  <li class="nav-sub-item fdesk-bg nav-logo-tagline">
+                    <a target="_blank" rel="" href="https://freshdesk.com/es/" class="nav-sub-label">
+                      
+    <img 
+        class="logo logo-fdesk "
+        src="/static-assets/images/common/company/logos/logo-fdesk-black.svg"
+        alt="Freshdesk"
+    />
+                      <span class="desc">Faculte a su equipo de soporte para que trabajen conjuntamente y resuelvan los problemas de los clientes más rápido.</span>
+                      <span class="label">Customer Support Software</span>
+                    </a>
+                  </li>
+                </div>
+                <div class="col-md-4">
+                  <li class="nav-sub-item fsales-bg nav-logo-tagline">
+                    <a target="_blank" rel="nofollow" href="https://www.freshworks.com/es/freshsales-crm/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                      
+    <img 
+        class="logo logo-fsales "
+        src="/static-assets/images/common/company/logos/logo-fsales-black.svg"
+        alt="Freshsales"
+    />
+                      <span class="desc">Mantenga a su equipo de ventas al tanto de los clientes potenciales y cierre ventas más rápido.</span>
+                      <span class="label">Sales CRM Software</span>
+                    </a>
+                  </li>
+                </div>
+                <div class="col-md-4 nav-featured-product hide-in-mobile-and-tablet ">
+                  <li class="nav-sub-item fworks-bg nav-logo-tagline">
+                      <a rel="" href="/360-customer-engagement/?utm_source=freshchat&amp;utm_medium=referral&amp;utm_campaign=fchat_corp_nav" class="nav-sub-label">
+                        <p><span class="logo logo-360-text">Freshworks 360</span></p>
+
+<p>El paquete “todo en uno” para interacción con el cliente</p>
+
+<p><a href="https://www.freshworks.com/360-customer-engagement/?utm_source=freshworks&amp;utm_medium=referral&amp;utm_campaign=fworks_corp_nav">Más información</a></p>
+
+                      </a>
+                  </li>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <li class="nav-sub-item fservice-bg nav-logo-tagline">
+                    <a target="_blank" rel="nofollow" href="https://freshservice.com/es/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                      
+    <img 
+        class="logo logo-fservice "
+        src="/static-assets/images/common/company/logos/logo-fservice-black.svg"
+        alt="Freshservice"
+    />
+                      <span class="desc">Optimice su servicio de TI y administre las solicitudes internas de sus empleados.</span>
+                      <span class="label">IT Service Management Software</span>
+                    </a>
+                  </li>
+                </div>
+                <div class="col-md-4">
+                  <li class="nav-sub-item fchat-bg nav-logo-tagline">
+                    <a target="_blank" rel="nofollow" href="https://www.freshworks.com/es/live-chat-software/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                      
+    <img 
+        class="logo logo-fchat "
+        src="/static-assets/images/common/company/logos/logo-fchat-black.svg"
+        alt="Freshchat"
+    />
+                      <span class="desc">Interactúe con los visitantes del sitio web y los usuarios de los productos para conseguir ventas y lograr que el cliente tenga éxito.</span>
+                      <span class="label">Customer Messaging Software</span>
+                    </a>
+                  </li>
+                </div>
+                <div class="col-md-4">
+                  <li class="nav-sub-item frelease-bg nav-logo-tagline">
+                    <a target="_blank" rel="nofollow" href="https://www.freshworks.com/agile-project-management-software?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                      
+    <img 
+        class="logo logo-frelease "
+        src="/static-assets/images/common/company/logos/logo-frelease-black.svg"
+        alt="Freshrelease"
+    />
+                      <span class="desc">Software de gestión de proyectos ágil para equipos de desarrollo. Planee, supervise, pruebe y envíe, todo en un mismo lugar.</span>
+                      <span class="label">Software de gestión de proyectos ágil para equipos de desarrollo.</span>
+                    </a>
+                  </li>
+                </div>
+              </div>
+    </div>
+        <div class="row">
+            <div class="col-md-4">
+              <li class="nav-sub-item fcaller-bg nav-logo-tagline">
+                <a rel="nofollow" target="_blank" href="https://www.freshworks.com/es/freshcaller-cloud-pbx/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                  
+    <img 
+        class="logo logo-fcaller "
+        src="/static-assets/images/common/company/logos/logo-fcaller-black.svg"
+        alt="Freshcaller"
+    />
+                  <span class="desc">Configure un call center basado en la nube en 40 países y en tan solo unos minutos.</span>
+                  <span class="label">Call Center Software</span>
+                </a>
+              </li>
+            </div>
+            <div class="col-md-4">
+              <li class="nav-sub-item fteam-bg nav-logo-tagline">
+                <a rel="nofollow" target="_blank" href="https://www.freshworks.com/hrms/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                  
+    <img 
+        class="logo logo-fteam "
+        src="/static-assets/images/common/company/logos/logo-fteam-black.svg"
+        alt="Freshteam"
+    />
+                  <span class="desc">Atraiga solicitudes, interactúe con los candidatos y contrate superestrellas.</span>
+                  <span class="label">Applicant Tracking Software</span>
+                </a>
+              </li>
+            </div>
+            <div class="col-md-4">
+              <li class="nav-sub-item fping-bg nav-logo-tagline">
+                <a rel="nofollow" target="_blank" href="https://www.freshworks.com/website-monitoring/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                  
+    <img 
+        class="logo logo-fping "
+        src="/static-assets/images/common/company/logos/logo-fping-black.svg"
+        alt="Freshping"
+    />
+                  <span class="desc">Monitoree la disponibilidad de tu sitio web. Reciba alertas y páginas de estado de forma gratuita.</span>
+                  <span class="label">Free website monitoring tool</span>
+                </a>
+              </li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+              <li class="nav-sub-item fmarketer-bg nav-logo-tagline">
+                <a rel="nofollow" target="_blank" href="https://www.freshworks.com/marketing-automation/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                  
+    <img 
+        class="logo logo-fmarketer "
+        src="/static-assets/images/common/company/logos/logo-fmarketer-black.png"
+        alt="Freshmarketer"
+    />
+                  <span class="desc">Convierta a los visitantes de su sitio web en clientes mediante técnicas de optimización de conversión altamente robustas.</span>
+                  <span class="label">Conversion Optimization Suite</span>
+                </a>
+              </li>
+            </div>
+            <div class="col-md-4">
+              <li class="nav-sub-item fstatus-bg nav-logo-tagline">
+                <a rel="nofollow" target="_blank" href="https://www.freshworks.com/statuspage/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                  
+    <img 
+        class="logo logo-fstatus "
+        src="/static-assets/images/common/company/logos/logo-fstatus-black.svg"
+        alt="Freshstatus"
+    />
+                  <span class="desc">Configure su página alojada de estado público en un clic y gratis para siempre.</span>
+                  <span class="label">Setup your hosted public status page, in 1-click, free forever.</span>
+                </a>
+              </li>
+            </div>
+            <div class="col-md-4">
+              <li class="nav-sub-item fsuccess-bg nav-logo-tagline">
+                <a rel="nofollow" target="_blank" href="https://www.freshworks.com/customer-success-software/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_corp_nav" class="nav-sub-label">
+                  
+    <img 
+        class="logo logo-fsuccess "
+        src="/static-assets/images/common/company/logos/logo-fsuccess-black.svg"
+        alt="Freshsuccess"
+    />
+                    <span class="tag tag-new">NUEVO</span>
+                  <span class="desc">Evite la deserción de los clientes, aumente la expansión de cuentas y refuerce las relaciones con los clientes.</span>
+                  <span class="label">Prevent churn, increase account expansion, and strengthen customer relationships.</span>
+                </a>
+              </li>
+            </div>
+        </div>
+  
+  </ul>
+        </li>
+        <li class="nav-super-item has-sub-menu   "
+        >
+            <span class="nav-super-label">Empresa</span>
+            <i class="icon-arrow-down nav-sub-toggle"></i>
+            <ul class="l-nav-list nav-sub-menu">
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="https://www.freshworks.com/es/empresa/quienes-somos/"
+                      rel="nofollow"
+                      target=&quot;blank&quot;
+                    >
+                      <span class="label">
+                        Sobre nosotros
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="https://www.freshworks.com/es/empresa/inversionistas/"
+                      rel="nofollow"
+                      target=&quot;blank&quot;
+                    >
+                      <span class="label">
+                        Inversionistas
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="https://www.freshworks.com/company/affiliate-partner/"
+                      rel="nofollow"
+                      target=&quot;blank&quot;
+                    >
+                      <span class="label">
+                        Afiliados
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="https://www.freshworks.com/es/empresa/empleo/"
+                      rel="nofollow"
+                      target=&quot;blank&quot;
+                    >
+                      <span class="label">
+                        Ofertas de empleo
+                      </span>
+                    </a>
+                  </li>
+            </ul>
+        </li>
+        <li class="nav-super-item    hide-in-mobile"
+        >
+            <a
+              class="nav-super-label"
+              href="https://support.freshdesk.com"
+              rel=""
+              target=&quot;blank&quot;
+            >Soporte</a>
+        </li>
+        <li class="nav-super-item    hide-in-mobile"
+        >
+            <a
+              class="nav-super-label"
+              href="/es/login/"
+              rel=""
+              
+            >Iniciar sesión</a>
+        </li>
+        <li class="nav-super-item    "
+        >
+            <a
+              class="nav-super-label"
+              href="https://www.freshworks.com/es/contacto/"
+              rel="nofollow"
+              target=&quot;blank&quot;
+            >Contáctanos</a>
+        </li>
+      
+    <li class="language-selector nav-super-item has-sub-menu hide-in-mobile">
+          <span class = "selected-fw-flag fw-flag fw-flag-spain"></span>
+          <i class="icon-arrow-down nav-sub-toggle"></i>
+      <div class= "language-selector-card">
+        
+  <div class="navigation-language-selector">
+        <div class="row">
+          <p class="region-label">North America</p><a class="col-md-4 language-wrapper" href = "/">
+                    <span class="fw-flag fw-flag-united-states-of-america"></span><span class="label">English</span>
+                  </a>
+        </div>
+        <div class="row pt-xs">
+          <p class="region-label">Europe</p><a class="col-md-4 language-wrapper" href = "/eu/">
+                    <span class="fw-flag fw-flag-europe-union"></span><span class="label">English (Europe)</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/de/">
+                    <span class="fw-flag fw-flag-germany"></span><span class="label">Deutsch</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/nl/">
+                    <span class="fw-flag fw-flag-netherlands"></span><span class="label">Nederlands</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/fr/">
+                    <span class="fw-flag fw-flag-france"></span><span class="label">Français</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/se/">
+                    <span class="fw-flag fw-flag-sweden"></span><span class="label">Svenska</span>
+                  </a><a class="col-md-4 language-wrapper active">
+                    <span class="fw-flag fw-flag-spain"></span><span class="label">Español</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/ru/">
+                    <span class="fw-flag fw-flag-romania"></span><span class="label">Pусский</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/it/">
+                    <span class="fw-flag fw-flag-italy"></span><span class="label">Italiano</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/pl/">
+                    <span class="fw-flag fw-flag-poland"></span><span class="label">Polski</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/tr/">
+                    <span class="fw-flag fw-flag-turkey"></span><span class="label">Türkçe</span>
+                  </a>
+        </div>
+        <div class="row pt-xs">
+          <p class="region-label">Latin America</p><a class="col-md-4 language-wrapper" href = "/latam/">
+                    <span class="fw-flag fw-flag-mexico"></span><span class="label">Español</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/br/">
+                    <span class="fw-flag fw-flag-brazil"></span><span class="label">Português</span>
+                  </a>
+        </div>
+        <div class="row pt-xs">
+          <p class="region-label">Asia Pacific</p><a class="col-md-4 language-wrapper" href = "/jp/">
+                    <span class="fw-flag fw-flag-japan"></span><span class="label">日本語</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/ko/">
+                    <span class="fw-flag fw-flag-korea-south"></span><span class="label">한국어</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/cn/">
+                    <span class="fw-flag fw-flag-china"></span><span class="label">简体中文</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/th/">
+                    <span class="fw-flag fw-flag-thailand"></span><span class="label">ภาษาไทย</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/vi/">
+                    <span class="fw-flag fw-flag-viet-nam"></span><span class="label">Tiếng Việt</span>
+                  </a><a class="col-md-4 language-wrapper" href = "/hk/">
+                    <span class="fw-flag fw-flag-china"></span><span class="label">繁體中文</span>
+                  </a>
+        </div>
+  </div>
+      </div>
+    </li>
+    </ul>
+  </div>
+</div>
+
+
+
+            
+      
+
+<div class="nav-primary-wrapper">
+  <div class="nav-primary l-page">
+    <div class="nav-logo-wrapper">
+      <a href="/es/">
+        
+    <img 
+        class="logo logo-fdesk "
+        src="/static-assets/images/common/company/logos/logo-fdesk-black.svg"
+        alt="Freshdesk"
+    />
+      </a>
+      <span class="nav-burger">
+        <span class="nav-burger-icon"></span>
+      </span>
+    </div>
+    <ul class="l-nav-list nav-main-menu" >
+        <li class="nav-main-item caps-heading-12 has-sub-menu    "
+        >
+            <span class="nav-label">Características</span>
+            <i class="icon-arrow-down nav-sub-toggle"></i>
+            <ul class="l-nav-list nav-sub-menu">
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/sistema-de-tickets/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Generación de tickets
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/colaboracion/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Colaboración
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/soporte-multicanal/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Help Desk multicanal
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/automatizaciones/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Automatizaciones
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/autoservicio/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Autoservicio
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/informes/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Informes y análisis
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/helpdesk-personalizable/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Personalizaciones
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/gestion-de-servicio-de-campo#/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Gestión de servicio de campo
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/helpdesk-seguro/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Help Desk seguro
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item nav-sub-item-with-button">
+                    <a href="/es/funcionalidades/" rel="" class="nav-sub-label">
+                      <span class="button button--ghost button--small link forward--link">Todas las características</span>
+                    </a>
+                  </li>
+            </ul>  
+        </li>
+        <li class="nav-main-item caps-heading-12     "
+        >
+            <a
+              class="nav-label"
+              href="/es/pricing/"
+              rel=""
+              
+            >Precios</a>  
+        </li>
+        <li class="nav-main-item caps-heading-12 has-sub-menu    "
+        >
+            <span class="nav-label">Soluciones</span>
+            <i class="icon-arrow-down nav-sub-toggle"></i>
+            <ul class="l-nav-list nav-sub-menu">
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/solutions/enterprise/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Para empresas
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-sub-item">
+                    <a
+                      class="nav-sub-label"
+                      href="/es/solutions/smb/"
+                      
+                      rel=""
+                    >
+                      <span class="label">
+                        Para PyMEs
+                      </span>
+                    </a>
+                  </li>
+            </ul>  
+        </li>
+        <li class="nav-main-item caps-heading-12     "
+        >
+            <a
+              class="nav-label"
+              href="https://freshdesk.com/es/recursos/"
+              rel=""
+              
+            >Recursos</a>  
+        </li>
+        <li class="nav-main-item caps-heading-12     "
+        >
+            <a
+              class="nav-label"
+              href="https://freshdesk.com/es/solicitar-demo/"
+              rel=""
+              
+            >Demo</a>  
+        </li>
+        <li class="nav-main-item caps-heading-12  nav-main-item-button  hide-in-mobile "
+        >
+            
+      
+  <a title="Regístrese en Freshdesk" class="button button--solid button--small " id="nav-sign-up" target="" href="/es/registro/"> Registro</a>
+
+
+  
+        </li>
+    </ul>
+      <ul class="l-nav-list nav-company-menu">
+        <li class="nav-main-item caps-heading-12 home-link">
+          <span class="nav-sub-item nav-company-logo">
+            <a href="https://www.freshworks.com/es/">
+              
+    <img 
+        class="logo logo-fworks "
+        src="/static-assets/images/common/company/logos/logo-fworks-white.svg"
+        alt="Freshworks"
+    />
+            </a>
+          </span>
+        </li>
+          <li class="nav-main-item caps-heading-12   "
+          >
+          </li>
+          <li class="nav-main-item caps-heading-12 has-sub-menu  "
+          >
+              <span class="nav-label">Empresa</span>
+              <i class="icon-arrow-down nav-sub-toggle"></i>
+              <ul class="l-nav-list nav-sub-menu">
+                    <li class="nav-sub-item">
+                      <a
+                        class="nav-sub-label"
+                        href="https://www.freshworks.com/es/empresa/quienes-somos/"
+                        target=&quot;blank&quot;
+                        rel="nofollow"
+                      >
+                        <span class="label">
+                          Sobre nosotros
+                        </span>
+                      </a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a
+                        class="nav-sub-label"
+                        href="https://www.freshworks.com/es/empresa/inversionistas/"
+                        target=&quot;blank&quot;
+                        rel="nofollow"
+                      >
+                        <span class="label">
+                          Inversionistas
+                        </span>
+                      </a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a
+                        class="nav-sub-label"
+                        href="https://www.freshworks.com/company/affiliate-partner/"
+                        target=&quot;blank&quot;
+                        rel="nofollow"
+                      >
+                        <span class="label">
+                          Afiliados
+                        </span>
+                      </a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a
+                        class="nav-sub-label"
+                        href="https://www.freshworks.com/es/empresa/empleo/"
+                        target=&quot;blank&quot;
+                        rel="nofollow"
+                      >
+                        <span class="label">
+                          Ofertas de empleo
+                        </span>
+                      </a>
+                    </li>
+              </ul>
+          </li>
+          <li class="nav-main-item caps-heading-12   hide-in-mobile"
+          >
+              <a
+                class="nav-label"
+                href="https://support.freshdesk.com"
+                target=&quot;blank&quot;
+                rel=""
+              >Soporte</a>
+          </li>
+          <li class="nav-main-item caps-heading-12   hide-in-mobile"
+          >
+              <a
+                class="nav-label"
+                href="/es/login/"
+                
+                rel=""
+              >Iniciar sesión</a>
+          </li>
+          <li class="nav-main-item caps-heading-12   "
+          >
+              <a
+                class="nav-label"
+                href="https://www.freshworks.com/es/contacto/"
+                target=&quot;blank&quot;
+                rel=""
+              >Contáctanos</a>
+          </li>
+          
+  <li class="nav-main-item caps-heading-12 lang-selector fworks-language-selector hide-in-tablet-and-desktop">
+    <form id="lang-switch" action="">
+      <select class="lang-options">
+              <option value="English"
+                  data-link="/">
+                English
+              </option>
+              <option value="English (Europe)"
+                  data-link="/eu/">
+                English (Europe)
+              </option>
+              <option value="Deutsch"
+                  data-link="/de/">
+                Deutsch
+              </option>
+              <option value="Nederlands"
+                  data-link="/nl/">
+                Nederlands
+              </option>
+              <option value="Français"
+                  data-link="/fr/">
+                Français
+              </option>
+              <option value="Svenska"
+                  data-link="/se/">
+                Svenska
+              </option>
+              <option value="Español"
+                  data-link="/latam/">
+                Español
+              </option>
+              <option value="Português"
+                  data-link="/br/">
+                Português
+              </option>
+              <option value="Pусский"
+                  data-link="/ru/">
+                Pусский
+              </option>
+              <option value="日本語"
+                  data-link="/jp/">
+                日本語
+              </option>
+              <option value="한국어"
+                  data-link="/ko/">
+                한국어
+              </option>
+              <option value="Italiano"
+                  data-link="/it/">
+                Italiano
+              </option>
+              <option value="简体中文"
+                  data-link="/cn/">
+                简体中文
+              </option>
+              <option value="ภาษาไทย"
+                  data-link="/th/">
+                ภาษาไทย
+              </option>
+              <option value="Tiếng Việt"
+                  data-link="/vi/">
+                Tiếng Việt
+              </option>
+              <option value="Polski"
+                  data-link="/pl/">
+                Polski
+              </option>
+              <option value="繁體中文"
+                  data-link="/hk/">
+                繁體中文
+              </option>
+              <option value="Türkçe"
+                  data-link="/tr/">
+                Türkçe
+              </option>
+          <option value="Polski" data-link="https://freshdesk.com.pl">Polski</option>
+          <option value="Italiano" data-link="https://freshdesk.it">Italiano</option>
+          <option value="中文" data-link="https://freshdesk.hk">中文</option>
+          <option value="中文简" data-link="https://cn.freshdesk.com">中文简</option>
+          <option value="Pусский" data-link="https://freshdesk.ru">Pусский</option>
+          <option value="日本語" data-link="https://freshdesk.jp">日本語</option>
+          <option value="العربية" data-link="https://freshdesk.ae">العربية</option>
+      </select>
+    </form>
+        <span class="nav-label lang-choice" data-lang="">Español</span>
+        <i class="icon-arrow-down"></i>
+  </li>
+      </ul>
+  </div>
+</div>
+
+
+
+      </nav>
+
+      <script type="text/javascript">
+        // Activate the navigation elements
+        FW.onLoad(function () {
+          FW.navigation.navLoader();
+        });
+      </script>
+    </header>
+  <section class="first-fold banner-home">
+    <div class="l-page container l-home">
+      <div class="row">
+        <div class="col-md-7 pt-xl mobile-center-desktop-left-align">
+          
+      
+  <h1 class="pt-xl">Software de soporte al cliente asequible, con abundantes características e intuitivo</h1>
+
+
+      <div class="pt-sm pb-md">
+
+      
+  <a title="Registrarse gratuitamente para el software de Helpdesk" class="button button--solid " id="top-banner-signup" target="" href="/es/registro/"> PRUEBA GRATUITA</a>
+
+
+</div>
+
+
+          <div class="hide-in-mobile-and-tablet mt-md pt-md">
+            
+      
+  <h5>Más de <strong>40.000 empresas</strong> de distintos tamaños confían en nosotros.</h5>
+
+
+      
+    
+      
+  <div class="customer-logo tight">
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0ac003cxffz6m8ex7al-logo-schneider-2x.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0ac003cxffz6m8ex7al-logo-schneider-2x.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0ac003cxffz6m8ex7al-logo-schneider-2x.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0ac003cxffz6m8ex7al-logo-schneider-2x.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+  </div>
+
+
+
+    
+      
+  <div class="customer-logo tight">
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0ad0023y3fzg28otcz5-logo-hp-2x.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0ad0023y3fzg28otcz5-logo-hp-2x.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0ad0023y3fzg28otcz5-logo-hp-2x.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0ad0023y3fzg28otcz5-logo-hp-2x.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+  </div>
+
+
+
+    
+      
+  <div class="customer-logo tight">
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rl002py8fzi2omjz2r-logo-harvard-2x.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rl002py8fzi2omjz2r-logo-harvard-2x.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rl002py8fzi2omjz2r-logo-harvard-2x.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rl002py8fzi2omjz2r-logo-harvard-2x.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+  </div>
+
+
+
+    
+      
+  <div class="customer-logo tight">
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjqz8psin00ewfrg0ze4jzkam-atrapalo-horizontal-300dpi-rgb-rojo.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjqz8psin00ewfrg0ze4jzkam-atrapalo-horizontal-300dpi-rgb-rojo.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjqz8psin00ewfrg0ze4jzkam-atrapalo-horizontal-300dpi-rgb-rojo.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjqz8psin00ewfrg0ze4jzkam-atrapalo-horizontal-300dpi-rgb-rojo.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+  </div>
+
+
+
+    
+      
+  <div class="customer-logo tight">
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0j7003gy3fz8jy2pwv4-logo-decathlon-2x.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0j7003gy3fz8jy2pwv4-logo-decathlon-2x.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0j7003gy3fz8jy2pwv4-logo-decathlon-2x.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0j7003gy3fz8jy2pwv4-logo-decathlon-2x.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+  </div>
+
+
+
+    
+      
+  <div class="customer-logo tight">
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rd0058xffz9mr628wn-logo-amex-2x.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rd0058xffz9mr628wn-logo-amex-2x.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rd0058xffz9mr628wn-logo-amex-2x.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rd0058xffz9mr628wn-logo-amex-2x.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+  </div>
+
+
+
+    
+      
+  <div class="customer-logo tight">
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/ck1affyxh03mz9bfztjzwm0lh-thai-union.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/ck1affyxh03mz9bfztjzwm0lh-thai-union.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/ck1affyxh03mz9bfztjzwm0lh-thai-union.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/ck1affyxh03mz9bfztjzwm0lh-thai-union.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+  </div>
+
+
+
+    
+      
+  <div class="customer-logo tight">
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rt003ly3fzaejkgjo6-logo-henkel-2x.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rt003ly3fzaejkgjo6-logo-henkel-2x.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rt003ly3fzaejkgjo6-logo-henkel-2x.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0rt003ly3fzaejkgjo6-logo-henkel-2x.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+  </div>
+
+
+
+
+
+          </div>
+          <div class="hide-in-desktop row">
+            <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cji4bxa5l0012gbfz7rqm99ft-fdesk-home-banner.svg"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cji4bxa5l0012gbfz7rqm99ft-fdesk-home-banner.svg"
+      src="https://website-assets-fd.freshworks.com/attachments/cji4bxa5l0012gbfz7rqm99ft-fdesk-home-banner.svg"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cji4bxa5l0012gbfz7rqm99ft-fdesk-home-banner.svg 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+            </div>
+          </div>
+          <div class="fdesk-capabilities">
+            
+      
+  <h2 class="mt-md pt-md">Con Freshdesk, usted puede...</h2>
+
+
+      <ul class= "list-checkmarks">
+	<li class='fdesk-home '><p><strong>Optimizar</strong> todas las conversaciones de sus clientes en un solo lugar</p>
+</li>
+	<li class='fdesk-home '><p><strong>Automatizar</strong> el trabajo repetitivo y ahorrar tiempo</p>
+</li>
+	<li class='fdesk-home '><p><strong>Colaborar</strong> con otros equipos para resolver más rápidamente los problemas</p>
+</li>
+	<li class='fdesk-home   suppress'><p>y mucho más... <a href="https://freshdesk.com/es/funcionalidades/">Ver todas las características</a></p>
+</li>
+</ul>
+
+
+          </div>
+        </div>
+        <div class="col-md-5 hide-in-mobile-and-tablet">
+          
+      
+  <div class="bucket-animation-wrapper">
+  <div class="bucket-animation-static-bg">
+    
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cji4bxa5l0012gbfz7rqm99ft-fdesk-home-banner.svg"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cji4bxa5l0012gbfz7rqm99ft-fdesk-home-banner.svg"
+      src="https://website-assets-fd.freshworks.com/attachments/cji4bxa5l0012gbfz7rqm99ft-fdesk-home-banner.svg"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cji4bxa5l0012gbfz7rqm99ft-fdesk-home-banner.svg 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+  </div>
+    <div class="bucket-animation-container" data-bodymovin-container id="73694277743636"></div>
+</div>
+<script type="text/javascript">
+  /* globals bodymovin */
+  FW.onLoad('lib/bodymovin', function (bodymovin) {
+    var initAnimation = function () {
+      FW.$.getJSON('https://website-assets-fd.freshworks.com/attachments/cjn5xno8h000ao9g0rb5ga9px-fdesk-homebanner.json', function (data) {
+          var wrapper = document.getElementById('73694277743636')
+          var animationInstance = bodymovin.loadAnimation({
+            wrapper: wrapper,
+            animType: 'svg',
+            loop: true,
+            animationData: data,
+            autoplay: true
+          });
+          animationInstance.addEventListener('complete', function () {
+            animationInstance.pause();
+          });
+          FW.$('#73694277743636').parent('.bucket-animation-wrapper').addClass('animation-ready');
+          FW.$(window).scroll(function () {
+            var id = '73694277743636';
+            var hT = FW.$('#' + id).parent().offset().top;
+            var hH = FW.$('#' + id).parent().outerHeight();
+            var wH = FW.$(window).height();
+            var wS = FW.$(this).scrollTop();
+
+            if ((wS + wH) > (hT + (0.4 * hH))) {
+              animationInstance.play();
+            } else { // stop animation when scrolling up and beyond
+              animationInstance.stop();
+            }
+
+            // stop animation when scrolling down and beyond
+            if (wS > (hT + hH)) {
+              animationInstance.stop();
+            }
+          });
+        bodymovin.setQuality('low');
+      });
+    };
+
+    // var browser = SiteUtilities.getUserAgent();
+    // if(browser == 'Chrome')
+    // {
+      initAnimation();
+    // }
+
+  });
+</script>
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  
+      
+
+<section class="section-light-bg pt-xl pb-lg" id ="">
+  <div class="l-page container" data-scroll-target="">
+    
+      
+  <h2 class="align-center l-section-heading">Entonces, ¿Qué le trae por aquí hoy?</h2>
+
+
+
+    <div class="row">
+      <div class="col-md-6 divider-right mb-md">
+        
+      
+  <div class="migrate-wrapper align-center">
+    
+      
+
+<div class="lazy-image-wrapper   loading-optimized" style=" padding-top: 215px">
+  <img class="original-image fadeIn w-px-200  " alt="" title="" src="" srcset="" data-src="https://website-assets-fd.freshworks.com/attachments/cji4bx9xf0013f3fzfqmv0ugo-email-to-helpdesk.one-half.png" data-srcset="https://website-assets-fd.freshworks.com/attachments/cji4bx9xf0013f3fzfqmv0ugo-email-to-helpdesk.full.png 2x"/>
+    
+</div>
+
+
+      
+  <h3>Uso el correo electrónico para ofrecer soporte</h3>
+
+<p>y se está volviendo caótico.</p>
+
+
+      
+
+      
+  <a title="COMIENCE A GENERAR TICKETS" class="button button--solid " id="" target="" href="https://freshdesk.com/es/correo-electronico-a-helpdesk/"> COMIENCE A GENERAR TICKETS</a>
+
+
+
+
+
+  </div>
+
+
+
+      </div>
+      <div class="col-md-6 mb-md">
+        
+      
+  <div class="migrate-wrapper align-center">
+    
+      
+
+<div class="lazy-image-wrapper   loading-optimized" style=" padding-top: 215px">
+  <img class="original-image fadeIn w-px-200  " alt="" title="" src="" srcset="" data-src="https://website-assets-fd.freshworks.com/attachments/cji4bx9xf000wehfz2pl8wvg9-other-helpdesk.one-half.png" data-srcset="https://website-assets-fd.freshworks.com/attachments/cji4bx9xf000wehfz2pl8wvg9-other-helpdesk.full.png 2x"/>
+    
+</div>
+
+
+      
+  <h3>Estoy usando otro Help Desk</h3>
+
+<p>y es abrumador.</p>
+
+
+      
+
+      
+  <a title="HAGA EL CAMBIO" class="button button--solid " id="" target="" href="https://freshdesk.com/es/precios/"> HAGA EL CAMBIO</a>
+
+
+
+
+
+  </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      
+<section class="l-section  " data-scroll-target="" data-scroll-target="" id ="">
+     <div class="l-page container align-center">
+      <div class="l-section-heading align-center">
+        
+      
+  <h2>A continuación, el porqué nuestros clientes nos eligen</h2>
+
+
+
+      </div>
+    
+      
+      
+<div id="83306574840788" data-interval="false" class="carousel testimonial-all-center slide carousel-fade mt-lg" data-ride="carousel">
+  <div class="carousel-inner" role="listbox">
+      <div class="carousel-item item active">
+        <div class="row testimonial-card all-center">
+          <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 testimonial-content">
+            <i class="icon-quote-open testimonial-quote-icon"></i>
+            <div class="testimonial-logo align-center">
+              
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjia1ds7x0025dgfzbv07tx21-logo-hamleys.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjia1ds7x0025dgfzbv07tx21-logo-hamleys.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjia1ds7x0025dgfzbv07tx21-logo-hamleys.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjia1ds7x0025dgfzbv07tx21-logo-hamleys.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+            </div>
+            <p class="testimonial-quote">“We began looking for a new tool in autumn and were keen to get one in place and optimised ahead of the Christmas peak period. Freshdesk ensured that the implementation process was as smooth as possible, and the team were up and running within 48 hours.”</p>
+            <div class="col-md-10 col-md-offset-1 author-bio">
+                <div class="image-small">
+                  
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjia1br1s000we4fz7u6nxe37-vaughan-potter-2x.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjia1br1s000we4fz7u6nxe37-vaughan-potter-2x.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjia1br1s000we4fz7u6nxe37-vaughan-potter-2x.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjia1br1s000we4fz7u6nxe37-vaughan-potter-2x.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+                </div>
+              <div class="author-bio-details">
+                <h6 class="author-name">Vaughan Potter</h6>
+                <div class="author-designation">Head of Customer Services</div>
+                <div class="author-company">Hamleys</div>
+              </div>
+            </div>
+            <i class="icon-quote-close testimonial-quote-icon"></i>
+          </div>
+            <div class="testimonial-band hide-in-mobile-and-tablet">
+              <div class="testimonial-band-inner">
+                      <span class="forward--link link"><a href="https://freshdesk.com/resources/case-study/hamleys">Read full case study</a></span>
+
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="carousel-item item ">
+        <div class="row testimonial-card all-center">
+          <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 testimonial-content">
+            <i class="icon-quote-open testimonial-quote-icon"></i>
+            <div class="testimonial-logo align-center">
+              
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjia1ds0i001wdbfzjkwbrmcf-logo-lesley.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjia1ds0i001wdbfzjkwbrmcf-logo-lesley.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjia1ds0i001wdbfzjkwbrmcf-logo-lesley.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjia1ds0i001wdbfzjkwbrmcf-logo-lesley.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+            </div>
+            <p class="testimonial-quote">“We were blown away when we saw Freshdesk. The combination of social, email, knowledge base, mobile, and gamification all together is what sealed the deal for us.”</p>
+            <div class="col-md-10 col-md-offset-1 author-bio">
+                <div class="image-small">
+                  
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjia1bql6000xdbfzscn80ase-charles-cooper-2x.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjia1bql6000xdbfzscn80ase-charles-cooper-2x.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjia1bql6000xdbfzscn80ase-charles-cooper-2x.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjia1bql6000xdbfzscn80ase-charles-cooper-2x.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+                </div>
+              <div class="author-bio-details">
+                <h6 class="author-name">Charles Cooper</h6>
+                <div class="author-designation">Director, Technology Support Services</div>
+                <div class="author-company">Lesley University</div>
+              </div>
+            </div>
+            <i class="icon-quote-close testimonial-quote-icon"></i>
+          </div>
+            <div class="testimonial-band hide-in-mobile-and-tablet">
+              <div class="testimonial-band-inner">
+                      <span class="forward--link link"><a href="https://freshdesk.com/resources/case-study/lesley-university-customer-support">Read full case study</a></span>
+
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="carousel-item item ">
+        <div class="row testimonial-card all-center">
+          <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 testimonial-content">
+            <i class="icon-quote-open testimonial-quote-icon"></i>
+            <div class="testimonial-logo align-center">
+              
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0a1001qy8fz1gmz3bn8-logo-pearson.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0a1001qy8fz1gmz3bn8-logo-pearson.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjhvjx0a1001qy8fz1gmz3bn8-logo-pearson.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjhvjx0a1001qy8fz1gmz3bn8-logo-pearson.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+            </div>
+            <p class="testimonial-quote">“We recommend Freshdesk because it’s great and their agents are determined to make it fit their customer’s needs.”</p>
+            <div class="col-md-10 col-md-offset-1 author-bio">
+                <div class="image-small">
+                  
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/cjpm4rkef00vksmfzovnpxo4u-matthijs-lok.one-half.jpg"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/cjpm4rkef00vksmfzovnpxo4u-matthijs-lok.full.jpg 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/cjpm4rkef00vksmfzovnpxo4u-matthijs-lok.one-sixth.jpg"
+      srcset="https://website-assets-fd.freshworks.com/attachments/cjpm4rkef00vksmfzovnpxo4u-matthijs-lok.one-sixth.jpg 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+                </div>
+              <div class="author-bio-details">
+                <h6 class="author-name">Matthijs Lok</h6>
+                <div class="author-designation">Marketing Manager Online</div>
+                <div class="author-company">Pearson</div>
+              </div>
+            </div>
+            <i class="icon-quote-close testimonial-quote-icon"></i>
+          </div>
+            <div class="testimonial-band hide-in-mobile-and-tablet">
+              <div class="testimonial-band-inner">
+                      <span class="forward--link link"><a href="https://freshdesk.com/resources/case-study/pearson-boosts-email-support-with-freshdesk">Read full case study</a></span>
+
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="carousel-item item ">
+        <div class="row testimonial-card all-center">
+          <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 testimonial-content">
+            <i class="icon-quote-open testimonial-quote-icon"></i>
+            <div class="testimonial-logo align-center">
+              
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/ck19euifi01om9bfzatdhdo9l-auto1-group-logo-png.one-half.png"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/ck19euifi01om9bfzatdhdo9l-auto1-group-logo-png.full.png 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/ck19euifi01om9bfzatdhdo9l-auto1-group-logo-png.one-sixth.png"
+      srcset="https://website-assets-fd.freshworks.com/attachments/ck19euifi01om9bfzatdhdo9l-auto1-group-logo-png.one-sixth.png 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+            </div>
+            <p class="testimonial-quote">“Freshworks products are the perfect complement to our back-office management tools. We’ve been relying on Freshworks tools for more than 3 years to provide integrated mission-critical solutions to AUTO1 Group’s customer and dealer service departments, as well as internally. In addition to outstanding products, Freshworks also offers excellent service and high level customer-success support, which makes them our Tier-1 solution for smart and efficient customer engagement cloud solution”</p>
+            <div class="col-md-10 col-md-offset-1 author-bio">
+                <div class="image-small">
+                  
+      
+
+<div class="lazy-image-wrapper   " style="">
+    <img
+      class="lazy-image "
+      data-src="https://website-assets-fd.freshworks.com/attachments/ck2oua34g00j5dig02c1u9vfx-niv-liran-auto1-2.one-half.jpg"
+      data-srcset="https://website-assets-fd.freshworks.com/attachments/ck2oua34g00j5dig02c1u9vfx-niv-liran-auto1-2.full.jpg 2x"
+      src="https://website-assets-fd.freshworks.com/attachments/ck2oua34g00j5dig02c1u9vfx-niv-liran-auto1-2.one-sixth.jpg"
+      srcset="https://website-assets-fd.freshworks.com/attachments/ck2oua34g00j5dig02c1u9vfx-niv-liran-auto1-2.one-sixth.jpg 2x"
+    />
+  <img class="original-image fadeIn   " alt="" title="" src="" srcset=""/>
+    
+</div>
+
+
+
+                </div>
+              <div class="author-bio-details">
+                <h6 class="author-name">Niv Liran</h6>
+                <div class="author-designation">Chief Product Officer</div>
+                <div class="author-company">AUTO1 Group</div>
+              </div>
+            </div>
+            <i class="icon-quote-close testimonial-quote-icon"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+    <div class="carousel-controls-wrapper  mt-md">
+      <div class="carousel-indicators-wrapper">
+        <ol class="carousel-indicators">
+            <li data-target="#83306574840788" data-slide-to="0" class="active"></li>
+            <li data-target="#83306574840788" data-slide-to="1" class=""></li>
+            <li data-target="#83306574840788" data-slide-to="2" class=""></li>
+            <li data-target="#83306574840788" data-slide-to="3" class=""></li>
+        </ol>
+        <a class="left carousel-control" href="#83306574840788" role="button" data-slide="prev">
+          <span class="icon-arrow-button-left" aria-hidden="true"></span>
+        </a>
+        <a class="right carousel-control" href="#83306574840788" role="button" data-slide="next">
+          <span class="icon-arrow-button-right" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+     </div>
+</section>
+
+      
+<section id="" data-text-list="[]" data-scroll-target="#" class=" align-center pattern-light     " >
+  <div class="container  banner-content l-banner " data-scroll-target="">
+    
+      
+  <h2>Pruébenos. Le encantará la experiencia Freshdesk.</h2>
+
+<p class="sub-text">Comience su prueba gratuita de 21 días. No se requiere tarjeta de crédito. Sin compromisos.</p>
+
+
+      <div class="mt-md">
+  <a title="Registrarse gratuitamente para el software de Helpdesk" class="button button--solid " id="bottom-banner-signup" target="" href="/es/registro"> REGISTRARSE GRATUITAMENTE</a>
+</div>
+
+
+  </div>
+</section>
+
+
+
+
+      <footer>
+          
+      
+  <div class="footer-main">
+    <div class="footer-navs l-page clearfix-lg">
+      <div class="row">
+        <div class="col-md-4 footer-left-section">
+          <div class="row">
+            
+
+    <div class="col-sm-6">
+          <div class="footer-nav-title footer-nav-title-logo">
+            
+    <img 
+        class="logo logo-fworks footer-logo"
+        src="/static-assets/images/common/company/logos/logo-fworks-black.svg"
+        alt="Freshworks"
+    />
+            <i class="icon-arrow-down"></i>
+          </div>
+          <ul class="footer-nav">
+                <li><a href="https://www.freshworks.com/es/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshworks</a></li>
+                <li><a href="https://freshdesk.com/es/" rel="" class="">Freshdesk</a></li>
+                <li><a href="https://freshservice.com/es/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshservice</a></li>
+                <li><a href="https://www.freshworks.com/es/freshsales-crm/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshsales</a></li>
+                <li><a href="https://www.freshworks.com/es/freshcaller-cloud-pbx/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshcaller</a></li>
+                <li><a href="https://www.freshworks.com/es/live-chat-software/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshchat</a></li>
+                <li><a href="https://www.freshworks.com/hrms/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshteam</a></li>
+                <li><a href="https://www.freshworks.com/marketing-automation/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshmarketer</a></li>
+                <li><a href="https://www.freshworks.com/website-monitoring/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshping</a></li>
+                <li><a href="https://www.freshworks.com/agile-project-management-software?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshrelease</a></li>
+                <li><a href="https://www.freshworks.com/statuspage/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshstatus</a></li>
+                <li><a href="https://www.freshworks.com/customer-success-software/?source=fdesk&amp;medium=referral&amp;campaign=fdesk_footer_main" rel="nofollow" class="">Freshsuccess</a></li>
+          </ul>
+    </div>
+
+    <div class="col-sm-6">
+        <p class="footer-nav-title caps-heading-12">
+          Empresa
+          <i class="icon-arrow-down"></i>
+        </p>
+          <ul class="footer-nav">
+                <li><a href="https://www.freshworks.com/es/company/about/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="nofollow" class="">Sobre nosotros</a></li>
+                <li><a href="https://www.freshworks.com/es/company/leadership/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="nofollow" class="">Dirección</a></li>
+                <li><a href="https://www.freshworks.com/es/company/board/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="nofollow" class="">Junta Directiva</a></li>
+                <li><a href="https://www.freshworks.com/es/company/investors/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="nofollow" class="">Inversionistas</a></li>
+                <li><a href="https://www.freshworks.com/company/affiliate-partner/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="nofollow" class="">Afiliados</a></li>
+                <li><a href="https://www.freshworks.com/es/company/careers/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="nofollow" class="">Oportunidades profesionales</a></li>
+                <li><a href="https://www.freshworks.com/newsroom/press-releases/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="nofollow" class="">Sala de prensa</a></li>
+                <li><a href="https://www.freshworks.com/es/contact/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="nofollow" class="">Contáctenos</a></li>
+                <li><a href="/gdpr/" rel="" class="">RGPD</a></li>
+          </ul>
+    </div>
+          </div>
+        </div>
+        <div class="col-md-8 footer-right-section">
+          <div class="row">
+            
+
+    <div class="col-sm-3">
+        <p class="footer-nav-title caps-heading-12">
+          Freshdesk
+          <i class="icon-arrow-down"></i>
+        </p>
+          <ul class="footer-nav">
+                <li><a href="/es/funcionalidades/" rel="" class="">Características</a></li>
+                <li><a href="/es/precios/" rel="" class="">Precios</a></li>
+                <li><a href="https://apps.freshdesk.com/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="" class="">Aplicaciones</a></li>
+                <li><a href="/customers/" rel="" class="">Clientes</a></li>
+                <li><a href="/academy/" rel="" class="">Capacitación</a></li>
+                <li><a href="https://developers.freshdesk.com/api/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="" class="">APIs y desarrolladores</a></li>
+                <li><a href="/es/recursos/" rel="" class="">Recursos</a></li>
+                <li><a href="https://blog.freshdesk.com/?utm_source=freshdesk&amp;utm_medium=referral&amp;utm_campaign=fdesk_footer_main" rel="" class="">Blog</a></li>
+                <li><a href="/es/help-desk-software" rel="" class="">Help Desk Software</a></li>
+                <li><a href="/es/pricing/free-support-software/" rel="" class="">Software de Help Desk gratuito</a></li>
+                <li><a href="/es/mejor-help-desk/" rel="" class="">El mejor software de Help Desk</a></li>
+          </ul>
+    </div>
+
+    <div class="col-sm-3">
+        <p class="footer-nav-title caps-heading-12">
+          Características principales
+          <i class="icon-arrow-down"></i>
+        </p>
+          <ul class="footer-nav">
+                <li><a href="/es/gestion-de-tickets/" rel="" class="">Generación de tickets</a></li>
+                <li><a href="/es/colaboracion/" rel="" class="">Colaboración</a></li>
+                <li><a href="/es/soporte-multicanal/" rel="" class="">Help Desk multicanal</a></li>
+                <li><a href="/es/automatizaciones/" rel="" class="">Automatizaciones</a></li>
+                <li><a href="/es/autoservicio/" rel="" class="">Autoservicio</a></li>
+                <li><a href="/es/informes/" rel="" class="">Informes y análisis</a></li>
+                <li><a href="/es/helpdesk-personalizable/" rel="" class="">Personalizaciones</a></li>
+                <li><a href="/es/helpdesk-seguro/" rel="" class="">Help Desk seguro</a></li>
+                <li><a href="/es/comparar-helpdesks/" rel="" class="">Comparar Help Desk</a></li>
+          </ul>
+    </div>
+
+    <div class="col-sm-3">
+        <p class="footer-nav-title caps-heading-12">
+          Soluciones
+          <i class="icon-arrow-down"></i>
+        </p>
+          <ul class="footer-nav">
+                <li><a href="/es/soluciones/empresa/" rel="" class="">Empresa</a></li>
+                <li><a href="/es/soluciones/smb/" rel="" class="">PyME</a></li>
+                <li><a href="/es/industries/software-de-help-desk-ecommerce-minorista/" rel="" class="">Comercio electrónico</a></li>
+                <li><a href="/es/software-de-soporte/servicio-al-cliente-k-12-instituciones-universidades/" rel="" class="">Enseñanza</a></li>
+          </ul>
+    </div>
+
+    <div class="col-sm-3">
+        <p class="footer-nav-title caps-heading-12">
+          Aplicaciones móviles
+          <i class="icon-arrow-down"></i>
+        </p>
+          <ul class="footer-nav app-stores">
+              <li><a href="http://ad.apps.fm/ozXtEc5ZI9HQ_q2ra73VL15KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYffAIOoczw-YGfIaoZYt7xO4LNOZ4hHcXlOAoj_MgX7b8gZe2OOIvCAxOQtZGmw1KoF6ewiom4sKC4xZyurG0g7Q" rel="" class="app-store-img app-google-play"></a></li>
+              <li><a href="https://itunes.apple.com/ca/app/freshdesk/id849713306?mt=8" rel="" class="app-store-img app-apple-store"></a></li>
+          </ul>
+        <p class="footer-nav-title caps-heading-12">
+          Síganos
+          <i class="icon-arrow-down"></i>
+        </p>
+          <ul class="footer-nav social-connect-nav">
+                <li><a href="https://www.facebook.com/freshdesk/" rel="" target="_blank"><i class="icon-facebook"></i></a></li>
+                <li><a href="https://twitter.com/freshdesk" rel="" target="_blank"><i class="icon-twitter"></i></a></li>
+                <li><a href="http://www.youtube.com/freshdesk" rel="" target="_blank"><i class="icon-youtube"></i></a></li>
+                <li><a href="http://www.linkedin.com/company/1377014" rel="" target="_blank"><i class="icon-linkedin"></i></a></li>
+          </ul>
+    </div>
+          </div>
+          <div class="footer-salessupport clearfix-lg">
+            <div class="row">
+              <div class="col-md-12 seperator-line">
+                <p class="footer-nav-title caps-heading-12">
+                  Ventas y Soporte
+                  <i class="icon-arrow-down"></i>
+                </p>
+                <ul class="footer-nav support-nav">
+                    <li>
+                      <a href="tel:+34518880864">
+                        <i class="icon-phone"></i><span>+34 51 888 0864</span>
+                      </a>
+                    </li>
+                  <li>
+                    <a href="mailto:support@freshdesk.com">
+                      <i class="icon-mail"></i><span>support@freshdesk.com</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyrights">
+    <div class="l-page clearfix-lg">
+      <div class="footer-nav copyrights-nav hide-in-mobile">
+          <a target=&quot;_blank&quot; href="https://www.freshworks.com/terms/" rel="nofollow">Condiciones</a>
+          <a target=&quot;_blank&quot; href="https://www.freshworks.com/privacy/" rel="nofollow">Política de Protección de Datos</a>
+          <a target=&quot;_blank&quot; href="https://www.freshworks.com/take-down/" rel="nofollow">Política de eliminación</a>
+          <a  href="/gdpr/" rel="">RGPD</a>
+          <a target=&quot;_blank&quot; href="https://www.freshworks.com/security/" rel="nofollow">Seguridad</a>
+      </div>
+      <p class="footer-copyrights-text">Copyright © Freshworks Inc. Todos los derechos reservados</p>
+    </div>
+  </div>
+
+
+      </footer>
+
+    <script type="text/javascript">
+      FW.onLoad(function() {
+        FW.footer();
+      });
+    </script>
+    <script type="text/javascript">
+      FW.onLoad(function() {
+        FW.legal.init();
+      });
+    </script>
+    <link href="/static-assets/css/non-critical.css" rel="stylesheet" />
+    <div id="modal-backdrop"></div>
+    <div id="form-modal-holder"></div>
+    <div id="eu-cookie-policy-popup">
+      <div class="l-page">
+        <div class="popup-container">
+          <div class="text col-md-9"><p>Usamos <em>cookies </em>para ofrecerle una mejor experiencia de navegación, analizar el tráfico del sitio, personalizar nuestro contenido y publicar anuncios dirigidos a audiencias específicas. Puede obtener más información sobre cómo usamos las <em>cookies </em>en nuestro Aviso de Protección de Datos. Nuestra Política de <em><a href="https://www.freshworks.com/list-of-cookies?domain=freshdesk.com">Cookies</a> </em>proporciona información acerca de cómo gestionar la configuración de las <em>cookies</em>.</p>
+</div>
+          <div class="options col-md-3">
+            <div class="button button--solid button--small button--black accept-cookies">
+              Acceptar Cookies
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modal-search">
+      <div class="modal-wrapper">
+        <i class="icon-close"></i>
+        <div id="searchbox"></div>
+        <div id="infinite-hits"></div>
+        <div id="pagination"></div>
+        <div class="no-results">
+          <img src="/static-assets/images/fservice/no-results-illustration.svg" alt="no results" />
+          <p>Sorry, our deep-dive didn’t help. Please try a different search term.</p>
+        </div>
+      </div>
+    </div>
+      
+
+    <script type="text/javascript">
+      (function(){
+        function loadFreshworksJS(event) {
+          var script = document.createElement('script')
+          script.type = 'text/javascript'
+          script.src = "/static-assets/js/freshworks.js?8e227c49d2e25ec6534580381b93676b"
+          document.body.appendChild(script)
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", loadFreshworksJS)
+        } else { // `DOMContentLoaded` already fired
+          loadFreshworksJS()
+        }
+      })();
+    </script>
+  </body>
+</html>

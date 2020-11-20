@@ -1,0 +1,763 @@
+What is the Google Maps Platform? 
+The Google Maps Platform is a set of APIs and SDKs that allows developers to embed Google Maps into mobile apps and web pages, or to retrieve data from Google Maps. There are several offerings. Depending on your needs, you may find yourself using one or a combination of these APIs and SDKs: 
+Maps: 
+Routes: 
+Places: 
+How do I get started with Google Maps Platform? 
+See. 
+Which API do I need? 
+For help in finding the right API based on your functional requirements, take a look at the. 
+How do I start using the APIs on my site? 
+See the Overview, Developer, and Get Started guides for the specific API or SDK you are interested in. For example, check out the guides for or. 
+Which countries does the Google Maps Platform cover? 
+The Google Maps team is constantly pushing new map data out and increasing our international coverage. Consult the for the latest coverage information. You can filter the data with the filter box at the top of the page. Please note that coverage data can change if licensing agreements with the data providers change. 
+Also see: 
+Can I put Google Maps on my site without using Google Maps Platform products? 
+Yes. now offers the ability to embed the map that you 're viewing into your website or blog, without any programming or use of the Google Maps Platform. More information is available. 
+How do I deliver Maps applications on mobile devices? 
+To incorporate maps in an Android application, use the. 
+To incorporate maps in a native iOS application, use the. 
+The has been developed to cater to mobile devices, and is suitable for browser applications targeted at both the desktop and devices that include a web browser with a full JavaScript implementation, such as the Apple iPhone. 
+For applications targeted at devices not suitable for using the Maps JavaScript API, the delivers map images in GIF, JPG, and PNG formats, including markers and polylines. Note that use of the Maps Static API outside of browser based applications requires that the map image be linked to Google Maps. 
+Which web browsers does the Maps JavaScript API support? 
+The Maps JavaScript API supports the following web browsers. 
+Desktop 
+The current and previous versions of Chrome( Windows, macOS, Linux). 
+The current and previous versions of Safari( macOS). 
+The current and previous versions of Firefox( Windows, macOS, Linux). 
+The current version of Microsoft Edge( Windows). 
+Internet Explorer 10 and 11( Windows). 
+Caution: 
+Internet Explorer's Compatibility View is not supported. 
+Android 
+The current version of Chrome on Android 4.1+. 
+Chrome WebView on Android 4.4+. 
+iOS 
+Mobile Safari on the current and previous major versions of iOS. 
+UIWebView and WKWebView on the current and previous major versions of iOS. 
+Current version of Chrome for iOS. 
+Can I print maps from the Maps JavaScript API? 
+Printing from the Maps JavaScript API is not supported. This is because printing support is inconsistent across commonly used browsers. 
+How can I be notified when there are changes to Google Maps Platform products? 
+You should subscribe to the for news updates across the various Google Geo developer offerings. 
+How do I contact technical support? 
+See for information about available support options. 
+When is technical support available? 
+The support team is available 24x5( weekdays from Monday 9 a.m. Tokyo time to Friday 5 p.m. Pacific time) excluding for`` service unusable'' issues. 
+How can I recover access to my Google Account? 
+If you lost access to your Google Account( e.g. joe@ mycompany.com or joe@ gmail.com), you can try restoring the account access by retrieving or resetting your password. Visit the article in Google Account Help. 
+Note: To restore access to a G Suite account, ask your admin to. 
+How can I recover access to a specific project? 
+If you lost access to the project where you manage your Google Maps Platform implementation, you can try to recover it. 
+If you have access to your project-associated Google Account: 
+If you know the Project Owner and have access to your Google Account: 
+Ask the Project Owner to. 
+If your project is part of an Organization: 
+Contact your admins and ask them to. 
+If you do not know any of the current Project Owners: 
+If you do n't know who the Project Owner is, or the Project Owner is unavailable, to explore additional options to recover the project. 
+If you 
+do not 
+have access to your project-associated Google Account: 
+If you lost access to your Google Account: 
+for your account. 
+If you can not recover access to your Google Account: 
+Create a new Google Account, then contact an existing project owner and ask them to. 
+Understanding the terms of service 
+What are the terms of service for Google Maps Platform products? 
+The Google Maps Platform Terms of Service are available at: 
+Does my site meet the Google Maps Platform Terms of Service? 
+You can use the Google Maps Platform within your applications as long as your site meets the. 
+However, there are some uses of the Google Maps Platform that we just do n't want to see: maps that identify the places to buy illegal drugs in a city, for instance, or any other illegal activity. We also respect people's privacy, so the Google Maps Platform should n't be used to identify private information about individuals. 
+You should use your own counsel to determine whether your application complies with the before you develop and launch it. Google engineers can only offer technical assistance and are not qualified to offer legal advice. Google reserves the right to suspend or terminate your use of the service at any time, so please read the carefully. 
+Can I access the Maps and Satellite images directly? 
+You may not access the maps or satellite images through any mechanism besides the Google Maps Platform( such as the creation of your own mapping API or the use of a bulk tile download script). Your application's access to the tiles will be blocked if it accesses them outside of the Google Maps Platform. See the for more details. 
+Can I use Google Maps Platform products for tracking applications? 
+There is no restriction on displaying real-time data( tracking) with Google Maps Platform products provided that the application complies with the Google Maps Platform Terms of Service. 
+Can I use Google Maps in my non-Web application? 
+Yes, Google Maps Platform products can now be used in non-Web applications, provided that they adhere to the other restrictions of the Google Maps Platform Terms of Service. 
+The Maps JavaScript API is only supported when run in one of the. 
+Can I use Google Maps Platform products on a site that is password protected? 
+Yes, Google Maps, Routes, Places services can be used with private-access applications. See the for more details. 
+Can I create an application that includes Google Maps Platform data in a document? 
+If your application generates a document, either in electronic or printed form, no data from Google Maps Platform may be included in the document. Please see the`` No Scraping'' section for more details. 
+As a user of a Google Maps Platform application, can I use screen shots of Google Maps imagery shown in the application in printed materials or offline media? 
+Limited amounts Google Maps imagery may be included in printed materials, subject to both the and the. 
+How can I opt out of including my content in Google search results? 
+We are no longer collecting this data. The use of the 
+indexing 
+parameter has been deprecated and has no effect. You no longer need to opt out explicitly, but we encourage you to remove this parameter at your earliest convenience. 
+To remove your page or site from search results, follow the provided in our webmaster help center. 
+What information is sent to Google when I use the Maps JavaScript API? 
+When using the Maps JavaScript API, the following information is sent to Google: 
+Map size and location for retrieving map tiles and copyrights 
+Addresses for geocoding 
+Direction and Elevation requests 
+Locations around which to search for Places 
+KML when using KmlLayer 
+Can I generate a map image using the Maps Static API which I store and serve from my website? 
+You may not store and serve copies of images generated using the Maps Static API from your website. All web pages that require static images must link the 
+src 
+attribute of an HTML 
+img 
+tag or the CSS 
+background-image 
+attribute of an HTML 
+div 
+tag directly to the Maps Static API so that all map images are displayed within the HTML content of the web page and served directly to end users by Google. 
+Usage limits and billing 
+How do I set up billing for my project? 
+See. 
+How do Google Cloud Platform Free Tier customers upgrade to a paid account? 
+The program provides customers a$ 300 credit free trial to use with any Google Cloud Platform( GCP) service, including the Google Maps Platform( GMP) APIs. When the free trial ends, you must to continue using these services. To upgrade to a paid account, visit the. 
+Does the Google Maps Platform have usage limits? 
+There are no maximum daily limits on the number of requests you can make to Google Maps Platform products, and the only usage limits are related to the maximum number of`` Queries Per Second''( QPS). The following table shows the QPS limit for each API: 
+API 
+QPS limit 
+Directions 
+50 QPS 
+Distance Matrix 
+1000 QPS 
+Elevation 
+100 QPS 
+Geocoding 
+50 QPS 
+Geolocation 
+100 QPS 
+Dynamic Maps 
+500 QPS 
+Static Maps 
+500 QPS 
+Street View Image API 
+500 QPS 
+Time Zone 
+500 QPS 
+Places( JavaScript and web) 
+100 QPS 
+Roads 
+500 QPS 
+In order to govern expenditures, you can, and to all requests to any billable API. 
+Google Maps Platform products must be deployed in compliance with the standard. 
+How is usage cost calculated? 
+For an overview of pricing for the Google Maps Platform products, please see the. 
+To learn more about how Google Maps Platform APIs are billed, please see. 
+How are map loads counted on the Google Maps Platform? 
+A single map load is charged when any of the following occur: 
+A web page or application displays a map using the Maps JavaScript API. 
+An application requests a single map image from the Maps Static API. 
+Street View panoramas are charged separately from map loads: 
+A static Street View panorama is charged for each request to the Street View Static API to embed a static( non-interactive) Street View panorama. 
+A dynamic Street View panorama is charged for each instantiation of a panorama object in a Maps JavaScript API, Maps SDK for Android, Maps SDK for iOS application. 
+After a web page or application loads a map, or a static map image, or a Street View panorama, any user interactions with it, such as panning, zooming, or switching map layers, do not generate additional map loads or affect usage limits. 
+How do I monitor my usage? 
+You can monitor the usage of individual APIs in the. 
+Select the project that contains the API you want to review. 
+From the list of APIs on the Dashboard, click the name of the API. 
+Near the top of the page, click 
+Metrics 
+or 
+Quotas 
+. 
+To see a traffic report and billing information for an entire project, follow these steps: 
+If you have n't already done so,. 
+Go to the Google Cloud Platform Console. 
+Select a project. 
+In the left sidebar, click 
+Reports 
+. Use the filters on the right sidebar to view reports on your billing account. 
+To learn more, see as well as and. 
+What happens if I exceed the request rate( QPS) limits? 
+If you exceed the of a given Google Maps Platform product, the API will return an error message. If you repeatedly exceed the limits, your access to the API may be temporarily blocked. 
+If you exceed the request or otherwise abuse the service, requests will return a specific error message. If you continue to exceed limits, your access to the Google Maps Platform may be blocked. 
+Note: 
+Four of the web service APIs have an equivalent client-side service available in the Maps JavaScript API:,,, and. 
+Usage limits exceeded 
+If you exceed the usage limits you will get an 
+OVER_QUERY_LIMIT 
+status code as a response. 
+This means that the web service will stop providing normal responses and switch to returning only status code 
+OVER_QUERY_LIMIT 
+until more usage is allowed again. This can happen within a few seconds, if the error was received because your application sent too many requests per second. 
+If you regularly exceed your QPS usage limits, consider lowering usage, by optimizing applications to use Google Maps Platform products more efficiently. See the for more information. 
+My site gets a lot of traffic. Can I use Google Maps Platform products? 
+Yes. However we recommend that you familiarize yourself with the for any of the Google Maps Platform that your application relies on. 
+If my web site or application becomes suddenly popular, will my maps stop working? 
+If you exceed the free$ 200 monthly usage, and you do not have a valid payment instrument on your billing account( credit card, bank transfer, ...), the API ceases to function until a payment instrument is added. 
+How will usage be calculated and billed? 
+Usage is calculated at the end of each day, and priced as shown in the. At the end of every month, the total usage is charged to the payment method associated with your billing account. For more information, see. 
+How much does it cost to use the Google Maps Platform? 
+See the for an overview of cost per API. If your application generates requests or map load volumes below the complimentary$ 200 per month usage, your usage is free. Usage that exceeds the$ 200 monthly credit will be charged to your billing account. For more details, see our. 
+Is pricing available in other currencies? 
+may be available within the console. When you select a different currency, rates will convert from the USD equivalent listed on our. 
+I 've set up billing. How do I view my bill? 
+Google charges you at the beginning of each month for the previous month's activity, using your. For details about your bill, see our. 
+Additional resources: 
+Learn how to. 
+Learn how to. 
+Learn how to. 
+How do I avoid a large bill if my usage unexpectedly increases? 
+The Google Maps Platform provides ways to set daily request limits and set maximum daily billable limits. You can cap the maximum daily limit on usage to protect against unexpected increases. You can also set budget alerts to receive email notifications when the charges on the billing account reach a threshold you set. 
+Capping the maximum daily billable limit: 
+To avoid a large bill, you can set a daily cap on usage to protect against unexpected increases in use. You can in the Google Cloud Platform Console by taking the following steps: 
+Go to the. 
+Select a project if prompted. 
+Select an API from the list, then click the 
+Quotas 
+tab. 
+Click the 
+edit icon 
+next to the 
+'' requests per day'' 
+quota. 
+Alternatively, you can edit multiple quotas for multiple APIs using the. 
+Tip: 
+Use a simple equation to determine your daily cap depending on how much you want to spend. For example:( Monthly spend/) /30= requests per day cap( for one API). For instance, on the Maps JavaScript API, 28,000 calls can be made per month within the free tier. If you cap your Maps JavaScript API daily quota to 903( ie 28,000/ 31), you will not be charged. Note that your implementation may use multiple billable APIs, so adjust your equation as needed. Remember, a is available each month, so be sure to factor that into your calculation. 
+Setting and managing budget alerts: 
+to send email notifications to billing administrators when the charges on the billing account reach a threshold you set. Billing administrators will be sent email notifications when the estimated charges on the billing account exceed 50%, 90%, and 100% of the threshold. 
+Key Point: 
+Setting a budget does 
+not 
+cap API usage. The purpose of budgets is to allow you to create alerts so that you know how your spending is trending over time. Alerts prompt you to take action to control your costs, but do not prevent the use of your services when the budget is met or exceeded. If you prefer to set a hard cap on API usage to prevent accruing costs, see. 
+I got a message saying that my project is linked to the`` Google Maps Platform Transition Account'', but I do n't have access to that account. What do I do? 
+The`` Google Maps Platform Transition Account'' was created to help certain customers transition to our new pay-as-you-go pricing plan. This transition account enabled Google to provide these customers with a one-time credit, so that they could continue using Google Maps Platform up to the limit of the$ 200 free tier. Once this limit is exceeded, the billing account will shut down and you will lose access to the service. To avoid service interruptions, we urge you to set your own billing account, and continue to enjoy the$ 200 monthly free tier. To change the billing account for your project: 
+( if you already have a billing account, you can skip this step). 
+. 
+Why is my quota limit set to 1 request per day? How can I raise this limit? 
+If you have not created and attached a billing account to your project, your Maps Platform APIs will be limited to 1 request per day. You can get higher quota by creating and attaching a billing account. To do this, see. 
+Once you have created and attached a billing account, your daily quota limit will be removed. You can decide to. 
+I received a billing violation notice. How do I resolve this? 
+You have received this notice because Google has determined that your account has been using multiple billing accounts. This is a violation of Google's terms, as defined in. Under these terms, it is forbidden to create multiple billing accounts. To learn more, see the. 
+Using the Google Maps Platform 
+Which keys or credentials should I use for different Maps products? 
+Each time you use Google Maps Platform products, you must include an API key to validate your request. The Google Maps Platform is available for Android, iOS or Web apps, and via HTTP web services. 
+API Key: 
+An API key is a unique identifier that you generate using the. 
+Example of loading an API with a key: 
+& amp; key=AIzaSyBjsINSH5x39Ks6c0_CoS1yr1Mb3cB3cVo 
+Digital Signature: 
+A digital signature is generated using a cryptographic key provided to you by Google. Digital signatures are used with the Maps Static API and Street View Static API. 
+Restrictions: 
+API key restrictions are optional, but we strongly recommend you restrict all API keys for greater security. 
+You can add an application restriction to the API key. Once restricted, a key will only work on platforms that support that type of restriction. Four types of application restrictions are available. APIs enforcing the same restriction type can use the same restricted key. 
+IP addresses( individual servers)- for use with the. 
+HTTP referrers( web sites)- for use with the. 
+Android app restriction( by package name and fingerprint)- for use with the. 
+iOS app restriction( by iOS bundle identifier)- for use with the. 
+You can also add an API restriction to the API key. For more information, see. 
+The table below indicates the key/credential and application restriction for each Google Maps Platform API/SDK. 
+API/SDK 
+Credential& amp; Application Restriction 
+API key with Android restriction 
+API key with Android restriction 
+API key with iOS restriction 
+API key with iOS restriction 
+API key with HTTP referer restriction 
+API key with HTTP referer restriction+ Digital Signature 
+API key with HTTP referer restriction+ Digital Signature 
+API key with HTTP referer restriction 
+API key with IP address restriction 
+API key with IP address restriction 
+API key with IP address restriction 
+API key with IP address restriction 
+API key with IP address restriction 
+API key with IP address restriction 
+API key with IP address restriction 
+API key with IP address restriction 
+1 
+API key restrictions are optional, but we strongly recommend you restrict all API keys for greater security. 
+2 
+Depending on usage, a digital signature may be required for the and. Regardless of usage, we strongly recommend that you use both an API key and a digital signature to authenticate your requests. 
+How do I switch my key restriction type from an HTTP referer to an IP address restriction? 
+Important: 
+If you are using any of the with an API key that has referer restrictions, your requests will fail with the error message:`` API keys can not have referer restrictions when used with this API.'' You should switch to using an API key with IP address restrictions. 
+Before you switch the API key restriction type from HTTP referer to IP address, ensure that all the APIs that use the API key support the IP restriction type. APIs of the same restriction type can use the same restricted key. If you need to enforce more than one restriction, add a separate key with the required restriction. See how to. 
+Learn more about. 
+To switch an API key with HTTP referer restriction to IP address restriction, do the following: 
+Go to the Credentials page of the. 
+Select the project that contains the API key you want to edit. 
+On the 
+Credentials 
+page, from the list of API keys, select the name of the API key to edit the details of the key. 
+In the 
+Key restriction 
+section of the page, select "IP addresses( web servers, cron jobs, etc.") and insert the appropriate server IP addresses, then click Save. 
+How do I get a new API key? 
+See. 
+How can I find the changes introduced in each version of the Google Maps APIs? 
+Version change information for many of the Maps APIs are available at the following links: 
+You can also check which version of the Google Maps Platform a particular bug was introduced and fixed in using the Google Maps Platform Issue Tracker at: 
+How can I load the API into a page asynchronously after the page has loaded? 
+Just specify the callback parameter when loading the API. More information and sample code can be found in the chapter of the Maps JavaScript API documentation. 
+How can I get Google Maps Platform products to display in a language other than English? 
+By default the API will attempt to load the most appropriate language based on the users location or browser settings. Some APIs allow you to explicitly set a language when you make a request. More information on how to set the language is available in the documentation for each API: 
+Supported Languages: 
+Google often updates supported languages. This list may not be exhaustive and is subject to change. 
+Language Code 
+Language 
+Language Code 
+Language 
+af 
+Afrikaans 
+ja 
+Japanese 
+sq 
+Albanian 
+kn 
+Kannada 
+am 
+Amharic 
+kk 
+Kazakh 
+ar 
+Arabic 
+km 
+Khmer 
+hy 
+Armenian 
+ko 
+Korean 
+az 
+Azerbaijani 
+ky 
+Kyrgyz 
+eu 
+Basque 
+lo 
+Lao 
+be 
+Belarusian 
+lv 
+Latvian 
+bn 
+Bengali 
+lt 
+Lithuanian 
+bs 
+Bosnian 
+mk 
+Macedonian 
+bg 
+Bulgarian 
+ms 
+Malay 
+my 
+Burmese 
+ml 
+Malayalam 
+ca 
+Catalan 
+mr 
+Marathi 
+zh 
+Chinese 
+mn 
+Mongolian 
+zh-CN 
+Chinese( Simplified) 
+ne 
+Nepali 
+zh-HK 
+Chinese( Hong Kong) 
+no 
+Norwegian 
+zh-TW 
+Chinese( Traditional) 
+pl 
+Polish 
+hr 
+Croatian 
+pt 
+Portuguese 
+cs 
+Czech 
+pt-BR 
+Portuguese( Brazil) 
+da 
+Danish 
+pt-PT 
+Portuguese( Portugal) 
+nl 
+Dutch 
+pa 
+Punjabi 
+en 
+English 
+ro 
+Romanian 
+en-AU 
+English( Australian) 
+ru 
+Russian 
+en-GB 
+English( Great Britain) 
+sr 
+Serbian 
+et 
+Estonian 
+si 
+Sinhalese 
+fa 
+Farsi 
+sk 
+Slovak 
+fi 
+Finnish 
+sl 
+Slovenian 
+fil 
+Filipino 
+es 
+Spanish 
+fr 
+French 
+es-419 
+Spanish( Latin America) 
+fr-CA 
+French( Canada) 
+sw 
+Swahili 
+gl 
+Galician 
+sv 
+Swedish 
+ka 
+Georgian 
+ta 
+Tamil 
+de 
+German 
+te 
+Telugu 
+el 
+Greek 
+th 
+Thai 
+gu 
+Gujarati 
+tr 
+Turkish 
+iw 
+Hebrew 
+uk 
+Ukrainian 
+hi 
+Hindi 
+ur 
+Urdu 
+hu 
+Hungarian 
+uz 
+Uzbek 
+is 
+Icelandic 
+vi 
+Vietnamese 
+id 
+Indonesian 
+zu 
+Zulu 
+it 
+Italian 
+You can see what the map will look like in any of the languages listed above in this. 
+Can the Google Maps Platform be accessed over SSL( HTTPS)? 
+The Maps JavaScript API, Maps Static API, and can be accessed over secure( HTTPS) connections. Please see the documentation for the API concerned for information on how to access the API over SSL. 
+Note that the Maps Static API does not support custom icon URLs that use HTTPS; the default icon will be displayed. 
+How do I report a bug or request a new feature in the Google Maps Platform? 
+If you experience behavior that you believe may be a bug, please begin by raising it in the. This will allow other developers to validate the bug, and rule out any potential issues with your code. 
+If you wish to request a feature, please also first raise it in the to confirm that a solution that meets your requirements is not already available. 
+Once you have confirmed that you have identified a new bug, or that your requirements can not be met by the existing functionality of the Google Maps Platform products, please report your bug or feature request using the. 
+Before adding a bug or feature request to the Issue Tracker please be sure to check that the bug or feature concerned has not already been added. If it has, you can star the issue to register your interest and be notified of updates. 
+How do Google Maps Platform APIs use site cookies? 
+The following APIs use cookies. For users of the Maps Embed API, Google uses cookies to determine the number of unique users of the API. Signed-in users are identified by their Google cookie, which is also used to provide a personalised experience. For users that are not signed in, Google uses an anonymous cookie for each unique user. 
+Google API 
+User type 
+Maps Embed API 
+Anonymous and signed-in user 
+Maps SDK for Android 
+Anonymous 
+Places SDK for Android 
+Anonymous 
+Maps SDK for iOS 
+Anonymous 
+Places SDK for iOS 
+Anonymous 
+Google also accumulates statistics about the types of features used from the Maps product. 
+I ca n't find the answer to my question. Who should I contact? 
+Google's Developer Relations team maintains a presence on — a collaboratively-edited question and answer site for programmers. It's a great place to ask technical questions about developing and maintaining Google Maps applications. More information about asking questions on Stack Overflow is available on the page. 
+For best results when requesting help, please keep the following in mind: 
+Search the current discussions. Chances are someone else has experienced a similar issue and found a fix. 
+Submit a link to your site if possible. Only post code snippets if the code is not easily viewable online. 
+Provide all relevant information including browser versions, errors, and all other facts that may be useful in troubleshooting this problem. 
+Errors and troubleshooting 
+What does this error mean? 
+If you encounter an error while loading or running the Google Maps APIs, please see the following links to find explanations for the error codes: 
+My maps appear darker than usual. What's happening? 
+Under certain circumstances, a darkened map, or 'negative' Street View image, watermarked with the text`` for development purposes only'', may be displayed. This behavior typically indicates issues with either an API key or billing. To use Google Maps Platform products, you must have a billing account and all requests must include a valid API key. The following flow will help troubleshoot this: 
+Are you using an API key? 
+I'm not sure. How can I check if I am using an API key? 
+An API key is passed as the 
+key 
+parameter in the URL that is used to load the Maps JavaScript API. Here are a few options to check if you are using an API key: 
+Use the Chrome extension. This allows you to determine if your website is properly implementing Google's licensed Maps APIs. 
+If you are using a library or plugin to load the Maps JavaScript API, check the settings for that library and look for an API key option. 
+Check. If you see the following messages, you are not using your API key correctly: 
+Google Maps JavaScript API warning: 
+Google Maps JavaScript API error: 
+For web developers: 
+If you have access to the source code of your application, look for the 
+& lt; script& gt; 
+tag which is used to load the Maps JavaScript API. When loading the Maps JavaScript API, substitute 
+YOUR_API_KEY 
+in the code below with your API key. 
+& lt; script async defer src='' https: //maps.googleapis.com/maps/api/js? key= 
+YOUR_API_KEY 
+& amp; callback=initMap''& gt;& lt; /script& gt; 
+Check the network traffic generated by your website in the browser. In Chrome, this can be viewed using the 
+Network 
+tab. Here you will see the network requests made by your website. Requests made using the Maps JavaScript API will be under the path 
+maps/api/js 
+. Here you can confirm if the requests are using the 
+key 
+parameter. It may be helpful to by 
+maps/api/js 
+when viewing the 
+Network 
+tab. 
+No, I am not using an API key. 
+To get an API key, click the button below. If you do not see a guided setup, follow the full instructions at. 
+Yes, I am using an API key. 
+Great! Let's move on and check if a billing account is attached to your project. 
+Is a billing account attached to your project? 
+I'm not sure. How can I check if billing account is attached to my project? 
+Go to the and select the project under which your API key was created. To confirm the key is associated with the project: 
+Go to the 
+Credentials 
+section, which can be accessed from the left side bar under 
+APIs& amp; Services& gt; Credentials 
+. 
+Check that the API key you currently use on your website is listed. If that's not the case, switch to a different project, and check the credentials there. 
+If you can not locate the project for your API key, you may have lost access to this project. Ask others in your organization for help. If the original project can not be located, you should: 
+Create a new project. This can be done by selecting 
+New Project 
+from the projects list, or by selecting 
+Create Project 
+via the. 
+Create a new API key. This can be done on the 
+Credentials 
+page. Once there click 
+Create credentials 
+and then select 
+API key 
+. 
+Once you have located your project in the Google Cloud Platform Console, check if a billing account is attached by navigating to the section in the left side menu. 
+No, a billing account is not attached to my project. 
+Go to the and add a billing account to your project. For additional information, see. 
+Yes, a billing account is attached to my project. 
+Great! Let's make sure the provided billing method is valid. 
+Is the provided billing method no longer valid( for example an expired credit card)? 
+You in the Google Cloud Platform Console. 
+Is there an exceeded self-imposed daily limit on the API? 
+If you have set a daily limit on any of your APIs, which is common to prevent unexpected increases, you can resolve this by. 
+You can check your daily limits in the Google Cloud Platform Console by going to the. Once there: 
+Select a project if prompted. 
+Select an API from the list, then click the 
+Quotas 
+tab. 
+Does your API key have an IP addresses restriction? 
+API keys with an 
+IP addresses 
+restriction can only be used with web services that are intended for use from the server side( such as the and other). Most of these web services have equivalent services within the Maps JavaScript API( for example, see the). To use the Maps JavaScript API client side services, you will need to create a separate API key which can be secured with an 
+HTTP referrers 
+restriction( see). 
+How do I resolve the error codes: 
+OVER_DAILY_LIMIT 
+or 
+OVER_QUERY_LIMIT 
+? 
+These error codes can be returned for any of the following reasons: 
+An API key is missing from the request. 
+The provided API key is invalid. 
+The project does not have a billing account attached. 
+A self-imposed has been exceeded. 
+The provided method of payment is no longer valid( for example, a credit card has expired). 
+You have for a given API. 
+To use Google Maps Platform products, you must have a billing account, and all requests must include a valid API key. To fix this, take the following steps: 
+. 
+. 
+to increase your daily limit( if applicable). 
+How do I resolve the error codes: 
+kGMSPlacesRateLimitExceeded 
+or 
+9005 PLACES_API_RATE_LIMIT_EXCEEDED 
+? 
+If you are seeing 
+kGMSPlacesRateLimitExceeded 
+or 
+9005 PLACES_API_RATE_LIMIT_EXCEEDED 
+, you may be using a deprecated version of the Places SDK for Android or Places SDK for iOS. Learn more and find the new SDKs at. 
+How do I resolve the error:`` This IP, site or mobile application is not authorized to use this API key.''? 
+There are various scenarios which may cause this error: 
+You 've enabled IP address( server) restrictions on your API key, and an unauthorized IP address is attempting a request. 
+You 've enabled HTTP referrer( website) restrictions on your API key, and an unauthorized referrer is attempting a request. 
+You 've restricted usage to your Android apps by setting a package name and fingerprint, and an unauthorized Android app is attempting a request. 
+You 've restricted requests from iOS apps by specifying bundle indentifiers and an unrecognized iOS app is attemting to send a request. 
+It used to be possible to get this error if you used any of the, with an API key with HTTP referer restrictions. Requests to those APIs should be identified with an API key with 
+IP address 
+restrictions.. For more information about restricting API keys, see. 
+View and Edit your API Key Credentials 
+To view your API keys and manage any restrictions, do the following: 
+Go to the. 
+Select the project that contains the API key you want to review. 
+To view credential details, including any restrictions set for the key, from the list of API keys, click the name of the key. 
+The full credentials of the selected API key are displayed, including any restrictions set up for the key. From here, the restrictions can be changed, deleted, or updated as needed. 
+How do I resolve the error:`` API keys with referer restrictions can not be used with this API.''? 
+You are using any of the with an API key restricted to an HTTP referer. For security reasons, web service APIs need to use API keys restricted to 
+IP addresses 
+., or create a new API key if your key is already used with the Maps JavaScript API. 
+Google Maps Platform Services 
+I need to convert addresses to latitude/longitude pairs. Can I do that with the Google Maps Platform? 
+Yes, this process is called`` geocoding.'' The Maps JavaScript API includes a class for performing a geocoding service. The class is:. 
+Alternatively, Google also provides the, which offers a REST interface that can respond in JSON and XML formats. 
+Which countries is geocoding available in? 
+To see countries currently supported by the Google Maps Platform geocoders, please consult the. 
+The accuracy of geocoded locations may vary per country, so you should consider using the returned field to determine if a good enough match has been found for the purposes of your application. Please note that the availability of geocoding data depends on our contracts with data providers, so it is subject to change. 
+Why do the Google Maps Platform Geocoders provide different locations than Google Maps? 
+The API geocoder and Google Maps geocoder sometimes use different data sets( depending on the country). The API geocoder occasionally gets updated with new data, so you can expect to see results changing or improving over time. 
+How should I format my geocoder queries to maximise the number of successful requests? 
+The geocoder is designed to map street addresses to geographical coordinates. We therefore recommend that you format geocoder requests in accordance with the following guidelines to maximize the likelihood of a successful query: 
+Specify addresses in accordance with the format used by the national postal service of the country concerned. 
+Do not specify additional address elements such as business names, unit numbers, floor numbers, or suite numbers that are not included in the address as defined by the postal service of the country concerned. Doing so may result in responses with 
+ZERO_RESULTS 
+. 
+Format plus codes as shown here( plus signs are url-escaped to 
+% 2B 
+and spaces are url-escaped to 
+% 20 
+): 
+global code 
+is a 4 character area code and 6 character or longer local code( 849VCWC8+R9 is 
+849VCWC8% 2BR9 
+). 
+compound code 
+is a 6 character or longer local code with an explicit location( CWC8+R9 Mountain View, CA, USA is 
+CWC8% 2BR9% 20Mountain% 20View% 20CA% 20USA 
+). 
+Use the street number of a premise in preference to the building name where possible. 
+Use street number addressing in preference to specifying cross streets where possible. 
+Do not provide 'hints' such as nearby landmarks. 
+How should I format a U.S. address on a numbered highway for geocoding? 
+The Google Maps Platform geocoder requires that U.S. numbered highways be specified in addresses as follows: 
+County Roads: 
+'' Co Road 
+NNN 
+'' 
+where 
+NNN 
+is the road number. eg. 
+'' Co Road 82'' 
+State Highways: 
+'' 
+State NNN 
+'' 
+where 
+State 
+is the full name of the state and 
+NNN 
+is the highway number. eg. 
+'' California 82'' 
+U.S. Highways: 
+'' U.S. 
+NNN 
+'' 
+where 
+NNN 
+is the highway number. eg. 
+'' U.S. 101'' 
+U.S. Interstates: 
+'' Interstate 
+NNN 
+'' 
+where 
+NNN 
+is the interstate number. eg. 
+'' Interstate 280'' 
+When should I use an API geocoder class and when should I use the HTTP Geocoding Service? 
+See the document:, which details the pros and cons of different geocoding strategies. 
+How do I provide driving directions with the Google Maps Platform? 
+The Directions API allows you to provide driving directions for single and multi-leg journeys. Routing options help you shape directions with a travel mode( driving), a single or a set of routes, and restrictions( no toll roads). The service is available in the following forms: 
+HTTP request/response interface 
+( used in mobile and other applications) is compatible with Maps SDK for Android and with other Google Maps web services. See the for more information. 
+JavaScript API 
+, for client-side applications, allows you to provide driving directions via the class. The class can automatically create the overlays and directions panel for you. are provided in the documentation. 
+Java, Python, go, and Node.js client interfaces 
+, for server-side applications, provide the same functionality. Reference documentation is available at these links:,,, and. 
+In which countries are driving directions available? 
+To see countries currently supported by Driving Directions in the Google Maps Platform products, consult the. Please note that the availability of driving directions data depends on our contracts with data providers, and is subject to change. 
+In which countries are transit directions available? 
+The Google Maps Directions Service, which includes the and, supports all the transit providers in the, except for those in Japan. 
+Which KML and GeoRSS features are supported in the Maps JavaScript API? 
+The class in the Maps JavaScript API enables developers to overlay KML/KMZ and GeoRSS files on top of the map. Documentation and examples can be found. 
+What are the limits on the size and complexity of KML that can be displayed using the KmlLayer class of the Maps JavaScript API? 
+The size and complexity limits on the display of KML using the 
+KmlLayer 
+class are documented. 
+What is the maximum number of markers or path vertices supported by the Maps Static API? 
+There is no limit to the number of markers or path vertices supported by the Maps Static API. When using custom icons, up to five unique icons can be specified per request, but each can be used multiple times within the map. 
+Note that Maps Static API URLs can contain a maximum of approximately 8,192 characters which constrains the number of markers and path vertices that can be specified based on the number of decimal places used when specifying each latitude/longitude pair. For information on how the number of decimal places used relates to the accuracy on the Earth see the Wikipedia article on. 
+Why ca n't I access Google Maps Platform products for certain countries? 
+Maps APIs may not be used in. Refer also to the. 
+How do I report a problem on the Google basemap? 
+through Google Maps for wrong or missing map information such as: 
+Wrong addresses or marker locations 
+Incorrect road names 
+Wrong information about one-way and two-way roads 
+Incorrectly drawn road 
+Closed roads 
+Roads that do n't exist 
+For correction of a place or business listing,. 
+If Maps content needs to be removed for legal reasons, submit a 
+For critical or time-sensitive requests, file a with specific details on what needs to be fixed. 
+Google Maps SDK for iOS 
+How do I resolve the error: 
+kGMSPlacesRateLimitExceeded 
+? 
+If you are seeing this error, you may be using a deprecated version of the Places SDK for iOS. Version 2.7.0 of the Places SDK for iOS has been turned off, and is no longer available. Please update your app to use the latest version as soon as possible. See the for details. 
+I'm getting crashes when debugging with an iOS 8.x device. What should I do? 
+If you experience issues when debugging with devices running iOS 8.x, follow these steps to disable GPU frame capture in the XCode scheme you are running: 
+In XCode, choose 
+Product 
+, 
+Scheme 
+, 
+Manage Schemes 
+. 
+Select a scheme and choose 
+Edit ... 
+. 
+Set the 
+GPU Frame Capture 
+option to 
+Disabled 
+. Note that this option may not be present for all devices. 
+What's the impact of the new iPhone X on the Google Maps iOS SDK? 
+The has a new screen shape, featuring new rounded corners, a notch at the top for the device's sensor housing, and an indicator at the bottom of the screen for accessing the Home screen. In the iOS 11.0 SDK, Apple has added the allowing developers to position elements in an area which is safe from being clipped by the new screen shape. 
+The Google Maps iOS SDK has many visual elements and controls, such as an indoor picker and the report a problem link. With version 2.4 these visual elements and controls could be clipped by the new screen shape. In landscape mode, the indoor floor picker may be clipped by either the notch or the home button indicator. 
+With the Google Maps iOS SDK 2.5 release these layout issues are fixed automatically. When your app is used on an iPhone X, the padding on and are increased so that the visual elements are n't clipped. 
+By default, we will always include your padding. The Google Maps iOS SDK assumes that padding is intended to pad from within the safe area. If you design your interface with the assumption that everything is positioned within the safe area, this will work without any extra effort. 
+If you have designed an interface which does n't work with our default adjustment, we have introduced a new property to GMSMapView, called. GMSMapView now allows you to pick from one of three padding adjustments behaviors: 'Always'( default), 'Automatic', and 'Never'. 
+If GMSMapView is set to use the 'Always' padding behavior, it will always add the safe area insets to the padding. This allows you to design your interface with the assumption that all placement is from the edges of the safe area. This is the default value. 
+If GMSMapView is set to use the 'Automatic' padding behavior, it will always choose the larger of padding or safe area inset. This will allow you to add padding from the screen edge while always ensuring that all elements stay within the safe area. 
+If GMSMapView is set to use the 'Never' padding behavior, it will never add the safe area insets to the padding. This is the behavior prior to the 2.5 release and may be useful if your padding already takes into consideration the safe area, or if our other behaviors do n't act well with your interface. It is your responsibility to ensure that the Google logo and copyright notices are always visible, as specified in the. 
+In contrast, GMSPanoramaView does n't have an optional padding property. This means that there is no padding to adjust and GMSPanoramaView will always apply any necessary padding to ensure that all visual elements are within the safe area. 
+Google Maps SDK for Android 
+How do I resolve the error: 
+9005 PLACES_API_RATE_LIMIT_EXCEEDED 
+? 
+If you are seeing this error, you may be using a deprecated version of the Places SDK for Android. The Google Play services version of the Places SDK for Android has been turned off, and is no longer available. Please update your app to use the latest version as soon as possible. See the for details. 
+Send feedback 
+Except as otherwise noted, the content of this page is licensed under the, and code samples are licensed under the. For details, see the. Java is a registered trademark of Oracle and/or its affiliates. 
+Last updated 2020-09-22 UTC. 
+Ask a question under the google-maps tag. 
+Fork our samples and try them yourself. 
+Read about the latest updates, customer stories, and tips. 
+Something wrong? Send us a bug report!

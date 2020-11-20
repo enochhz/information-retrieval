@@ -1,0 +1,2381 @@
+<!doctype html>
+<html 
+      lang="en"
+      dir="ltr">
+  <head>
+    
+    
+    
+    
+    <meta name="google-signin-client-id" content="721724668570-nbkv1cfusk7kk4eni4pjvepaus73b13t.apps.googleusercontent.com">
+    <meta name="google-signin-scope"
+          content="profile email">
+    <meta property="og:site_name" content="Google Developers">
+    <meta property="og:type" content="website">
+    
+
+    
+      <meta name="theme-color" content="#1a73e8">
+    
+
+    <meta charset="utf-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/_pwa/developers/manifest.json"
+          crossorigin="use-credentials">
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="//apis.google.com" crossorigin>
+    <link rel="preconnect" href="//www.google-analytics.com" crossorigin>
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700|Material+Icons">
+      
+      <link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b/developers/css/app.css">
+    
+
+    <noscript>
+      
+    </noscript>
+    <link rel="shortcut icon" href="https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b/developers/images/favicon.png">
+    <link rel="apple-touch-icon" href="https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b/developers/images/touchicon-180.png"><link rel="canonical" href="https://developers.google.com/apps-script/guides/client-verification"><link rel="search" type="application/opensearchdescription+xml"
+            title="Google Developers" href="https://developers.google.com/s/opensearch.xml">
+      
+
+<title>OAuth Client Verification &nbsp;|&nbsp; Apps Script &nbsp;|&nbsp; Google Developers</title>
+
+<meta property="og:title" content="OAuth Client Verification &nbsp;|&nbsp; Apps Script &nbsp;|&nbsp; Google Developers">
+
+
+
+
+
+  <meta property="og:url" content="https://developers.google.com/apps-script/guides/client-verification">
+
+
+
+  <meta property="og:image" content="https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b/developers/images/opengraph/google-blue.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+
+
+  <meta property="og:locale" content="en">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Apps Script",
+      "item": "https://developers.google.com/apps-script"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "OAuth Client Verification",
+      "item": "https://developers.google.com/apps-script/guides/client-verification"
+    }]
+  }
+  </script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+    </head>
+  <body type="article"
+        theme="google-blue"
+        class=""
+        
+        layout="docs"
+        
+        
+        pending>
+    <devsite-progress type="indeterminate" id="app-progress"></devsite-progress>
+  
+    <section class="devsite-wrapper"><devsite-header>
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-header--inner nocontent">
+  <div class="devsite-top-logo-row-wrapper-wrapper">
+    <div class="devsite-top-logo-row-wrapper">
+      <div class="devsite-top-logo-row">
+        <button type="button" id="devsite-hamburger-menu"
+          class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Navigation menu button"
+          visually-hidden
+          aria-label="Open menu">
+        </button>
+        <div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="/apps-script">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <img class="devsite-product-logo"
+         alt="Google Apps Script"
+         src="https://www.gstatic.com/images/branding/product/2x/apps_script_48dp.png"
+         srcset=""
+         sizes="64px"
+         loading="lazy">
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+
+  
+  
+  <span class="devsite-product-name">
+    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             devsite-has-google-wordmark">
+    
+    
+    
+      
+      
+        
+  <a href="/apps-script"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Google Apps Script"
+      
+    >
+    
+          <svg class="devsite-google-wordmark"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 148 48">
+    <title>Google</title>
+    <path class="devsite-google-wordmark-svg-path" d="M19.58,37.65c-9.87,0-18.17-8.04-18.17-17.91c0-9.87,8.3-17.91,18.17-17.91c5.46,0,9.35,2.14,12.27,4.94l-3.45,3.45c-2.1-1.97-4.93-3.49-8.82-3.49c-7.21,0-12.84,5.81-12.84,13.02c0,7.21,5.64,13.02,12.84,13.02c4.67,0,7.34-1.88,9.04-3.58c1.4-1.4,2.32-3.41,2.66-6.16H19.58v-4.89h16.47c0.18,0.87,0.26,1.92,0.26,3.06c0,3.67-1.01,8.21-4.24,11.44C28.93,35.9,24.91,37.65,19.58,37.65z M61.78,26.12c0,6.64-5.1,11.53-11.36,11.53s-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53S61.78,19.43,61.78,26.12z M56.8,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C53.84,33.11,56.8,30.22,56.8,26.12z M87.25,26.12c0,6.64-5.1,11.53-11.36,11.53c-6.26,0-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53C82.15,14.59,87.25,19.43,87.25,26.12zM82.28,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C79.32,33.11,82.28,30.22,82.28,26.12z M112.09,15.29v20.7c0,8.52-5.02,12.01-10.96,12.01c-5.59,0-8.95-3.76-10.22-6.81l4.41-1.83c0.79,1.88,2.71,4.1,5.81,4.1c3.8,0,6.16-2.36,6.16-6.77v-1.66h-0.18c-1.14,1.4-3.32,2.62-6.07,2.62c-5.76,0-11.05-5.02-11.05-11.49c0-6.51,5.28-11.57,11.05-11.57c2.75,0,4.93,1.22,6.07,2.58h0.18v-1.88H112.09z M107.64,26.16c0-4.06-2.71-7.03-6.16-7.03c-3.49,0-6.42,2.97-6.42,7.03c0,4.02,2.93,6.94,6.42,6.94C104.93,33.11,107.64,30.18,107.64,26.16z M120.97,3.06v33.89h-5.07V3.06H120.97z M140.89,29.92l3.93,2.62c-1.27,1.88-4.32,5.11-9.61,5.11c-6.55,0-11.28-5.07-11.28-11.53c0-6.86,4.77-11.53,10.71-11.53c5.98,0,8.91,4.76,9.87,7.34l0.52,1.31l-15.42,6.38c1.18,2.31,3.01,3.49,5.59,3.49C137.79,33.11,139.58,31.84,140.89,29.92zM128.79,25.77l10.31-4.28c-0.57-1.44-2.27-2.45-4.28-2.45C132.24,19.04,128.66,21.31,128.79,25.77z"/>
+  </svg>Apps Script
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+  </span>
+
+</div>
+        <div class="devsite-top-logo-row-middle">
+          <div class="devsite-header-upper-tabs">
+            
+           </div>
+          
+<devsite-search
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    enable-signin
+    enable-search
+    enable-suggestions
+      enable-query-completion
+    
+    project-name="Apps Script"
+    tenant-name="Google Developers"
+    project-scope="/apps-script"
+    url-scoped="https://developers.google.com/s/results/apps-script"
+    
+    
+    
+    role="combobox">
+  <form class="devsite-search-form" action="https://developers.google.com/s/results" method="GET">
+    <div class="devsite-search-container">
+      <div class="devsite-searchbox">
+        <input
+          aria-activedescendant=""
+          aria-autocomplete="list"
+          
+          aria-label="Search"
+          aria-haspopup="false"
+          aria-multiline="false"
+          aria-label="Search box"
+          autocomplete="off"
+          class="devsite-search-field devsite-search-query"
+          name="q"
+          
+          placeholder="Search"
+          type="text"
+          value=""
+          >
+        <div class="devsite-search-image material-icons" aria-hidden="true"></div>
+      </div>
+      <button type="button"
+              search-open
+              class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+              
+              aria-label="Open search"></button>
+    </div>
+  </form>
+  <button type="button"
+          search-close
+          class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+          
+          aria-label="Close search"></button>
+</devsite-search>
+
+        </div>
+
+        
+
+        
+<devsite-language-selector>
+  <devsite-select class="devsite-language-selector-menu">
+    
+    <select aria-label="Select your language preference."
+            class="devsite-language-selector-select"
+            name="language"
+            track-name="click"
+            track-type="languageSelector">
+    
+      
+      <option>Language</option>
+    
+    
+      <option value="en"
+              lang="en"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="en"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        English
+      </option>
+    
+      <option value="id"
+              lang="id"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="id"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Bahasa Indonesia
+      </option>
+    
+      <option value="de"
+              lang="de"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="de"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Deutsch
+      </option>
+    
+      <option value="es"
+              lang="es"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="es"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Español
+      </option>
+    
+      <option value="fr"
+              lang="fr"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="fr"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Français
+      </option>
+    
+      <option value="pt_br"
+              lang="pt_br"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="pt_br"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Português – Brasil
+      </option>
+    
+      <option value="ru"
+              lang="ru"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="ru"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Русский
+      </option>
+    
+      <option value="zh_cn"
+              lang="zh_cn"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="zh_cn"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        中文 – 简体
+      </option>
+    
+      <option value="ja"
+              lang="ja"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="ja"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        日本語
+      </option>
+    
+      <option value="ko"
+              lang="ko"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="ko"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        한국어
+      </option>
+    
+    </select>
+  </devsite-select>
+</devsite-language-selector>
+
+
+        
+
+        
+          
+          
+          <devsite-user 
+                        
+                        
+                          enable-profiles
+                        
+                        
+                          
+                            fp-auth
+                          
+                        id="devsite-user"></devsite-user>
+           
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="devsite-collapsible-section
+    ">
+    <div class="devsite-header-background">
+      
+        
+      
+      
+        <div class="devsite-doc-set-nav-row">
+          
+          
+            
+            
+  <devsite-tabs class="lower-tabs">
+
+    <nav class="devsite-tabs-wrapper" aria-label="Lower tabs">
+      
+        
+          <tab  >
+            <a href="/apps-script"
+   class="gc-analytics-event "
+   track-type="globalNav"
+   track-metadata-position="nav"
+   track-metadata-eventdetail="nav"
+   track-name="home"
+   
+   
+   
+     data-category="Site-Wide Custom Events"
+   
+     data-label="Tab: Home"
+   >
+  Home
+</a>
+
+          </tab>
+        
+      
+        
+          <tab  active>
+            <a href="/apps-script/overview"
+   class="gc-analytics-event "
+   track-type="globalNav"
+   track-metadata-position="nav"
+   track-metadata-eventdetail="nav"
+   track-name="guides"
+   aria-label="Guides, selected" 
+   
+   
+     data-category="Site-Wide Custom Events"
+   
+     data-label="Tab: Guides"
+   >
+  Guides
+</a>
+
+          </tab>
+        
+      
+        
+          <tab  >
+            <a href="/apps-script/reference"
+   class="gc-analytics-event "
+   track-type="globalNav"
+   track-metadata-position="nav"
+   track-metadata-eventdetail="nav"
+   track-name="reference"
+   
+   
+   
+     data-category="Site-Wide Custom Events"
+   
+     data-label="Tab: Reference"
+   >
+  Reference
+</a>
+
+          </tab>
+        
+      
+        
+          <tab  >
+            <a href="/apps-script/articles"
+   class="gc-analytics-event "
+   track-type="globalNav"
+   track-metadata-position="nav"
+   track-metadata-eventdetail="nav"
+   track-name="samples"
+   
+   
+   
+     data-category="Site-Wide Custom Events"
+   
+     data-label="Tab: Samples"
+   >
+  Samples
+</a>
+
+          </tab>
+        
+      
+        
+          <tab  >
+            <a href="/apps-script/support"
+   class="gc-analytics-event "
+   track-type="globalNav"
+   track-metadata-position="nav"
+   track-metadata-eventdetail="nav"
+   track-name="support"
+   
+   
+   
+     data-category="Site-Wide Custom Events"
+   
+     data-label="Tab: Support"
+   >
+  Support
+</a>
+
+          </tab>
+        
+      
+        
+          <tab  >
+            <a href="/gsuite/add-ons/overview"
+   class="gc-analytics-event "
+   track-type="globalNav"
+   track-metadata-position="nav"
+   track-metadata-eventdetail="nav"
+   track-name="addOns"
+   
+   
+   
+     data-category="Site-Wide Custom Events"
+   
+     data-label="Tab: Add-ons"
+   >
+  Add-ons
+</a>
+
+          </tab>
+        
+      
+        
+          <tab  >
+            <a href="/apps-script/api"
+   class="gc-analytics-event "
+   track-type="globalNav"
+   track-metadata-position="nav"
+   track-metadata-eventdetail="nav"
+   track-name="appsScriptApi"
+   
+   
+   
+     data-category="Site-Wide Custom Events"
+   
+     data-label="Tab: Apps Script API"
+   >
+  Apps Script API
+</a>
+
+          </tab>
+        
+      
+    </nav>
+
+  </devsite-tabs>
+
+          
+          
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+  
+</devsite-header>
+      <devsite-book-nav scrollbars >
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="devsite-book-nav devsite-nav nocontent"
+     aria-label="Side menu">
+  <div class="devsite-mobile-header">
+    <button type="button"
+            id="devsite-close-nav"
+            class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Close navigation"
+            aria-label="Close navigation">
+    </button>
+    <div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="/apps-script">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <img class="devsite-product-logo"
+         alt="Google Apps Script"
+         src="https://www.gstatic.com/images/branding/product/2x/apps_script_48dp.png"
+         srcset=""
+         sizes="64px"
+         loading="lazy">
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+  
+      <span class="devsite-product-name">
+        
+        
+        <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             devsite-has-google-wordmark">
+    
+    
+    
+      
+      
+        
+  <a href="/apps-script"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Google Apps Script"
+      
+    >
+    
+          <svg class="devsite-google-wordmark"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 148 48">
+    <title>Google</title>
+    <path class="devsite-google-wordmark-svg-path" d="M19.58,37.65c-9.87,0-18.17-8.04-18.17-17.91c0-9.87,8.3-17.91,18.17-17.91c5.46,0,9.35,2.14,12.27,4.94l-3.45,3.45c-2.1-1.97-4.93-3.49-8.82-3.49c-7.21,0-12.84,5.81-12.84,13.02c0,7.21,5.64,13.02,12.84,13.02c4.67,0,7.34-1.88,9.04-3.58c1.4-1.4,2.32-3.41,2.66-6.16H19.58v-4.89h16.47c0.18,0.87,0.26,1.92,0.26,3.06c0,3.67-1.01,8.21-4.24,11.44C28.93,35.9,24.91,37.65,19.58,37.65z M61.78,26.12c0,6.64-5.1,11.53-11.36,11.53s-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53S61.78,19.43,61.78,26.12z M56.8,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C53.84,33.11,56.8,30.22,56.8,26.12z M87.25,26.12c0,6.64-5.1,11.53-11.36,11.53c-6.26,0-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53C82.15,14.59,87.25,19.43,87.25,26.12zM82.28,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C79.32,33.11,82.28,30.22,82.28,26.12z M112.09,15.29v20.7c0,8.52-5.02,12.01-10.96,12.01c-5.59,0-8.95-3.76-10.22-6.81l4.41-1.83c0.79,1.88,2.71,4.1,5.81,4.1c3.8,0,6.16-2.36,6.16-6.77v-1.66h-0.18c-1.14,1.4-3.32,2.62-6.07,2.62c-5.76,0-11.05-5.02-11.05-11.49c0-6.51,5.28-11.57,11.05-11.57c2.75,0,4.93,1.22,6.07,2.58h0.18v-1.88H112.09z M107.64,26.16c0-4.06-2.71-7.03-6.16-7.03c-3.49,0-6.42,2.97-6.42,7.03c0,4.02,2.93,6.94,6.42,6.94C104.93,33.11,107.64,30.18,107.64,26.16z M120.97,3.06v33.89h-5.07V3.06H120.97z M140.89,29.92l3.93,2.62c-1.27,1.88-4.32,5.11-9.61,5.11c-6.55,0-11.28-5.07-11.28-11.53c0-6.86,4.77-11.53,10.71-11.53c5.98,0,8.91,4.76,9.87,7.34l0.52,1.31l-15.42,6.38c1.18,2.31,3.01,3.49,5.59,3.49C137.79,33.11,139.58,31.84,140.89,29.92zM128.79,25.77l10.31-4.28c-0.57-1.44-2.27-2.45-4.28-2.45C132.24,19.04,128.66,21.31,128.79,25.77z"/>
+  </svg>Apps Script
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+      </span>
+    
+
+</div>
+  </div>
+
+  <div class="devsite-book-nav-wrapper">
+    <div class="devsite-mobile-nav-top">
+      
+        <ul class="devsite-nav-list">
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/apps-script"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Home"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav"
+     track-name="home">
+  
+    <span class="devsite-nav-text" tooltip >
+      Home
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/apps-script/overview"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              devsite-nav-active"
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Guides"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav"
+     track-name="guides">
+  
+    <span class="devsite-nav-text" tooltip >
+      Guides
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/apps-script/reference"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Reference"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav"
+     track-name="reference">
+  
+    <span class="devsite-nav-text" tooltip >
+      Reference
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/apps-script/articles"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Samples"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav"
+     track-name="samples">
+  
+    <span class="devsite-nav-text" tooltip >
+      Samples
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/apps-script/support"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Support"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav"
+     track-name="support">
+  
+    <span class="devsite-nav-text" tooltip >
+      Support
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/gsuite/add-ons/overview"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Add-ons"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav"
+     track-name="addOns">
+  
+    <span class="devsite-nav-text" tooltip >
+      Add-ons
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/apps-script/api"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Apps Script API"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav"
+     track-name="appsScriptApi">
+  
+    <span class="devsite-nav-text" tooltip >
+      Apps Script API
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+          
+          
+        </ul>
+      
+    </div>
+    
+      <div class="devsite-mobile-nav-bottom">
+        
+          
+          <ul class="devsite-nav-list" menu="_book">
+            <li class="devsite-nav-item"><a href="/apps-script/overview"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-external"><a href="/gsuite/add-ons/overview"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Add-ons</span><span class="devsite-nav-icon material-icons"
+          data-icon="external"
+          data-title="External"
+          aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-new"><a href="/apps-script/guides/dashboard"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Apps Script Dashboard</span><span class="devsite-nav-icon material-icons"
+          data-icon="new"
+          data-title="New!"
+          aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-external"><a href="/apps-script/api"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Apps Script API</span><span class="devsite-nav-icon material-icons"
+          data-icon="external"
+          data-title="External"
+          aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Learn Apps Script</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/quickstart/fundamentals-codelabs"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Codelabs: Apps Script Fundamentals</span></a></li><li class="devsite-nav-item"><a href="/apps-script/quickstart/custom-functions"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Quickstart: Menus and Custom Functions</span></a></li><li class="devsite-nav-item"><a href="/apps-script/quickstart/forms"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Quickstart: Manage Google Forms Responses</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/hangouts/chat/quickstart/apps-script-bot"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Quickstart: Build a Google Chat Bot</span><span class="devsite-nav-icon material-icons"
+          data-icon="external"
+          data-title="External"
+          aria-hidden="true"></span></a></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion
+           devsite-nav-new"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Apps Script Runtimes</span><span class="devsite-nav-icon material-icons"
+          data-icon="new"
+          data-title="New!"
+          aria-hidden="true"></span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/v8-runtime"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>V8 Runtime overview</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/v8-runtime/migration"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Migrating to the V8 runtime</span></a></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Google Services / External APIs</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/services"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Built-in Google Services</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/services/advanced"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Advanced Google Services</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/services/authorization"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Authorization</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/services/quotas"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Quotas</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/services/external"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>External APIs</span></a></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Types of Scripts</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/standalone"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Standalone</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/bound"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Bound to Google Workspace Documents</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/web"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Web Apps</span></a></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Extend Google Workspace</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/docs"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Google Docs</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Google Sheets</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/sheets"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/sheets/functions"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Custom Functions</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/sheets/macros"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Macros</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/sheets/connected-sheets"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Connected Sheets</span></a></li></ul></devsite-expandable-nav></li><li class="devsite-nav-item
+           devsite-nav-expandable"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Google Slides</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/slides"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/slides/presentations"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Structure of a presentation</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/slides/moving-elements"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Sizing and positioning page elements</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/slides/selecting"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Selecting items in a presentation</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/slides/editing-styling"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Editing and styling text</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/slides/lifecycle"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Life cycle of an update</span></a></li></ul></devsite-expandable-nav></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Menus, Dialogs, and Sidebars</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/menus"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Custom Menus in Google Workspace</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/dialogs"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Dialogs / Sidebars in Google Workspace</span></a></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>User Interfaces</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/html"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Create and Serve HTML</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/html/communication"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Client-to-Server Communication</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/html/templates"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Templated HTML</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/html/restrictions"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Restrictions</span></a></li><li class="devsite-nav-item"><a href="/apps-script/migration/iframe"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Migrate to IFRAME</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/html/best-practices"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Best Practices</span></a></li><li class="devsite-nav-item
+           devsite-nav-deprecated"><a href="/apps-script/guides/ui-service"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>UI Service</span><span class="devsite-nav-icon material-icons"
+          data-icon="deprecated"
+          data-title="Deprecated"
+          aria-hidden="true"></span></a></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Store and Serve Data</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/properties"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Script / User / Document Properties</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/jdbc"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>External Databases via JDBC</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/content"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Content Service</span></a></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Triggers and Events</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/triggers"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Simple Triggers</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/triggers/installable"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Installable Triggers</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/triggers/events"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Event Objects</span></a></li></ul></devsite-expandable-nav></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><devsite-expandable-nav collapsed>
+    <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button"><span class="devsite-nav-text" tooltip>Development Environment</span></div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/apps-script/guides/projects"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Script Projects</span></a></li><li class="devsite-nav-item"><a href="/apps-script/concepts/manifests"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Manifests</span></a></li><li class="devsite-nav-item"><a href="/apps-script/concepts/scopes"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Scopes</span></a></li><li class="devsite-nav-item"><a href="/apps-script/concepts/deployments"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Deployments</span></a></li><li class="devsite-nav-item
+           devsite-nav-new"><a href="/apps-script/guides/cloud-platform-projects"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Cloud Platform Projects</span><span class="devsite-nav-icon material-icons"
+          data-icon="new"
+          data-title="New!"
+          aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/logging"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Logging</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/client-verification"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>OAuth Client Verification</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/libraries"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Libraries</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/versions"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Versions</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/collaborating"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Collaboration</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/clasp"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Command Line Interface using clasp</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/typescript"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Using TypeScript</span></a></li><li class="devsite-nav-item"><a href="/apps-script/guides/import-export"
+     class="devsite-nav-title"
+   ><span class="devsite-nav-text" tooltip>Import / Export Projects</span></a></li></ul></devsite-expandable-nav></li>
+          </ul>
+        
+        
+        
+          
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+        
+      </div>
+    
+  </div>
+</nav>
+        
+      </devsite-book-nav>
+      <section id="gc-wrapper">
+        <main role="main" class="devsite-main-content"
+            has-book-nav
+            has-toc>
+          <devsite-toc class="devsite-nav"
+            ></devsite-toc>
+          <devsite-content>
+            
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="devsite-article">
+  
+  
+    <div class="devsite-banner devsite-banner-announcement"
+         >
+      <div class="devsite-banner-message">
+        <div class="devsite-banner-message-text">
+          <style>
+  .devsite-banner-announcement:not(.devsite-banner-tenant) {
+    background: #202124;
+    color: white;
+    font-weight: 500;
+  }
+  .devsite-banner-announcement a {
+    color: white;
+    font-weight: 700;
+  }
+  .devsite-banner-announcement a:link,
+  .devsite-banner-announcement a:visited {
+    background: 0;
+  }
+  .devsite-banner-announcement a:hover,
+  .devsite-banner-announcement a:focus {
+    text-decoration: none;
+  }
+  .devsite-banner-announcement .devsite-banner-message-text {
+    margin: 0 auto;
+  }
+</style> Google is committed to advancing racial equity for Black communities. <a href="https://google.com/racialequity"
+   class="gc-analytics-event"
+   data-category="Announcement"
+   data-label="Racial Equity">See how.</a>
+
+        </div>
+      </div>
+    </div>
+  
+  
+
+  <div class="devsite-article-meta">
+    
+    
+    <ul class="devsite-breadcrumb-list"
+  
+    role="navigation"
+    aria-label="Breadcrumb">
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+  <a href="/"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+        Home
+      
+  </a>
+  
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+  <a href="/products"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="2"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="2"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+        Products
+      
+  </a>
+  
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+  <a href="/gsuite"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="3"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="3"
+      
+        track-metadata-eventdetail="Google Workspace Developer"
+      
+    >
+    
+        Google Workspace Developer
+      
+  </a>
+  
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+  <a href="/apps-script"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="4"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="4"
+      
+        track-metadata-eventdetail="Google Apps Script"
+      
+    >
+    
+        Apps Script
+      
+  </a>
+  
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+  <a href="/apps-script/overview"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="5"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="5"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+        Guides
+      
+  </a>
+  
+    
+  </li>
+  
+</ul>
+    
+      
+    <devsite-page-rating position="header" selected-rating="0" hover-rating-star="0">
+    </devsite-page-rating>
+  
+    
+  </div>
+
+  
+    <devsite-feedback
+  position="header"
+  project-name="Apps Script"
+  product-id="717201"
+  bucket="apps-script"
+  context=""
+  version="t-devsite-webserver-20201001-r01-rc01.430035087605178851"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="header"
+  
+  
+    project-feedback-url="https://issuetracker.google.com/issues/new?component=191640&amp;template=824113"
+  
+  
+    
+      project-icon="https://www.gstatic.com/images/branding/product/2x/apps_script_48dp.png"
+    
+  
+  
+    project-support-url="https://developers.google.com/apps-script/support"
+  >
+
+  <button>
+  
+    
+    Send feedback
+  
+  </button>
+</devsite-feedback>
+  
+  
+    <h1 class="devsite-page-title">OAuth Client Verification</h1>
+  
+
+  <devsite-toc class="devsite-nav" devsite-toc-embedded
+               >
+  </devsite-toc>
+
+  <div class="devsite-article-body clearfix
+    ">
+
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Google OAuth clients that request certain sensitive OAuth scopes are
+subject to verification by Google.</strong></p>
+<aside class="note"><strong>Note:</strong><span> Verification is <strong>not required</strong> for Apps Script projects
+whose owner and users belong to the same
+Google Workspace domain or customer.</span></aside>
+<p>If you don&#39;t verify your script project&#39;s OAuth client, users outside your
+domain see an <em>unverified app</em> screen when they try to authorize your script.
+An <em>unverified authorization flow</em> allows these users to authorize unverified
+apps and use them, but only after confirming they understand the risks. The
+total number of unverified app users is also capped.</p>
+
+<p>For more information, see the following articles:</p>
+
+<ul>
+<li><a href="https://support.google.com/cloud/answer/7454865">Unverified Apps</a></li>
+<li><a href="https://support.google.com/cloud/answer/9110914">OAuth Application Verification FAQ</a></li>
+<li><a href="/terms/api-services-user-data-policy">Google API Services: User Data Policy</a></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<div class="attempt-left">
+  <figure id="unverified-app-screen">
+    <img src="/apps-script/images/unverified2.png" alt="Unverified app screen" width="67%">
+    <figcaption><b>Figure 1</b>: Unverified app screen</figcaption>
+  </figure>
+</div>
+
+<div class="attempt-right">
+  <figure id="unverified-app-auth-flow">
+    <img src="/apps-script/images/unverified-app-ui.gif" alt="Unverified app authorization flow">
+    <figcaption><b>Figure 2</b>: Unverified app authorization flow</figcaption>
+  </figure>
+</div>
+
+<p>&nbsp;</p>
+
+<p>This change applies to Google OAuth web clients, including those used by all
+Apps Script projects. By
+<a href="#requesting_verification">verifying your app with Google</a>,
+you can remove the unverified app screen from your authorization flow and
+give your users confidence that your app is non-malicious.</p>
+
+<h2 id="unverified_apps" data-text="Unverified apps" tabindex="0">Unverified apps</h2>
+
+<p>Add-ons, web apps, and other deployments (such as apps that use the
+<a href="/apps-script/api">Apps Script API</a>) may need verification.</p>
+<aside class="note"><strong>Note:</strong><span> Add-ons are no longer verified as part of the
+<a href="/gsuite/add-ons/concepts/gmail-addon-review">add-on review process</a>, and
+must be verified prior to publishing an add-on.</span></aside>
+<h3 id="applicability" data-text="Applicability" tabindex="0">Applicability</h3>
+
+<p>If the app uses sensitive OAuth scopes, the unverified app screen may appear
+as part of the authorization flow. Its presence (and the resulting unverified
+app authorization flow) depends on what account the app is published from and
+what account is attempting to use the app. For example, apps published in a
+specific Google Workspace organization do not result
+in the unverified app authorization
+flow for accounts in that domain, even if the app has not been verified.</p>
+
+<p>The following table illustrates what situations result in the unverified app
+authorization flow:</p>
+
+<table>
+  <col width="22%">
+  <col width="18%" align="center">
+  <col width="22%" align="center">
+  <col width="20%" align="center">
+  <col width="18%" align="center">
+  <tr>
+    <th></th>
+    <th>Client is verified</th>
+    <th>Publisher is a Google Workspace account of customer A</th>
+    <th>Script is in a shared drive of customer A</th>
+    <th>Publisher is a Gmail account</th>
+  </tr>
+  <tr>
+    <td class="alt">User is a Google Workspace account of customer A</td>
+    <td>Normal auth flow</td>
+    <td>Normal auth flow</td>
+    <td>Normal auth flow</td>
+    <td><b><i>Unverified auth flow</i></b></td>
+  </tr>
+  <tr>
+    <td class="alt">User is a Google Workspace account <u>not</u> of customer A</td>
+    <td>Normal auth flow</td>
+    <td><b><i>Unverified auth flow</i></b></td>
+    <td><b><i>Unverified auth flow</i></b></td>
+    <td><b><i>Unverified auth flow</i></b></td>
+  </tr>
+  <tr>
+    <td class="alt">User is a Gmail account<a href="#note1"><b><sup>1</sup></b></a></td>
+    <td>Normal auth flow</td>
+    <td><b><i>Unverified auth flow</i></b></td>
+    <td><b><i>Unverified auth flow</i></b></td>
+    <td><b><i>Unverified auth flow</i></b></td>
+  </tr>
+</table>
+
+<p><a name="note1"><b><sup>1</sup></b></a>Any Gmail account, including the account used to
+publish the app.</p>
+
+<h3 id="user_cap" data-text="User cap" tabindex="0">User cap</h3>
+
+<p>The number of users who can authorize an app via the unverified app flow is
+capped to limit possible abuse. See
+<a href="https://support.google.com/cloud/answer/9028764">OAuth application user limits</a>
+for details.</p>
+
+<h2 id="requesting_verification" data-text="Requesting verification" tabindex="0">Requesting verification</h2>
+
+<p>You can request a verification of the OAuth client used by your app and its
+associated <a href="/apps-script/guides/cloud-platform-projects">Cloud Platform (GCP) project</a>.
+Once your app is verified, your users will no longer see the unverified app
+screen. In addition, your app will no longer be subject to the
+<a href="#user_cap">user cap</a>.</p>
+
+<h3 id="requirements" data-text="Requirements" tabindex="0">Requirements</h3>
+
+<p>In order to submit your OAuth client for verification, you must satisfy the
+following requirements:</p>
+
+<ol>
+<li><p>You must own a web site on a domain. The site must host publicly-accessible
+pages that describe your app and its privacy policy. You must also
+<a href="https://support.google.com/webmasters/answer/9008080?ref_topic=7440006">verify your ownership of the site with Google</a>.</p>
+<aside class="note"><strong>Note:</strong><span> You do not need to publish your app from an account in this
+domain, but the domain owner must be an editor or owner of the script
+project.</span></aside></li>
+<li><p>The <a href="/apps-script/guides/cloud-platform-projects">GCP project</a>
+your script project uses must be a
+<a href="/apps-script/guides/cloud-platform-projects#standard_cloud_platform_projects">standard GCP project</a>
+that you have edit access for. If your script is using its default GCP
+project, you must
+<a href="/apps-script/guides/cloud-platform-projects#switching_to_a_different_standard_gcp_project">switch to a standard GCP project</a>.</p></li>
+</ol>
+
+<p>In addition, you must have the following <strong>required</strong> assets:</p>
+
+<ul>
+<li><strong>Application name</strong>. The name of the app; this is displayed on the consent
+screen. It should match the name used for the app in other locations, such
+as the
+<a href="/gsuite/marketplace">Google Workspace Marketplace</a>
+listing for published apps.</li>
+<li><strong>Application logo</strong>. A app logo JPEG, PNG, or BMP image to use in the
+consent screen. Its file size must be 1MB or less.</li>
+<li><strong>Support email</strong>. This is an email displayed on the consent screen for
+users to contact if they need app support. It can be your email address or
+a Google Group that you own or manage.</li>
+<li><strong>Scopes</strong>. The list of all the <a href="/apps-script/concepts/scopes">scopes</a> your
+app uses. You can <a href="/apps-script/concepts/scopes#viewing_scopes">view your scopes</a>
+in the Apps Script editor.</li>
+<li><strong>Authorized domains</strong>. This is a whitelist of domains containing information
+about your app. All your application&#39;s links (such as its required privacy
+policy page) must be hosted on authorized domains.</li>
+<li><strong>Application homepage URL</strong>. The location of a homepage describing your
+app. This location must hosted on an authorized domain.</li>
+<li><strong>Application privacy policy URL</strong>. The location of a page describing your
+app&#39;s privacy policy. This location must be hosted on an authorized domain.</li>
+</ul>
+
+<p>In addition to the above required assets, you can optionally provide an
+<strong>Application terms of service URL</strong> that points to a page describing your
+app&#39;s terms of service. If provided, this location must be in an authorized
+domain.</p>
+
+<h3 id="steps" data-text="Steps" tabindex="0">Steps</h3>
+
+<ol>
+<li>If you have not done so already,
+<a href="https://support.google.com/webmasters/answer/9008080?ref_topic=7440006">verify ownership of all the authorized domains</a>
+you use to host your script project&#39;s privacy policy and other information.
+The verified owners of the domains must be editors or the owner of the script
+project.</li>
+<li>In the Apps Script editor, select <strong>File &gt; Project properties &gt; Scopes</strong>.
+Copy all the scopes your script project uses.</li>
+<li><p><a href="/apps-script/guides/cloud-platform-projects#completing_the_oauth_consent_screen">Complete the OAuth consent screen for your application&#39;s GCP project</a>
+using the text and URL assets you collected.</p>
+
+<ol>
+<li>Be sure to list all the <strong>Authorized domains</strong> where your app&#39;s
+ information (such as its privacy policy) are hosted.</li>
+<li><p>To add your application scopes, click the <strong>Add scope</strong> button. The
+ resulting dialog attempts to autodetect scopes for APIs you&#39;ve enabled
+ in the Cloud Platform (such as
+ <a href="/apps-script/guides/services/advanced">advanced services</a>). You can
+ select scopes from this list by checking the corresponding checkboxes.</p>
+
+<p>This autodetected list doesn&#39;t always include scopes used by
+ Apps Script <a href="/apps-script/guides/services">built-in services</a>.
+ You must enter these scopes manually by clicking the <strong>manually paste</strong>
+ link and then entering the scopes in the resulting checkbox.</p>
+
+<p>When you are done selecting or entering scopes, click <strong>Add</strong>.</p></li>
+</ol></li>
+<li><p>When you&#39;ve entered all the required information, click <strong>Save</strong>.</p></li>
+<li><p>Click <strong>Submit for verification</strong> to start a verification request.</p></li>
+</ol>
+
+<p>Most verification requests receive a response within 24 to 72 hours.
+You can check the <strong>Verification status</strong> at the top of the OAuth consent
+screen form. When verification of your OAuth client is confirmed, your app is
+verified.</p>
+<aside class="note"><strong>Note:</strong><span> If your app is verified and later you decide to
+<a href="/apps-script/guides/cloud-platform-projects#switching_to_a_different_standard_gcp_project">switch to another GCP project</a>,
+you must repeat these steps to keep the app verified.</span></aside>
+    
+
+    
+  </div>
+
+  
+
+  
+    
+      
+    <devsite-page-rating position="footer" selected-rating="0" hover-rating-star="0">
+    </devsite-page-rating>
+  
+       
+         <devsite-feedback
+  position="footer"
+  project-name="Apps Script"
+  product-id="717201"
+  bucket="apps-script"
+  context=""
+  version="t-devsite-webserver-20201001-r01-rc01.430035087605178851"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="footer"
+  
+  
+    project-feedback-url="https://issuetracker.google.com/issues/new?component=191640&amp;template=824113"
+  
+  
+    
+      project-icon="https://www.gstatic.com/images/branding/product/2x/apps_script_48dp.png"
+    
+  
+  
+    project-support-url="https://developers.google.com/apps-script/support"
+  >
+
+  <button>
+  
+    
+    Send feedback
+  
+  </button>
+</devsite-feedback>
+       
+    
+    
+  
+
+  
+  
+</article>
+
+
+<devsite-content-footer class="nocontent">
+  <p>Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 License</a>, and code samples are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see the <a href="https://developers.google.com/site-policies">Google Developers Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
+  <p>Last updated 2020-10-06 UTC.</p>
+</devsite-content-footer>
+
+
+
+            
+          </devsite-content>
+        </main>
+        <devsite-footer-promos class="devsite-footer">
+          
+            
+
+<nav class="devsite-footer-promos nocontent" aria-label="Promotions">
+  <ul class="devsite-footer-promos-list">
+    
+    <li class="devsite-footer-promo">
+      <a href="https://gsuite-developers.googleblog.com/search/label/Apps%20Script"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+         
+         data-label="Footer Promo Link (index 1)"
+       
+       >
+        
+        
+        <img class="devsite-footer-promo-icon"
+             src="https://www.gstatic.com/images/icons/material/product/2x/blogger_48dp.png"
+             loading="lazy"
+             alt="Blog">
+        
+        Blog
+      </a>
+      <div class="devsite-footer-promo-description">The latest news on the Google Workspace Developers blog</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://github.com/gsuitedevs/apps-script-samples"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+         
+         data-label="Footer Promo Link (index 2)"
+       
+       >
+        
+        
+        <img class="devsite-footer-promo-icon"
+             src="/site-assets/logo-github.svg"
+             loading="lazy"
+             alt="GitHub">
+        
+        GitHub
+      </a>
+      <div class="devsite-footer-promo-description">Fork our samples and try them yourself</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://issuetracker.google.com/issues?q=componentid:191640"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+         
+         data-label="Footer Promo Link (index 3)"
+       
+       >
+        
+        
+        <img class="devsite-footer-promo-icon"
+             src="/site-assets/developers_64dp.png"
+             loading="lazy"
+             alt="Issue Tracker">
+        
+        Issue Tracker
+      </a>
+      <div class="devsite-footer-promo-description">Something wrong? Send us a bug report!</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="http://stackoverflow.com/questions/tagged/google-apps-script"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+         
+         data-label="Footer Promo Link (index 4)"
+       
+       >
+        
+        
+        <img class="devsite-footer-promo-icon"
+             src="/site-assets/logo-stack-overflow.svg"
+             loading="lazy"
+             alt="Stack Overflow">
+        
+        Stack Overflow
+      </a>
+      <div class="devsite-footer-promo-description">Ask a question under the google-apps-script tag</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="/apps-script/guides/videos"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+         
+         data-label="Footer Promo Link (index 5)"
+       
+       >
+        
+        
+        <img class="devsite-footer-promo-icon"
+             src="https://www.gstatic.com/images/icons/material/product/2x/youtube_64dp.png"
+             loading="lazy"
+             alt="Videos">
+        
+        Videos
+      </a>
+      <div class="devsite-footer-promo-description">Check out the Apps Script videos on YouTube</div>
+    </li>
+    
+  </ul>
+</nav>
+
+          
+        </devsite-footer-promos>
+        <devsite-footer-linkboxes class="devsite-footer">
+          
+            
+<nav class="devsite-footer-linkboxes nocontent" aria-label="Footer links">
+  
+  <ul class="devsite-footer-linkboxes-list">
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Tools</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://script.google.com/create"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+          
+            Script Editor
+          
+          </a>
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://script.google.com/home"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+          
+            Apps Script Dashboard
+          
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Connect</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://twitter.com/gsuitedevs"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+          
+            @gsuitedevs on Twitter
+          
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Product Info</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/apps-script/terms"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+          
+            Terms of Service
+          
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+  </ul>
+  
+</nav>
+          
+        </devsite-footer-linkboxes>
+        <devsite-footer-utility class="devsite-footer">
+          
+            
+
+<div class="devsite-footer-utility nocontent">
+  
+  
+  <nav class="devsite-footer-sites" aria-label="Other Google Developers websites">
+    <a href="https://developers.google.com/"
+       class="devsite-footer-sites-logo-link gc-analytics-event"
+       data-category="Site-Wide Custom Events"
+       data-label="Footer Google Developers Link">
+      <img class="devsite-footer-sites-logo"
+           src="https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b/developers/images/lockup-developers.svg"
+           loading="lazy"
+           alt="Google Developers">
+    </a>
+    <ul class="devsite-footer-sites-list">
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.android.com"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Android Link"
+         
+         >
+          Android
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.chrome.com/home"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Chrome Link"
+         
+         >
+          Chrome
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//firebase.google.com"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Firebase Link"
+         
+         >
+          Firebase
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//cloud.google.com"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google Cloud Platform Link"
+         
+         >
+          Google Cloud Platform
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="/products"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer All products Link"
+         
+         >
+          All products
+        </a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+
+  
+  <nav class="devsite-footer-utility-links" aria-label="Utility links">
+    
+    <ul class="devsite-footer-utility-list">
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="/terms/site-terms"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Terms link"
+         >
+          Terms
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//policies.google.com/privacy"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Privacy link"
+         >
+          Privacy
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 devsite-footer-utility-button">
+        
+        <span class="devsite-footer-utility-description">Sign up for the Google Developers newsletter</span>
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//services.google.com/fb/forms/googledevelopersnewsletter/?utm_medium=referral&amp;utm_source=google-products&amp;utm_team=googledevs&amp;utm_campaign=201611-newsletter-launch"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Subscribe link"
+         >
+          Subscribe
+        </a>
+        
+      </li>
+      
+    </ul>
+    
+
+    
+<devsite-language-selector>
+  <devsite-select class="devsite-language-selector-menu">
+    
+    <select aria-label="Select your language preference."
+            class="devsite-language-selector-select"
+            name="language"
+            track-name="click"
+            track-type="languageSelector">
+    
+      
+      <option>Language</option>
+    
+    
+      <option value="en"
+              lang="en"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="en"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        English
+      </option>
+    
+      <option value="id"
+              lang="id"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="id"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Bahasa Indonesia
+      </option>
+    
+      <option value="de"
+              lang="de"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="de"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Deutsch
+      </option>
+    
+      <option value="es"
+              lang="es"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="es"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Español
+      </option>
+    
+      <option value="fr"
+              lang="fr"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="fr"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Français
+      </option>
+    
+      <option value="pt_br"
+              lang="pt_br"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="pt_br"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Português – Brasil
+      </option>
+    
+      <option value="ru"
+              lang="ru"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="ru"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        Русский
+      </option>
+    
+      <option value="zh_cn"
+              lang="zh_cn"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="zh_cn"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        中文 – 简体
+      </option>
+    
+      <option value="ja"
+              lang="ja"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="ja"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        日本語
+      </option>
+    
+      <option value="ko"
+              lang="ko"
+              track-metadata-original-language="en"
+              track-metadata-selected-language="ko"
+              track-name="changed"
+              track-type="languageSelector"
+            >
+        한국어
+      </option>
+    
+    </select>
+  </devsite-select>
+</devsite-language-selector>
+
+  </nav>
+</div>
+          
+        </devsite-footer-utility>
+      </section></section>
+    <devsite-sitemask></devsite-sitemask>
+    <devsite-snackbar 
+                  ></devsite-snackbar>
+    <devsite-tooltip ></devsite-tooltip>
+    <devsite-heading-link></devsite-heading-link>
+    <devsite-analytics >
+      
+        <script type="application/json" analytics>[{"gaid": "UA-24532603-1", "dimensions": {"dimension1": "Signed out", "dimension4": "Apps Script", "dimension11": false, "dimension8": null, "dimension5": "en", "dimension6": "en", "dimension3": false}, "metrics": {"ratings_count": "metric2", "ratings_value": "metric1"}}]</script>
+<script type="application/json" gtm>{"parameters": {"freeTrialEligibleUser": "False", "internalUser": "False", "language": {"machineTranslated": "False", "requested": "en", "served": "en"}, "pageType": "article", "projectName": "Apps Script", "scriptsafe": null, "signedIn": "False", "tenant": "developers"}}</script>
+      
+    </devsite-analytics>
+    
+      <devsite-badger></devsite-badger>
+    
+    
+    <script nonce="TujBhY8F8HSbpHBJkpQCg0bjPBYrNQ">
+  
+  (function(d,e,v,s,i,t,E){d['GoogleDevelopersObject']=i;
+    t=e.createElement(v);t.async=1;t.src=s;E=e.getElementsByTagName(v)[0];
+    E.parentNode.insertBefore(t,E);})(window, document, 'script',
+    'https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b/developers/js/app_loader.js', '[1,"en",null,"/js/devsite_app_module.js","https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b","https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b/developers","https://developers-dot-devsite-v2-prod.appspot.com",null,null,["/_pwa/developers/manifest.json","/_static/images/video-placeholder.svg","https://www.gstatic.com/devrel-devsite/prod/v36e9b4a2fdc696650f09851e8c880b958655492821ded3455f80aaef87b6b52b/developers/images/favicon.png","https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700|Material+Icons"],1]')
+  
+</script>
+  </body>
+</html>

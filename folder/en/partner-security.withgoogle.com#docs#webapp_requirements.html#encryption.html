@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html class="google-js mmfb" lang="en">
+<meta charset="utf-8">
+<meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">
+<title>
+  Google - Outsourcing Portal
+</title>
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Product+Sans:400&amp;lang=en"
+  rel="stylesheet">
+</link>
+<link href="https://www.google.com/css/maia.css" rel="stylesheet">
+</link>
+<link href="/static/20201005rc0/vsa_docs/vsa.css" rel="stylesheet" />
+<div class="maia-header" id="maia-header" role="banner">
+
+  <div class="maia-aux">
+    <h1>
+      <a href="/"><img alt="Google"
+          src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_116x41dp.png"
+          srcset="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_116x41dp.png 2x">&nbsp;
+        Outsourcing</a>
+    </h1>
+
+  </div>
+</div>
+
+<div id="maia-main" role="main">
+  <div class="maia-article" role="article">
+    <div class="main-content">
+      <div class="maia-col-10">
+
+        <h1 class="maia-display">Web Application Security Requirements for Google Providers</h1>
+
+        <p>This document describes the baseline security controls that web applications provided by Google partners must
+          comply with. In order to prevent security issues, security controls must be carefully designed and should be
+          regularly tested for their effectiveness.</p>
+
+        <p><b><i>Note</i></b> - Web sites built specifically for Google must also adhere to the <a
+            href="https://partner-security.withgoogle.com/docs/dev_requirements.html">Outsourced Development Requirements</a>
+        </p>
+
+        <hr>
+        </hr>
+        <h1>Summary</h1>
+        <h3>Requirements</h3>
+        <p>The basic web application requirements are:</p>
+
+        <ol>
+          <li><a href="#webenvironment">Secure the web environment</a> (prevent web server bugs)</li>
+          <li><a href="#inputvalidation">Validate user input</a> (prevent XSS and injection attacks)</li>
+          <li><a href="#third-partycontent">Avoid third-party scripts and CSS</a></li>
+          <li><a href="#encryption">Use encryption</a> (protect data, prevent mixed content bugs)</li>
+          <li><a href="#authentication">Use the right authentication</a></li>
+          <li><a href="#authorization">Authorize requests</a> (prevent XSRF, XSSI etc)</li>
+          <li><a href="#contentsecuritypolicy">Content Security Policy</a></li>
+          <li><a href="#appendix">Appendix</a></li>
+        </ol>
+
+        <p>If any of these requirements cannot be implemented, please contact your primary Google point of contact for
+          escalation to the Google security team.</p>
+
+        <h3>Recommendations</h3>
+        <p>Google regularly analyzes security bugs to identify common mistakes and good design practices. Experience has
+          show the following recommendations help prevent vulnerabilities and avoid re-work or delays.</p>
+        <ul>
+          <li>Use <a href="#authentication">OAuth2 or a Google approved auth system</a> for both users and admins</li>
+          <li>Use a web app security scanner with your product before launch</li>
+          <li>Implement <a href="https://csp.withgoogle.com/docs/strict-csp.html">CSP</a> with appropriate policy in
+            enforce mode</li>
+        </ul>
+
+        <p>The Google Security Team may identify additional controls, as needed, for sensitive operations or data, or in
+          response to foreseeable threats and vulnerabilities.</p>
+
+        <p>Software development is not a perfect science and vulnerabilities will occasionally be found. In such
+          situations the provider must engage with the Google security team to identify appropriate fixes, negotiate
+          timelines, and maintain adequate security.</p>
+
+        <hr>
+        </hr>
+        <h1>Details</h1>
+
+        <h2><a name="webenvironment"></a>1. Secure the environment</h2>
+        <p>Depending on the nature of your project the application will be either hosted in your datacenter and on your
+          servers, or on Google infrastructure. In both cases there are some requirements and best practices that help
+          ensure secure operations.</p>
+
+        <h3>For Software-as-a-Service Applications</h3>
+        <p>A web application is only as secure as the environment it operates in. This means that the security of all
+          the application's dependencies must be ensured. Common dependencies of web applications include:</p>
+        <ul>
+          <li>the web application framework it is based on</li>
+          <li>the web server and modules used by it</li>
+          <li>the underlying operating systems</li>
+          <li>network components on the way between the user and the application</li>
+          <li>the storage layer used by the application</li>
+          <li>middleware systems</li>
+        </ul>
+
+        <p>In addition, other factors such as systems running near the application (management hosts or other web
+          servers, for example) or other web applications that are hosted on the same server, may influence and affect
+          the security of the application provided to Google. The security program and operating procedures used around
+          an application may also have a big impact on its security.</p>
+
+        <p>This document cannot describe requirements for every possible dependency. It is expected that the application
+          is operated in a secure environment, implementing industry best practices (e.g. <a
+            href="https://en.wikipedia.org/wiki/ISO/IEC_27001" target="_blank">ISO 27001</a>, <a
+            href="https://www.pcisecuritystandards.org/security_standards/" target="_blank">PCI-DSS</a>, <a
+            href="https://iase.disa.mil" target="_blank">DISA</a> <a href="https://iase.disa.mil/stigs/#"
+            target="_blank">STIGs</a> or <a href="https://www.nist.gov/index.html" target="_blank">NIST</a> <a
+            href="https://web.nvd.nist.gov/view/ncp/repository" target="_blank">checklists</a> and <a
+            href="https://csrc.nist.gov/publications" target="_blank">guidelines</a>) and vendor recommendations (e.g.
+          <a href="https://technet.microsoft.com/en-us/library/cc184906.aspx" target="_blank">Microsoft Security
+            Guidance</a>, <a href="https://www.oracle.com/security" target="_blank">Oracle Hardening Guides</a>, etc.).
+        </p>
+
+        <p>At a minimum, the software used around the application must be up-to-date, and there must be no known
+          vulnerabilities that can be patched. A robust vulnerability management process must be in place to ensure the
+          prompt identification and remediation of systems that are affected by known vulnerabilities or
+          misconfigurations. Further, the systems must be appropriately hardened, following the principle that anything
+          that is not required should be removed.</p>
+
+        <h3><a name="outsourceddev"></a>For Outsourced Software Development</h3>
+        <p>Please see our <a href="/docs/dev_requirements.html">Outsourced Software Development Requirements</a> for detailed
+          requirements that apply to outsourced software development.</p>
+
+        <h2><a name="inputvalidation"></a>2. Input Validation</h2>
+        <p>Anything that is transmitted from the browser to the application can potentially be manipulated by a
+          malicious actor. As such the application should always assume that any user input is, in fact, malicious. It
+          is a common misconception that input received from cookies, hidden form fields or drop down boxes cannot be
+          changed by an attacker. Everything in an HTTP request can be modified, thus stringent checks of all input are
+          required (see the section on serialization issues for further issues to consider).</p>
+
+        <p>Furthermore anything an application obtains from outside its <a
+            href="https://en.wikipedia.org/wiki/Trust_boundary" target="_blank">trust boundary</a> may also be
+          malicious. For example, information written to a database by a different application may not have gone through
+          the same stringent sanitization routines that the application itself applies. Therefore it is necessary to
+          validate all input an application receives from any system outside its trust boundary.</p>
+
+        <p>The following section describes some common vulnerabilities that are caused by insufficient input validation.
+          This list should by no means be deemed exhaustive. Developers must ensure that input cannot change the way
+          data or code is interpreted, regardless of context.</p>
+
+        <h3>SQL Injection</h3>
+        <p>An application is vulnerable to <a href="https://en.wikipedia.org/wiki/SQL_injection" target="_blank">SQL
+            injection</a> in the context of a database query when some of the user input is interpreted by the database
+          as being part of the query structure. This often results in the attacker being able to redirect the
+          application flow, read from or even write data directly to the database.</p>
+
+        <p>There are <a href="https://en.wikipedia.org/wiki/SQL_injection#Mitigation" target="_blank">many ways to
+            avoid</a> SQL injection vulnerabilities, including escaping user input, using parameterized queries, using
+          stored procedures or ORM frameworks. It is recommended to use one approach consistently throughout the
+          application. Whatever method chosen, the application must make sure that input received from outside the
+          application's trust boundary cannot modify the way the query is interpreted by the database.</p>
+
+        <p>One of the best ways to avoid SQL injection is to actually avoid using SQL at all in your project, e.g. by
+          instead relying on an Object-Relational Mapping (ORM) framework (such as the one for DataStore supplied on
+          AppEngine).</p>
+
+        <h3>XPath Injection</h3>
+        <p>If an application uses XPath to query server-side data and uses input received from outside the application's
+          trust boundary to form the query, the application must make sure that the input <a
+            href="https://www.owasp.org/index.php/XPATH_Injection" target="_blank">cannot modify</a> the way the query
+          is interpreted by the data backend.</p>
+
+        <h3>LDAP Injection</h3>
+        <p>If an application queries an LDAP server and uses input received from outside the application's trust
+          boundary to form the query, it must make sure that the input <a
+            href="https://www.owasp.org/index.php/LDAP_injection" target="_blank">cannot modify</a> way the query is
+          interpreted by the LDAP server.</p>
+
+        <h3>Command Injection</h3>
+        <p><a href="https://www.owasp.org/index.php/Command_Injection" target="_blank">Command injection</a> is one of
+          the most serious vulnerabilities an application may suffer from as it allows an attacker to execute arbitrary
+          commands, typically with the same privileges the web server has. We strongly recommended against using user
+          input to form commands that are executed at the operating system level. If unavoidable, the application must
+          make sure that it is not possible for an attacker to modify the command line in a way that allows users to
+          specify additional commands or modify the command the application intends to run.</p>
+
+        <h3>Path Traversal</h3>
+        <p>If user input will determine the filename an application operates on, controls must be in place to ensure
+          that an attacker <a href="https://www.owasp.org/index.php/Path_Traversal" target="_blank">cannot modify the
+            filename</a> in a way that would allow an attacker to read from or write to unintended files. For example,
+          consider an application that allows the user to retrieve a file they previously uploaded. The URL might look
+          like this:</p>
+
+        <p><code>https://www.example.com/getmyfile.html?file=uploadedfile.txt</code></p>
+
+        <p>If this application was vulnerable to path traversal attacks, a user might get confidential system files by
+          walking down the path using <code>../</code>:</p>
+
+        <p><code>https://www.example.com/getmyfile.html?file=../../../../etc/passwd</code></p>
+
+        <h3>Writing to Files</h3>
+        <p>If the application allows users to upload or write files, it must ensure that this cannot compromise the
+          security of the server or application. In particular, the application should appropriately separate
+          user-manipulated files from other system and application files, and prevent execution or misinterpretation.
+          For example, an ASP.net application allowing the user to upload a file must ensure that users cannot upload
+          .aspx files in a way that they would be executed by the web server.</p>
+        <p>Privacy-relevant metadata (e.g. geolocation data within images) should be removed from these files.</p>
+
+        <h3>Cross Site Scripting (XSS)</h3>
+        <p><a href="https://www.owasp.org/index.php/XSS" target="_blank">Cross Site Scripting</a> (or XSS for short)
+          occurs when an application redisplays insufficiently sanitized user input in the context of the application's
+          origin (as defined by the <a href="https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy"
+            target="_blank">Same Origin Policy</a>). If the user input contains certain kinds of scripting code that is
+          interpreted by the user's browser, it may read or alter the DOM of the current page when redisplayed. In many
+          cases, XSS is used to steal users' cookies, but it may also be used for phishing attacks, or even to deface
+          the web page. Unfortunately, XSS is one of the most common security issues in web applications, and due to
+          browser quirks and other unexpected factors quite hard to get right.</p>
+
+        <p>In order to work around these factors, the application must take the following precautions:</p>
+        <ul>
+          <li>either escape or sanitize user input that is redispayed by the application
+            <ul>
+              <li>if escaping is chosen, replace any characters that might be used to inject HTML or scripting code
+                (e.g. characters such as &lt;, &gt;, ", ', \, …) and replace them with values that are harmless in the
+                context they are used in (for example, different substitutions have to be used in javascript context
+                (e.g. &gt; becomes <code>\u003e</code> or <code>\x3e</code>) than in HTML context (e.g. &gt; becomes
+                <code>&amp;gt;</code>))</li>
+              <li>if sanitization is chosen, it is strongly recommended to use a proven library, such as <a
+                  href="https://developers.google.com/caja/" target="_blank">Caja</a>. HTML sanitization is incredibly
+                hard, so it should only be used when necessary.</li>
+            </ul>
+          </li>
+          <li>set a valid and appropriate content type for each page (in the Content-Type HTTP header)</li>
+          <li>set a valid character set for each page (in the Content-Type HTTP header)</li>
+          <li>do not allow the beginning of any file to be under the control of the user</li>
+          <li>consider hosting user supplied files in a different origin, taking into consideration the potential need
+            for authorization
+            <ul>
+              <li><code>Content-Disposition: attachment</code> <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition"
+                  target="_blank">headers</a> should be used where appropriate</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p>We strongly recommend an escape-on-output approach where the escaping or sanitizing step is performed each
+          time user input is redisplayed, as opposed to when it is stored. This allows easier fixes when vulnerabilities
+          are discovered in the escaping or sanitization routines.</p>
+
+        <p>One way to do this consistently throughout the application is to use an auto-escaping templating language (as
+          opposed to manually escaping in code). A few examples for different programming languages are listed below.
+          Note that not all of these are context sensitive. So it may still be required to do manual escaping (or
+          explicitly tagging a variable in the template) when the context is something other than HTML.</p>
+
+        <ul>
+          <li><a href="https://www.djangoproject.com/" target="_blank">Django</a>, <a
+              href="https://realpython.com/primer-on-jinja-templating/" target="_blank">Jinja2</a> (Python)</li>
+          <li><a href="https://developers.google.com/closure/" target="_blank">Closure</a>/<a
+              href="https://developers.google.com/closure/templates/" target="_blank">Soy</a> (Java, JavaScript)</li>
+          <li><a href="https://jquery.com/" target="_blank">JQuery</a>, <a href="https://angularjs.org/"
+              target="_blank">AngularJS</a> (JavaScript)</li>
+        </ul>
+
+        <p><b><i>Note</i></b> - Mixing Client and Server-side templating can result in unforeseen security
+          vulnerabilities. Output from the server-side templating might result in valid expressions that are <a
+            href="https://github.com/angular/angular.js/issues/5601#issuecomment-31548902" target="_blank">evaluated</a>
+          by the client-side templating system. By injecting valid client-side expressions an attacker can run malicious
+          javascript on the webpage.</p>
+
+        <p>Given there is no server-side template system which understands contextual escaping for popular client-side
+          frameworks (AngularJS, ReactJS, Polymer, EmberJS, VueJS...), these designs have inherent security risks. As
+          such, UI element rendering should strive to be solely in the domain of the client <b>or</b> server, using
+          REST-ful architectures as appropriate.</p>
+
+        <ul>
+          <li><a href="https://blog.portswigger.net/2016/01/xss-without-html-client-side-template.html"
+              target="_blank">XSS without HTML: Client-Side Template Injection with AngularJS</a></li>
+          <li><a href="https://github.com/cure53/mustache-security" target="_blank">Mustache-security (archived)</a>
+          </li>
+        </ul>
+
+        <p>There are also XSS vulnerabilities that work exclusively on the client-side. This kind of XSS is often
+          referred to as <a href="https://www.owasp.org/index.php/DOM_Based_XSS" target="_blank">DOM based XSS</a>.
+          Standard server-sided escaping of user input does not help with this type of issue as the root cause is in the
+          client-side code. The application must therefore also make sure that whenever client-side scripting code
+          handles user input, or parts of the DOM that may contain user input (such as document.location), it does not
+          introduce XSS vulnerabilities.</p>
+
+        <p>XSS vulnerabilities may also surface through file uploads. In many cases it is better to serve uploaded files
+          from a separate, cookie-less domain, and let the same origin policy take care of protecting against attacks.
+          Note that this implies that all uploaded files will be available without authentication, which may not be
+          appropriate for all situations. In case the application needs to protect the files from unauthorized access,
+          additional controls must be implemented to ensure other users cannot be attacked through XSS in uploaded
+          files.</p>
+
+        <h3>Integer Overflows</h3>
+        <p>When using user provided numbers in arithmetic operations, the application must take care and account for
+          possible <a href="https://en.wikipedia.org/wiki/Integer_overflow" target="_blank">integer overflows</a>.</p>
+
+        <p>As an example, consider a web store that uses a 16 bit signed integer to hold the price. A 16 bit signed
+          integer can hold a maximum value of 32767. If an attacker tries to buy 100 items with a price of $600 each,
+          the total price would be $60000. However since the variable holding the value is a signed 16 bit integer it
+          would overflow, with it is actual value being $-5536.</p>
+
+        <h3>XML External Entities</h3>
+        <p>XML has a lesser known feature that permits <a
+            href="https://xmlwriter.net/xml_guide/entity_declaration.shtml" target="_blank">entity</a> aliases (for
+          example <code>&amp;customEntity;</code>) containing external data such as file or URL content. If an
+          application handles XML input from a system outside its trust boundary it must ensure that external entities
+          referenced from the XML document are not resolved, as failing to do so may result in attackers being able to
+          disclose local files or retrieve URLs from the local network.</p>
+
+        <p>How to disable external entity loading in:</p>
+        <ul>
+          <li><a href="https://xerces.apache.org/xerces-j/features.html#external-parameter-entities"
+              target="_blank">Apache Xerces/SAX</a></li>
+          <li><a href="https://php.net/manual/en/function.libxml-disable-entity-loader.php" target="_blank">PHP
+              libxml</a></li>
+          <li><a
+              href="https://docs.oracle.com/javase/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html#setExpandEntityReferences(boolean)"
+              target="_blank">Java DocumentBuilderFactory</a> (in addition, for XML parsers that do not respect
+            <code>setExpandEntityReference(false)</code>, a custom empty EntityResolver <a
+              href="https://docs.oracle.com/javase/1.5.0/docs/api/javax/xml/parsers/DocumentBuilder.html#setEntityResolver(org.xml.sax.EntityResolver)"
+              target="_blank">should be set</a> and implemented)</li>
+        </ul>
+
+        <h3>Logic Errors</h3>
+        <p>The application must perform logic checks where appropriate. For example, an application must check and
+          enforce that a user cannot buy a negative number of items from a web store, or that it is not possible to
+          transfer a negative amount of money to another person's account.</p>
+
+        <h3>Serialization/Deserialization</h3>
+        <p>There are many risks involved with various approaches to serialization and deserialization of data that may
+          be influenced by potentially hostile users. Common flaws that your application needs to defend against may
+          involve:</p>
+        <ul>
+          <li>remote code execution via powerful serialization APIs (e.g. Python’s <a
+              href="https://www.cs.uic.edu/~s/musings/pickle.html" target="_blank">pickle</a> API)</li>
+          <li><a href="https://en.wikipedia.org/wiki/Mass_assignment_vulnerability" target="_blank">mass-assignment</a>
+            style vulnerabilities when dealing with other serialization methods such as JSON, YAML, Protocol Buffers,
+            etc.</li>
+        </ul>
+
+        <p>To avoid security issues, you should:</p>
+
+        <ul>
+          <li>use libraries and APIs that only deserialize primitive types (e.g. int, string, byte array)</li>
+          <li>not blindly store a serialized representation submitted by client (instead, take a approach where only
+            specifically defined fields are propagated to the internal data model after validation)</li>
+          <li>use protection mechanisms such as encryption or signing when exchanging serialized data representations
+            with other services</li>
+        </ul>
+
+        <h3>Other Vulnerabilities</h3>
+        <p>Other input validation related vulnerabilities web applications may need to protect against include:</p>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Buffer_overflow" target="_blank">buffer overflows</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Uncontrolled_format_string" target="_blank">format string bugs</a>
+          </li>
+          <li><a href="https://en.wikipedia.org/wiki/Memory_corruption" target="_blank">memory corruption bugs</a></li>
+        </ul>
+
+        <h2><a name="third-partycontent"></a>3. Third Party Content</h2>
+        <p>Loading content from other sites is dangerous under certain circumstances since a security issue in a
+          third-party site might also affect your application.</p>
+
+        <p>To avoid this problem it is not permissible to load scripts or style sheets (e.g. via &lt;link
+          rel="stylesheet" href=…&gt; or &lt;script src=…&gt;) from any third-party site that is not Google owned and
+          operated. By inserting malicious code into the script or style sheets, whoever has control over the servers
+          from where those resources are loaded will also have full control over your site.
+
+          <p>Similarly, directly embedding applets, videos, frames, or images (including advertisements, tracking
+            pixels, etc.) from third-party sources is also dangerous, as loading these resources can leak information.
+            For example, the referer header may reveal where in the application an external resource has been loaded
+            from, which may be both a privacy and a security issue.</p>
+
+          <p>When the use of third-party libraries is unavoidable, these resources must be sourced locally and not
+            loaded from an any third-party site that is not Google owned and operated. Care should also be taken to
+            ensure that the third-party libraries are :</p>
+          <li>the latest stable version available</li>
+          <li>actively supported (not deprecated or relying on deprecated functionality that may cause issues with
+            ongoing support)</li>
+
+          <p>In instances where the application requires to communicate with another service or API to retrieve/send
+            data, these communications must be completed over an HTTPS connection (including suitable validation of the
+            SSL certificate). The use of unencrypted HTTP communications or unvalidated HTTPS connections (e.g. with
+            services delivering self-signed or untrusted certificates), even for public data, is not permissible.</p>
+
+          <h2><a name="encryption"></a>4. Encryption</h2>
+          <p>For an attacker it is often extremely easy to listen in on the packets as they are transmitted between a
+            user and the web application (for example when the user is on a public WiFi network). In order to avoid
+            having sensitive data read by an attacker while it is in transit, any application that allows users to log
+            in, or contains anything but public data, must be available solely over <a
+              href="https://en.wikipedia.org/wiki/Transport_Layer_Security" target="_blank">HTTPS</a>. Applications
+            developed specifically for Google must <i>always</i> be SSL-only (including any inter-server communications
+            that occur on the backend). A web server listening on port 80 (plain HTTP) and redirecting users to the SSL
+            version of the application is fine, and can make it easier for users to access the application.</p>
+
+          <p>There are certain encryption ciphers and key lengths that are deemed insufficient. To protect against
+            related attacks the web server should be configured to support only TLS 1.1 or newer, and should only accept
+            secure ciphers with strong key lengths (&gt;=112 bits). Note - some old versions of Android do not support
+            TLS1.1, please assess the impact of this on your project before implementing.</p>
+
+          <p>To avoid someone impersonating your web server, it must identify itself with a valid certificate signed by
+            a trusted <a href="https://en.wikipedia.org/wiki/Certificate_authority" target="_blank">certification
+              authority</a>. The CA's public key must be installed by default in the certificate store of common
+            browsers (Chrome, Firefox, IE, Safari).</p>
+
+          <p>The use of <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank">HTTP
+              Strict Transport Security</a> (HSTS) headers is strongly encouraged.</p>
+
+          <p>Another important scenario to consider involves sensitive information that is stored in browser cookies: If
+            cookies are not set with the “secure” flag, an attacker can inject a reference to an HTTP IFRAME on any site
+            (even one unrelated to your application) visited via HTTP, and the contents of these cookies will be sent.
+            To avoid this problem cookies must have the <code>secure</code> flag set, all HTTP requests should redirect
+            to HTTPS and resources should be referenced via a schemeless protocol (for example,
+            <code>&lt;script src=“//foo.com/bar.js”&gt;</code>).</p>
+
+          <h3>Mixed Content</h3>
+          <p>Even if an application is only available through HTTPS, it may be vulnerable to attacks by including
+            resources (most importantly JavaScript files) from other servers over plain HTTP. This defeats the purpose
+            of SSL, and therefore the application must make sure that there are no resources included from plain HTTP
+            sites. Typically browsers will help identify cases where resources from non-SSL sites are included by
+            displaying mixed content warnings.</p>
+
+          <h3>Encrypting data at rest</h3>
+          <p>The use of strong <a href="https://en.wikipedia.org/wiki/Cryptography" target="_blank">cryptography</a>
+            within web applications is encouraged. However, the application must make sure that appropriate <a
+              href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program"
+              target="_blank">cryptographic algorithms</a> are selected and only used within their specifications, and
+            for their intended use. Applications must not use self-designed or modified algorithms for protecting the
+            confidentiality or integrity of Google data or Google customer data. In addition, use proven and thoroughly
+            tested cryptographic libraries, instead of implementing algorithms on your own.</p>
+
+          <h4>Key Management</h4>
+          <p>Whenever an application uses public key cryptography (regardless of whether it is for encryption or
+            signing), the application and/or the operators must follow secure <a
+              href="https://en.wikipedia.org/wiki/Key_management" target="_blank">key management</a> practices. Private
+            keys must only be accessible to authorized persons and/or programs.</p>
+
+          <h4>Key Rotation</h4>
+          <p>An application using cryptographic keys must have the ability to rotate those keys. If a key was leaked or
+            has otherwise become unusable, it should be possible to move to a different key without requiring
+            significant effort.</p>
+
+          <h2><a name="authentication"></a>5. Authentication</h2>
+          <p>In many cases, the application or the data in the application should not be public. In order to control
+            access many applications ask the user to log in. The requirements in this section apply to all applications
+            that require users to prove their identity to the application.</p>
+
+          <h3>Applications for Google Employees</h3>
+          <p>If an application is going to be used by more than just a few Google employees, it must integrate with the
+            Google internal authentication mechanism. This makes sure that Google employees do not inadvertently enter
+            their Google account password, thereby sharing it with a third-party. In addition, employees who leave the
+            company should no longer have access to Google data, and disabling their corporate Google account should
+            terminate access to third-party applications as well.</p>
+
+          <p>Outside of AppEngine, the best way to fulfill this requirement is to use <a
+              href="https://developers.google.com/accounts/docs/OAuth2Login" target="_blank">OAuth2 Login</a>. The
+            preferred way to integrate OAuth2 Login into a web application is through the use of the <a
+              href="https://developers.google.com/identity/toolkit/" target="_blank">Google Identity Toolkit</a> which
+            supports multiple programming languages. However there is a variety of other open source or free libraries
+            available as well (good and proven libraries include <a
+              href="https://github.com/DotNetOpenAuth/DotNetOpenAuth/wiki" target="_blank">DotNetOpenAuth</a> (.NET), <a
+              href="https://github.com/jbufu/openid4java" target="_blank">OpenID4Java</a> (Java), and <a
+              href="https://www.janrain.com/openid-enabled" target="_blank">janrain</a> (Python)). Companies that
+            provide services to reduce the complexity of implementing OAuth2 Login include <a
+              href="https://www.pingidentity.com/" target="_blank">Ping Identity</a>, <a href="https://janrain.com/"
+              target="_blank">Janrain</a>, and <a href="https://www.gigya.com/connect/" target="_blank">Gigya</a>.</p>
+
+          <p>Applications built on AppEngine may integrate even easier using the <a
+              href="https://developers.google.com/appengine/docs/python/users/" target="_blank">Users</a> service which
+            federates with Google accounts. If you are using an application framework like Django, there is also <a
+              href="https://github.com/fhahn/django-gaeauth" target="_blank">community support</a> for AppEngine
+            integration.</p>
+
+          <p>If an application requires integration with Google+, it can also integrate with the “<a
+              href="https://developers.google.com/+/features/sign-in" target="_blank">login with g+</a>” API.</p>
+
+          <p>Applications that will be deployed on servers internal to Google and do not require support for multiple
+            roles may also integrate with the Google single sign on mechanism using an Apache module.</p>
+
+          <p>If an application will only be used by a small number of Google employees (&lt;25), it may use its own
+            authentication mechanism (though support for OAuth2 Login is still preferred). In such a case the
+            application must ensure that:</p>
+          <ul>
+            <li>the password is only stored encrypted in a <a href="https://en.wikipedia.org/wiki/Bcrypt"
+                target="_blank">non-reversible format</a>, using a secure <a
+                href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">cryptographic one-way
+                hash function</a> of a <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)"
+                target="_blank">salt</a> and the password,
+            <li>the application allows the user to change the password,
+            <li>it enforces a secure <a href="https://en.wikipedia.org/wiki/Password_policy" target="_blank">password
+                policy</a> (minimum length, characters, etc.),
+            <li>the application displays an eye-catching warning to users not to use their Google account password,</li>
+            <li>user accounts can be disabled quickly in case an employee leaves the company.</li>
+          </ul>
+
+          <h4>OAuth2 Login Implementation Requirements</h4>
+          <p>When supporting authentication through OAuth2 Login, the application must make sure that Google is the only
+            IdentityProvider (IdP) that is authoritative for @google.com, @gmail.com and @googlemail.com email
+            addresses.</p>
+
+          <p>The only scopes that should be requested from the user are the ones necessary to uniquely identify them.
+            Typically, those are:</p>
+          <ul>
+            <li><code>https://www.googleapis.com/auth/userinfo.profile</code>
+            <li><code>https://www.googleapis.com/auth/userinfo.email</code>
+          </ul>
+
+          <h3>Applications for Google customers</h3>
+          <p>Whether or not an application intended for Google customers must integrate with the Google authentication
+            framework (Google Accounts) should be determined on a case by case basis, depending on factors such as
+            branding, the information shared by the users, etc. If it is decided that an application must integrate,
+            methods similar to the ones described in the above section are required (OAuth2 Login, Login with G+). In
+            almost all cases OAuth2 Login integration will be required.</p>
+
+          <p>If an application does not need to integrate, the following requirements apply:</p>
+          <ul>
+            <li>stored passwords must be hashed, using a <a
+                href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">secure cryptographic
+                one-way hash function</a> of a <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)"
+                target="_blank">salt</a> and the password,</li>
+            <li>the application must allow the user to change the password,</li>
+            <li>the application must enforce a password policy (minimum length, characters, etc.), that is defined in
+              agreement with Google,</li>
+            <li>the login page must be clearly branded as the vendor's, and not as Google. The Google logo should not
+              appear anywhere on the page,</li>
+            <li>the login page must not try to imitate the look of the <a href="https://accounts.google.com/Login"
+                target="_blank">Google login page</a>.</li>
+          </ul>
+
+          <h4>Authentication Cookies and Sessions</h4>
+          <p>In order to remember a user after login, web applications typically use a session ID stored in a cookie to
+            match individual requests to specific users. If the application uses cookies to store the session ID, the
+            cookie must have the <code>HttpOnly</code> and <code>Secure</code> <a
+              href="https://en.wikipedia.org/wiki/HTTP_cookie#Secure_and_HttpOnly" target="_blank">attributes</a> set.
+            In any case, the session ID should not be transmitted as part of the URL, as URLs are retained in the user's
+            history, and may be logged by the web server or proxies in between.</p>
+
+          <p>There are many ways to construct session IDs. If the application elects to use a random string or number,
+            it must ensure that the ID has enough entropy to keep an attacker from being able to guess it using brute
+            force. Furthermore, the session ID must be generated using a secure <a href="" target="_blank">cryptographic
+              pseudo random number generator</a> (PRNG), that does not allow the state of the generator to be
+            recalculated from its output.</p>
+
+          <p>Sessions should only remain valid for a certain amount of time. After a longer period of inactivity, users
+            must be required to re-authenticate. Such a session time-out depends on the nature of the application, but
+            should generally be somewhere between 30 minutes and 24 hours. To avoid attacks where an attacker who gained
+            access to a session ID once replays the same session ID over and over, the web application must make sure
+            that the session ID is actually invalidated, as opposed to simply deleting or overwriting the cookie in the
+            client's browser.</p>
+
+          <p>In addition to session time-outs, applications must provide the user with a way to manually end a session.
+            Typically, applications provide a "log out" button or link for this purpose. Similarly to a session
+            time-out, the application must invalidate the session ID once the user elects to end the session. Note that
+            if an application uses something other than a random session ID (such as a signed cookie), it may prove
+            difficult to invalidate the session ahead of its timeout. This must be accounted for by the application, for
+            example by blocking session IDs of users who logged out of an application prior to the session time-out.</p>
+
+          <h2><a name="authorization"></a>6. Authorization</h2>
+          <p>In many cases, different users should have access to different data sets. For example, in most
+            authenticated applications only the currently logged in user may change profile data such as name, email
+            address or the account password. All authorization controls must be enforced on the server-side.</p>
+
+          <p>Web applications providing multiple roles must also make sure that users do not perform unauthorized
+            actions by loading pages that should only be available to users of a different role. For example, a page
+            “admin.html” should only be accessible to members of the “admin” role and not to members of the “regular
+            user” role. When pages are shared between different roles, but should provide different functionality based
+            on user role, the application must take special care to allow only actions that are appropriate for the role
+            of the currently logged in user. Hiding a page or control does not constitute access control and all
+            authorization checks must be performed both on read and write functions.</p>
+
+          <p>Applications with complex role separation should take care to fully document the available roles, alongside
+            information on which roles are authorized to perform given actions (e.g. view, edit, delete) within the
+            application. The ACL code should be centrally implemented and easy to audit for correctness based on the
+            project documentation. Tests should be implemented to ensure that these ACLs accurately prevent unauthorized
+            access. </p>
+
+          <h3>Cross Site Request Forgery (XSRF or CSRF)</h3>
+          <p>Applications must prevent an attacker abusing the privileges granted to a user by protecting all
+            authenticated state changing actions against <a
+              href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)" target="_blank">Cross Site
+              Request Forgery</a> (XSRF). In this attack, a malicious actor forces their victim to send a request to the
+            vulnerable application. This is often achieved by luring the victim to a page under the attacker's control.
+            As the browser automatically attaches relevant authentication cookies to requests sent by the user, the
+            request will appear to come from the authorized user if they are logged into the application.</p>
+
+          <p>For example, consider an online banking application that has a feature to transfer money to another
+            account. The URL to do such a transfer could look something like this:</p>
+
+          <p><code>https://bank.example.com/transfer.html?dest_account=123456&amount=99.90&submit=true</code></p>
+
+          <p>If an attacker manages to lure their victim onto their site, they could include HTML that causes such a
+            request to be sent:</p>
+
+          <p>
+            <code>&lt;img src="https://bank.example.com/transfer.html?dest_account=666&amount=99.90&submit=true"&gt;</code>
+          </p>
+
+          <p>If the user is logged into their online banking portal, the application will receive that request, and
+            check for authentication cookies - which will be present, since the request was sent from the authorized
+            user's browser (only from a different tab).</p>
+
+          <p>To protect against this attack, the application must secure all authenticated state changing actions with
+            XSRF tokens. These tokens must:</p>
+          <ul>
+            <li>be bound to the user they were generated for,</li>
+            <li>expire after a certain amount of time (&lt;24h),</li>
+            <li>be passed to the user in a way that they cannot be read by an attacker,</li>
+            <li>be sufficiently long and unpredictable to not be easily guessable.</li>
+          </ul>
+
+          <h3>Cross Site Script Inclusion (XSSI)</h3>
+          <p>Many web applications use AJAX to exchange data with the application. A common format for data exchange is
+            JSONP which can be interpreted as JavaScript by the user's browser. Unfortunately, this may lead to <a
+              href="https://www.scip.ch/en/?labs.20160414">Cross Site Script Inclusion</a> (XSSI) vulnerabilities, as
+            the javascript can be included from a different origin, and any variables set there can be read.</p>
+
+          <p>As an example, consider a contact management application, that transmits the user's contacts in a JSON file
+            (contacts.js):</p>
+
+          <p><code>var contacts = {"name": "John Doe", "address": "jdoe@example.com", ... }</code></p>
+
+          <p>An attacker, can now include this script in their own site, and when a user visits the attacker's site
+            while being logged into the contact management application, the attacker will find a variable "contacts"
+            that contains all of the victim's contacts:</p>
+
+          <p><code>&lt;script src="https://contacts.example.com/contacts.js"&gt;&lt;/script&gt;</code></p>
+
+          <p>In order to protect against XSSI, an application must:</p>
+          <ul>
+            <li>not use <a href="https://en.wikipedia.org/wiki/JSONP" target="_blank">JSONP</a> for communication of
+              non-public information,</li>
+            <li>not use any other format that sets variables or calls functions with non-public information,</li>
+            <li>not use an Array serialization format (e.g. [ ["John D", "jdoe@example.com"], … ])</li>
+          </ul>
+
+          <p>or</p>
+
+          <ul>
+            <li>protect transmission of such data with an unguessable, non-predictable token (must fulfill the same
+              requirements as XSRF tokens described above),</li>
+            <li>require POST requests</li>
+          </ul>
+
+          <h3>Clickjacking</h3>
+          <p>Depending on the nature of the actions that can be taken in the application, it may be necessary to protect
+            against <a href="https://www.owasp.org/index.php/Clickjacking" target="_blank">Clickjacking</a>.</p>
+
+          <p>If there is no requirement to frame a web page, the application should send the <a
+              href="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options" target="_blank">following
+              header</a>:</p>
+
+          <p><code>X-Frame-Options: SAMEORIGIN</code></p>
+
+          <p>The header tells the browser to not render the page if it is being framed by a page from a different
+            origin. Unfortunately, some older browser do not yet understand this header, leading to somewhat incomplete
+            mitigation. However, for applications that will be used only by Google employees, sending the header is
+            sufficient.</p>
+
+          <p>Applications that are provided to external Google customers should evaluate the need for further
+            protection, and must document the decision for review by Google.</p>
+
+
+          <h2><a name="contentsecuritypolicy"></a>7. Content Security Policy</h2>
+          <p>If you develop software specifically for Google implementation of Content Security Policy is
+            <em>required</em>. In all other cases it is highly recommended.</p>
+
+          <p><a href="https://www.w3.org/TR/CSP/" target="_blank">CSP</a> is a defense-in-depth mechanism web
+            applications can use to mitigate a broad class of content injection vulnerabilities, such as cross-site
+            scripting (XSS). This goal is achieved through a declarative policy that lets the authors of a web
+            application inform the client about the sources from which the application expects to load resources. Almost
+            all major browsers support <a href="https://caniuse.com/#feat=contentsecuritypolicy"
+              target="_blank">some</a> <a href="https://caniuse.com/#feat=contentsecuritypolicy2"
+              target="_blank">version</a> of CSP.</p>
+
+          <h4>Suggested policy</h4>
+          <p>Three frameworks that implement CSP out of the box are:<p>
+              <ul>
+                <li><a href="https://github.com/potatolondon/djangae" target="_blank">Djangae</a></li>
+                <li><a href="https://github.com/google/gae-secure-scaffold-python" target="_blank">GAE Secure Scaffold
+                    for Python 2</a></li>
+                <li><a href="https://github.com/google/gae-secure-scaffold-python3" target="_blank">GAE Secure Scaffold
+                    for Python 3</a></li>
+              </ul>
+
+              <p>Content Security Policy can protect your application from XSS, but in order for it to be effective you
+                need to define a secure policy. To get real value out of CSP your policy must prevent the execution of
+                untrusted scripts; below we describe how to accomplish this using an approach called strict CSP. This is
+                the recommended way to implement CSP for sites developed specifically for Google.</p>
+
+              <p>A production-quality strict policy appropriate for many projects is:</p>
+              &emsp;<code>object-src 'none';</code><br>
+              &emsp;<code>script-src 'nonce-{random}' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:;</code><br>
+              &emsp;<code>base-uri 'self';</code><br>
+              &emsp;<code>report-uri https://csp.withgoogle.com/csp/&lt;unique_id&gt;/&lt;application_version&gt;</code><br>
+
+              <p>When such a policy is set, modern browsers will execute only those scripts whose nonce attribute
+                matches the value set in the policy header, as well as scripts dynamically added to the page by scripts
+                with the proper nonce. Older browsers, which do not support the CSP3 standard, will ignore the nonce-*
+                and 'strict-dynamic' keywords and fall back to [script-src 'unsafe-inline' https: http:] which will not
+                provide protection against XSS vulnerabilities, but will allow the application to function properly.</p>
+              <p>The final Content Security Policy should be run through the <a
+                  href="https://csp-evaluator.withgoogle.com" target="_blank">CSP Evaluator</a> tool to ensure that no
+                high risk findings are reported.</p>
+              <p>More detailed information about Content Security Policy and Strict CSP is available on <a
+                  href="https://csp.withgoogle.com/docs" target="_blank">csp.withgoogle.com/docs</a>.</p>
+
+              <h4>Mode of operation</h4>
+
+              <p>Every application should be first run in "Report Only" mode. This way during initial development the
+                application can be tested and all CSP violations can be easily spotted.</p>
+
+              <p>After that, when the application is deployed to a live environment, the policy should be switched to
+                the recommended one - "Enforce mode". Applications in that mode will not only report all policy
+                violations but also actively block all dangerous elements and actions.</p>
+
+              <h4>Reporting endpoint</h4>
+
+              <p>All CSP violations reports from live environments needs to be collected and stored for further
+                analysis. We have created an application that performs this function for you. Please set a following
+                value in your report-uri directive:</p>
+
+              <p><code>https://csp.withgoogle.com/csp/&lt;unique_id&gt;/&lt;application_version&gt;</code></p>
+
+              <p>For example a collector URI for the first version of content security policy for gBank would look like
+                this:</p>
+
+              <p><code>https://csp.withgoogle.com/csp/gBank-A480F1EC/1</code></p>
+
+              <p>If you develop your application on AppEngine you can use AppEngine Application ID as a unique
+                application identifier.</p>
+
+              <hr>
+              </hr>
+              <h1><a name="appendix"></a>Appendix A: Further Reading</h1>
+              <ul>
+                <li><a href="https://code.google.com/p/browsersec/wiki/Main" target="_blank">Browser Security
+                    Handbook</a></li>
+                <li>OWASP directory of <a href="https://www.owasp.org/index.php/Category:Vulnerability"
+                    target="_blank">vulnerabilities</a> and <a href="https://www.owasp.org/index.php/Category:Attack"
+                    target="_blank">attacks</a></li>
+              </ul>
+
+              <hr>
+              </hr>
+              <h1 id="bad_javascript">Appendix B: Bad JavaScript patterns</h1>
+              <p>There are quite a few ways to do the right thing in JavaScript, but also a couple of persistent bad
+                ideas that refuse to go away. This appendix covers common security errors when writing JavaScript, if
+                you avoid these patterns you are well on your way to safe code.
+
+                <h2>Part I: How to create security hazards on client-side?</h2>
+                <h3>Bad idea #1:</h3>
+                <p>Let's use *.innerHTML or document.write to output text.</p>
+                <p>Sure, this code is pretty convenient:</p>
+
+                <p>
+                  <pre><code>
+function invalid_id(id) {
+  document.getElementById('errorbox').innerHTML = '&lt;blink&gt;Sorry, ' + id + ' is not a valid identifier!&lt;/blink&gt;';
+}
+</code></pre>
+                </p>
+
+                <p>...but what happens if id is equal to &lt;script&gt;alert('Look ma, my code is running on
+                  www.google.com!')&lt;/script&gt;?</p>
+
+                <p>The instinctive response of any developer who made this mistake is to add a bit of code to escape
+                  angle brackets, quotes, and such. But trust us, you will fail: with hundreds of code snippets like
+                  this, somebody will eventually miss a spot. A new engineer on the team will sooner or later assume
+                  that id must be an integer, and is already validated elsewhere.</p>
+
+                <p>In fact, it gets worse: there are cases where innerHTML containing user-controlled strings cannot be
+                  manipulated safely at all. There are obscure DOM reserialization bugs present in most browsers that
+                  may trigger XSS with as little as:</p>
+
+                <p>
+                  <pre><code>
+foo.innerHTML = [...correctly_sanitized_HTML_data_received_from_server...];
+foo.innerHTML += '.';
+</code></pre>
+                </p>
+
+                <h3>Good idea #1:</h3>
+                <p>If at all possible, do not use <code>innerHTML</code>,
+                  <code>outerHTML</code>, <code>cssText</code> - and do not call
+                  <code>document.write()</code>, <code>document.writeln()</code>, jQuery's
+                  <code>html()</code>, etc - when dealing with user-controlled strings. The
+                  approach is simply too error-prone in the long haul. Instead, create and
+                  attach HTML nodes using a JS library such as Google Closure.
+                </p>
+
+                <h3>Bad idea #2:</h3>
+                <p>Let's use <code>eval()</code> or <code>&lt;script src=...&gt;</code> to parse JSON / JSONP</p>
+
+                <p><a href="https://en.wikipedia.org/wiki/JSON" target="_blank">JSON</a> and JSONP are a common way to
+                  exchange data in JavaScript environments. To convert the responses received from server-side APIs, it
+                  is common to call <code>eval()</code> or create a new <code>&lt;script src=...&gt;</code> element on
+                  the page.</p>
+
+                <p>Unfortunately, this is usually a bad idea. Let's say that you are using a third-party API that
+                  returns contact information in this JSONP format:</p>
+
+                <p>
+                  <pre><code>
+{
+  name: "John Doe",
+  phone: "650-555-5555"
+}
+</code></pre>
+                </p>
+
+                <p>But what if that site gets compromised or is a victim of simple DNS hijacking? Well, it could return
+                  something like:</p>
+
+                <p>
+                  <pre><code>
+{
+  name: "John Doe",
+  phone: alert('Look ma, no hands!')
+}
+</code></pre>
+                </p>
+
+                <p>Well, you guessed it: the code will execute in the context of your application. In fact, the site
+                  does not even need to go openly malicious - what if they just do not validate phone numbers
+                  sufficiently, permitting the attacker to smuggle an unescaped quote into the string?</p>
+
+                <p>
+                  <pre><code>
+{
+  name: "John Doe",
+  phone: "650-555-" + alert('Look ma, no hands!') + "5555"
+}
+</code></pre>
+                </p>
+
+                <p>JSON escaping mistakes happen, and you should try to limit their impact on your app.</p>
+
+                <h3>Good idea #2:</h3>
+                <p>In general, use sanitizing parsers such as <code>JSON.parse()</code>.</p>
+
+                <p>Note that the "safe" JSON validator proposed in <a href="https://www.ietf.org/rfc/rfc4627.txt"
+                    target="_blank">RFC 4627</a> is actually completely broken - do not use it.</p>
+
+                <h3>Bad idea #3:</h3>
+                <p>Let's load this tiny script from Twitter or Facebook...</p>
+
+                <p>This should not be done. Any scripts loaded from third-party sites gain full access to google.com. We
+                  do not know how good their security practices are, and we do not want to increase our attack surface
+                  in such a way. Keep in mind that even some of the largest and most reputable sites on the Internet
+                  have a fair number of serious flaws discovered every year; popularity itself is really not an
+                  argument.</p>
+
+                <h3>Good idea #3:</h3>
+                <p>You may be able to implement the functionality in-house, or at least host the scripts on our servers.
+                  If that fails, it may be useful to ask the third-party company to develop a safer API for us - there
+                  is a good chance they would be willing to help.</p>
+
+
+                <h3>Bad idea #4:</h3>
+                <p>Let's read application state from <code>location.*</code></p>
+
+                <p>It is convenient for JavaScript-driven applications to store some of their state information in the
+                  URL - using <code>location.hash</code> and <code>history.pushState()</code> APIs in particular. This
+                  is not necessarily a bad idea by itself - but it is a very bad idea to blindly trust this data later
+                  on.</p>
+
+                <p>Of course, the attacker can put any data within the <code>location.*</code> object simply by
+                  redirecting the victim to a carefully crafted URL. Because of this, you need to very carefully scrub
+                  the values you are reading back, and never just blindly depend on them to perform state-changing
+                  operations, or to render critical parts of your UI.</p>
+
+                <p>You should not assume that characters such as angle brackets or quotes will be always escaped when
+                  reading back <code>location.*</code> properties, too. This behavior is browser-specific and varies
+                  between various segments - for example, <code>location.search</code> behaves differently than
+                  <code>location.hash</code>.</p>
+
+                <h3>Good idea #4:</h3>
+                <p>Use location.* responsibly:</p>
+
+                <ul>
+                  <li>Do not rely on <code>location.*</code> to store anything that, if tampered with, could have
+                    undesirable or lasting effects.</li>
+                  <li>Assume that the data retrieved from <code>location.*</code> will contain arbitrary characters or
+                    nonsensical values, and always validate and scrub it properly.</li>
+                  <li>In general, do not put anything sensitive in the URLs to avoid leaking user data through Referer
+                    headers.</li>
+                </ul>
+
+                <h3>Bad idea #5:</h3>
+                <p>Let's set <code>document.domain</code> to google.com.</p>
+
+                <p>At first sight, this may seem like an elegant way to integrate, say, wallet.google.com and
+                  picasaweb.google.com: if both sites set their <code>document.domain</code> in this manner, they will
+                  be able to exchange data on the client-side with ease. But it is a very, very bad plan: it means that
+                  any cross-site scripting vulnerability, anywhere within google.com, can be used to access Wallet, too:
+                  all the attacker has to do is to inject scripts onto dancing-hamsters.google.com, and then set their
+                  <code>document.domain</code>, too.</p>
+
+                <h3>Good idea #5:</h3>
+                <p>There are several safe alternatives:</p>
+
+                <ul>
+                  <li>You can set up secure client-side communications using <code>window.postMessage()</code>. Just be
+                    sure to properly set and validate origins on all messages.</li>
+                  <li>For legacy browsers, you may be able to leverage Closure XPC.</li>
+                  <li>Finally, you can use CORS or plain-old <code>XMLHttpRequest</code> to create a server-side channel
+                    to exchange data between the apps.</li>
+                </ul>
+
+                <h3>Bad idea #6:</h3>
+                <p>Let's talk to our <code>IFRAME</code> without re-confirming its identity.</p>
+
+                <p>Some of our more complex apps frequently rely on <code>IFRAME</code>-based containers, either visible
+                  or hidden, to maintain some of the application's state or to compartmentalize some of the logic. For
+                  example, in Google Mail or Google Docs, the currently edited document may be an <code>IFRAME</code>
+                  container; while in Google+, frames are used for the chat gadget, for third-party games, and so on.
+                </p>
+
+                <p>Unfortunately, there are some situations in which these frames can be navigated to a new location
+                  without the parent's page knowledge or consent. In essence, you need to be prepared that the frame you
+                  created a while ago may be no longer what you think it should be.</p>
+
+                <h3>Good idea #6:</h3>
+                <p>If you need to exchange sensitive data with a frame, always use <code>window.postMessage()</code> and
+                  necessarily specify the destination origin on outgoing messages, and carefully check it on any
+                  incoming ones. If you use any custom frame communications hacks based for example on
+                  <code>location.hash</code>, you should be prepared to run into trouble sooner or later.</p>
+
+                <h3>Bad idea #7:</h3>
+                <p>Let's build a security mechanism on top of a browser bug.</p>
+
+                <p>There are several legacy bugs and omissions in DOM access controls; for example, it is possible in
+                  some browsers to set <code>window.opener</code>, <code>window.name</code>, or <code>window.on*</code>
+                  methods for windows that are not in the same domain.</p>
+
+                <p>Some developers use such mechanism to implement high-performance or more potable client-side IPC
+                  schemes that offer some benefits over the standard <code>postMessage</code> API. But doing so is
+                  somewhat crazy: the lack of sufficient security controls around these cross-domain interactions means
+                  that not only the two consenting parties can leverage it to exchange messages, but that evil.com can
+                  join in uninvited, too.</p>
+
+                <p>A cherry on top: browser vendors sometimes decide to fix these problems on a short notice, causing
+                  problems for our products.</p>
+
+                <h3>Good idea #7:</h3>
+                <p>Please use the <code>postMessage</code> API, even if it causes a slight performance or portability
+                  hit. If you really cannot, reuse an existing standard solution such as Closure XPC. Refrain from
+                  developing custom hacks.</p>
+
+                <h3>Bad idea #8:</h3>
+                <p>Let's put user input in <code>document.cookie</code> or in HTTP headers sent with
+                  <code>XMLHttpRequest</code>.</p>
+
+                <p>It is tempting to treat <code>document.cookie</code> or
+                  <code>XMLHttpRequest.setRequestHeader()</code> as a yet another, convenient way to store or exchange
+                  short strings between various portions of your application. Unfortunately, this is dangerous: the
+                  handling of 8-bit characters in these settings is not well-defined, and is broken in some browsers,
+                  sometimes leading to serious security bugs.</p>
+
+                <h3>Good idea #8:</h3>
+                <p>Use <code>localStorage</code> or server-side mechanisms to keep track of user data. If you cannot
+                  avoid it, make sure that the values you place in cookies or other HTTP headers are thoroughly scrubbed
+                  and escaped. Be zealous: <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"
+                    target="_blank">%-encoding</a>, <a href="https://www.ietf.org/rfc/rfc2047.txt" target="_blank">RFC
+                    2047 encoding</a>, or <a href="https://en.wikipedia.org/wiki/Base64" target="_blank">base64
+                    encoding</a>, should all do the trick.</p>
+
+                <h3>Bad idea #9:</h3>
+                <p>Let's navigate to a user-supplied URL without validating it.</p>
+
+                <p>User-supplied URLs can have a special meaning to the browser. For example, clicking on some of them
+                  will not take you to a new page - and instead, will execute scripts in the security context of the
+                  originating page. Examples of this include:</p>
+
+                <ul>
+                  <li><code>javascript:alert('Look ma!')</code></li>
+                  <li><code>vbscript:MsgBox("Look ma!")</code></li>
+                  <li><code>data:text/html,&lt;script&gt;alert('Look ma!')&lt;/script&gt;</code></li>
+                </ul>
+
+                <p>If your JavaScript code uses <code>location.*</code> methods or properties to navigate to
+                  externally-supplied URLs without confirming that they are actually safe, you will end up with
+                  cross-site scripting flaws. You need to be careful, too because <a
+                    href="https://code.google.com/p/browsersec/wiki/Part1#Uniform_Resource_Locators" target="_blank">URL
+                    parsing</a> is relatively lax and sometimes counterintuitive, trying to ban known bad schemes or
+                  detect other patterns is almost always bound to fail. For example, these URLs still work:</p>
+
+                <ul>
+                  <li><code>javas[0x0a][0x0d]cript:alert('Look ma!')</code></li>
+                  <li><code>javascript://www.example.com/?foo=%0a%0dalert('Look ma!')</code></li>
+                </ul>
+
+                <p>Another pitfall: in Microsoft Internet Explorer, semicolons in URLs also become a deadly weapon - so
+                  generating a snippet of HTML containing this markup:</p>
+
+                <ul>
+                  <li><code>&lt;meta http-equiv="Refresh" content="0;URL=user_data"&gt;</code></li>
+                </ul>
+
+                <p>...will lead to code execution if user_data is
+                  <code>https://example.com;URL=javascript:alert('Look ma!')</code>, as the second occurrence of URL= in
+                  the directive inexplicably takes precedence. Trouble again.</p>
+
+                <h3>Good idea #9:</h3>
+                <p>The right approach is pretty simple:</p>
+                <ul>
+                  <li>If the URL looks like an absolute reference, make sure that it starts with a specifically
+                    permitted protocol followed by a colon and two slashes (e.g. http://, https://),</li>
+                  <li>If the URL looks relative, prefix it as appropriate to turn it into an absolute one. Do not output
+                    relative URLs as-is - browser URL parsing is messy, the some of them may be interpreted in funny
+                    ways.</li>
+                  <li>When writing <code>&lt;meta http-equiv="Refresh" content="..."&gt;</code> directives, also reject
+                    or percent-encode stray ; characters in the payload.</li>
+                </ul>
+
+                <h3>Bad idea #10:</h3>
+                <p>Let's allow third-party applets to talk to our scripts.</p>
+
+                <p>Microsoft Silverlight, Adobe Flash, and Sun Java applets all have opt-in mechanisms that allow them
+                  to talk to their host pages: in Flash, this is done with the <code>allowScriptAccess</code> parameter,
+                  while Java uses <code>MAYSCRIPT</code>.</p>
+
+                <p>It is dangerous to use these options to permit third-party scripts to
+                  interact with your JavaScript code, because they grant the applet full access to
+                  your JavaScript context - and by extension, to anything that we happen to have
+                  on google.com.</p>
+
+                <h3>Good idea #10:</h3>
+                <p>Settle for server-assisted communication channels if possible.</p>
+
+                <h2>Part II: How to misuse JavaScript to induce server-side issues?</h2>
+                <h3>Bad idea #11:</h3>
+                <p>Let's test all the input on the client-side, and call it a day.</p>
+
+                <p>JavaScript code offers a simple way to validate form submissions and other user-supplied data on the
+                  client-side before submitting it to the server. This is faster and more streamlined than waiting for a
+                  HTTP request to go through.</p>
+
+                <p>But this also makes it easier to forget about doing proper input validation on the server-side - and
+                  makes it harder to spot problems in testing, too. Users are free to tamper with your JavaScript, so
+                  always be vigilant: do not assume that only because your JavaScript code rejects <code>&lt;</code> or
+                  <code>&gt;</code> in the first_name field, or limits crawling_speed slider to values between 1 and
+                  100, that this is what you will receive from the browser.</p>
+
+                <h3>Good idea #11:</h3>
+                <p>Please use existing server-side input validation frameworks to make sure the data you received from
+                  client-side code meets your expectations. Develop unit tests or UI testing procedures to check for the
+                  behavior of your server-side code when incorrect inputs are submitted.</p>
+
+                <h3>Bad idea #12:</h3>
+                <p>Let's just generate JSONP with all the user data.</p>
+
+                <p>JSONP makes it easy to load your responses via <code>&lt;script src=...&gt;</code> or similar
+                  mechanisms - but it also makes it easy for the owner of evil.com to do the same!</p>
+
+                <p>If your JSON or AJAX response is sensitive and user-specific, expect it will get intercepted unless
+                  you take specific steps to prevent this; for example, this response is easy to hijack by simply
+                  defining your own <code>add_to_addressbook()</code> function prior to writing
+                  <code>&lt;script src="..."&gt;</code>:</p>
+
+                <p>
+                  <pre><code>
+add_to_addressbook("John Doe", "johndoe@example.com");
+add_to_addressbook("Jane Doe", "janedoe@example.com");
+</code></pre>
+                </p>
+
+                <p>Perhaps less obviously, it is also possible to intercept many types of array and object-based syntax
+                  by defining setters or getters for object prototypes - this response may be vulnerable in some
+                  browsers, too:</p>
+
+                <p>
+                  <pre><code>
+[
+  [ "John Doe", "johndoe@example.com" ],
+  [ "Jane Doe", "janedoe@example.com" ]
+]
+</code></pre>
+                </p>
+
+                <p>You do not want evil.com to have a copy of your addressbook, do you?</p>
+
+                <p>In addition to the problems with cross-domain inclusion, there is also a risk of non-HTML cross-site
+                  scripting bugs if you do not properly escape certain control characters, specify the wrong
+                  Content-Type, and make other seemingly harmless mistakes of this sort. For example, this response will
+                  be interpreted as HTML by some browsers, if the stars align just right:</p>
+
+                <p>
+                  <pre><code>
+HTTP/1.0 200 OK
+Content-Type: something/made-up; charset=utf-8
+var error_msg = "Not a valid id: '&lt;html&gt;&lt;body&gt;&lt;script&gt;alert('Look ma!')&lt;/script&gt;'";
+</code></pre>
+                </p>
+
+                <p>It gets even better - because of obscure charset detection rules, this utf-7 attack may be
+                  exploitable, too:</p>
+
+                <p>
+                  <pre><code>
+HTTP/1.0 200 OK
+Content-Type: text/html; charset=made-up
+
+// Now we are smart and block angle brackets in identifiers!
+var error_msg = "Not a valid id: '+ADw-script+AD4-alert('Look ma!')+ADw-/script+AD4-'";
+</code></pre>
+                  <p>
+
+                    <h3>Good idea #12:</h3>
+                    <p>Please include the right <code>charset=</code> for any text based document, set the right
+                      Content-Type header and thoroughly validate input data conforms to the expected data type. Include
+                      the <code>X-Content-Type-Options: nosniff</code> header and avoid hosting dangerous file types
+                      (Eg. Java, Silverlight, Flash, MS Word etc) in sensitive domains.</p>
+
+                    <p>Finally, be aware of XSSI attacks and how they can be prevented.</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div id="maia-signature"></div>
+<div class="maia-footer" id="maia-footer">
+  <div id="maia-footer-global">
+    <div class="maia-aux">
+      <ul>
+        <li><a href="/docs">Partner Security Documentation Index</a>
+        <li><a href="//www.google.com">Google Home</a>
+        <li><a href="//www.google.com/policies/privacy/">Privacy Policy</a>
+        <li><a href="//www.google.com/corporate/suppliers/terms/">Supplier Terms</a>
+      </ul>
+    </div>
+  </div>
+</div>
