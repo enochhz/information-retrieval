@@ -1,7 +1,7 @@
 import redis
 import pandas as pd
 
-PAGE_LIMIT = 20000
+PAGE_LIMIT = 10000
 
 class id_mapper():
     redis_db = redis.Redis(host='localhost', port=6379, db=0, charset='utf-8', decode_responses=True)
