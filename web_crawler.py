@@ -10,13 +10,14 @@ import threading
 class WebCrawler:
 
     page_to_be_visited = set()
-    visited_pages = set()
+    visited_pages = list()
     threads_num = 10
 
-    def __init__(self, domain: str, seed_url: str, page_limit = 100):
+    def __init__(self, domain: str, seed_url: str, page_limit = 100, stored_visited_page_limit = None):
         self.domain = domain
         self.page_to_be_visited.add(seed_url)
         self.page_limit = page_limit
+        self.stored_visited_page_limit = stored_visited_page_limit
         self.redis_db = redis.Redis(host='localhost', port=6379, db=0, charset='utf-8', decode_responses=True)
         all_keys = self.redis_db.scan_iter()
         for key in all_keys: self.redis_db.delete(key) # Delete all key value pairs
@@ -31,18 +32,23 @@ class WebCrawler:
             for thread in threads:
                 thread.join()
         print(f'visited pages num: {len(self.visited_pages)}')
+        if self.stored_visited_page_limit is not None:
+            visited_df = pd.DataFrame({'pages': self.visited_pages[:self.stored_visited_page_limit]})
+        else:
+            visited_df = pd.DataFrame({'pages': self.visited_pages})
+        visited_df.to_csv('visited_pages.csv')
 
     def parse_new_page(self) -> None:
         try:
             current_page = self.page_to_be_visited.pop()
             outlinks = self.extract_outlinks(current_page) 
             outlinks_str = ','.join([link for link in outlinks])
-            self.redis_db.set(current_page, outlinks_str)
-            self.visited_pages.add(current_page)
+            self.redis_db.set(current_page, outlinks_str) 
+            self.visited_pages.append(current_page)
             print(f'{len(self.visited_pages)} - {current_page} - {len(outlinks)}')
             self.page_to_be_visited.update({ link for link in outlinks if link not in self.visited_pages}) # Append not-visited pages to the queue
         except Exception as e:
-            self.visited_pages.add(current_page)
+            self.visited_pages.append(current_page)
             print(f'error: {str(e)}')
 
     def extract_outlinks(self, page_url: str) -> set:
@@ -61,6 +67,6 @@ class WebCrawler:
     
 if __name__ == '__main__':
     start_time = time.time()
-    crawler = WebCrawler(domain='www.cdc.gov', seed_url = 'https://www.cdc.gov', page_limit = 1000)
+    crawler = WebCrawler(domain='www.cdc.gov', seed_url = 'https://www.cdc.gov', page_limit = 1200, stored_visited_page_limit = 1000)
     crawler.start_parsing()
     print(f'time used: {time.time() - start_time}')
